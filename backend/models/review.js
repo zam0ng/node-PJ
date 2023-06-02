@@ -35,6 +35,7 @@ class review extends Model {
       foreignKey: "review_id",
       sourceKey: "id",
     });
+    db.review.belongTo(db.Books, { foreignKey: "books_id", targetKey: "id" });
   }
 }
 
