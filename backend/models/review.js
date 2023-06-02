@@ -11,7 +11,7 @@ class review extends Model {
         nickname: {
           type: DataTypes.STRING,
         },
-        review: {
+        comment: {
           type: DataTypes.STRING,
         },
         star: {
@@ -35,7 +35,7 @@ class review extends Model {
       foreignKey: "review_id",
       sourceKey: "id",
     });
-    db.review.belongTo(db.Books, { foreignKey: "books_id", targetKey: "id" });
+    db.review.belongsTo(db.Books, { foreignKey: "books_id", targetKey: "id" });
   }
 }
 
