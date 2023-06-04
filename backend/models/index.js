@@ -4,6 +4,7 @@ const review = require("./review");
 const r_review = require("./r_review");
 const User = require("./users");
 const Books = require("./books");
+const Chat = require("./chat");
 
 const sequelize = new Sequelize(config.dev);
 
@@ -13,11 +14,13 @@ db.review = review;
 db.r_review = r_review;
 db.User = User;
 db.Books = Books;
+db.Chat = Chat;
 
 review.init(sequelize);
 r_review.init(sequelize);
 User.init(sequelize);
 Books.init(sequelize);
+Chat.init(sequelize);
 
 review.assicoate(db);
 r_review.assicoate(db);
