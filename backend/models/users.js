@@ -7,7 +7,7 @@ class User extends Model {
       {
         user_img :{
             type : DataTypes.STRING,
-            allowNull : false,
+            defaultValue : "./img/basic.png",
         },
         user_id : {
             type : DataTypes.STRING,
