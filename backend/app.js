@@ -1,9 +1,13 @@
 const express = require("express");
 const session = require("express-session");
+const cors = require("cors");
+const path = require("path");
 const dot = require("dotenv").config();
 const socketio = require("socket.io");
 const { sequelize } = require("./models");
 const path = require("path");
+
+const mainRouter = require("./routers/mainRouter");
 
 const app = express();
 const cors = require("cors");
@@ -12,15 +16,9 @@ const signuprouter = require("./routers/signup");
 const loginrouter = require("./routers/login");
 
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  session({
-    secret: "test",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
-app.use("/css",express.static(path.join(__dirname,"frontend/css")));
+app.use("/css", express.static(path.join(__dirname, "frontend/css")));
+app.use("/img", express.static(path.join(__dirname, "frontend/img")));
 
 app.use(express.json());
 
@@ -32,6 +30,7 @@ sequelize
   .catch((err) => {
     console.error(err);
   });
+
 
 app.use(cors({
     origin : "http://127.0.0.1:5500",
@@ -47,9 +46,9 @@ app.use(session({
 
 }))
 
-
 app.use('/signup',signuprouter);
 app.use('/login',loginrouter);
+app.use("/main", mainRouter);
 
 const server = app.listen(8080, () => {
   console.log("Server On");
