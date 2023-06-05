@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .img-box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+        }
+
+        .con-box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>글 작성 페이지</h3>
+    <div>
+        <span>wirter : </span>
+        <span id="writer1"></span>
+    </div>
+    <div>
+        <img id="img1" class="img-box" alt="" >
+        <img src="" alt="">
+    </div>
+    <input type="text" id="imgs">
+    <input type="file" id="file">
+    <button id="uploadBtn">전송</button>
+
+</body>
+<script>
+    async function getAPI() {
+        //   try {
+        //       const {data} = await axios.get(
+        //           "http://127.0.0.1:8080/upload/view",
+        //           { withCredentials: true }
+        //           );
+        //           console.log("dddddddddddddddddddddddddddd",data.img)
+        //         img1.src=`http://127.0.0.1:8080/img/${data.img}`
+        //         console.log(data.img)
+
+        //         writer1.innerHTML=data.writer
+        //     console.log(data);
+        //   } catch (error) {
+        //     console.log(error);
+        //   }
+        async function getAPI() {
+            try {
+                const response = await axios.get(
+                    "http://127.0.0.1:8080/upload/view",
+                    { withCredentials: true }
+                );
+
+                const data = response.data;
+                console.log("dddddddddddddddddddddddddddd");
+
+                img1.src = `../backend/${data.img}`;
+                console.log(data.img);
+
+                writer1.innerHTML = data.writer;
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+    }
+
+    uploadBtn.onclick = () => {
+
+        console.log("나 클릭?")
+        const form = new FormData();
+        form.append('imgs', imgs.value);
+        form.append("user_id", 2)
+        console.log(imgs.value)
+        // console.log(file.files[0]); 
+        form.append('upload', file.files[0]);
+        console.log(file.files[0])
+        axios.post('http://127.0.0.1:8080/upload', form, {
+            withCredentials: true,
+            'Content-Type': 'multipart/form-data'
+        }).then((e) => {
+            console.log('잘 전달됨');
+            console.log(e);
+
+        }).catch((err) => {
+            console.log("=================================================")
+            console.log(err);
+        })
+        getAPI();
+
+    }
+</script>
+
+</html>

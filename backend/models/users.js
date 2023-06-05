@@ -37,7 +37,7 @@ class User extends Model {
             type : DataTypes.STRING,
             allowNull : false,
         },
-        check : {
+        checks : {
             type : DataTypes.STRING,
             allowNull : false,
         }
