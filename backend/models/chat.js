@@ -25,6 +25,9 @@ class Chat extends Model {
       }
     );
   }
+  static assicoate(db) {
+    db.Chat.belongsTo(db.User, { foreignKey: "chat_id", targetKey: "id" });
+  }
 }
 
 module.exports = Chat;
@@ -38,8 +41,8 @@ module.exports = Chat;
 // from test2.chat
 // where created_at >= (select min(created_at)
 // 	from test2.chat
-// 	where user_name = "test2"
-// 	group by created_at
+// 	where chat_id = 2
 // 	limit 1)
 // and user_name IN ("test2","admin")
+// and chat_id = 2
 // order by created_at;

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- 로고 부분 -->
+    <div class="nav">
+      <div class="logoBox">
+        <img src="img/Black logo - no background.png" alt="" />
+        <div class="functionBox">
+          <span><a href=""> books</a></span>
+          <span><a href=""> gerne</a></span>
+          <span><a href=""> login</a></span>
+          <span><a href=""> signUp</a></span>
+        </div>
+      </div>
+    </div>
+    <!-- main img -->
+    <div class="mainImgBox">
+      <img
+        src="https://s.gr-assets.com/assets/home/homepage_promos/summer_reading_2023/Summer23_HomepageMasthead_desktop@2x.png"
+        alt=""
+      />
+    </div>
+
+    <!-- view top 5 list -->
+    <div class="viewContainer">
+      <div class="viewWrap">
+        <div class="viewTitle">
+          <span>VIEW TOP 5 LIST</span>
+        </div>
+        <div id="viewList"></div>
+      </div>
+    </div>
+    <!-- star top 5 list -->
+    <div class="starContainer">
+      <div class="starWrap">
+        <div class="starTitle">
+          <span>STAR TOP 5 LIST</span>
+        </div>
+        <div id="starList"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // 조회수가 가장 많은 5개의 리스트를 가져옴
+    async function getViewList() {
+      const { data } = await axios.get("http://127.0.0.1:8080/main/viewlist");
+      data.forEach((el, index) => {
+        viewList.innerHTML += `<div class="viewCard">
+            <img src="../backend/${el.img}" alt="" />
+            <div class="cardText">
+              <span>☻</span>
+              <span>${el.viewcnt}</span>
+              <span>${el.title}</span>
+            </div>
+          </div>`;
+      });
+    }
+
+    // 별점이 높은 순으로 5개의 리스트를 가져옴
+    async function getStarList() {
+      const { data } = await axios.get("http://127.0.0.1:8080/main/starlist");
+      console.log(data);
+      data.forEach((el, index) => {
+        starList.innerHTML += `<div class="viewCard">
+            <img src="../backend/${el.img}" alt="" />
+            <div class="cardText">
+              <span>☻</span>
+              <span>${el.orderstar}</span>
+              <span>${el.title}</span>
+            </div>
+          </div>`;
+      });
+    }
+    getStarList();
+    getViewList();
+  </script>
+</html>

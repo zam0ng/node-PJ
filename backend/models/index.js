@@ -26,5 +26,6 @@ review.assicoate(db);
 r_review.assicoate(db);
 User.assicoate(db);
 Books.assicoate(db);
+Chat.assicoate(db);
 
 module.exports = db;

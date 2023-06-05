@@ -7,44 +7,47 @@ class Books extends Model {
       {
         img: {
           type: DataTypes.STRING,
-          allowNull : false,
+          allowNull: false,
         },
         title: {
-            type: DataTypes.STRING,
-            allowNull : false,
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        writer :{
-            type: DataTypes.STRING,
-            allowNull : false,
+        writer: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        content : {
-            type: DataTypes.TEXT,
-            allowNull : false,
+        content: {
+          type: DataTypes.TEXT,
+          allowNull: false,
         },
-        genre : {
-            type: DataTypes.STRING,
-            allowNull : false,
+        genre: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        page : {
-            type: DataTypes.INTEGER,
-            allowNull : false,
+        page: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
         },
-        publish : {
-            type: DataTypes.STRING,
-            allowNull : false,
+        publish: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
         accept: {
-            type: DataTypes.STRING,
-            defaultValue : "0",
+          type: DataTypes.STRING,
+          defaultValue: "0",
         },
         reject: {
-            type: DataTypes.STRING,
-           
+          type: DataTypes.STRING,
         },
-        user_id :{
-            type: DataTypes.INTEGER,
-            allowNull : false,
-        }
+        user_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        viewcnt: {
+          type: DataTypes.INTEGER,
+          defaultValue: 0,
+        },
       },
       {
         sequelize,
@@ -59,9 +62,8 @@ class Books extends Model {
   }
 
   static assicoate(db) {
-    db.Books.belongsTo(db.User,{foreignKey:"user_id",targetKey: "id"});
-    db.Books.hasMany(db.review,{foreignKey:"books_id",sourceKey:"id"});
-    
+    db.Books.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
+    db.Books.hasMany(db.review, { foreignKey: "book_id", sourceKey: "id" });
   }
 }
 
