@@ -5,12 +5,10 @@ const path = require("path");
 const dot = require("dotenv").config();
 const socketio = require("socket.io");
 const { sequelize } = require("./models");
-const path = require("path");
 
 const mainRouter = require("./routers/mainRouter");
 
 const app = express();
-const cors = require("cors");
 
 const signuprouter = require("./routers/signup");
 const loginrouter = require("./routers/login");
@@ -31,23 +29,24 @@ sequelize
     console.error(err);
   });
 
-
-app.use(cors({
-    origin : "http://127.0.0.1:5500",
-    credentials : true,
-}))
+app.use(
+  cors({
+    origin: "http://127.0.0.1:5500",
+    credentials: true,
+  })
+);
 
 //
-app.use(session({
-  
-  secret : process.env.SESSION_KEY,
-  resave : false,
-  saveUninitialized : false,
+app.use(
+  session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-}))
-
-app.use('/signup',signuprouter);
-app.use('/login',loginrouter);
+app.use("/signup", signuprouter);
+app.use("/login", loginrouter);
 app.use("/main", mainRouter);
 
 const server = app.listen(8080, () => {
