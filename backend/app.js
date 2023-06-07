@@ -5,7 +5,8 @@ const path = require("path")
 const socketio = require("socket.io");
 const { sequelize } = require("./models");
 const CreatebooksRouter = require("./routers/books")
-const UploadRouter = require("./routers/upload")
+const UploadRouter = require("./routers/uploads")
+const MypageRouter = require("./routers/mypage")
 const cors = require("cors")
 
 const app = express();
@@ -26,7 +27,7 @@ sequelize
   }))
 app.use(express.urlencoded({ extended: false }));
 app.use("/css",express.static(path.join(__dirname,"frontend/css")));
-app.use("/img",express.static(path.join(__dirname,"upload")))
+app.use("/upload",express.static(path.join(__dirname,"upload")))
 
 app.use(
   session({
@@ -39,9 +40,11 @@ app.get("/",(req,res)=>{
   res.send("응답함")
 })
 
-app.use("/books",CreatebooksRouter);
 app.use(express.json())
-app.use("/upload",UploadRouter)
+app.use("/books",CreatebooksRouter);
+app.use("/uploads",UploadRouter)
+app.use("/mypages",MypageRouter)
+
 
 const server = app.listen(8080, () => {
   console.log("Server On!");

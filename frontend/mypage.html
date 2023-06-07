@@ -1,23 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .img-box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+        }
+    </style>
 </head>
+
 <body>
-    <h3>mypage</h3>
-    <form action="http://127.0.0.1:8080/mypage/" method="post">
-        <label for="">닉네임 변경</label>
-        <input type="text" name="nickname" />
-        <button>바꾸기</button>
+    <h3>마이 페이지</h3>
+    <div>
+        <img id="img1" class="img-box" alt="" >
+        <img src="" alt="">
+    </div>
+    <input type="file" id="file">
+    <button id="uploadBtn">전송</button>
+    <div>
+        <span>nickname : </span>
+        <span id="nickname1"></span>
+    </div>
+    <form action= "http://127.0.0.1:8080/mypages/nick" method="post">
+        <label for="">닉네임 변경</label><br>
+        <input type="text" name="changenick">
+        <button id="nickBtn">변경하기</button>
     </form>
-    <form action="http://127.0.0.1:8080/mypage/"  method="post">
-        <label for="">아이디 변경</label>
-        <input type="text" name="user_id" />
-        <button>바꾸기</button>
-    </form>
+    <div>
+        <span>gender : </span>
+        <span id="gender1"></span>
+    </div>
+    <div>
+        <span>age : </span>
+        <span id="age1"></span>
+    </div>
+    <div>
+        <span>check : </span>
+        <span id="checks"></span>
+    </div>
+
 </body>
+<script>
+    async function getAPI() {
+          try {
+              const {data} = await axios.get(
+                  "http://127.0.0.1:8080/mypages",
+                  { withCredentials: true }
+                  );
+                img1.src=`http://127.0.0.1:8080/${data.user_img}`
+
+                nickname1.innerHTML=data.nickname
+                gender1.innerHTML=data.gender
+                age1.innerHTML = data.age
+                checks.innerHTML = data.checks
+        }
+         catch (error) {
+            console.log(error);
+        }
+    }
+     getAPI();
+    uploadBtn.onclick = () => {
+        console.log("나 클릭?")
+        const form = new FormData();
+        form.append('imgs', imgs.value);
+        form.append("user_id", 2)
+        console.log(imgs.value)
+        // console.log(file.files[0]); 
+        form.append('upload', file.files[0]);
+        console.log(file.files[0])
+        axios.post('http://127.0.0.1:8080/mypages', form, {
+            withCredentials: true,
+            'Content-Type': 'multipart/form-data'
+        }).then((e) => {
+            console.log('잘 전달됨');
+            console.log(e);
+
+        }).catch((err) => {
+            console.log("=================================================")
+            console.log(err);
+        })
+    }
+    nickBtn.onclick = ()=>{
+        try {
+        console.log("닉버튼 찍힘?")  
+   window.location.reload();
+        
+    } catch (error) {
+        console.log("여기 nick ERR")
+        console.log(error)
+    }
+    }
+
+
+</script>
+
 </html>

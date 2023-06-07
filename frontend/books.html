@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <h3>글 작성 페이지</h3>
+    <h3>작성페이지</h3>
     <div>
         <span>wirter : </span>
         <span id="writer1"></span>
@@ -35,45 +35,29 @@
     <input type="text" id="imgs">
     <input type="file" id="file">
     <button id="uploadBtn">전송</button>
+    <!-- 제목, 내용 -->
 
 </body>
 <script>
     async function getAPI() {
-        //   try {
-        //       const {data} = await axios.get(
-        //           "http://127.0.0.1:8080/upload/view",
-        //           { withCredentials: true }
-        //           );
-        //           console.log("dddddddddddddddddddddddddddd",data.img)
-        //         img1.src=`http://127.0.0.1:8080/img/${data.img}`
-        //         console.log(data.img)
+          try {
+              const {data} = await axios.get(
+                  "http://127.0.0.1:8080/uploads/view",
+                  { withCredentials: true }
+                  );
+                  console.log("dddddddddddddddddddddddddddd",data.img)
+                img1.src=`http://127.0.0.1:8080/${data.img}`
+                console.log(data.img)
 
-        //         writer1.innerHTML=data.writer
-        //     console.log(data);
-        //   } catch (error) {
-        //     console.log(error);
-        //   }
-        async function getAPI() {
-            try {
-                const response = await axios.get(
-                    "http://127.0.0.1:8080/upload/view",
-                    { withCredentials: true }
-                );
-
-                const data = response.data;
-                console.log("dddddddddddddddddddddddddddd");
-
-                img1.src = `../backend/${data.img}`;
-                console.log(data.img);
-
-                writer1.innerHTML = data.writer;
-                console.log(data);
-            } catch (error) {
-                console.log(error);
-            }
+                writer1.innerHTML=data.writer
+            console.log(data);
         }
-
+         catch (error) {
+            console.log(error);
+        }
     }
+    getAPI();
+    
 
     uploadBtn.onclick = () => {
 
@@ -85,7 +69,7 @@
         // console.log(file.files[0]); 
         form.append('upload', file.files[0]);
         console.log(file.files[0])
-        axios.post('http://127.0.0.1:8080/upload', form, {
+        axios.post('http://127.0.0.1:8080/uploads', form, {
             withCredentials: true,
             'Content-Type': 'multipart/form-data'
         }).then((e) => {
@@ -96,7 +80,6 @@
             console.log("=================================================")
             console.log(err);
         })
-        getAPI();
 
     }
 </script>
