@@ -1,0 +1,657 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffeed2;
+}
+
+.nav {
+  width: 100%;
+  height: 80px;
+  border: 1px solid;
+}
+
+/*  ========== 상세페이지 시작 ==========  */
+.viewWrap {
+  width: 1100px;
+  height: 2000px;
+  margin: 0 auto;
+  display: flex;
+  box-sizing: border-box;
+}
+
+/*  ========== 왼쪽 사이드 책표지, 찜 ========== */
+.sideSticky {
+  position: relative;
+}
+
+.sideWrap {
+  width: 300px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sideWrap .sideWrapImg {
+  width: 160px;
+  height: 250px;
+  border: 1px solid;
+  margin: 40px 0 20px;
+  border-radius: 0 20px 20px 0;
+}
+
+.sideWrap .sideWrapBtn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wantToReadBtn,
+.BuyTheBookBtn {
+  width: 80%;
+  height: 30px;
+  margin: 4px 0;
+  border: 2px solid #377458;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wantToReadBtn {
+  background-color: #377458;
+  color: #fff;
+}
+
+/* 우측 사이드바 별점 잔해 */
+/* .bookStars {
+  width: 80%;
+  height: 30px;
+  display: flex;
+  position: relative;
+  transform: translateX(25%);
+}
+
+.bookStars .bookStarEmpty,
+.bookStars .bookStarFull {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  box-sizing: border-box;
+}
+.bookStars .bookStarFull {
+  /* 추후에 별점 총점 가져와서 그리기 이거 수정해야함 */
+/* box-sizing: border-box;
+  overflow: hidden;
+} */
+
+/* .bookStars .bookStarEmpty span,
+.bookStars .bookStarFull span {
+  font-size: 28px;
+  font-weight: 200;
+  margin: 2px;
+}
+
+.wantToReadBtn:hover,
+.BuyTheBookBtn:hover,
+.bookStars:hover {
+  cursor: pointer;
+}  */
+
+/*  ========== 상세페이지 본문 ========== */
+.viewMainWrap {
+  width: 800px;
+
+  border: 1px solid;
+  padding: 40px 40px;
+}
+
+.viewMainText {
+}
+
+.viewMainText h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-bottom: 10px;
+}
+
+.viewMainText > span {
+  font-weight: 200;
+  font-size: 18px;
+}
+
+.communityCollection {
+  width: 400px;
+  height: 30px;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+.communityCollection:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.communityCollection .collectionStar {
+  width: 230px;
+  height: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+.communityCollection .collectionStar .colStars {
+  width: 80%;
+  height: 30px;
+  display: flex;
+  position: relative;
+  transform: translateX(10%);
+}
+
+.colStars .colStarEmpty,
+.colStars .colStarFull {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  box-sizing: border-box;
+  color: #e87400;
+}
+.colStars .colStarFull {
+  /* 추후에 별점 총점 가져와서 그리기 이거 수정해야함 */
+  width: 100px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.colStars .colStarEmpty span,
+.colStars .colStarFull span {
+  font-size: 30px;
+  font-weight: 200;
+  letter-spacing: 6px;
+}
+
+.communityCollection .colStarAvg span {
+  margin-left: 5px;
+  font-size: 20px;
+}
+.communityCollection .colRatingsReviews {
+  margin: 4px;
+}
+
+.communityCollection .colRatingsReviews span {
+  color: #707070;
+  font-size: 10px;
+}
+
+.textContainer {
+  width: 500px;
+}
+
+/*  ========== 장르, 책 페이지 수, 출판일 ==========  */
+.genre,
+.bookpage,
+.bookpublish {
+  margin: 10px 0;
+  color: #707070;
+}
+
+/*  ==========  people currently reading & people want to read ==========  */
+.peopleWrap {
+  margin: 20px 0;
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #707070;
+  border-bottom: 1px solid #707070;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.peopleWrap .currentlyWrap,
+.peopleWrap .readWrap {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.peopleWrap .peopleContainer {
+  width: 100%;
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.peopleWrap .peopleContainer img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  object-fit: cover;
+  border: 0.1px solid #fff;
+}
+
+.peopleWrap .peopleContainer img:nth-child(2) {
+  transform: translateX(-5px);
+}
+
+.peopleWrap .peopleContainer img:nth-child(3) {
+  transform: translateX(-10px);
+}
+
+.peopleWrap .peopleContainer span {
+  margin-right: 4px;
+}
+
+/*  ========== About the author ========== */
+.authorContainer {
+}
+.authorContainer .authorWrap {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+
+.authorContainer .authorWrap .authorImg {
+  width: 10%;
+}
+.authorImg img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+.authorContainer .authorWrap .authorName {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.authorName span {
+  color: #707070;
+}
+.authorName span:first-child {
+  display: block;
+  color: #000;
+  font-size: 16px;
+}
+.authorContainer .authorWrap .authorFollow {
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+.authorFollow .followBtn {
+  width: 100%;
+  height: 25px;
+  border-radius: 14px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authorFollow .followBtn:hover {
+  cursor: pointer;
+  background-color: #393939;
+}
+
+.authorFollow .followBtn span {
+  font-size: 10px;
+  color: #fff;
+}
+
+.authorContainer .authorProfile {
+  width: 500px;
+}
+
+/*  ========== Ratings & Reviews ========== */
+.reviewContainer {
+  margin-bottom: 20px;
+}
+.reviewContainer .reviewWrap {
+  width: 100%;
+  height: 60px;
+  display: flex;
+}
+.reviewContainer .reviewWrap .myImg {
+  width: 10%;
+  height: 50px;
+}
+
+.myImg img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+.reviewContainer .reviewWrap .reivewForm {
+  width: 80%;
+}
+
+.reivewForm .reviewStars {
+  width: 500px;
+  height: 20px;
+  display: flex;
+  padding: 0 10px;
+}
+
+.reivewForm .reviewStars .reviewStar {
+  width: 20px;
+  height: 20px;
+  margin-right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e87400;
+}
+.reviewStar:hover {
+  cursor: pointer;
+}
+.reviewStar span {
+  font-size: 20px;
+}
+
+.reivewForm .writeReviewContainer {
+  width: 80%;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.reivewForm .writeReviewContainer input {
+  box-sizing: border-box;
+  width: 550px;
+  height: 100%;
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #7f7f7f;
+  padding: 0 10px;
+  margin: 10px 0 0;
+}
+
+.reviewWrap .reviewPost {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.reviewPost .postBtn {
+  width: 100%;
+  height: 30px;
+  border-radius: 14px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewPost .postBtn:hover {
+  cursor: pointer;
+  background-color: #393939;
+}
+
+.reviewPost span {
+  font-size: 10px;
+  color: #fff;
+}
+
+/* ========== Community Reviews ========== */
+.ratingsContainer {
+  border-bottom: 1px solid #707070;
+}
+.ratingsContainer .ratingsWrap {
+  width: 550px;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+.ratingsContainer .ratingsWrap .ratingsNum {
+  width: 10%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ratingsContainer .ratingsWrap .ratingsBar {
+  width: 75%;
+  height: 30px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+.ratingsBar .ratingsBarInner {
+  width: 100%;
+  height: 10px;
+  position: relative;
+}
+.ratingsBar .ratingsBarInner .emptyBar {
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.15);
+  position: absolute;
+}
+.ratingsBar .ratingsBarInner .fullBar {
+  /* 퍼센트에 따라 width값 조절 */
+  width: 50%;
+  height: 10px;
+  border-radius: 10px;
+  background-color: #e87400;
+  position: absolute;
+}
+.ratingsWrap .ratingsTotal {
+  width: 15%;
+  height: 30px;
+  padding: 0 4px;
+}
+
+.ratingsTotal span {
+  font-size: 4px;
+  color: #707070;
+}
+
+.ratingsWrap:hover {
+  cursor: pointer;
+}
+
+.ratingsWrap:hover .ratingsBar {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.ratingsWrap:hover .ratingsNum span,
+.ratingsWrap:hover .ratingsTotal span {
+  text-decoration: underline;
+}
+
+/* reviews area */
+.commentContainer {
+  border: 1px solid;
+  padding: 10px;
+}
+.commentContainer > p {
+  font-size: 8px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.commentContainer .commentWrap {
+  width: 100%;
+  display: flex;
+  height: auto;
+}
+
+.commentWrap .commentProfile {
+  width: 20%;
+}
+
+.commentProfile .commentProfileImg {
+  width: 50px;
+  height: 50px;
+}
+.commentProfile .commentProfileImg img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+.commentProfile .commentProfileInfo {
+  width: 100%;
+}
+.commentProfile .commentProfileInfo span {
+  display: block;
+  font-size: 8px;
+}
+.commentProfile .commentProfileInfo > span:first-child {
+  font-size: 16px;
+  margin-top: 4px;
+}
+.commentProfile .commentProfileInfo > span:first-child:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.commentProfile .commentProfileInfo .commentProfileFollowbtn {
+  width: 80px;
+  height: 25px;
+  border-radius: 12px;
+  margin-top: 6px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.commentProfileFollowbtn:hover {
+  cursor: pointer;
+  background-color: #393939;
+}
+.commentProfileFollowbtn span {
+  font-size: 10px;
+  color: #fff;
+}
+
+/*  */
+.commentWrap .commentMainWrap {
+  width: 80%;
+
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.commentMainWrap .commentMainHeader {
+  width: 100%;
+  padding: 2px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.commentMainHeader .commentMainStar span {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #e87400;
+}
+.commentMainHeader .commentMainStar span:hover {
+  cursor: default;
+}
+
+.commentMainWrap .commentArea {
+}
+.commentMainWrap .commentArea p {
+  font-weight: 500;
+}
+
+.reCommentArea {
+}
+.reCommentArea span {
+  font-size: 6px;
+}
+.reCommentArea > span:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.reCommentsWrap {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.reCommentsInner {
+  display: flex;
+  margin: 4px 0;
+}
+
+.reCommentsWrap .reCommentsProfileImgs {
+  width: 25px;
+  height: 25px;
+}
+
+.reCommentsWrap .reCommentsProfileImgs img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+
+.reCommentsWrap .reComments {
+  margin-left: 4px;
+}
+
+.reCommentsWrap .reComments span {
+  display: block;
+}
+.reCommentsWrap .reComments > span:first-child {
+  font-size: 12px;
+  font-weight: 800;
+}
+/* 대댓글 작성 구간 */
+.reCommentInput {
+  width: 100%;
+
+  display: flex;
+}
+.reCommentInput .reCommentMyimg {
+  width: 25px;
+  height: 25px;
+}
+.reCommentInput .reCommentMyimg img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+.reCommentInput input {
+  box-sizing: border-box;
+  margin-left: 4px;
+  padding: 0 4px;
+  width: 90%;
+  border: 1.5px solid #7f7f7f;
+  border-radius: 6px;
+  background: none;
+}
+
+.reCommentBtn {
+  width: 10%;
+  height: 25px;
+  background-color: #000;
+  border: 1px solid;
+  border-radius: 16px;
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reCommentBtn span {
+  font-size: 10px;
+  color: #fff;
+}
+
+.reCommentBtn:hover {
+  cursor: pointer;
+  background-color: #393939;
+}
