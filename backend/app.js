@@ -12,6 +12,7 @@ const app = express();
 
 const signuprouter = require("./routers/signup");
 const loginrouter = require("./routers/login");
+const viewRouter = require("./routers/viewRouter");
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -48,6 +49,7 @@ app.use(
 app.use("/signup", signuprouter);
 app.use("/login", loginrouter);
 app.use("/main", mainRouter);
+app.use("/view", viewRouter);
 
 const server = app.listen(8080, () => {
   console.log("Server On");

@@ -35,7 +35,6 @@ body {
 .sideWrap .sideWrapImg {
   width: 160px;
   height: 250px;
-  border: 1px solid;
   margin: 40px 0 20px;
   border-radius: 0 20px 20px 0;
 }
@@ -182,6 +181,7 @@ body {
 }
 
 .textContainer {
+  margin: 10px 0;
   width: 500px;
 }
 

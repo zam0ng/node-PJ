@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/view.css" />
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
   </head>
   <body>
     <!-- 네비게이션 바 -->
@@ -16,10 +17,8 @@
       <!-- 왼쪽 책표지, 찜 -->
       <div class="sideSticky">
         <div class="sideWrap">
-          <img
-            class="sideWrapImg"
-            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1673563845i/76671861.jpg"
-          />
+          <!-- 책 표지 나오는 곳 -->
+          <img class="sideWrapImg" src="" />
           <div class="sideWrapBtn">
             <div class="wantToReadBtn">
               <span>Want to read</span>
@@ -44,8 +43,10 @@
       <!-- 오른쪽 상세페이지 본문 -->
       <div class="viewMainWrap">
         <div class="viewMainText">
-          <h1>The One That Got Away</h1>
-          <span>J.D. Kirk</span>
+          <!-- 책 제목 출력 -->
+          <h1></h1>
+          <!-- 지은이 출력 -->
+          <span></span>
 
           <!-- 별점, 조회수, 리뷰수 -->
           <div class="communityCollection">
@@ -68,7 +69,7 @@
             </div>
           </div>
           <!-- 별점, 조회수, 리뷰수 end -->
-          <!-- 책 내용 -->
+          <!-- 책 내용 출력 -->
           <div class="textContainer">
             <p>
               What if your worst enemy was your only hope? <br />
@@ -84,10 +85,7 @@
           <div class="genre">
             <span>Genre : </span>
             <!-- 아래부터 장르 받아오기 -->
-            <span>Mystery</span>
-            <span>Thriller</span>
-            <span>Fiction</span>
-            <span>Crime</span>
+            <span></span>
           </div>
           <!-- 장르 end -->
 
@@ -373,4 +371,6 @@
     </div>
     <!-- 상세페이지 end -->
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./js/view.js"></script>
 </html>
