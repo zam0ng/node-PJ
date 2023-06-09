@@ -74,3 +74,17 @@ exports.OrderByStar = async (req, res) => {
 // on C.id = D.id
 // order by orderstar desc
 // limit 5;
+
+exports.logincheck = async (req,res)=>{
+
+  const user_id = req.decoded.user_id;
+  const nickname = req.decoded.nickname;
+  const role = req.decoded.role;
+  console.log("maincontroller of logincheck")
+  console.log(user_id);
+
+  const data = {nickname,role};
+  res.json(data);
+
+
+}
