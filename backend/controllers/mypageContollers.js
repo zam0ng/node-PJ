@@ -1,5 +1,5 @@
   
-  const {User} = require("../models")
+  const {User,review,Books} = require("../models")
   const path = require("path")
   
   // 마이페이지 업로드
@@ -56,4 +56,15 @@ exports.NickChange = async (req,res)=>{
       
   }
 }
+// 작성한 댓글 업로드
+ exports.reviewUpload = async(req,res)=>{
+    try {
+      console.log("이거 reviewupload임------------")
+      const data = await review.findAll({where:{nickname:"asd"}})
+      console.log(data)
+      res.json(data)
+    } catch (error) {
+      console.log(error)
+    }
+ }
 

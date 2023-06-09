@@ -7,41 +7,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <style>
-        .img-box {
-            width: 200px;
-            height: 200px;
-            border: 1px solid;
-        }
-
-        .con-box {
-            width: 200px;
-            height: 200px;
-            border: 1px solid;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/books.css">
 </head>
 
 <body>
-    <h3>작성페이지</h3>
-    <div>
-        <span>wirter : </span>
-        <span id="writer1"></span>
+    <div class="header">
+        <img class="header-img"
+        src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
+        alt="">
+        <div class="ulheader">
+            <ul style="display: flex; align-items: center;">
+                <li class="category"><a href="">Home</a></li>
+                <li class="category"><a href="">My Books</a></li>
+            </ul>
+            <ul style="display: flex; align-items: center;">
+                <li class="category"><a href="">Log-Out</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-        <img id="img1" class="img-box" alt="" >
-        <img src="" alt="">
+    <div class="main">
+    <div class="content1">
+    <h3>book cover</h3>
+    <form>
+        <div>
+            <img id="img1" class="img-box" alt="" >
+            <input type="file" id="file" onchange="loadImg(event)"><br>
+        </div>
     </div>
-    <input type="text" id="imgs">
-    <input type="file" id="file">
-    <button id="uploadBtn">전송</button>
-    <!-- 제목, 내용 -->
-
+    <div class=content2>
+        <!-- <input type="text" id="imgs"><br> -->
+        <label for="">writer</label><br>
+        <input type="text" id="writer" placeholder="작가의 이름을 작성해주세요"><br>
+        <label for="">title</label><br>
+        <input type="text" id="title"placeholder="제목을 작성해주세요"><br>
+        <label for="">content</label><br>
+        <!-- <input type="text" id="content"placeholder="내용을 작성해주세요"><br> -->
+        <textarea class="con_write" name="" id="content" cols="50" rows="5"placeholder="내용을 작성해주세요"></textarea>
+        <label for="">page</label><br>
+        <input type="text" id="page"placeholder="페이지의 수를 작성해주세요"><br>
+        <div>
+            <span>genre : </span>
+            <select id="genre">
+                <option value="1">cartoon</option>
+                <option value="2">romance</option>
+                <option value="3">s.f</option>
+                <option value="4">novel</option>
+            </select>
+        </div>
+        <br>
+        <label for="date">publish: <br>
+            <input id="publish" type="date"
+            id="date"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            max="2100-06-20"
+            min="1500-06-05"
+            value="2023-06-10">
+        </label> <br>
+        <button id="uploadBtn" type="button">등록하기</button>
+    </form>
+</div>
+    </div>
+    
 </body>
 <script>
     async function getAPI() {
-          try {
-              const {data} = await axios.get(
+        try {
+            const {data} = await axios.get(
                   "http://127.0.0.1:8080/uploads/view",
                   { withCredentials: true }
                   );
@@ -61,20 +91,22 @@
 
     uploadBtn.onclick = () => {
 
-        console.log("나 클릭?")
+        console.log("uploadBtn 클릭?")
         const form = new FormData();
-        form.append('imgs', imgs.value);
-        form.append("user_id", 2)
-        console.log(imgs.value)
-        // console.log(file.files[0]); 
         form.append('upload', file.files[0]);
-        console.log(file.files[0])
-        axios.post('http://127.0.0.1:8080/uploads', form, {
+        form.append('title', title.value);
+        form.append('writer', writer.value);
+        form.append('content', content.value);
+        form.append('genre', genre.options[genre.selectedIndex].value);
+        form.append('page', page.value);
+        form.append('publish', publish.value);
+        axios.post('http://127.0.0.1:8080/books', form, {
             withCredentials: true,
             'Content-Type': 'multipart/form-data'
         }).then((e) => {
             console.log('잘 전달됨');
             console.log(e);
+            
 
         }).catch((err) => {
             console.log("=================================================")
@@ -82,6 +114,18 @@
         })
 
     }
+    function loadImg(event) {
+    let input = event.target;
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      
+      reader.onload = function(e) {
+        document.getElementById('img1').src = e.target.result;
+      }
+      
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 </script>
 
 </html>

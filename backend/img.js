@@ -8,7 +8,9 @@ exports.Upload = multer({
         },
         filename :(req,file,done)=>{
             const ext = path.extname(file.originalname)
+            console.log("111111111111111",ext)
             const filename = path.basename(file.originalname,ext)+"_"+Date.now()+ext;
+            console.log("sdfsdfsdfs",filename)
             done(null,filename);
         }
     }),

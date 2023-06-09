@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="./css/mypage.css">
+    <link rel="stylesheet" href="./css/writer.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     </div>
     <div class="main">
         <div class="content1">
-            <h3 class="margin1">My-Page</h3>
+            <h3 class="margin1">Writer-Page</h3>
             <div style="display: flex;justify-content: space-around;">
                 <img id="img1" class="img-box" alt="">
             </div>
@@ -37,10 +37,10 @@
                 <span id="userId"></span>
             </div>
             <div>
-                <a class="my-comment" href="">내가 쓴 댓글</a>
+                <a class="writer-result" href="">책 작성 승인 결과</a>
             </div>
             <h3 class="margin1">프로필 변경</h3>
-            <input class="margin1" type="file" id="file" onchange="loadImg(event)" style=" width: 200px;">
+            <input class="margin1" type="file" id="file" style=" width: 200px;">
             <button id="uploadBtn" class="button">change</button>
             <form action="http://127.0.0.1:8080/mypages/nick" method="post">
                 <h3  class="margin1">닉네임 변경</h3>
@@ -76,8 +76,8 @@
             </div>
 
         </div>
-        <div class="comments"><h3>comments</h3>
-            <ul id="reviewList">
+        <div class="result"><h3>result</h3>
+            <ul id="resultList">
             </ul>
         </div>
     </div>
@@ -133,28 +133,26 @@
         console.log(error)
     }
     }
-    let myComment = document.querySelector('.my-comment')
-    let comments = document.querySelector('.comments')
-    myComment.addEventListener('click',function(e){
+    let writerResult = document.querySelector('.writer-result')
+    let bookresult = document.querySelector('.result')
+    writerResult.addEventListener('click',function(e){
         console.log("댓글 클릭?")
         e.preventDefault()
-        if(comments.style.display==='none'){
-            comments.style.display ='block'
+        if( bookresult.style.display==='none'){
+            bookresult.style.display ='block'
         }else{
-            comments.style.display='none'
+            bookresult.style.display='none'
         }
     })
-
-    async function reviewAPI(){
+    async function booksAPI(){
         try {
-            const {data}= await axios.get('http://127.0.0.1:8080/mypages/reviews',{
+            const {data}= await axios.get('http://127.0.0.1:8080/mypages/writer',{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {
                 reviewList.innerHTML +=`
                 <li>
-            <div>comment : ${el.comment} </div>
-            <div>star⭐ : ${el.star} </div>
+            <div> : ${el.accept} </div>
                 </li>
                 `
                });
@@ -163,19 +161,8 @@
         }
     }
     reviewAPI()
-    
-    function loadImg(event) {
-    let input = event.target;
-    if (input.files && input.files[0]) {
-      let reader = new FileReader();
-      
-      reader.onload = function(e) {
-        document.getElementById('img1').src = e.target.result;
-      }
-      
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
+
+
 
 </script>
 
