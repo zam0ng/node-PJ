@@ -1,5 +1,5 @@
 const { Books, User, review, r_review } = require("../models");
-const sequelize = require("sequelize");
+const { sequelize } = require("../models");
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
@@ -101,16 +101,20 @@ exports.insertReview = async (req, res) => {
 
 exports.Ta = async (req, res) => {
   try {
-    const test = await User.findAll({
-      include: [
-        {
-          model: Books,
-          required: true,
+    // 책번호를 가져와 책에 쓴 댓글을 가져옴
+    const test = await sequelize.query(
+      `SELECT * FROM users A, review B WHERE A.nickname = B.nickname and B.book_id = 49 order by B.createdAt`,
+      { type: sequelize.QueryTypes.SELECT }
+    );
 
-          include: [{ model: review, required: true, where: { book_id: 49 } }],
-        },
-      ],
-    });
+    res.json(test);
+
+    // const test = await Books.findAll({
+    //   include: [{ model: review, where: { book_id: 49 } }],
+    // });
+
+    // console.log("test[0].dataValues");
+    // console.log(test[0].dataValues.Reviews.Review[0].dataValues);
 
     // 별점 가져오기
     // const test = await review.findAll({
@@ -123,7 +127,10 @@ exports.Ta = async (req, res) => {
     // });
     // const tb = test.map((e) => e.dataValues);
     // console.log(tb);
-    res.json(test);
+
+    // res.json(test);
+    // res.json을 두번 쓰면 아래 같은 오류가 남
+    // Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
   } catch (error) {
     console.error(error);
   }

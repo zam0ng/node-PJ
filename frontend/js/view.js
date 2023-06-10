@@ -244,6 +244,18 @@ async function getView() {
   });
 }
 
+const r_reviewOpen = document.querySelector(".r_reviewOpen");
+r_reviewOpen.onclick = (e) => {
+  console.log(e);
+  const reCommentsWrap = document.querySelector(".reCommentsWrap");
+
+  if (reCommentsWrap.classList.contains("active")) {
+    reCommentsWrap.classList.remove("active");
+  } else {
+    reCommentsWrap.classList.add("active");
+  }
+};
+
 getView();
 
 async function taa() {

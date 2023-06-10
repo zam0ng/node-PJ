@@ -562,22 +562,29 @@ body {
   font-weight: 500;
 }
 
-.reCommentArea {
-}
-.reCommentArea span {
+.commentMainWrap .r_reviewOpen {
   font-size: 6px;
 }
-.reCommentArea > span:hover {
+
+.commentMainWrap .r_reviewOpen:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
+.reCommentArea {
+}
+
 .reCommentsWrap {
   width: 100%;
-  height: 30px;
+
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
+  overflow: hidden;
+  height: 0px;
+}
+.reCommentsWrap.active {
+  height: auto;
 }
 
 .reCommentsInner {
