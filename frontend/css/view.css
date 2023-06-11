@@ -434,7 +434,7 @@ body {
 }
 .ratingsBar .ratingsBarInner .fullBar {
   /* 퍼센트에 따라 width값 조절 */
-  width: 50%;
+  /* width: 50%; */
   height: 10px;
   border-radius: 10px;
   background-color: #e87400;

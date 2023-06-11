@@ -4,9 +4,9 @@ const { sequelize } = require("../models");
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
   // 가져온 책의 번호
-  const booknum = 49;
+  const booknum = 2;
   // 로그인한 유저의 id
-  const tempuser_id = 14;
+  const tempuser_id = 8;
   try {
     // 책에 대한 정보와 작가의 정보 가져오기
     const bookdata = await User.findOne(
@@ -83,7 +83,12 @@ exports.viewInfo = async (req, res) => {
 
     stardata = stardata.map((e) => e.dataValues);
 
-    res.json({ bookdata, userdata, stardata, authordata });
+    // users 테이블에 모든 유저의 정보를 가져옴
+    const userAll = await User.findAll();
+    const userAlldata = userAll.map((e) => e.dataValues);
+    // console.log(userAlldata);
+
+    res.json({ bookdata, userdata, stardata, authordata, userAlldata });
   } catch (error) {
     console.error(error);
   }
@@ -101,13 +106,22 @@ exports.insertReview = async (req, res) => {
 
 exports.Ta = async (req, res) => {
   try {
-    // 책번호를 가져와 책에 쓴 댓글을 가져옴
-    const test = await sequelize.query(
-      `SELECT * FROM users A, review B WHERE A.nickname = B.nickname and B.book_id = 49 order by B.createdAt`,
-      { type: sequelize.QueryTypes.SELECT }
+    const data = await User.findAll(
+      {
+        include: [{ model: review }],
+      },
+      { where: { nickname: review.nickname } }
     );
 
-    res.json(test);
+    res.json(data);
+
+    // 책번호를 가져와 책에 쓴 댓글을 가져옴
+    // const test = await sequelize.query(
+    //   `SELECT * FROM users A, review B WHERE A.nickname = B.nickname and B.book_id = 49 order by B.createdAt`,
+    //   { type: sequelize.QueryTypes.SELECT }
+    // );
+
+    // res.json(test);
 
     // const test = await Books.findAll({
     //   include: [{ model: review, where: { book_id: 49 } }],

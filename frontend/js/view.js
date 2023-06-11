@@ -8,7 +8,7 @@ async function getView() {
     const userInfo = e.data.userdata;
     const starInfo = e.data.stardata;
     const authordata = e.data.authordata;
-
+    const userAlldata = e.data.userAlldata;
     // 넘어오는 데이터 콘솔 로그
     console.log("작가 정보 : author");
     console.log(author);
@@ -22,6 +22,26 @@ async function getView() {
     console.log(starInfo);
     console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
     console.log(authordata);
+    console.log("모든 유저 정보를 가져옴");
+    console.log(userAlldata);
+
+    //===============================================
+    // 넘어온 데이터 가공 하는 곳
+    //===============================================
+
+    // 별점이 비어있는 경우 비어 있는 별점 채우기
+    if (starInfo.length != 5) {
+      for (let i = 0; i < 5; i++) {
+        if (starInfo[i] == undefined) {
+          console.log("별점 정보가 없는 별점 숫자 찾기");
+          console.log("starInfo", i, "undefined");
+          starInfo[i] = { star: `${i}`, starCnt: 0, starSum: 0 };
+        }
+      }
+      starInfo.sort((a, b) => a.star - b.star);
+      starInfo.reverse();
+    }
+    //===============================================
 
     if (e.status == 200) {
       // index.html의 스타일 시트를 가져옴
@@ -65,12 +85,23 @@ async function getView() {
       const starBarWidth = ((starAvg / 5) * 153).toFixed();
       const colStarAvg = document.querySelector(".colStarAvg");
       const colStarAvgSpan = colStarAvg.querySelector("span");
-      colStarAvgSpan.innerHTML = `${starAvg}`;
 
-      let colStarFullWidth = `.colStars .colStarFull { width : ${starBarWidth}px;}`;
+      // 만약 별점 정보가 없다면
+      if (starInfo.length == 0) {
+        colStarAvgSpan.innerHTML = "0";
 
-      let sheetIndex = documentStyleSheet.cssRules.length;
-      documentStyleSheet.insertRule(colStarFullWidth, sheetIndex);
+        let colStarFullWidth = `.colStars .colStarFull { width : 0px;}`;
+
+        let sheetIndex = documentStyleSheet.cssRules.length;
+        documentStyleSheet.insertRule(colStarFullWidth, sheetIndex);
+      } else {
+        colStarAvgSpan.innerHTML = `${starAvg}`;
+
+        let colStarFullWidth = `.colStars .colStarFull { width : ${starBarWidth}px;}`;
+
+        let sheetIndex = documentStyleSheet.cssRules.length;
+        documentStyleSheet.insertRule(colStarFullWidth, sheetIndex);
+      }
 
       // 조회수 + 댓글수
       const colRatingsReviews = document.querySelector(".colRatingsReviews");
@@ -212,17 +243,35 @@ async function getView() {
       const fullBar = ratingsContainer.querySelectorAll(".fullBar");
       const ratingsTotal = ratingsContainer.querySelectorAll(".ratingsTotal");
 
-      starInfo.forEach((el, index) => {
-        let starPercent = (
-          (parseInt(el.starCnt) / starTotalCnt) *
-          100
-        ).toFixed();
+      // // 별점이나 댓글이 없을 경우
+      if (starInfo.length == 0) {
+        let fullBarWidth = `
+      .ratingsBar .ratingsBarInner .fullBar { width : 0px;}`;
 
-        fullBar[index].style.width = `${starPercent}%`;
-        ratingsTotal[
-          index
-        ].innerHTML = `<span>${el.starCnt} (${starPercent}%)</span>`;
-      });
+        let sheetIndex = documentStyleSheet.cssRules.length;
+        documentStyleSheet.insertRule(fullBarWidth, sheetIndex);
+        for (let i = 0; i < 5; i++) {
+          ratingsTotal[i].innerHTML = "<span> 0 (0%)</span>";
+        }
+      } else {
+        starInfo.forEach((el, index) => {
+          let starPercent;
+          if (el.starCnt) {
+            starPercent = (
+              (parseInt(el.starCnt) / starTotalCnt) *
+              100
+            ).toFixed();
+          } else {
+            el.starCnt = 0;
+            starPercent = 0;
+          }
+
+          fullBar[index].style.width = `${starPercent}%`;
+          ratingsTotal[
+            index
+          ].innerHTML = `<span>${el.starCnt} (${starPercent}%)</span>`;
+        });
+      }
 
       // reviews area
       const commentContainer = document.querySelector(".commentContainer");
@@ -236,6 +285,8 @@ async function getView() {
       }
 
       // // 댓글을 쓴 사람의 정보를 가져옴
+      console.log("댓글쓴 사람 정보 가져오기");
+      console.log(thisReview);
 
       // if(e.status == 200) end
     }
@@ -260,6 +311,7 @@ getView();
 
 async function taa() {
   axios.get("http://127.0.0.1:8080/view/test").then((e) => {
+    console.log("test");
     console.log(e);
   });
 }

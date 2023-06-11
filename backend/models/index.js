@@ -16,16 +16,16 @@ db.User = User;
 db.Books = Books;
 db.Chat = Chat;
 
-review.init(sequelize);
-r_review.init(sequelize);
 User.init(sequelize);
 Books.init(sequelize);
+review.init(sequelize);
+r_review.init(sequelize);
 Chat.init(sequelize);
 
-review.assicoate(db);
-r_review.assicoate(db);
 User.assicoate(db);
 Books.assicoate(db);
+review.assicoate(db);
+r_review.assicoate(db);
 Chat.assicoate(db);
 
 module.exports = db;

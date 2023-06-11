@@ -5,6 +5,10 @@ class r_review extends Model {
   static init(sequelize) {
     return super.init(
       {
+        user_id: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         nickname: {
           type: DataTypes.STRING,
         },
