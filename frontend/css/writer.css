@@ -55,7 +55,7 @@ body{
     position: relative;
     width: 300px;
     height: 650px;
-    background-color: #FFEED2;
+    background-color: #e0e0e0;
     
 }
 .content2{
@@ -64,7 +64,7 @@ body{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: #fff7ea;
+    background-color: hsl(0, 0%, 91%);
     
 }
 .margin1{
@@ -79,10 +79,10 @@ body{
     color: black;
 }
 .result{
-    width: 300px;
-    height: 650px;
-    display: none;
-    background-color: aliceblue;
+        width: 400px;
+        height: 700px;
+        display: none;
+        background-color:  #e0e0e0;
 }
 .info{
     border: 3px solid rgb(200, 200, 200);;
@@ -142,4 +142,42 @@ margin: -1px;
 overflow: hidden;
 clip:rect(0,0,0,0);
 border: 0;
+}
+
+.tab {
+   margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.tab_item {
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+
+}
+
+.tab_inner {
+	display: none;
+	background: #ededed;
+	padding: 15px;
+    display: none;
+    height: 550px;
+    overflow: scroll;
+    list-style: none;
+}
+
+.tab_item.active {
+    background: rgb(210, 210, 210);
+    color: #000000;
+}
+
+.tab_inner.active {
+    display: block;
+}
+
+.list-warp{
+    border-bottom:2px dashed;
 }

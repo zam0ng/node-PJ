@@ -50,8 +50,7 @@ exports.UserUpload = async(req,res)=>{
 // 책 표지 이미지
 exports.ImgLink = async (req, res) => {
     try {
-      const data = await Books.findOne({ where: { id: 4} });
-  
+      const data = await Books.findOne({ where: { id: 4} })
       res.json(data); // 데이터를 클라이언트에 응답
       // res.json(userdata)
 

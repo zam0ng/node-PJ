@@ -77,7 +77,6 @@
                   );
                   console.log("dddddddddddddddddddddddddddd",data.img)
                 img1.src=`http://127.0.0.1:8080/${data.img}`
-                console.log(data.img)
 
                 writer1.innerHTML=data.writer
             console.log(data);
@@ -94,9 +93,21 @@
         console.log("uploadBtn 클릭?")
         const form = new FormData();
         form.append('upload', file.files[0]);
+        if(file.files.length==0){
+            alert("책 표지를 넣어주세요")
+        }
         form.append('title', title.value);
+        if(!title.value ){
+            alert("제목을 입력해주세요")
+        }
         form.append('writer', writer.value);
+        if(!writer.value){
+            alert("작가를 입력해주세요")
+        }
         form.append('content', content.value);
+        if(!content.value){
+            alert("내용를 입력해주세요")
+        }
         form.append('genre', genre.options[genre.selectedIndex].value);
         form.append('page', page.value);
         form.append('publish', publish.value);
@@ -112,6 +123,9 @@
             console.log("=================================================")
             console.log(err);
         })
+        if(file.files.length==0){
+            alert("책 표지를 넣어주세요")
+        }
 
     }
     function loadImg(event) {

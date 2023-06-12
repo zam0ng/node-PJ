@@ -7,6 +7,7 @@ const { sequelize } = require("./models");
 const CreatebooksRouter = require("./routers/books")
 const UploadRouter = require("./routers/uploads")
 const MypageRouter = require("./routers/mypage")
+const WriterResult = require("./routers/writer")
 const cors = require("cors")
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(express.json())
 app.use("/books",CreatebooksRouter);
 app.use("/uploads",UploadRouter)
 app.use("/mypages",MypageRouter)
+app.use("/writer",WriterResult)
 
 
 const server = app.listen(8080, () => {

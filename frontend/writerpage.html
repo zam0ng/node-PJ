@@ -53,7 +53,7 @@
             <div class="info">
                 <span>nickname : </span>
                 <span id="nickname1"></span>
-            </div>
+            </div> 
             <span class="block"></span>
             <div class="info">
                 <span>gender : </span>
@@ -77,8 +77,24 @@
 
         </div>
         <div class="result"><h3>result</h3>
-            <ul id="resultList">
+            <ul class="tab">
+                <li class="tab_item active">accept</li>
+                <li class="tab_item">reject</li>
             </ul>
+                <div class="tab_inner active">accept.
+                    <div id="acceptList">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab_inner">reject.
+                    <div id="rejectList">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
         </div>
     </div>
 
@@ -87,7 +103,7 @@
     async function getAPI() {
           try {
               const {data} = await axios.get(
-                  "http://127.0.0.1:8080/mypages",
+                  "http://127.0.0.1:8080/writer",
                   { withCredentials: true }
                   );
                 img1.src=`http://127.0.0.1:8080/${data.user_img}`
@@ -111,7 +127,7 @@
         console.log(img1.value)
         form.append('upload', file.files[0]);
         console.log(file.files[0])
-        axios.post('http://127.0.0.1:8080/mypages', form, {
+        axios.post('http://127.0.0.1:8080/writer', form, {
             withCredentials: true,
             'Content-Type': 'multipart/form-data'
         }).then((e) => {
@@ -136,23 +152,45 @@
     let writerResult = document.querySelector('.writer-result')
     let bookresult = document.querySelector('.result')
     writerResult.addEventListener('click',function(e){
-        console.log("댓글 클릭?")
+        console.log("책 작성 승인 결과")
         e.preventDefault()
         if( bookresult.style.display==='none'){
             bookresult.style.display ='block'
         }else{
             bookresult.style.display='none'
-        }
+        }    
     })
-    async function booksAPI(){
+    
+const tabItem = document.querySelectorAll('.tab_item')
+const tabInner = document.querySelectorAll('.tab_inner')
+
+tabItem.forEach((tab, idx)=> {
+    tab.addEventListener('click', function(){
+        tabInner.forEach((inner)=> {
+            inner.classList.remove('active')
+        })
+
+        tabItem.forEach((item)=> {
+            item.classList.remove('active')
+        })
+
+        tabItem[idx].classList.add('active')
+        tabInner[idx].classList.add('active')
+    })
+})
+
+    async function acceptAPI(){
         try {
-            const {data}= await axios.get('http://127.0.0.1:8080/mypages/writer',{
+            const {data}= await axios.get('http://127.0.0.1:8080/writer/result',{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {
-                reviewList.innerHTML +=`
+                acceptList.innerHTML +=`
                 <li>
-            <div> : ${el.accept} </div>
+            <div class="list-warp">
+            <div> title : ${el.title} </div>
+            <div> 승인 결과 : ${el.accept} </div>
+            </div>
                 </li>
                 `
                });
@@ -160,7 +198,27 @@
             
         }
     }
-    reviewAPI()
+    acceptAPI()
+    async function rejectAPI(){
+        try {
+            const {data}= await axios.get('http://127.0.0.1:8080/writer/result',{
+                withCredentials :true})
+                console.log(data)
+               data.forEach((el) => {
+                rejectList.innerHTML +=`
+                <li>
+            <div class="list-warp">
+            <div> title : ${el.title} </div>
+            <div> 거절사유 : ${el.reject} </div>
+        </div>
+                </li>
+                `
+               });
+        } catch (error) {
+            
+        }
+    }
+    rejectAPI()
 
 
 
