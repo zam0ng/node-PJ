@@ -196,39 +196,49 @@
 //     });
     
 // }
-async function logincheck() {
+async function logincheck(){
+    const at = document.cookie.slice(8);
+    console.log(at);
+    
+    const {data} = await axios.get("http://127.0.0.1:8080/main/logincheck"
+    ,{
 
-    const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck");
+      // 이게 rawheader에 쿠키를 저장하는 역할
+      withCredentials:true,
+
+      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+    }
+    );
 
     console.log(data);
 
-    const { nickname, role } = data;
+    const {nickname,role} = data;
     console.log(nickname);
     let who;
     console.log(role);
 
-    if (role == "writer") {
-        who = "작가";
+    if(role=="writer"){
+      who="작가";
     }
-    else {
-        who = "독자";
+    else{
+      who="독자";
     }
 
     console.log(who);
 
-    if (data == "다시 로그인") {
+    if(data =="다시 로그인"){
 
-        login.style.display = "block";
-        signUp.style.display = "block";
-        nick.style.display = "none";
+    login.style.display="block";
+    signUp.style.display="block";
+    nick.style.display = "none";
     }
-    else {
-        login.style.display = "none";
-        signUp.style.display = "none";
-        nick.innerText = "👤" + nickname + " " + who + " 님";
+    else{
+    login.style.display="none";
+    signUp.style.display="none";
+    nick.innerText = "👤"+ nickname +" "+ who+" 님";
 
     }
-}
+  }
 logincheck();
 
 logout.onclick = async () => {

@@ -42,6 +42,10 @@ class User extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        tk :{
+          type: DataTypes.STRING,
+          allowNull : false,
+        }
       },
       {
         sequelize,

@@ -17,5 +17,6 @@ exports.adminsignup = async(User) =>{
         grade: "999",
         nickname : "admin",
         checks : "999",
+        tk : "",
     })
 }

@@ -18,6 +18,10 @@ const nonagreeuser = require("./routers/nonagreeuser");
 const logoutrouter = require("./routers/logout");
 const allview = require("./routers/allview");
 
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/css", express.static(path.join(__dirname, "frontend/css")));
