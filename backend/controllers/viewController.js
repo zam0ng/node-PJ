@@ -4,7 +4,7 @@ const { sequelize } = require("../models");
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
   // 가져온 책의 번호
-  const booknum = 2;
+  const booknum = 1;
   // 로그인한 유저의 id
   const tempuser_id = 8;
   try {
@@ -29,12 +29,33 @@ exports.viewInfo = async (req, res) => {
             include: [
               {
                 model: review,
-                attributes: ["id", "book_id", "comment", "nickname", "star"],
+                attributes: [
+                  "id",
+                  "book_id",
+                  "comment",
+                  "nickname",
+                  "star",
+                  "createdAt",
+                ],
+
                 include: [
                   {
-                    model: r_review,
+                    model: User,
+                    attributes: ["id", "nickname", "user_id", "user_img"],
                   },
                 ],
+                // include: [
+                //   {
+                //     model: r_review,
+                //     attributes: [
+                //       "review_id",
+                //       "user_id",
+                //       "nickname",
+                //       "review",
+                //       "updatedAt",
+                //     ],
+                //   },
+                // ],
               },
             ],
             where: {
@@ -50,6 +71,7 @@ exports.viewInfo = async (req, res) => {
       }
     );
 
+    // console.log(bookdata);
     // 작가가 쓴 글의 전체 수와 팔로워 수 구하기
     // --------------------------------------------
     // follow 기능 추가되면 추가 해야됨
@@ -79,16 +101,27 @@ exports.viewInfo = async (req, res) => {
       ],
       group: ["star"],
       order: [["star", "DESC"]],
+      raw: true,
     });
 
-    stardata = stardata.map((e) => e.dataValues);
+    const reviewdata = await review.findAll({
+      include: [
+        {
+          model: r_review,
+          include: [{ model: User }],
+        },
+      ],
+    });
 
+    // console.log(reviewdata);
     // users 테이블에 모든 유저의 정보를 가져옴
-    const userAll = await User.findAll();
-    const userAlldata = userAll.map((e) => e.dataValues);
-    // console.log(userAlldata);
+    // const userAll = await User.findAll();
+    // const userAlldata = userAll.map((e) => e.dataValues);
+    // // console.log(userAlldata);
 
-    res.json({ bookdata, userdata, stardata, authordata, userAlldata });
+    // res.json({ bookdata, userdata, stardata, authordata, userAlldata });
+
+    res.json({ bookdata, userdata, stardata, authordata, reviewdata });
   } catch (error) {
     console.error(error);
   }
@@ -106,12 +139,9 @@ exports.insertReview = async (req, res) => {
 
 exports.Ta = async (req, res) => {
   try {
-    const data = await User.findAll(
-      {
-        include: [{ model: review }],
-      },
-      { where: { nickname: review.nickname } }
-    );
+    const data = await review.findAll({
+      include: [{ model: User }],
+    });
 
     res.json(data);
 

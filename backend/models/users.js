@@ -62,6 +62,10 @@ class User extends Model {
       foreignKey: "user_id",
       sourceKey: "id",
     });
+    db.User.hasMany(db.r_review, {
+      foreignKey: "user_id",
+      sourceKey: "id",
+    });
   }
 }
 

@@ -478,6 +478,7 @@ body {
   width: 100%;
   display: flex;
   height: auto;
+  margin-bottom: 30px;
 }
 
 .commentWrap .commentProfile {
@@ -511,7 +512,7 @@ body {
   text-decoration: underline;
 }
 
-.commentProfile .commentProfileInfo .commentProfileFollowbtn {
+.commentProfileFollowbtn {
   width: 80px;
   height: 25px;
   border-radius: 12px;
@@ -581,10 +582,10 @@ body {
   flex-direction: column;
   margin-bottom: 4px;
   overflow: hidden;
-  height: 0px;
+  height: auto;
 }
 .reCommentsWrap.active {
-  height: auto;
+  height: 0;
 }
 
 .reCommentsInner {

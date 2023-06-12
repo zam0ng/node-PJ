@@ -5,10 +5,6 @@ class r_review extends Model {
   static init(sequelize) {
     return super.init(
       {
-        user_id: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
         nickname: {
           type: DataTypes.STRING,
         },
@@ -31,6 +27,10 @@ class r_review extends Model {
   static assicoate(db) {
     db.r_review.belongsTo(db.review, {
       foreignKey: "review_id",
+      targetKey: "id",
+    });
+    db.r_review.belongsTo(db.User, {
+      foreignKey: "user_id",
       targetKey: "id",
     });
   }

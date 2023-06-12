@@ -1,5 +1,5 @@
 async function getView() {
-  await axios.get("http://127.0.0.1:8080/view").then((e) => {
+  const data = await axios.get("http://127.0.0.1:8080/view").then((e) => {
     console.log("then");
     console.log(e);
     const author = e.data.bookdata;
@@ -8,7 +8,8 @@ async function getView() {
     const userInfo = e.data.userdata;
     const starInfo = e.data.stardata;
     const authordata = e.data.authordata;
-    const userAlldata = e.data.userAlldata;
+    const reviewInfo = e.data.reviewdata;
+    // const userAlldata = e.data.userAlldata;
     // 넘어오는 데이터 콘솔 로그
     console.log("작가 정보 : author");
     console.log(author);
@@ -22,25 +23,40 @@ async function getView() {
     console.log(starInfo);
     console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
     console.log(authordata);
-    console.log("모든 유저 정보를 가져옴");
-    console.log(userAlldata);
+    console.log("특정 책에 있는 댓글과 대댓글 가져오기 : reviewInfo");
+    console.log(reviewInfo);
+    // console.log(userAlldata);
 
     //===============================================
     // 넘어온 데이터 가공 하는 곳
     //===============================================
 
     // 별점이 비어있는 경우 비어 있는 별점 채우기
-    if (starInfo.length != 5) {
-      for (let i = 0; i < 5; i++) {
-        if (starInfo[i] == undefined) {
-          console.log("별점 정보가 없는 별점 숫자 찾기");
-          console.log("starInfo", i, "undefined");
-          starInfo[i] = { star: `${i}`, starCnt: 0, starSum: 0 };
-        }
-      }
-      starInfo.sort((a, b) => a.star - b.star);
-      starInfo.reverse();
-    }
+
+    // if (starInfo.length != 5) {
+    //   for (let i = 0; i < 5; i++) {
+    //     for (let j = 5; j > 0; j--) {
+    //       if (starInfo[i]?.star != "5") {
+    //         console.log("별점 정보가 없는 별점 숫자 찾기");
+    //         console.log("starInfo", j, "undefined");
+    //         starInfo[j] = { star: `${j}`, starCnt: 0, starSum: 0 };
+    //         continue;
+    //       }
+    //     }
+
+    //     // for (let j = 5; (j = j); j--) {
+    //     //   if (parseInt(starInfo[i].star) != j) {
+    //     //     console.log("별점 정보가 없는 별점 숫자 찾기");
+    //     //     console.log("starInfo", j, "undefined");
+    //     //     starInfo[i] = { star: `${j}`, starCnt: 0, starSum: 0 };
+    //     //     break;
+    //     //   }
+    //     // }
+    //   }
+    //   // starInfo.sort((a, b) => a.star - b.star);
+    //   // starInfo.reverse();
+    // }
+
     //===============================================
 
     if (e.status == 200) {
@@ -73,16 +89,21 @@ async function getView() {
       let starTotalCnt = 0;
       let starAvg = 0;
       // 최대 width 값
-      let starMaxWidth = 153;
+      let starMaxWidth = 155;
 
       starInfo.forEach((el, index) => {
+        // console.log(el);
         starTotalStore += parseInt(el.starSum);
         starTotalCnt += parseInt(el.starCnt);
       });
 
+      console.log("=============================");
+      console.log(starTotalStore);
+      console.log(starTotalCnt);
+
       starAvg = (starTotalStore / starTotalCnt).toFixed(2);
 
-      const starBarWidth = ((starAvg / 5) * 153).toFixed();
+      const starBarWidth = ((starAvg / 5) * starMaxWidth).toFixed();
       const colStarAvg = document.querySelector(".colStarAvg");
       const colStarAvgSpan = colStarAvg.querySelector("span");
 
@@ -243,6 +264,14 @@ async function getView() {
       const fullBar = ratingsContainer.querySelectorAll(".fullBar");
       const ratingsTotal = ratingsContainer.querySelectorAll(".ratingsTotal");
 
+      const allStar = [
+        { star: 5, starCnt: 0, starSum: 0 },
+        { star: 4, starCnt: 0, starSum: 0 },
+        { star: 3, starCnt: 0, starSum: 0 },
+        { star: 2, starCnt: 0, starSum: 0 },
+        { star: 1, starCnt: 0, starSum: 0 },
+      ];
+
       // // 별점이나 댓글이 없을 경우
       if (starInfo.length == 0) {
         let fullBarWidth = `
@@ -254,7 +283,19 @@ async function getView() {
           ratingsTotal[i].innerHTML = "<span> 0 (0%)</span>";
         }
       } else {
-        starInfo.forEach((el, index) => {
+        if (starInfo.length != 5) {
+          starInfo.forEach((e) => {
+            const insertStar = allStar.find((x) => x.star === parseInt(e.star));
+            if (insertStar) {
+              insertStar.starCnt = e.starCnt;
+              insertStar.starSum = e.starSum;
+            }
+            // console.log("insertStar");
+            // console.log(insertStar);
+          });
+        }
+        console.log(allStar);
+        allStar.forEach((el, index) => {
           let starPercent;
           if (el.starCnt) {
             starPercent = (
@@ -284,38 +325,216 @@ async function getView() {
         commentContainerP[0].innerHTML = `<p>Displaying 1 - 10 of ${thisReview.length} reviews</p>`;
       }
 
-      // // 댓글을 쓴 사람의 정보를 가져옴
-      console.log("댓글쓴 사람 정보 가져오기");
-      console.log(thisReview);
+      // 댓글 그려주기
+      const commentWrap = commentContainer.querySelector(".commentWrap");
+      const commentProfile =
+        commentContainer.querySelectorAll(".commentProfile");
+      const commentProfileImg =
+        commentContainer.querySelectorAll(".commentProfileImg");
+      const commentProfileImgImg = commentContainer.querySelectorAll("img");
 
+      const commentProfileInfo = commentContainer.querySelectorAll(
+        ".commentProfileInfo"
+      );
+
+      const commentArea = commentContainer.querySelectorAll(".commentArea");
+
+      const commentMainStar =
+        commentContainer.querySelectorAll(".commentMainStar");
+
+      const commentMainDate =
+        commentContainer.querySelectorAll(".commentMainDate");
+      console.log("댓글 테스트 구간");
+
+      thisReview.forEach((el, index) => {
+        let dateSplit = el.createdAt.split("-");
+
+        if (dateSplit[1] == "01") dateSplit[1] = "Jan";
+        if (dateSplit[1] == "02") dateSplit[1] = "Feb";
+        if (dateSplit[1] == "03") dateSplit[1] = "Mar";
+        if (dateSplit[1] == "04") dateSplit[1] = "Apr";
+        if (dateSplit[1] == "05") dateSplit[1] = "May";
+        if (dateSplit[1] == "06") dateSplit[1] = "Jun";
+        if (dateSplit[1] == "07") dateSplit[1] = "Jul";
+        if (dateSplit[1] == "08") dateSplit[1] = "Aug";
+        if (dateSplit[1] == "09") dateSplit[1] = "Sep";
+        if (dateSplit[1] == "10") dateSplit[1] = "Oct";
+        if (dateSplit[1] == "11") dateSplit[1] = "Nov";
+        if (dateSplit[1] == "12") dateSplit[1] = "Dec";
+        let reviewStar;
+        let restNum;
+        // console.log("댓글 별점");
+        // console.log(el.star);
+        if (el.star < 5) {
+          reviewStar = "★".repeat(parseInt(el.star));
+          restStar = "☆".repeat(5 - parseInt(el.star));
+          // console.log("restStar");
+          // console.log(restStar);
+          reviewStar += restStar;
+        } else {
+          reviewStar = "★".repeat(parseInt(el.star));
+        }
+
+        commentContainer.innerHTML += `
+        <div class="commentWrap">
+        <div class="commentProfile">
+          <div class="commentProfileImg">
+            <img src="${el.User.user_img}" alt="" />
+          </div>
+          <div class="commentProfileInfo">
+          <span>${el.User.nickname}</span>
+          <span>0 review</span>
+          <span>0 follows</span>
+          </div>
+          <div class="commentProfileFollowbtn">
+            <span>Follow</span>
+          </div>
+        </div>
+        <div class="commentMainWrap">
+          <div class="commentMainHeader">
+            <div class="commentMainStar">
+              <span>${reviewStar}</span>
+            </div>
+            <div class="commentMainDate">
+            <span>${dateSplit[1]} ${dateSplit[2].slice(0, 2)}, ${
+          dateSplit[0]
+        }</span>
+            </div>
+          </div>
+          <div class="commentArea">
+            <p>
+              ${el.comment}
+            </p>
+          </div>
+          <span class="r_reviewOpen">${
+            reviewInfo[index].r_reviews.length
+          } comments</span>
+          <div class="reCommentArea">
+            <div class="reCommentsWrap">
+            </div
+          </div>
+          
+        </div>
+      </div>
+      `;
+      });
+
+      // 대댓글 comments 버튼 누르면 대댓글을 불러옴
+
+      const commentMainWrap = document.querySelectorAll(".commentMainWrap");
+      const reCommentArea = document.querySelectorAll(".reCommentArea");
+      const reCommentsWrap =
+        commentContainer.querySelectorAll(".reCommentsWrap");
+      const r_reviewOpen = commentContainer.querySelectorAll(".r_reviewOpen");
+
+      commentMainWrap.forEach((el, index) => {
+        r_reviewOpen[index].onclick = (e, i) => {
+          console.log(e.target);
+          if (reCommentsWrap[index].classList.contains("active")) {
+            reviewInfo.forEach((e, i) => {
+              reCommentArea[i].innerHTML = "";
+            });
+            reCommentsWrap[index].classList.remove("active");
+          } else {
+            reviewInfo.forEach((x, y) => {
+              console.log(x.r_reviews[y]);
+
+              x.r_reviews.forEach((ee, ii) => {
+                console.log(ee);
+                reCommentArea[y].innerHTML += `
+                <div class="reCommentsWrap">
+                    <div class="reCommentsInner">
+                      <div class="reCommentsProfileImgs">
+                        <img src=${ee.User.user_img} alt="" />
+                      </div>
+                      <div class="reComments">
+                        <span>${ee.nickname}</span>
+                        <span>${ee.review}</span>
+                      </div>
+                      </div>
+                  </div>`;
+              });
+              // reCommentArea[y].innerHTML += `<div class="reCommentInput">
+              //   <div class="reCommentMyimg">
+              //     <img src="./img/basic.png" alt="" />
+              //   </div>
+              //   <input type="text" />
+              //   <div class="reCommentBtn">
+              //     <span>post</span>
+              //   </div>
+              // </div>`;
+              // reCommentsWrap[index].innerHTML = `
+              //       <div class="reCommentsInner">
+              //         <div class="reCommentsProfileImgs">
+              //           <img src=${x.r_reviews[y].User.user_img} alt="" />
+              //         </div>
+              //         <div class="reComments">
+              //           <span>name</span>
+              //           <span>recomments</span>
+              //         </div>
+              //       </div>`;
+
+              // <div class="reCommentInput">
+              //   <div class="reCommentMyimg">
+              //     <img src="./img/basic.png" alt="" />
+              //   </div>
+              //   <input type="text" />
+              //   <div class="reCommentBtn">
+              //     <span>post</span>
+              //   </div>
+              // </div>;
+            });
+            // reCommentArea[index].forEach((x) => {
+            //   x.innerHTML = `
+            //   <div class="reCommentsInner">
+            //      <div class="reCommentsProfileImgs">
+            //        <img src="./img/basic.png" alt="" />
+            //      </div>
+            //      <div class="reComments">
+            //        <span>name</span>
+            //        <span>recomments</span>
+            //      </div>
+            //    </div>`;
+            // });
+            reCommentsWrap[index].classList.add("active");
+          }
+        };
+      });
+
+      return e;
       // if(e.status == 200) end
     }
 
     // axios.get end
   });
+
+  // console.log(data);
 }
-
-const r_reviewOpen = document.querySelector(".r_reviewOpen");
-r_reviewOpen.onclick = (e) => {
-  console.log(e);
-  const reCommentsWrap = document.querySelector(".reCommentsWrap");
-
-  if (reCommentsWrap.classList.contains("active")) {
-    reCommentsWrap.classList.remove("active");
-  } else {
-    reCommentsWrap.classList.add("active");
-  }
-};
 
 getView();
 
 async function taa() {
-  axios.get("http://127.0.0.1:8080/view/test").then((e) => {
-    console.log("test");
-    console.log(e);
-  });
+  // axios.get("http://127.0.0.1:8080/view/test").then((e) => {
+  //   console.log("test");
+  //   console.log(e);
+  // });
+  // function findKeyByValue(obj, value) {
+  //   for (let key in obj) {
+  //     if (typeof obj[key] === "object") {
+  //       const result = findKeyByValue(obj[key], value);
+  //       if (result) {
+  //         return key;
+  //       }
+  //     } else if (obj[key] === value) {
+  //       return key;
+  //     }
+  //   }
+  //   return null;
+  // }
+  // const ta = { sessionID: { a: { cookie: 1 }, b: 2, c: 3, d: 4 } };
+  // console.log(findKeyByValue(ta, 2)); // "sessionID"
 }
-taa();
+// taa();
 
 // let starTemp = [];
 // let starSum = 0;
@@ -331,3 +550,45 @@ taa();
 // console.log(starArr);
 // console.log(starSum);
 // ==================================================
+
+// const r_reviewOpen = document.querySelectorAll(".r_reviewOpen");
+
+// const reCommentsWrap = document.querySelectorAll(".reCommentsWrap");
+// commentArea.forEach((el, index) => {
+//   console.log(el);
+//   r_reviewOpen[index].onclick = (e) => {
+//     console.log(e);
+
+//     if (reCommentsWrap[index].classList.contains("active")) {
+//       reCommentsWrap[index].classList.remove("active");
+//     } else {
+//       reCommentsWrap[index].classList.add("active");
+//     }
+//   };
+// });
+
+// <div class="reCommentArea">
+
+// <div class="reCommentsWrap">
+//   <div class="reCommentsInner">
+//     <div class="reCommentsProfileImgs">
+//       <img src="./img/basic.png" alt="" />
+//     </div>
+//     <div class="reComments">
+//       <span>name</span>
+//       <span>recomments</span>
+//     </div>
+//   </div>
+
+//   <div class="reCommentInput">
+//     <div class="reCommentMyimg">
+//       <img src="${userInfo.user_img}" alt="" />
+//     </div>
+//     <input type="text" />
+//     <div class="reCommentBtn">
+//       <span>post</span>
+//     </div>
+//   </div>
+// </div>
+
+// </div>
