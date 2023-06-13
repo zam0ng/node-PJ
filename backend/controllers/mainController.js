@@ -12,7 +12,11 @@ exports.OrderByView = async (req, res) => {
     const data = await Books.findAll({
       order: [["viewcnt", "desc"]],
       limit: 5,
+      where: {
+        accept: true,
+      },
     });
+
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -55,9 +59,12 @@ exports.OrderByStar = async (req, res) => {
       limit: 5,
       // 서브쿼리 생성을 비활성화
       subQuery: false,
+      where: {
+        accept: true,
+      },
     });
 
-    console.log(data);
+    // console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -74,3 +81,14 @@ exports.OrderByStar = async (req, res) => {
 // on C.id = D.id
 // order by orderstar desc
 // limit 5;
+
+exports.logincheck = async (req, res) => {
+  const user_id = req.decoded.user_id;
+  const nickname = req.decoded.nickname;
+  const role = req.decoded.role;
+  console.log("maincontroller of logincheck");
+  console.log(user_id);
+
+  const data = { nickname, role };
+  res.json(data);
+};

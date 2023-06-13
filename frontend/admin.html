@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="./css/admin.css">
+<body>
+    <div class="main-box">
+        <div class="title">
+            
+        <a href="http://127.0.0.1:5500/frontend/index.html"><img src="../../backend/img/White_logo_-_no_background.png" class="title-img" alt=""></a>
+            
+
+        </div>
+        <div class="agree">
+            <div class="agreelist">
+                <div class="al">
+                    <div id="user_agree">가입 승인</div>
+                    <div id="post_agree">게시글 관리</div>
+                    <div id="chat_agree">고객 문의</div>
+                </div>
+
+            </div>
+            <div class="content">
+                <div id="tab_title">가입 승인</div>
+                <div id="main_content">
+                    
+                    
+                   
+                </div>
+            </div>
+        </div>
+</body>
+
+<script>
+    //
+    window.onload
+    = async() =>{
+    
+    tab_title.innerText = "가입 승인";
+    user_agree.style.color ="black";
+    post_agree.style.color ="rgb(158, 158, 158)";
+    chat_agree.style.color ="rgb(158, 158, 158)";
+
+    const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+
+        withCredentials:true,
+    })
+    main_content.innerHTML ="";
+
+    console.log(data);
+
+    if(data.data.length==0){
+        return main_content.innerHTML =`가입 승인 대기중인 유저가 없습니다.`
+    }
+
+    main_content.innerHTML =`
+                    <br>
+                    <table class="tb">
+                        <th class="num">num</th>
+                        <th class="user_id">user_id</th>
+                        <th class="gender">M/W</th>
+                        <th class="role">W/R</th>
+                        <th class="age">age</th>
+                        <th class="nickname">nickname</th>
+                    </table>`
+    // console.log(data);
+    // console.log(data.data);
+
+    data.data.forEach((el,index) => {
+        
+        main_content.innerHTML += 
+        `       <div style="display:flex">
+                    <table class="tb">
+                        
+                        <td class="num">${el.id}</td>
+                        <td class="user_id">${el.user_id}</td>
+                        <td class="gender">${el.gender}</td>
+                        <td class="role">${el.role}</td>
+                        <td class="age">${el.age}</td>
+                        <td class="nickname">${el.nickname}</td>
+                        
+                        
+                    </table>
+                        <button class="accept">  </button>
+                        <button class="reject">  </button>
+                </div>
+        `
+
+        const accept =document.querySelectorAll(".accept");
+        const reject =document.querySelectorAll(".reject");
+
+        accept.forEach((e,index)=>{
+            e.onclick = async ()=>{
+
+                console.log("클릭됨")
+                console.log(index)
+
+                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+                withCredentials:true,
+                })
+
+                
+                
+                data.data.forEach((e,indexx) => {
+                    // console.log(index,indexx);
+                    // console.log("Xxxxxxxx")
+                    // console.log(typeof(e.grade));
+
+                    if(index ==indexx){
+                        e.grade = e.grade + 1;
+                        // console.log(e.grade);
+                        console.log(e.user_id);
+                        axios.post("http://127.0.0.1:8080/nonagreeuser",{
+
+                            withCredentials : true,
+
+                            data :{
+                                grade : e.grade,
+                                user_id : e.user_id,
+                            }
+                        })
+                    }
+                });
+                location.reload();
+            }
+        });
+
+        reject.forEach((e,index)=>{
+            e.onclick = async () =>{
+                console.log("클릭");
+
+                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+                withCredentials:true,
+                })
+
+                data.data.forEach((e,indexx) => {
+                    // console.log(index,indexx);
+                    // console.log("Xxxxxxxx")
+                    // console.log(typeof(e.grade));
+
+                    if(index ==indexx){
+                        e.grade = e.grade - 1;
+                        // console.log(e.grade);
+                        console.log(e.user_id);
+                        axios.post("http://127.0.0.1:8080/nonagreeuser",{
+
+                            withCredentials : true,
+
+                            data :{
+                                grade : e.grade,
+                                user_id : e.user_id,
+                            }
+                        })
+                    }
+                });
+
+                location.reload();
+            }
+        })
+
+
+    });
+   }
+   user_agree.onclick= async() =>{
+    
+    tab_title.innerText = "가입 승인";
+    user_agree.style.color ="black";
+    post_agree.style.color ="rgb(158, 158, 158)";
+    chat_agree.style.color ="rgb(158, 158, 158)";
+
+    const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+
+        withCredentials:true,
+    })
+    main_content.innerHTML ="";
+
+    console.log(data);
+
+    if(data.data.length==0){
+        return main_content.innerHTML =`가입 승인 대기중인 유저가 없습니다.`
+    }
+
+    main_content.innerHTML =`
+                    <br>
+                    <table class="tb">
+                        <th class="num">num</th>
+                        <th class="user_id">user_id</th>
+                        <th class="gender">M/W</th>
+                        <th class="role">W/R</th>
+                        <th class="age">age</th>
+                        <th class="nickname">nickname</th>
+                    </table>`
+    // console.log(data);
+    // console.log(data.data);
+
+    data.data.forEach((el,index) => {
+        
+        main_content.innerHTML += 
+        `       <div style="display:flex">
+                    <table class="tb">
+                        
+                        <td class="num">${el.id}</td>
+                        <td class="user_id">${el.user_id}</td>
+                        <td class="gender">${el.gender}</td>
+                        <td class="role">${el.role}</td>
+                        <td class="age">${el.age}</td>
+                        <td class="nickname">${el.nickname}</td>
+                        
+                        
+                    </table>
+                        <button class="accept">  </button>
+                        <button class="reject">  </button>
+                </div>
+        `
+
+        const accept =document.querySelectorAll(".accept");
+
+        accept.forEach((e,index)=>{
+            e.onclick = async ()=>{
+
+                console.log("클릭됨")
+                console.log(index)
+
+                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+                withCredentials:true,
+                })
+
+                
+                
+                data.data.forEach((e,indexx) => {
+                    // console.log(index,indexx);
+                    // console.log("Xxxxxxxx")
+                    // console.log(typeof(e.grade));
+
+                    if(index ==indexx){
+                        e.grade = e.grade + 1;
+                        // console.log(e.grade);
+                        console.log(e.user_id);
+                        axios.post("http://127.0.0.1:8080/nonagreeuser",{
+
+                            withCredentials : true,
+
+                            data :{
+                                grade : e.grade,
+                                user_id : e.user_id,
+                            }
+                        })
+                    }
+                });
+
+            }
+        })
+    });
+   }
+   
+   
+   post_agree.onclick = () =>{
+    tab_title.innerText = "게시글 관리";
+    user_agree.style.color ="rgb(158, 158, 158)";
+    post_agree.style.color ="black";
+    chat_agree.style.color ="rgb(158, 158, 158)";
+
+//     const data = axios.get("http://127.0.0.1:8080/nonagressuser/post",{
+//         withCredentials : true,
+//     })
+   }
+
+   chat_agree.onclick = () =>{
+    tab_title.innerText = "고객 문의";
+    user_agree.style.color ="rgb(158, 158, 158)";
+    post_agree.style.color ="rgb(158, 158, 158)";
+    chat_agree.style.color ="black";
+   }
+   
+   
+    
+
+</script>
+</html>

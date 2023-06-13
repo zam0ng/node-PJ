@@ -6,11 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/view.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
   </head>
   <body>
-    <!-- 네비게이션 바 -->
-    <div class="nav"></div>
+     <!-- 로고 부분 -->
+     <div class="nav">
+      <div class="logoBox">
+        <a href="http://127.0.0.1:5500/frontend/index.html"
+          ><img src="../../backend/img/Black logo - no background.png" alt=""
+        /></a>
+
+        <div class="functionBox">
+          <span id="insert"
+            ><a href="http://127.0.0.1:5500/frontend/books.html"
+              >✏️ writing</a
+            ></span
+          >
+          <span id="allview">📙books</span>
+          <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+          <a href=""><span id="nick"></span></a>
+          <span id="login"
+            ><a href="http://127.0.0.1:5500/frontend/login.html">
+              login</a
+            ></span
+          >
+          <span id="signUp"
+            ><a href="http://127.0.0.1:5500/frontend/signup.html">
+              signUp</a
+            ></span
+          >
+          <button id="logout">logout</button>
+        </div>
+      </div>
+      <div class="toggle">
+        <div class="genre">
+          <span id="all"
+            ><a href="http://127.0.0.1:5500/frontend/genre/all.html"
+              >전체</a
+            ></span
+          >
+          <span id="conan"
+            ><a href="http://127.0.0.1:5500/frontend/genre/conan.html"
+              >추리</a
+            ></span
+          >
+          <span id="horror"
+            ><a href="http://127.0.0.1:5500/frontend/genre/horror.html"
+              >공포•스릴러</a
+            ></span
+          >
+          <span id="fantasy"
+            ><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html"
+              >판타지</a
+            ></span
+          >
+          <span id="sorim"
+            ><a href="http://127.0.0.1:5500/frontend/genre/sorim.html"
+              >무협</a
+            ></span
+          >
+          <span id="game"
+            ><a href="http://127.0.0.1:5500/frontend/genre/game.html"
+              >게임</a
+            ></span
+          >
+          <span id="romance"
+            ><a href="http://127.0.0.1:5500/frontend/genre/romance.html"
+              >로맨스</a
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+    <!-- main img -->
 
     <!-- 상세페이지 -->
     <div class="viewWrap">
@@ -111,9 +180,9 @@
           <!-- people currently reading -->
           <div class="currentlyWrap">
             <div class="peopleContainer">
-              <img class="peopleProfileImg" src="./img/basic.png" />
-              <img class="peopleProfileImg" src="./img/basic.png" />
-              <img class="peopleProfileImg" src="./img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
               <span>100</span>
               <span> people are currently reading</span>
             </div>
@@ -121,9 +190,9 @@
           <!-- people want to read -->
           <div class="readWrap">
             <div class="peopleContainer">
-              <img class="peopleProfileImg" src="./img/basic.png" />
-              <img class="peopleProfileImg" src="./img/basic.png" />
-              <img class="peopleProfileImg" src="./img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
               <span>100 </span>
               <span>people want to read</span>
             </div>
@@ -168,7 +237,7 @@
           <!-- 작가 이미지, 이름, 팔로우 버튼 -->
           <div class="reviewWrap">
             <div class="myImg">
-              <img src="./img/basic.png" alt="" />
+              <img src="" alt="" />
             </div>
             <div class="reivewForm">
               <div class="reviewStars">

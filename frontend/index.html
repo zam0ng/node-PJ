@@ -6,18 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
     <link rel="stylesheet" href="./css/index.css" />
+   
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <!-- 로고 부분 -->
     <div class="nav">
       <div class="logoBox">
-        <img src="img/Black logo - no background.png" alt="" />
-        <div class="functionBox">
-          <span><a href=""> books</a></span>
-          <span><a href=""> gerne</a></span>
-          <span><a href=""> login</a></span>
-          <span><a href=""> signUp</a></span>
+        <a href="http://127.0.0.1:5500/frontend/index.html"><img src="../backend/img/Color_logo_-_no_background.png" alt="" /></a>        <div class="functionBox">
+          <span id="insert"><a href="http://127.0.0.1:5500/frontend/books.html">✏️ writing</a></span>
+          <span id="allview">📙books</span>
+          <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+          <span id="nick"><a href="http://127.0.0.1:5500/frontend/writerpage.html"></a></span>
+          <span id="login"><a href="http://127.0.0.1:5500/frontend/login.html"> login</a></span>
+          <span id="signUp"><a href="http://127.0.0.1:5500/frontend/signup.html"> signUp</a></span>
+          <button id="logout">logout</button>
+        </div>
+      </div>
+      <div class="toggle">
+        <div class="genre">
+          
+          <span id="all"><a href="http://127.0.0.1:5500/frontend/genre/all.html">전체</a></span>
+          <span id="conan"><a href="http://127.0.0.1:5500/frontend/genre/conan.html">추리</a></span>
+          <span id="horror"><a href="http://127.0.0.1:5500/frontend/genre/horror.html">공포•스릴러</a></span>
+          <span id="fantasy"><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html">판타지</a></span>
+          <span id="sorim"><a href="http://127.0.0.1:5500/frontend/genre/sorim.html">무협</a></span>
+          <span id="game"><a href="http://127.0.0.1:5500/frontend/genre/game.html">게임</a></span>
+          <span id="romance"><a href="http://127.0.0.1:5500/frontend/genre/romance.html">로맨스</a></span>
         </div>
       </div>
     </div>
@@ -48,10 +63,13 @@
       </div>
     </div>
   </body>
+
+  
   <script>
     // 조회수가 가장 많은 5개의 리스트를 가져옴
     async function getViewList() {
       const { data } = await axios.get("http://127.0.0.1:8080/main/viewlist");
+      console.log(data);
       data.forEach((el, index) => {
         viewList.innerHTML += `<div class="viewCard">
             <img src="../backend/${el.img}" alt="" />
@@ -81,5 +99,100 @@
     }
     getStarList();
     getViewList();
+    
+    async function logincheck(){
+      const at = document.cookie.slice(8);
+      console.log(at);
+      
+      const {data} = await axios.get("http://127.0.0.1:8080/main/logincheck"
+      ,{
+
+        // 이게 rawheader에 쿠키를 저장하는 역할
+        withCredentials:true,
+
+        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+      }
+      );
+
+      console.log(data);
+
+      const {nickname,role} = data;
+      console.log(nickname);
+      let who;
+      console.log(role);
+
+      if(role=="writer"){
+        who="작가";
+      }
+      else{
+        who="독자";
+      }
+
+      console.log(who);
+
+      if(data =="다시 로그인"){
+
+      login.style.display="block";
+      signUp.style.display="block";
+      nick.style.display = "none";
+      logout.style.visibility = "hidden";
+      
+      }
+      else{
+      login.style.display="none";
+      signUp.style.display="none";
+      nick.innerText = "👤"+ nickname +" "+ who+" 님";
+      logout.style.visibility = "visible";
+
+      if(who=="작가"){
+        insert.style.visibility = "visible";
+      }
+
+      
+
+      }
+    }
+    nick.onclick = async()=>{
+
+      const {data} = await axios.get("http://127.0.0.1:8080/main/logincheck"
+      ,{
+        // 이게 rawheader에 쿠키를 저장하는 역할
+        withCredentials:true,
+      }
+      );
+      const {nickname,role} = data;
+
+      console.log(role);
+      if(role =="writer"){
+
+        window.location.href ="http://127.0.0.1:5500/frontend/writerpage.html";
+      }
+
+      if(role=="reader"){
+        window.location.href ="http://127.0.0.1:5500/frontend/mypage.html";
+      }
+
+    }
+    logincheck();
+
+    logout.onclick = async ()=>{
+      
+      await axios.get("http://127.0.0.1:8080/logout",{
+        withCredentials:true,  
+      })
+
+      document.cookie = 'mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+      location.reload();
+    }
+
+    allview.onclick = async() =>{
+
+      const toggle = document.querySelector(".toggle");
+      
+      toggle.classList.toggle("active");
+    }
+
+
   </script>
+  
 </html>

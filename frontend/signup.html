@@ -12,7 +12,7 @@
     <div class="main-box">
         <div class="title">
         
-            <img src="./img/Color_logo_-_no_background.png" class="title-img" alt="">
+            <img src="../../backend/img/Color_logo_-_no_background.png" class="title-img" alt="">
         </div>
         <div class="title2">Create Account</div>
         
@@ -53,9 +53,21 @@
 </body>
 <script>
     btn.onclick = (event)=>{
-        const gender = document.getElementById("gender").value;
-        const role = document.getElementById("role").value;
+        let gender = document.getElementsByName("check-gender");
+        let role = document.getElementsByName("check-role");
 
+        gender.forEach((el) => {
+            if(el.checked){
+                gender = el.value;
+            }
+        });
+        role.forEach((el) => {
+            if(el.checked){
+                role = el.value;
+            }
+        });
+        console.log(role);
+        console.log(gender);
         axios.post('http://127.0.0.1:8080/signup',{
 
             withCredentials:true,
