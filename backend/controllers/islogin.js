@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 exports.islogin = async (req, res, next) => {
   try {
     const th = req.rawHeaders[29].slice(8);
-    console.log(req.rawHeaders);
-    console.log("--------th---------", th);
-    console.log(th);
+    // console.log(req.rawHeaders);
+    // console.log("--------th---------", th);
+    // console.log(th);
     jwt.verify(th, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
       if (err) {
         console.log("다시 로그인");
@@ -22,14 +22,12 @@ exports.islogin = async (req, res, next) => {
   }
 };
 exports.islogin2 = async (req, res, next) => {
-  console.log("================================== 1");
   try {
     // console.log(req.rawHeaders[39]);
-    // const
     // console.log(th);
     let th;
-    console.log("================================== 2");
-
+    console.log("req.rawHeaders");
+    console.log(req.rawHeaders);
     req.rawHeaders.forEach((element, index) => {
       const name = "mytoken";
 
@@ -37,27 +35,20 @@ exports.islogin2 = async (req, res, next) => {
         return (th = element);
       }
     });
-    console.log("================================== 3");
 
     console.log("---------th-------");
     th = th.slice(8);
-    console.log("================================== 4");
-
-    console.log(th);
 
     jwt.verify(th, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
       if (err) {
         console.log("다시 로그인");
         res.send("다시 로그인");
-        console.log("================================== 5");
       } else {
         console.log("islogin2");
         console.log(decoded);
         req.decoded = decoded;
-        console.log("================================== 6");
 
         next();
-        console.log("================================== 7");
       }
     });
   } catch (error) {

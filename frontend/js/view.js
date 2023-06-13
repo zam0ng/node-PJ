@@ -229,14 +229,20 @@ async function getView() {
     }
     // console.log(reviewsScore);
     // console.log(reviewInput);
+    axios.post(
+      "http://127.0.0.1:8080/view/reviewInsert",
 
-    axios.post("http://127.0.0.1:8080/view/reviewInsert", {
-      book_id: bookInfo.id,
-      nickname: userInfo.nickname,
-      star: reviewsScore,
-      comment: reviewInput,
-      user_id: userInfo.id,
-    });
+      {
+        book_id: bookInfo.id,
+        nickname: userInfo.nickname,
+        star: reviewsScore,
+        comment: reviewInput,
+        user_id: userInfo.id,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     // 댓글을 쓰고 난 후 별 초기화
     reviewStarSpan.forEach((el, index) => {
@@ -254,29 +260,6 @@ async function getView() {
   getStarAvg(starInfo);
   getComments();
 }
-
-async function taa() {
-  // axios.get("http://127.0.0.1:8080/view/test").then((e) => {
-  //   console.log("test");
-  //   console.log(e);
-  // });
-  // function findKeyByValue(obj, value) {
-  //   for (let key in obj) {
-  //     if (typeof obj[key] === "object") {
-  //       const result = findKeyByValue(obj[key], value);
-  //       if (result) {
-  //         return key;
-  //       }
-  //     } else if (obj[key] === value) {
-  //       return key;
-  //     }
-  //   }
-  //   return null;
-  // }
-  // const ta = { sessionID: { a: { cookie: 1 }, b: 2, c: 3, d: 4 } };
-  // console.log(findKeyByValue(ta, 2)); // "sessionID"
-}
-// taa();
 
 // ==================================================
 // ========== then에서 빼서 별도의 함수로 만들것 ===========
@@ -524,23 +507,17 @@ async function getComments() {
             // console.log(reCommentArea[index]);
             // 대댓글 등록
 
-            axios
-              .post(
-                "http://127.0.0.1:8080/view/r_reviewInsert",
-                { withCredentials: true },
-                {
-                  params: {
-                    nickname: userInfo.nickname,
-                    review: reCommentInput[y].value,
-                    user_id: userInfo.id,
-                    review_id: thisReview[index].id,
-                  },
-                }
-              )
-              .then((e) => {
-                console.log("http://127.0.0.1:8080/view/r_reviewInsert");
-                console.log(e);
-              });
+            axios.post(
+              "http://127.0.0.1:8080/view/r_reviewInsert",
+
+              {
+                nickname: userInfo.nickname,
+                review: reCommentInput[y].value,
+                user_id: userInfo.id,
+                review_id: thisReview[index].id,
+              },
+              { withCredentials: true }
+            );
             getView();
           };
         });
@@ -553,13 +530,21 @@ async function getComments() {
 
 // 책에 대한 모든 정보를 가져오는 axios 문법
 async function booksAllData() {
-  const data = await axios.get("http://127.0.0.1:8080/view");
+  // 현재 url에 있는 id의 값을 가져옴
+  const getUrl = new URL(window.location.href);
+
+  const getParams = new URLSearchParams(getUrl.search);
+
+  const getId = getParams.get("id");
+
+  const data = await axios.get(`http://127.0.0.1:8080/view/${getId}`, {
+    withCredentials: true,
+  });
   return data;
 }
 
 async function logincheck() {
   const at = document.cookie.slice(8);
-  console.log(at);
 
   const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할
@@ -568,20 +553,14 @@ async function logincheck() {
     //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
   });
 
-  console.log(data);
-
   const { nickname, role } = data;
-  console.log(nickname);
   let who;
-  console.log(role);
 
   if (role == "writer") {
     who = "작가";
   } else {
     who = "독자";
   }
-
-  console.log(who);
 
   if (data == "다시 로그인") {
     login.style.display = "block";
@@ -597,6 +576,6 @@ async function logincheck() {
       insert.style.visibility = "visible";
     }
   }
-  getView();
 }
+getView();
 logincheck();
