@@ -129,11 +129,26 @@ exports.viewInfo = async (req, res) => {
 
 // 작성된 리뷰 저장
 exports.insertReview = async (req, res) => {
-  const { book_id, nickname, star, comment } = req.body;
+  const { book_id, nickname, star, comment, user_id } = req.body;
   try {
-    await review.create({ book_id, nickname, comment, star });
+    await review.create({
+      book_id,
+      nickname,
+      comment,
+      star,
+      user_id,
+    });
   } catch (error) {
     console.log(error);
+  }
+};
+
+exports.insertReReview = async (req, res) => {
+  const { nickname, review, user_id, review_id } = req.query;
+  try {
+    await r_review.create({ nickname, review, user_id, review_id });
+  } catch (error) {
+    console.error(error);
   }
 };
 
