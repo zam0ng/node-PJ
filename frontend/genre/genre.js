@@ -236,16 +236,24 @@ async function logincheck(){
     login.style.display="none";
     signUp.style.display="none";
     nick.innerText = "👤"+ nickname +" "+ who+" 님";
+    logout.style.visibility = "visible";
+
+    if(who=="작가"){
+      insert.style.visibility = "visible";
+    }
 
     }
   }
 logincheck();
 
-logout.onclick = async () => {
-    document.cookie = 'mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+logout.onclick = async ()=>{
+      
+  await axios.get("http://127.0.0.1:8080/logout",{
+    withCredentials:true,  
+  })
 
-    await axios.get("http://127.0.0.1:8080/logout");
-
+  document.cookie = 'mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+  location.reload();
 }
 const allview = document.getElementById("allview");
 
@@ -254,5 +262,27 @@ allview.onclick = async () => {
     const toggle = document.querySelector(".toggle");
 
     toggle.classList.toggle("active");
+}
+
+nick.onclick = async()=>{
+
+  const {data} = await axios.get("http://127.0.0.1:8080/main/logincheck"
+  ,{
+    // 이게 rawheader에 쿠키를 저장하는 역할
+    withCredentials:true,
+  }
+  );
+  const {nickname,role} = data;
+
+  console.log(role);
+  if(role =="writer"){
+
+    window.location.href ="http://127.0.0.1:5500/frontend/writerpage.html";
+  }
+
+  if(role=="reader"){
+    window.location.href ="http://127.0.0.1:5500/frontend/mypage.html";
+  }
+
 }
 

@@ -42,7 +42,7 @@ exports.signup = async (req,res) =>{
             age : bb,
             grade : "0",
             nickname : user_nick,
-            checks : "",
+            checks : 0,
             tk : "",
         }).then((e)=>{
             return res.send("가입성공");

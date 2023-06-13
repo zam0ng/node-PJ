@@ -2,14 +2,72 @@ const jwt = require("jsonwebtoken");
 
 exports.islogin = async(req,res,next) =>{
     try {
-        
+        const th = req.rawHeaders[29].slice(8);
+        console.log(req.rawHeaders);
+        console.log("--------th---------",th);
+        console.log(th);
+        jwt.verify(th,process.env.ACCESS_TOKEN_KEY,(err,decoded)=>{
+
+            if(err){
+                console.log("다시 로그인");
+                res.send("다시 로그인");
+            }
+            else{
+                console.log("islogin")
+                console.log(decoded);
+                req.decoded = decoded;
+                next();
+            }
+        })
+    
+    } catch (error) {
+        console.log("islogin 컨트롤러에서 오류남"+error);
+    }
+}
+exports.islogin2 = async(req,res,next) =>{
+    try {
+        // console.log(req.rawHeaders[39]);
+        // const 
+        // console.log(th);
+        let th;
+        req.rawHeaders.forEach((element,index) => {
+            const name = "mytoken";
+            
+            if(element.startsWith(name)){
+                return th = element;
+            }
+            
+        });
+        console.log("---------th-------");
+        th =th.slice(8);
+        console.log(th);
+
+        jwt.verify(th,process.env.ACCESS_TOKEN_KEY,(err,decoded)=>{
+
+            if(err){
+                console.log("다시 로그인");
+                res.send("다시 로그인");
+            }
+            else{
+                console.log("islogin2")
+                console.log(decoded);
+                req.decoded = decoded;
+                next();
+            }
+        })
+    
+    } catch (error) {
+        console.log("islogin 컨트롤러에서 오류남"+error);
+    }
+}
+        // console.log(req);
         // console.log(req.rawHeaders);
         // console.log(req.rawHeaders[29]);
         // console.log(req.rawHeaders[29].slice(8));
-        const th = req.rawHeaders[29].slice(8);
-        console.log("req.session ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
+        
+        // console.log("req.session ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
         // console.log(req.sessionID);
-        console.log(req.sessionStore.sessions);
+        // console.log(req.sessionStore.sessions);
         // if(req.sessionID in req.sessionStore.sessions){
         //     console.log("같음");
         // }
@@ -36,20 +94,5 @@ exports.islogin = async(req,res,next) =>{
         
         // console.log("te");
         // console.log(te);
-        console.log(th);
-        jwt.verify(th,process.env.ACCESS_TOKEN_KEY,(err,decoded)=>{
-
-            if(err){
-                res.send("다시 로그인");
-            }
-            else{
-                console.log(decoded);
-                req.decoded = decoded;
-                next();
-            }
-        })
-    
-    } catch (error) {
-        console.log("islogin 컨트롤러에서 오류남"+error);
-    }
-}
+        // console.log(th);
+ 

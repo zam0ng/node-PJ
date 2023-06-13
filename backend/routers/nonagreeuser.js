@@ -5,4 +5,6 @@ router.get("/",nonagreeuser);
 
 router.post("/",gradeUpdate);
 
+router.get("/posts", nonagreepost);
+
 module.exports = router;

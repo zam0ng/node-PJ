@@ -28,9 +28,14 @@ exports.login = async(req,res)=>{
         // console.log(hash);
         if(hash){
             let token = jwt.sign({
+                id : data.id,
+                user_img : data.user_img,
                 user_id : data.user_id,
                 nickname : data.nickname,
                 role : data.role,
+                gender : data.gender,
+                checks : data.checks,
+                age : data.age,
                 sessionID : req.sessionID,
             },process.env.ACCESS_TOKEN_KEY,{
                 expiresIn : "10m",

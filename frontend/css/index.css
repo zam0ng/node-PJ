@@ -11,6 +11,30 @@ a { text-decoration: none; color: black; }
     a:hover, a:active { text-decoration: none; }
 
 /* nav */
+#logout {
+  cursor: pointer;
+  visibility: hidden;
+  border: none;
+  background-color: #f4f2e9;
+
+  list-style-type: none;
+  font-weight: 600;
+  font-size: 14px;
+
+  margin-left: 15px;
+  text-decoration-line: none;
+  color: black;
+  line-height: 15px;
+}
+#logout:hover{
+  color: red;
+}
+#insert{
+  visibility: hidden;
+}
+#insert a:hover{
+  color: orangered;
+}
 
 .nav {
   width: 100%;
@@ -26,7 +50,7 @@ a { text-decoration: none; color: black; }
   position: relative;
 }
 .nav .functionBox {
-  width: 250px;
+  width: 350px;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -162,7 +186,10 @@ a { text-decoration: none; color: black; }
 }
 .genre span:hover:after { transform: scaleX(1); }
 
-#allview { 
+#allview,
+#login,
+#signUp
+ {
   color: #000;
   display:inline-block; 
   margin:0;
@@ -170,11 +197,25 @@ a { text-decoration: none; color: black; }
   cursor: pointer;
  }
 
-#allview:after {
+#allview:after,
+#login:after,
+#signUp:after {
   display:block;
   content: '';
   border-bottom: solid 3px orange;  
   transform: scaleX(0);  
   transition: transform 250ms ease-in-out;
 }
-#allview:hover:after { transform: scaleX(1); }
+#allview:hover:after,
+
+#login:hover:after,
+#signUp:hover:after
+ { transform: scaleX(1); }
+
+#nick{
+  cursor: pointer;
+}
+#nick:hover{
+  
+  color: blueviolet;
+}

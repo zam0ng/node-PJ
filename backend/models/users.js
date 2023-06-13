@@ -7,7 +7,7 @@ class User extends Model {
       {
         user_img :{
           type : DataTypes.STRING,
-          defaultValue : "./img/basic.png",
+          defaultValue : "/img/basic.png",
         },
         
         user_id: {
@@ -42,10 +42,7 @@ class User extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        tk :{
-          type: DataTypes.STRING,
-          allowNull : false,
-        }
+        
       },
       {
         sequelize,
