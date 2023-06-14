@@ -3,43 +3,48 @@ const { sequelize } = require("../models");
 
 class User extends Model {
   static init(sequelize) {
-    return super.init(
+    return super.init( 
       {
         user_img :{
-            type : DataTypes.STRING,
-            allowNull : false,
+          type : DataTypes.STRING,
+          defaultValue : "./img/basic.png",
         },
-        user_id : {
-            type : DataTypes.STRING,
-            allowNull : false,
+        
+        user_id: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        user_pw : {
-            type : DataTypes.STRING,
-            allowNull : false,
+        user_pw: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        gender : {
-            type : DataTypes.STRING,
-            allowNull : false,
+        gender: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        role : {
-            type : DataTypes.STRING,
-            allowNull : false,
+        role: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        age :{
-            type : DataTypes.INTEGER,
-            allowNull : false,
+        age: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
         },
-        grade : {
-            type : DataTypes.INTEGER,
-            allowNull : false,
+        grade: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
         },
-        nickname : {
-            type : DataTypes.STRING,
-            allowNull : false,
+        nickname: {
+          type: DataTypes.STRING,
+          allowNull: false,
         },
-        checks : {
-            type : DataTypes.STRING,
-            allowNull : false,
+        checks: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        tk :{
+          type: DataTypes.STRING,
+          allowNull : false,
         }
       },
       {
@@ -55,7 +60,8 @@ class User extends Model {
   }
 
   static assicoate(db) {
-    db.User.hasMany(db.Books,{foreignKey:"user_id",sourceKey:"id"});
+    db.User.hasMany(db.Books, { foreignKey: "user_id", sourceKey: "id" });
+    db.User.hasMany(db.Chat, { foreignKey: "chat_id", sourceKey: "id" });
   }
 }
 

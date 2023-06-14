@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/font/Nanum_Myeongjo/NanumMyeongjo-ExtraBold.ttf">
     <link rel="stylesheet" href="./css/mypage.css">
+   
 </head>
 
 <body>
@@ -18,7 +24,7 @@
             alt="">
     <div class="ulheader">
         <ul style="display: flex; align-items: center;">
-            <li class="category"><a href="">Home</a></li>
+            <li class="category"><a href="http://127.0.0.1:5500/frontend/checklist.html">Home</a></li>
             <li class="category"><a href="">My Books</a></li>
         </ul>
         <ul style="display: flex; align-items: center;">
@@ -28,29 +34,29 @@
     </div>
     <div class="main">
         <div class="content1">
-            <h3 class="margin1">프로필 변경</h3>
+            <h3 class="margin1">change profile</h3>
             <input class="margin1" type="file" id="file" onchange="loadImg(event)" style=" width: 200px;">
             <button id="uploadBtn" class="button">change</button>
             <form action="http://127.0.0.1:8080/mypages/nick" method="post">
-                <h3  class="margin1">닉네임 변경</h3>
+                <h3  class="margin1">change nickname</h3>
                 <input class="margin1" type="text" name="changenick">
                 <button class="button" id="nickBtn">change</button>
             </form>
         </div>
         <div class="content2">
         <div>
-            <span class="margin1" style="font-weight: 600;" id="nickname2"></span>님의 mypage
+            <span class="margin1" style="font-weight: 600;" id="nickname2"></span>'s mypage
         </div>
             <div style="display: flex;justify-content: space-around;">
                 <img id="img1" class="img-box" alt="">
             </div>
             <div class="id-info">
-                <span>아이디 : </span>
+                <span>ID : </span>
                 <span id="userId"></span>
             </div>
             <div>
-                <a class="my-info" href="">정보 수정하기</a>
-                <a class="my-comment" href="">내가 쓴 댓글</a>
+                <a class="my-info" href="">Edit information</a>
+                <a class="my-comment" href="">comment written by me</a>
             </div>
             <h3>information</h3>
             <div class="info">
