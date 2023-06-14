@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/view.css" />
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+  </head>
+  <body>
+     <!-- 로고 부분 -->
+     <div class="nav">
+      <div class="logoBox">
+        <a href="http://127.0.0.1:5500/frontend/index.html"
+          ><img src="../../backend/img/Black logo - no background.png" alt=""
+        /></a>
+
+        <div class="functionBox">
+          <span id="insert"
+            ><a href="http://127.0.0.1:5500/frontend/books.html"
+              >✏️ writing</a
+            ></span
+          >
+          <span id="allview">📙books</span>
+          <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+          <a href=""><span id="nick"></span></a>
+          <span id="login"
+            ><a href="http://127.0.0.1:5500/frontend/login.html">
+              login</a
+            ></span
+          >
+          <span id="signUp"
+            ><a href="http://127.0.0.1:5500/frontend/signup.html">
+              signUp</a
+            ></span
+          >
+          <button id="logout">logout</button>
+        </div>
+      </div>
+      <div class="toggle">
+        <div class="genre">
+          <span id="all"
+            ><a href="http://127.0.0.1:5500/frontend/genre/all.html"
+              >전체</a
+            ></span
+          >
+          <span id="conan"
+            ><a href="http://127.0.0.1:5500/frontend/genre/conan.html"
+              >추리</a
+            ></span
+          >
+          <span id="horror"
+            ><a href="http://127.0.0.1:5500/frontend/genre/horror.html"
+              >공포•스릴러</a
+            ></span
+          >
+          <span id="fantasy"
+            ><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html"
+              >판타지</a
+            ></span
+          >
+          <span id="sorim"
+            ><a href="http://127.0.0.1:5500/frontend/genre/sorim.html"
+              >무협</a
+            ></span
+          >
+          <span id="game"
+            ><a href="http://127.0.0.1:5500/frontend/genre/game.html"
+              >게임</a
+            ></span
+          >
+          <span id="romance"
+            ><a href="http://127.0.0.1:5500/frontend/genre/romance.html"
+              >로맨스</a
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세페이지 -->
+    <div class="viewWrap">
+      <!-- 왼쪽 책표지, 찜 -->
+      <div class="sideSticky">
+        <div class="sideWrap">
+          <!-- 책 표지 나오는 곳 -->
+          <img class="sideWrapImg" src="" />
+          <div class="sideWrapBtn">
+            <div class="wantToReadBtn">
+              <span>Want to read</span>
+            </div>
+            <div class="BuyTheBookBtn">
+              <span>Buy The Book</span>
+            </div>
+            <!-- 우측 사이드 별점 일단 보류 -->
+            <!-- <div class="bookStars">
+              <div class="bookStarEmpty">
+                <span>☆☆☆☆☆</span>
+              </div>
+              <div class="bookStarFull">
+                <span>★★★★★</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- 왼쪽 책표지, 찜 end -->
+
+      <!-- 오른쪽 상세페이지 본문 -->
+      <div class="viewMainWrap">
+        <div class="viewMainText">
+          <!-- 책 제목 출력 -->
+          <h1></h1>
+          <!-- 지은이 출력 -->
+          <span></span>
+
+          <!-- 별점, 조회수, 리뷰수 -->
+          <div class="communityCollection">
+            <div class="collectionStar">
+              <div class="colStars">
+                <div class="colStarEmpty">
+                  <span>☆☆☆☆☆</span>
+                </div>
+                <div class="colStarFull">
+                  <span>★★★★★</span>
+                </div>
+              </div>
+              <div class="colStarAvg">
+                <span>${}</span>
+              </div>
+            </div>
+
+            <div class="colRatingsReviews">
+              <span>${조회수} ratings, ${댓글수} reviews</span>
+            </div>
+          </div>
+          <!-- 별점, 조회수, 리뷰수 end -->
+          <!-- 책 내용 출력 -->
+          <div class="textContainer">
+            <p>
+              What if your worst enemy was your only hope? <br />
+
+              When a fifteen-year-old girl fails to make it home after school,
+              DI Heather Filson believes she’s dealing with just another teenage
+              runaway.
+            </p>
+          </div>
+          <!-- 책 내용 end -->
+
+          <!-- 장르 -->
+          <div class="genres">
+            <span>Genre : </span>
+            <!-- 아래부터 장르 받아오기 -->
+            <span></span>
+          </div>
+          <!-- 장르 end -->
+
+          <!-- 책 페이지수 -->
+          <div class="bookpage">
+            <!-- 여기에 페이지 수 받아오기 -->
+            <span>100</span>
+            <span>Pages</span>
+          </div>
+          <!-- 책 페이지수 end -->
+
+          <!-- 출판일 -->
+          <div class="bookpublish">
+            <span>First published</span>
+            <!-- 여기에 출판 날자 받아오기 -->
+            <span>May 19, 2023</span>
+          </div>
+        </div>
+        <!-- 출판일 end -->
+
+        <!-- people currently reading & people want to read -->
+        <div class="peopleWrap">
+          <!-- people currently reading -->
+          <div class="currentlyWrap">
+            <div class="peopleContainer">
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <span>100</span>
+              <span> people are currently reading</span>
+            </div>
+          </div>
+          <!-- people want to read -->
+          <div class="readWrap">
+            <div class="peopleContainer">
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <img class="peopleProfileImg" src="../backend/img/basic.png" />
+              <span>100 </span>
+              <span>people want to read</span>
+            </div>
+          </div>
+        </div>
+        <!-- people currently reading & people want to read end -->
+
+        <!-- About the author -->
+        <div class="authorContainer">
+          <h2>About the author</h2>
+          <!-- 작가 이미지, 이름, 팔로우 버튼 -->
+          <div class="authorWrap">
+            <div class="authorImg">
+              <img
+                src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/authors/1586076388i/19106689.jpg"
+                alt=""
+              />
+            </div>
+            <div class="authorName">
+              <span>JD Kirk</span>
+              <span>26 books, 876 followers</span>
+            </div>
+            <div class="authorFollow">
+              <div class="followBtn">
+                <span>Follow</span>
+              </div>
+            </div>
+          </div>
+          <!-- 작가 프로필 텍스트 -->
+          <!-- <div class="authorProfile">
+            <p>
+              JD Kirk is the pen name of multi-award-winning author,
+              screenwriter, and writer of comics, Barry Hutchison.<br /><br />
+            </p>
+          </div> -->
+        </div>
+        <!-- About the author end -->
+
+        <!-- Ratings & Reviews -->
+        <div class="reviewContainer">
+          <h2>Ratings & Reviews</h2>
+          <!-- 작가 이미지, 이름, 팔로우 버튼 -->
+          <div class="reviewWrap">
+            <div class="myImg">
+              <img src="" alt="" />
+            </div>
+            <div class="reivewForm">
+              <div class="reviewStars">
+                <div class="reviewStar"><span>☆</span></div>
+                <div class="reviewStar"><span>☆</span></div>
+                <div class="reviewStar"><span>☆</span></div>
+                <div class="reviewStar"><span>☆</span></div>
+                <div class="reviewStar"><span>☆</span></div>
+              </div>
+              <div class="writeReviewContainer">
+                <input type="text" name="" id="" />
+              </div>
+            </div>
+            <div class="reviewPost">
+              <div class="postBtn">
+                <span>post</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ratings & Reviews end -->
+
+        <!-- Community Reviews -->
+        <div class="communityReviewsContainer">
+          <h2>Community Reviews</h2>
+          <!-- 별점, 조회수, 리뷰수 -->
+          <!-- <div class="communityCollection">
+            <div class="collectionStar">
+              <div class="colStars">
+                <div class="colStarEmpty">
+                  <span>☆☆☆☆☆</span>
+                </div>
+                <div class="colStarFull">
+                  <span>★★★★★</span>
+                </div>
+              </div>
+              <div class="colStarAvg">
+                <span>${}</span>
+              </div>
+            </div>
+
+            <div class="colRatingsReviews">
+              <span>${조회수} ratings, ${댓글수} reviews</span>
+            </div>
+          </div> -->
+
+          <!-- 별점 bar -->
+          <div class="ratingsContainer">
+            <!-- 별점 5점 -->
+            <div class="ratingsWrap">
+              <div class="ratingsNum"><span>5 stars</span></div>
+              <div class="ratingsBar">
+                <div class="ratingsBarInner">
+                  <div class="emptyBar"></div>
+                  <div class="fullBar"></div>
+                </div>
+              </div>
+              <div class="ratingsTotal">
+                <span>0 (0%)</span>
+              </div>
+            </div>
+
+            <!-- 별점 4점 -->
+            <div class="ratingsWrap">
+              <div class="ratingsNum"><span>4 stars</span></div>
+              <div class="ratingsBar">
+                <div class="ratingsBarInner">
+                  <div class="emptyBar"></div>
+                  <div class="fullBar"></div>
+                </div>
+              </div>
+              <div class="ratingsTotal">
+                <span>0 (0%)</span>
+              </div>
+            </div>
+
+            <!-- 별점 3점 -->
+            <div class="ratingsWrap">
+              <div class="ratingsNum"><span>3 stars</span></div>
+              <div class="ratingsBar">
+                <div class="ratingsBarInner">
+                  <div class="emptyBar"></div>
+                  <div class="fullBar"></div>
+                </div>
+              </div>
+              <div class="ratingsTotal">
+                <span>0 (0%)</span>
+              </div>
+            </div>
+
+            <!-- 별점 2점 -->
+            <div class="ratingsWrap">
+              <div class="ratingsNum"><span>2 stars</span></div>
+              <div class="ratingsBar">
+                <div class="ratingsBarInner">
+                  <div class="emptyBar"></div>
+                  <div class="fullBar"></div>
+                </div>
+              </div>
+              <div class="ratingsTotal">
+                <span>0 (0%)</span>
+              </div>
+            </div>
+
+            <!-- 별점 1점 -->
+            <div class="ratingsWrap">
+              <div class="ratingsNum"><span>1 stars</span></div>
+              <div class="ratingsBar">
+                <div class="ratingsBarInner">
+                  <div class="emptyBar"></div>
+                  <div class="fullBar"></div>
+                </div>
+              </div>
+              <div class="ratingsTotal">
+                <span>0 (0%)</span>
+              </div>
+            </div>
+          </div>
+          <!-- 별점 bar end -->
+
+          <!-- reviews area -->
+          <div class="commentContainer">
+            <p class="commentContainerReviewCnt">Displaying 1 - 10 of 84 reviews</p>
+            <!-- 댓글 전체 감싸는 div -->
+            <!-- <div class="commentWrap">
+              <div class="commentProfile">
+                <div class="commentProfileImg">
+                  <img src="./img/basic.png" alt="" />
+                </div>
+                <div class="commentProfileInfo">
+                  <span>name</span>
+                  <span>author & not</span>
+                  <span>2 books & reviews</span>
+                  <span>101 followers</span>
+                </div>
+                <div class="commentProfileFollowbtn">
+                  <span>Follow</span>
+                </div>
+              </div>
+              <div class="commentMainWrap">
+                <div class="commentMainHeader">
+                  <div class="commentMainStar">
+                    <span>☆☆☆☆☆</span>
+                  </div>
+                  <div class="commentMainDate">
+                    <span>May 30, 2023</span>
+                  </div>
+                </div>
+                <div class="commentArea">
+                  <p>
+                    
+                  </p>
+                </div>
+                <span class="r_reviewOpen">1 comments</span>
+                <div class="reCommentArea">
+
+                  <div class="reCommentsWrap">
+                    <div class="reCommentsInner">
+                      <div class="reCommentsProfileImgs">
+                        <img src="./img/basic.png" alt="" />
+                      </div>
+                      <div class="reComments">
+                        <span>name</span>
+                        <span>recomments</span>
+                      </div>
+                    </div>
+
+
+                    <div class="reCommentInput">
+                      <div class="reCommentMyimg">
+                        <img src="./img/basic.png" alt="" />
+                      </div>
+                      <input type="text" />
+                      <div class="reCommentBtn">
+                        <span>post</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </div>
+            </div> -->
+            
+ 
+            </div>
+          </div>
+          <!-- reviews area end -->
+        </div>
+        <!-- Community Reviews end -->
+      </div>
+      <!-- 오른쪽 상세페이지 본문 end -->
+    </div>
+    <!-- 상세페이지 end -->
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./genre/genre.js"></script>
+  <script src="./js/view.js"></script>
+</html>

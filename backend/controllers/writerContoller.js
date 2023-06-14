@@ -6,9 +6,6 @@ const{Books,User} = require("../models")
    
     try {
       
-      console.log("=======================================");
-      console.log(req.decoded);
-      console.log("=======================================");
       
       const { file, body } = req;
       const {user_id} = req.decoded;
@@ -60,10 +57,18 @@ exports.NickChange = async (req,res)=>{
   
 // 책 승인 결과
 exports.bookResult = async(req,res)=>{
+
+    const {nickname} = req.decoded;
+    console.log("-------------nickname----------");
+    console.log(nickname);
+    console.log("-------------nickname----------");
     try {
-      console.log("이거 bookResult임------------")
-      const data = await Books.findAll({where :{accept:1}})
-      console.log(data)
+      const data = await Books.findAll({
+        where :{
+          accept:1,
+          writer : nickname,
+        }
+      })
       res.json(data)
     } catch (error) {
       console.log(error)
@@ -72,8 +77,9 @@ exports.bookResult = async(req,res)=>{
 // 책 거절 결과
  exports.bookResult2 = async(req,res)=>{
   try {
-    console.log("이거 bookResult임------------")
-    const data = await Books.findAll({where :{accept:-1}})
+    const {nickname} = req.decoded;
+    const data = await Books.findAll({where :{accept:-1,
+      writer:nickname,}})
     console.log(data)
     res.json(data)
   } catch (error) {
@@ -84,8 +90,9 @@ exports.bookResult = async(req,res)=>{
 // 책 대기 결과
 exports.bookResult3 = async(req,res)=>{
   try {
-    console.log("이거 bookResult임------------")
-    const data = await Books.findAll({where :{accept:0}})
+    const {nickname} = req.decoded;
+    const data = await Books.findAll({where :{accept:0,
+      writer:nickname}})
     console.log(data)
     res.json(data)
   } catch (error) {

@@ -4,11 +4,23 @@ body {
   background-color: #f4f2e9;
 }
 
-a { text-decoration: none; color: black; }
-    a:visited { text-decoration: none; }
-    a:hover { text-decoration: none; }
-    a:focus { text-decoration: none; }
-    a:hover, a:active { text-decoration: none; }
+a {
+  text-decoration: none;
+  color: black;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
+}
+a:hover,
+a:active {
+  text-decoration: none;
+}
 
 /* nav */
 #logout {
@@ -26,13 +38,13 @@ a { text-decoration: none; color: black; }
   color: black;
   line-height: 15px;
 }
-#logout:hover{
+#logout:hover {
   color: red;
 }
-#insert{
+#insert {
   visibility: hidden;
 }
-#insert a:hover{
+#insert a:hover {
   color: orangered;
 }
 
@@ -133,26 +145,26 @@ a { text-decoration: none; color: black; }
 .starCard .cardText span:last-child {
   display: block;
 }
-#signUp{
+#signUp {
   float: right;
 }
 
-.genre{
-    /* display: none; */
-    display: flex;
-    top: 70px;
-    right: 100px;
-    position: absolute;
-    width: 500px;
-    height: 50px;
-    /* border: 1px solid black; */
-    background-color: white;
-    border-radius: 10px;
-    justify-content: space-around;
-    align-items: center;
-    color : rgb(92, 92, 92)
+.genre {
+  /* display: none; */
+  display: flex;
+  top: 70px;
+  right: 100px;
+  position: absolute;
+  width: 500px;
+  height: 50px;
+  /* border: 1px solid black; */
+  background-color: white;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(92, 92, 92);
 }
-@keyframes fade{
+@keyframes fade {
   from {
     opacity: 0;
   }
@@ -165,57 +177,56 @@ a { text-decoration: none; color: black; }
   opacity: 0;
   animation: fade 0.3s ease-in-out;
 }
-.toggle.active{
-  display : block;
+.toggle.active {
+  display: block;
   opacity: 1;
 }
-.genre span{
+.genre span {
   text-align: center;
   font-size: smaller;
-  display:inline-block; 
-  margin:0;
-  
+  display: inline-block;
+  margin: 0;
 }
 
 .genre span:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px gray;  
-  transform: scaleX(0);  
+  display: block;
+  content: "";
+  border-bottom: solid 3px gray;
+  transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
-.genre span:hover:after { transform: scaleX(1); }
+.genre span:hover:after {
+  transform: scaleX(1);
+}
 
 #allview,
 #login,
-#signUp
- {
+#signUp {
   color: #000;
-  display:inline-block; 
-  margin:0;
-  text-transform:uppercase;
+  display: inline-block;
+  margin: 0;
+  text-transform: uppercase;
   cursor: pointer;
- }
+}
 
 #allview:after,
 #login:after,
 #signUp:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px orange;  
-  transform: scaleX(0);  
+  display: block;
+  content: "";
+  border-bottom: solid 3px orange;
+  transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
 #allview:hover:after,
-
 #login:hover:after,
-#signUp:hover:after
- { transform: scaleX(1); }
+#signUp:hover:after {
+  transform: scaleX(1);
+}
 
-#nick{
+#nick {
   cursor: pointer;
 }
-#nick:hover{
-  
+#nick:hover {
   color: blueviolet;
 }

@@ -3,13 +3,13 @@ const { sequelize } = require("../models");
 
 class User extends Model {
   static init(sequelize) {
-    return super.init( 
+    return super.init(
       {
-        user_img :{
-          type : DataTypes.STRING,
-          defaultValue : "/img/basic.png",
+        user_img: {
+          type: DataTypes.STRING,
+          defaultValue: "/img/basic.png",
         },
-        
+
         user_id: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -42,7 +42,6 @@ class User extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        
       },
       {
         sequelize,
@@ -59,6 +58,14 @@ class User extends Model {
   static assicoate(db) {
     db.User.hasMany(db.Books, { foreignKey: "user_id", sourceKey: "id" });
     db.User.hasMany(db.Chat, { foreignKey: "chat_id", sourceKey: "id" });
+    db.User.hasMany(db.review, {
+      foreignKey: "user_id",
+      sourceKey: "id",
+    });
+    db.User.hasMany(db.r_review, {
+      foreignKey: "user_id",
+      sourceKey: "id",
+    });
   }
 }
 

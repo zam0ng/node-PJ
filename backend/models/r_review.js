@@ -29,6 +29,10 @@ class r_review extends Model {
       foreignKey: "review_id",
       targetKey: "id",
     });
+    db.r_review.belongsTo(db.User, {
+      foreignKey: "user_id",
+      targetKey: "id",
+    });
   }
 }
 

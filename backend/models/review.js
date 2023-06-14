@@ -8,6 +8,7 @@ class review extends Model {
         book_id: {
           type: DataTypes.INTEGER,
         },
+
         nickname: {
           type: DataTypes.STRING,
         },
@@ -35,7 +36,13 @@ class review extends Model {
       foreignKey: "review_id",
       sourceKey: "id",
     });
+
     db.review.belongsTo(db.Books, { foreignKey: "book_id", targetKey: "id" });
+
+    db.review.belongsTo(db.User, {
+      foreignKey: "user_id",
+      targetKey: "id",
+    });
   }
 }
 
