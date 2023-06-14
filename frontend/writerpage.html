@@ -81,16 +81,24 @@
             <ul class="tab">
                 <li class="tab_item active">accept</li>
                 <li class="tab_item">reject</li>
+                <li class="tab_item">waiting</li>
             </ul>
-                <div class="tab_inner active">accept.
+                <div class="tab_inner active">accept list
                     <div id="acceptList">
                         <ul>
 
                         </ul>
                     </div>
                 </div>
-                <div class="tab_inner">reject.
+                <div class="tab_inner">reject list
                     <div id="rejectList">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab_inner">waiting list
+                    <div id="waitingList">
                         <ul>
 
                         </ul>
@@ -201,7 +209,7 @@ tabItem.forEach((tab, idx)=> {
                 <li>
             <div class="list-warp">
             <div> title : ${el.title} </div>
-            <div> 승인 결과 : ${el.accept} </div>
+            
             </div>
                 </li>
                 `
@@ -213,10 +221,30 @@ tabItem.forEach((tab, idx)=> {
     acceptAPI()
     async function rejectAPI(){
         try {
-            const {data}= await axios.get('http://127.0.0.1:8080/writer/result',{
+            const {data}= await axios.get('http://127.0.0.1:8080/writer/result2',{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {
+                console.log(el.reject);
+                switch (el.reject) {
+                       case "1": el.reject = "부적절한 책표지";
+
+                           break;
+                       case "2": el.reject = "부적절한 책제목";
+
+                           break;
+                       case "3": el.reject = "부적절한 책내용";
+
+                           break;
+                       case "4": el.reject = "부적절한 책표지";
+
+                           break;
+
+
+                       default:
+                           break;
+                   }
+                   console.log(el.reject);
                 rejectList.innerHTML +=`
                 <li>
             <div class="list-warp">
@@ -231,6 +259,27 @@ tabItem.forEach((tab, idx)=> {
         }
     }
     rejectAPI()
+
+    async function waitingAPI(){
+        try {
+            const {data}= await axios.get('http://127.0.0.1:8080/writer/result3',{
+                withCredentials :true})
+                console.log(data)
+               data.forEach((el) => {
+                waitingList.innerHTML +=`
+                <li>
+            <div class="list-warp">
+            <div> title : ${el.title} </div>
+            
+            </div>
+                </li>
+                `
+               });
+        } catch (error) {
+            
+        }
+    }
+    waitingAPI();
 
 
 

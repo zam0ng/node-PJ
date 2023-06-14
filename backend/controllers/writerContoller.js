@@ -69,3 +69,26 @@ exports.bookResult = async(req,res)=>{
       console.log(error)
     }
  }
+// 책 거절 결과
+ exports.bookResult2 = async(req,res)=>{
+  try {
+    console.log("이거 bookResult임------------")
+    const data = await Books.findAll({where :{accept:-1}})
+    console.log(data)
+    res.json(data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// 책 대기 결과
+exports.bookResult3 = async(req,res)=>{
+  try {
+    console.log("이거 bookResult임------------")
+    const data = await Books.findAll({where :{accept:0}})
+    console.log(data)
+    res.json(data)
+  } catch (error) {
+    console.log(error)
+  }
+}

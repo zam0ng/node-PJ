@@ -12,7 +12,7 @@ router.post("/",Mypage.single("upload"),MypageUpload);
 router.get('/',islogin,UserImg)
 router.get('/reviews',reviewUpload)
 router.post("/nick",islogin2,NickChange)
-module.exports = router
+module.exports = router;
 
 
 

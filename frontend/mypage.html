@@ -106,7 +106,7 @@
                 "http://127.0.0.1:8080/mypages",
                 { withCredentials: true }
             );
-            img1.src=`http://127.0.0.1:8080/${data.user_img}`;
+            img1.src=`http://127.0.0.1:8080${data.user_img}`;
 
             // img1.src = data.user_img;
 
@@ -169,7 +169,6 @@
     let comments = document.querySelector('.comments')
     myComment.addEventListener('click', function (e) {
         console.log("댓글 클릭?")
-        e.preventDefault()
         if (comments.style.display === 'none') {
             comments.style.display = 'block'
         } else {
@@ -180,7 +179,6 @@
     let profile = document.querySelector(".content1")
     myinfo.addEventListener('click', function (e) {
         console.log("정보 수정 클릭?")
-        e.preventDefault()
         if (profile.style.display === 'none') {
             profile.style.display = 'block'
         } else {
