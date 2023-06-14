@@ -1,0 +1,17 @@
+.chatWrap {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.chatWrap img {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(5px 5px 5px #000);
+}
+
+.chatWrap img:hover {
+  cursor: pointer;
+  transition: 1s;
+  transform: scale(1.1);
+}

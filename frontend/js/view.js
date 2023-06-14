@@ -6,7 +6,13 @@ async function getView() {
   const author = data.data.bookdata;
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
-  const userInfo = data.data.userdata;
+  // const userInfo = data.data.userdata;
+  let userInfo;
+  if (data.data?.userdata) {
+    userInfo = data.data.userdata;
+    console.log("로그인한 유저 정보 : userInfo");
+    console.log(userInfo);
+  }
   const starInfo = data.data.stardata;
   const authordata = data.data.authordata;
   const reviewInfo = data.data.reviewdata;
@@ -18,8 +24,8 @@ async function getView() {
   console.log(bookInfo);
   console.log("책에 있는 댓글들 모음 : thisReview");
   console.log(thisReview);
-  console.log("로그인한 유저 정보 : userInfo");
-  console.log(userInfo);
+  // console.log("로그인한 유저 정보 : userInfo");
+  // console.log(userInfo);
   console.log("리뷰 점수 : starInfo");
   console.log(starInfo);
   console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
@@ -187,7 +193,9 @@ async function getView() {
   const myImg = document.querySelector(".myImg");
   const myImgImg = myImg.querySelector("img");
 
-  myImgImg.setAttribute("src", `http://127.0.0.1:8080${userInfo.user_img}`);
+  if (userInfo) {
+    myImgImg.setAttribute("src", `http://127.0.0.1:8080${userInfo.user_img}`);
+  }
 
   // Ratings & Reviews 별 누르면 별 채워지는 기능
   const reviewStars = document.querySelector(".reviewStars");
@@ -195,7 +203,7 @@ async function getView() {
 
   let reviewsScore;
   reviewStarSpan.forEach((el, index) => {
-    console.log(index);
+    // console.log(index);
     el.onclick = () => {
       reviewsScore = index + 1;
       for (let i = 0; i <= 4; i++) {
@@ -218,6 +226,7 @@ async function getView() {
   postBtn.onclick = () => {
     if (!userInfo) {
       alert("로그인 후 댓글을 작성 할 수 있습니다.");
+      return;
     }
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
@@ -281,10 +290,10 @@ async function getStarAvg(starInfo) {
     starTotalCnt += parseInt(el.starCnt);
   });
 
-  console.log("=============================");
-  console.log(starTotalStore);
-  console.log(starTotalCnt);
-  console.log("=============================");
+  // console.log("=============================");
+  // console.log(starTotalStore);
+  // console.log(starTotalCnt);
+  // console.log("=============================");
 
   starAvg = (starTotalStore / starTotalCnt).toFixed(2);
 
@@ -352,7 +361,10 @@ async function getComments() {
   const author = data.data.bookdata;
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
-  const userInfo = data.data.userdata;
+  let userInfo;
+  if (data.data?.userdata) {
+    userInfo = data.data.userdata;
+  }
   const reviewInfo = data.data.reviewdata;
   // reviews area
   const commentContainer = document.querySelector(".commentContainer");
@@ -485,7 +497,8 @@ async function getComments() {
                       </div>
                   </div>`;
         });
-        reCommentArea[index].innerHTML += `
+        if (userInfo) {
+          reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
                         <img src="http://127.0.0.1:8080${userInfo.user_img}" alt="" />
@@ -495,11 +508,28 @@ async function getComments() {
                         <span>post</span>
                       </div>
                     </div>`;
+        } else {
+          reCommentArea[index].innerHTML += `
+        <div class="reCommentInput">
+                      <div class="reCommentMyimg">
+                        <img src="http://127.0.0.1:8080/img/basic.png" alt="" />
+                      </div>
+                      <input type="text" />
+                      <div class="reCommentBtn">
+                        <span>post</span>
+                      </div>
+                    </div>`;
+        }
+
         const reCommentBtn = commentContainer.querySelectorAll(".reCommentBtn");
         const reCommentInput = commentContainer.querySelectorAll("input");
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
           x.onclick = (e) => {
+            if (!userInfo) {
+              alert("로그인 후 이용해주세요.");
+              return;
+            }
             if (!reCommentInput[y].value) {
               alert("댓글을 입력해주세요.");
               return;
@@ -578,4 +608,4 @@ async function logincheck() {
   }
 }
 getView();
-logincheck();
+// logincheck();
