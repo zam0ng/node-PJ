@@ -29,19 +29,26 @@ exports.UserUpload = multer({
     }),
     limits :{fileSize:5*1024*1024}
 })
+
 exports.Mypage = multer({
+
     storage : multer.diskStorage({
         destination :(req,file,done)=>{
             done(null,"upload/")
+
         },
         filename :(req,file,done)=>{
             const ext = path.extname(file.originalname)
             const filename = path.basename(file.originalname,ext)+"_"+Date.now()+ext;
-            done(null,filename);
+            // console.log("filename");
+            // console.log(filename);
+            done(null,filename);   
         }
+        
     }),
     limits :{fileSize:5*1024*1024}
 })
+
 exports.writerpage = multer({
     storage : multer.diskStorage({
         destination :(req,file,done)=>{

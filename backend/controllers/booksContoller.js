@@ -25,21 +25,22 @@ const {Books,User} = require("../models")
 exports.UserUpload = async(req,res)=>{
     try {
         console.log("여기 userupload contoller")
-       
-        const {title,writer,content,genre,page,publish}=req.body;
+        console.log("req.decoded---------------------------");
+        console.log(req.decoded);
+        const {nickname,user_id,id} = req.decoded;
+        const {title,content,genre,page,publish}=req.body;
         // await Books.update({img:req.file.path},{where:{id:body.user_id}}) 
         await Books.create({
             img: req.file.path,
             title : title,
-            writer :writer, 
+            writer :nickname, 
             content : content,
             genre:genre,
             page:page,
             publish:publish,
-            accept:1,
-            reject:1,
-            user_id:1
-
+            accept:0,
+            reject:0,
+            user_id:id,
           });
         res.send("여기 완!")
     } catch (error) {

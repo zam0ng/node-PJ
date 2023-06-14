@@ -48,3 +48,13 @@ exports.gradeUpdate = async(req,res)=>{
         console.log("gradeupdate 에서 오류남 "+error);
     }
 }
+
+exports.nonagreepost = async(req,res) =>{
+
+    try {
+        
+    } catch (error) {
+        
+    }
+
+}

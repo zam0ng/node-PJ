@@ -3,23 +3,23 @@ const{Books,User} = require("../models")
 
   // 작가페이지 업로드
   exports.WriterUpload = async (req,res) => {
+   
     try {
-      console.log("여기 mypage contoller")
+      
+      console.log("=======================================");
+      console.log(req.decoded);
+      console.log("=======================================");
+      
       const { file, body } = req;
-      console.log(body.changenick)
+      const {user_id} = req.decoded;
+      // console.log(body.changenick)
+      const userImg = "/" +  req.file.path;
       
       // console.log(req.file,'여기는 마이페이지 업로드');
       await User.update({
-        user_img: req.file.path,
-        user_id: "qwe",
-        user_pw: "qwe",
-        gender: "female",
-        role: "writer",
-        age: 20,
-        grade: 2,
-        nickname: "writer",
-        check: 12,
-      },{where:{id:1}});
+        user_img: userImg,
+      
+      },{where:{user_id:user_id}});
       console.log("나WriterUpload에서 찍힘")
       res.send("I made it here");
     } catch (error) {
@@ -28,8 +28,12 @@ const{Books,User} = require("../models")
   };
     // 작가 프로필
     exports.UserImg = async (req, res) => {
+
+      // console.log("여기 mypage contoller")
+      // console.log(req.decoded);
+      const {user_id,nickname,gender,age,checks,user_img} = req.decoded;
       try {
-        const userdata = await User.findOne({ where: { id: 1} });
+        const userdata = await User.findOne({ where: { user_id :user_id} });
         console.log("나Userimg 잘빠져나감!");
         console.log(userdata);
     
@@ -44,9 +48,11 @@ const{Books,User} = require("../models")
 exports.NickChange = async (req,res)=>{
   try {
       const {changenick}=req.body;
-      await User.update({nickname:changenick},{where:{id:1}})
+      const {user_id} = req.decoded;
+
+      await User.update({nickname:changenick},{where:{user_id}})
       console.log("nicknamechange contoller 빠짐");
-      res.redirect('http://127.0.0.1:5500/frontend/writer.html');
+      res.redirect('http://127.0.0.1:5500/frontend/writerpage.html');
   } catch (error) {
       
   }

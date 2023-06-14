@@ -1,5 +1,7 @@
 body {
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
@@ -8,6 +10,25 @@ body {
     display: flex;
 
 }
+
+#logout {
+    cursor: pointer;
+    /* visibility: hidden; */
+    border: none;
+    background-color: rgb(212, 212, 212);
+  
+    list-style-type: none;
+    font-weight: 600;
+    font-size: 20px;
+  
+    margin-left: 15px;
+    text-decoration-line: none;
+    color: black;
+    line-height: 15px;
+  }
+  #logout:hover{
+    color: red;
+  }
 
 .header-img {
     width: 160px;

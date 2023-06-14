@@ -4,7 +4,11 @@ const {Books} = require("../models");
 exports.allview = async(req,res)=>{
     
     try {
-        await Books.findAll({}).then((e)=>{
+        await Books.findAll({
+            where : {
+                accept :true,
+            }
+        }).then((e)=>{
             // console.log(e.Books.length);
             
             const eArr=[];
@@ -25,7 +29,12 @@ exports.conan = async(req,res)=>{
     const genre = "conan"
 
     try {
-        await Books.findAll({where : {genre}}).then((e)=>{
+        await Books.findAll({
+            where : {
+                genre,
+                accept :true,
+            }
+        }).then((e)=>{
 
             // console.log(elength);
             const eArr1=[];
@@ -48,7 +57,13 @@ exports.horror = async(req,res)=>{
     const genre = "horror"
 
     try {
-        await Books.findAll({where : {genre}}).then((e)=>{
+        await Books.findAll({
+            where : {
+
+                genre,
+                accept :true,
+                
+            }}).then((e)=>{
 
             // console.log(elength);
             const eArr1=[];
@@ -71,7 +86,11 @@ exports.fantasy = async(req,res)=>{
     const genre = "fantasy"
 
     try {
-        await Books.findAll({where : {genre}}).then((e)=>{
+        await Books.findAll({
+            where : {
+                genre,
+                accept :true,
+            }}).then((e)=>{
 
             // console.log(elength);
             const eArr1=[];
@@ -94,7 +113,11 @@ exports.sorim = async(req,res)=>{
     const genre = "sorim"
 
     try {
-        await Books.findAll({where : {genre}}).then((e)=>{
+        await Books.findAll({
+            where : {
+                genre,
+                accept :true,
+            }}).then((e)=>{
 
             // console.log(elength);
             const eArr1=[];
@@ -117,7 +140,11 @@ exports.game = async(req,res)=>{
     const genre = "game"
 
     try {
-        await Books.findAll({where : {genre}}).then((e)=>{
+        await Books.findAll({
+            where : {
+                genre,
+                accept :true,
+            }}).then((e)=>{
 
             // console.log(elength);
             const eArr1=[];
@@ -140,7 +167,11 @@ exports.romance = async(req,res)=>{
     const genre = "romance"
 
     try {
-        await Books.findAll({where : {genre}}).then((e)=>{
+        await Books.findAll({
+            where : {
+                genre,
+                accept :true,
+            }}).then((e)=>{
 
             // console.log(elength);
             const eArr1=[];

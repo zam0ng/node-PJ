@@ -6,13 +6,49 @@ body {
 
 }
 
-a { text-decoration: none; color: black; }
-    a:visited { text-decoration: none; }
-    a:hover { text-decoration: none; }
-    a:focus { text-decoration: none; }
-    a:hover, a:active { text-decoration: none; }
+a {
+  text-decoration: none;
+  color: black;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
+}
+a:hover,
+a:active {
+  text-decoration: none;
+}
 
 /* nav */
+#logout {
+  cursor: pointer;
+  visibility: hidden;
+  border: none;
+  background-color: #f4f2e9;
+
+  list-style-type: none;
+  font-weight: 600;
+  font-size: 14px;
+
+  margin-left: 15px;
+  text-decoration-line: none;
+  color: black;
+  line-height: 15px;
+}
+#logout:hover {
+  color: red;
+}
+#insert {
+  visibility: hidden;
+}
+#insert a:hover {
+  color: orangered;
+}
 
 .nav {
   width: 100%;
@@ -28,7 +64,7 @@ a { text-decoration: none; color: black; }
   position: relative;
 }
 .nav .functionBox {
-  width: 250px;
+  width: 350px;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -111,26 +147,26 @@ a { text-decoration: none; color: black; }
 .starCard .cardText span:last-child {
   display: block;
 }
-#signUp{
+#signUp {
   float: right;
 }
 
-.genre{
-    /* display: none; */
-    display: flex;
-    top: 70px;
-    right: 100px;
-    position: absolute;
-    width: 500px;
-    height: 50px;
-    /* border: 1px solid black; */
-    background-color: white;
-    border-radius: 10px;
-    justify-content: space-around;
-    align-items: center;
-    color : rgb(92, 92, 92)
+.genre {
+  /* display: none; */
+  display: flex;
+  top: 70px;
+  right: 100px;
+  position: absolute;
+  width: 500px;
+  height: 50px;
+  /* border: 1px solid black; */
+  background-color: white;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(92, 92, 92);
 }
-@keyframes fade{
+@keyframes fade {
   from {
     opacity: 0;
   }
@@ -143,40 +179,56 @@ a { text-decoration: none; color: black; }
   opacity: 0;
   animation: fade 0.3s ease-in-out;
 }
-.toggle.active{
-  display : block;
+.toggle.active {
+  display: block;
   opacity: 1;
 }
-.genre span{
+.genre span {
   text-align: center;
   font-size: smaller;
-  display:inline-block; 
-  margin:0;
-  
+  display: inline-block;
+  margin: 0;
 }
 
 .genre span:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px gray;  
-  transform: scaleX(0);  
+  display: block;
+  content: "";
+  border-bottom: solid 3px gray;
+  transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
-.genre span:hover:after { transform: scaleX(1); }
+.genre span:hover:after {
+  transform: scaleX(1);
+}
 
-#allview { 
+#allview,
+#login,
+#signUp {
   color: #000;
-  display:inline-block; 
-  margin:0;
-  text-transform:uppercase;
+  display: inline-block;
+  margin: 0;
+  text-transform: uppercase;
   cursor: pointer;
- }
+}
 
-#allview:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px orange;  
-  transform: scaleX(0);  
+#allview:after,
+#login:after,
+#signUp:after {
+  display: block;
+  content: "";
+  border-bottom: solid 3px orange;
+  transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
-#allview:hover:after { transform: scaleX(1); }
+#allview:hover:after,
+#login:hover:after,
+#signUp:hover:after {
+  transform: scaleX(1);
+}
+
+#nick {
+  cursor: pointer;
+}
+#nick:hover {
+  color: blueviolet;
+}
