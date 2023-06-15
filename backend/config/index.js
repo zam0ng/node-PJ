@@ -5,6 +5,8 @@ const config = {
     password: process.env.DATABASE_PASSWORD,
     host: process.env.DATABASE_HOST,
     dialect: "mysql",
+    timezone: "+09:00",
+    dateStrings: "date",
   },
 };
 

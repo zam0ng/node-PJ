@@ -109,12 +109,13 @@ body{
 .my-info:hover{
     color: black;
 }
-.comments{
+.comments,
+.rp_result{
     width: 400px;
-    height: 700px;
+    height: 600px;
     display: none;
     /* overflow:auto; */
-    overflow: scroll;
+    /* overflow: scroll; */
     background-color:  #FFEED2;
 }
 .info{
@@ -128,7 +129,7 @@ body{
     align-items: center;
 }
 .id-info{
-    border: 3px solid rgb(200, 200, 200);;
+    border: 3px solid rgb(200, 200, 200);
     border-radius: 10px;
     width: 100px;
     height: 30px;
@@ -181,4 +182,66 @@ border: 0;
     width: 300px;
     border-bottom:3px solid rgb(180, 180, 180); 
     border-collapse: collapse;
+}
+.tab_list{
+    display: flex;
+    width: 380px;
+    height: 100px;
+    /* border: solid 1px black; */
+}
+
+.tab{
+    position: relative;
+    width: 200px;
+    height: 100px;
+    /* border: solid 1px black; */
+    text-align: center;
+    line-height: 80px;
+}
+#num1,
+#num2{
+    position: absolute;
+    /* width: 10px;
+    height: 50px; */
+    top:30px;
+    left: 90px;
+}
+
+.tab.active{
+    background-color: #fce0b5;
+}
+
+.comments.active{
+    display: block;
+    background-color: #fce0b5;
+}
+.comments {
+    display: none;
+    overflow: scroll;
+}
+
+.flex1{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#contain{
+    display: flex;
+}
+
+#immg{
+    width: 100px;
+    height: 100px;
+}
+#imgg{
+    width: 100px;
+    height: 100px;
+    
+}
+#r_title{
+    width: 230px;
+    height: 100px;
+    line-height: 100px;
+    padding-left: 5px;
+    /* border: 1px solid black; */
 }

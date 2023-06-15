@@ -1,5 +1,5 @@
   
-  const {User,review,Books} = require("../models")
+  const {User,review,Books, sequelize, r_review} = require("../models")
   const path = require("path")
   const jwt = require("jsonwebtoken");
   
@@ -73,10 +73,46 @@ exports.NickChange = async (req,res)=>{
 // 작성한 댓글 업로드
  exports.reviewUpload = async(req,res)=>{
     try {
-      console.log("이거 reviewupload임------------")
-      const data = await review.findAll({where:{nickname:"asd"}})
-      console.log(data)
-      res.json(data)
+      const {nickname} = req.decoded;
+      const data = await review.findAll({
+        // 리뷰 테이블과 books 테이블이 조인되어있으니깐
+        // include 로 books를 가져오고
+        // attributes 로 가져오고 싶은 컬럼 셀렉한다
+        include: [{
+          model: Books,
+          
+          attributes :["img","title"]
+          
+        }],
+          // include: [{
+          //   model: r_review,
+          // }],
+      },{
+        where:{
+          nickname:nickname
+      },raw:true,}
+      )
+      
+
+      const data2 = await r_review.findAll({
+        
+        include: [{
+          model: review,
+          
+          attributes :["comment"]
+          
+        }],
+          // include: [{
+          //   model: r_review,
+          // }],
+      },{
+        where:{
+          nickname:nickname
+      },raw:true,}
+      )
+    
+      const dataobj = {data,data2};
+      res.json(dataobj)
     } catch (error) {
       console.log(error)
     }

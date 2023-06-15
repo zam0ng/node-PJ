@@ -38,7 +38,7 @@ exports.login = async(req,res)=>{
                 age : data.age,
                 sessionID : req.sessionID,
             },process.env.ACCESS_TOKEN_KEY,{
-                expiresIn : "10m",
+                expiresIn : "60m",
             })
 
 
