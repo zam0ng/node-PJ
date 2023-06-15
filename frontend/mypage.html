@@ -123,7 +123,11 @@
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
         grade1.innerHTML = data.grade;
-        checks.innerHTML = data.checks;
+        console.log(data.checks);
+        let tb = data.checks;
+        let tc = tb.split(",");
+        console.log(tc);
+        checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
         console.log(error);

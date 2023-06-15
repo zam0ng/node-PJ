@@ -15,7 +15,7 @@ exports.checkList = async(req,res)=>{
 
 exports.deleteCheck = async(req,res)=>{
     await User.destroy({
-        where:{checks:checks}
+        where:{checks}
     })
     res.redirect('http://127.0.0.1:8080/check/list')
 }
