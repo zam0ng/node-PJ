@@ -226,10 +226,10 @@ async function getView() {
   const postBtn = document.querySelector(".postBtn");
 
   postBtn.onclick = () => {
-    if (!userInfo) {
-      alert("로그인 후 댓글을 작성 할 수 있습니다.");
-      return;
-    }
+    // if (!userInfo) {
+    //   alert("로그인 후 댓글을 작성 할 수 있습니다.");
+    //   return;
+    // }
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
       return;
@@ -245,10 +245,8 @@ async function getView() {
 
       {
         book_id: bookInfo.id,
-        nickname: userInfo.nickname,
         star: reviewsScore,
         comment: reviewInput,
-        user_id: userInfo.id,
       },
       {
         withCredentials: true,
