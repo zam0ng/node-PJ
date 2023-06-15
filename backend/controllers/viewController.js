@@ -4,11 +4,13 @@ const url = require("url");
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
-  console.log("req");
-  console.log(req);
+  // console.log("req");
+  // console.log(req);
   try {
     // 가져온 책의 번호
-    const booknum = req.params.id;
+    let booknum = req.params.id;
+    console.log("const booknum = req.params.id;");
+    console.log(booknum);
 
     // 책에 대한 정보와 작가의 정보 가져오기
     const bookdata = await User.findOne(
@@ -78,18 +80,12 @@ exports.viewInfo = async (req, res) => {
     // --------------------------------------------
     // follow 기능 추가되면 추가 해야됨
     // --------------------------------------------
-    const authordata = await User.findOne(
-      {
-        attributes: [
-          [sequelize.fn("count", sequelize.col("user_id")), "writebooks"],
-        ],
-        where: { id: bookdata.dataValues.id },
-      },
-      {
-        include: [{ model: Books }],
-        group: ["user_id"],
-      }
-    );
+    const authordata = await Books.findOne({
+      attributes: [
+        [sequelize.fn("count", sequelize.col("writer")), "writebooks"],
+      ],
+      group: ["writer"],
+    });
 
     // 책에 대한 별점 개수, 총점
     let stardata = await review.findAll({
@@ -113,6 +109,9 @@ exports.viewInfo = async (req, res) => {
           include: [{ model: User }],
         },
       ],
+      where: {
+        book_id: booknum,
+      },
     });
 
     if (req.decoded?.id) {
@@ -131,14 +130,19 @@ exports.viewInfo = async (req, res) => {
 
 // 작성된 리뷰 저장
 exports.insertReview = async (req, res) => {
-  const { book_id, nickname, star, comment, user_id } = req.body;
+  // console.log("exports.insertReview");
+  // console.log(req.decoded);
+  const { nickname, id } = req.decoded;
+  const { book_id, star, comment } = req.body;
+  console.log("const { book_id, star, comment } = req.body;");
+  console.log(req.body);
   try {
     await review.create({
       book_id,
       nickname,
       comment,
       star,
-      user_id,
+      user_id: id,
     });
   } catch (error) {
     console.log(error);
