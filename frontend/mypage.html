@@ -6,19 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="./css/mypage.css">
-</head>
+    <link rel="stylesheet" href="./css/mypage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+  </head>
 
   <body>
     <div class="header">
-        
-        <img class="header-img"
-        src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
-            alt="">
-    <div class="ulheader">
-        <ul style="display: flex; align-items: center;">
-            <li class="category"><a href="">Home</a></li>
-            <li class="category"><a href="">My Books</a></li>
+      <a href="http://127.0.0.1:5500/frontend/index.html">
+        <img
+          class="header-img"
+          src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
+          alt=""
+      /></a>
+      <div class="ulheader">
+        <ul style="display: flex; align-items: center">
+          <li class="category">
+            <a href="http://127.0.0.1:5500/frontend/index.html">Home</a>
+          </li>
+          <li class="category"><a href="http://127.0.0.1:5500/frontend/checklist.html">My Books</a></li>
         </ul>
         <ul style="display: flex; align-items: center">
           <button id="logout">Log-Out</button>
@@ -26,67 +33,82 @@
       </div>
     </div>
     <div class="main">
-        <div class="content1">
-            <h3 class="margin1">프로필 변경</h3>
-            <input class="margin1" type="file" id="file" onchange="loadImg(event)" style=" width: 200px;">
-            <button id="uploadBtn" class="button">change</button>
-            <form action="http://127.0.0.1:8080/mypages/nick" method="post">
-                <h3  class="margin1">닉네임 변경</h3>
-                <input class="margin1" type="text" name="changenick">
-                <button class="button" id="nickBtn">change</button>
-            </form>
-        </div>
-        <div class="content2">
+      <div class="content1">
+        <h3 class="margin1">Change profile</h3>
+        <input
+          class="margin1"
+          type="file"
+          id="file"
+          onchange="loadImg(event)"
+          style="width: 200px"
+        />
+        <button id="uploadBtn" class="button">change</button>
+        <form action="http://127.0.0.1:8080/mypages/nick" method="post">
+          <h3 class="margin1">Change nickname</h3>
+          <input class="margin1" type="text" name="changenick" />
+          <button class="button" id="nickBtn">change</button>
+        </form>
+      </div>
+      <div class="content2">
         <div>
-            <span class="margin1" style="font-weight: 600;" id="nickname2"></span>님의 mypage
+          <span class="margin1" style="font-weight: 600" id="nickname2"></span
+          >'s Mypage
         </div>
-            <div style="display: flex;justify-content: space-around;">
-                <img id="img1" class="img-box" alt="">
-            </div>
-            <div class="id-info">
-                <span>아이디 : </span>
-                <span id="userId"></span>
-            </div>
-            <div>
-                <a class="my-info" href="">정보 수정하기</a>
-                <a class="my-comment" href="">내가 쓴 댓글</a>
-            </div>
-            <h3>information</h3>
-            <div class="info">
-                <span>nickname : </span>
-                <span id="nickname1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>gender : </span>
-                <span id="gender1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>age : </span>
-                <span id="age1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>grade : </span>
-                <span id="grade1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>❤️ : </span>
-                <span id="checks"></span>
-            </div>
+        <div style="display: flex; justify-content: space-around">
+          <img id="img1" class="img-box" alt="" />
+        </div>
+        <div class="id-info">
+          <span>ID : </span>
+          <span id="userId"></span>
+        </div>
+        <div>
+          <a class="my-info" href="">Edit information</a>
+          <a class="my-comment" href="">Comments</a>
+        </div>
+        <h3>information</h3>
+        <div class="info">
+          <span>nickname : </span>
+          <span id="nickname1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>gender : </span>
+          <span id="gender1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>age : </span>
+          <span id="age1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>grade : </span>
+          <span id="grade1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>❤️ : </span>
+          <span id="checks"></span>
+        </div>
+      </div>
+      <div class="comments">
+        <h3 class="margin1">comments</h3>
 
-        </div>
-        <div class="comments"><h3 class="margin1">comments</h3>
-            
-            <ul id="reviewList">
-            </ul>
-        </div>
+        <ul id="reviewList"></ul>
+      </div>
     </div>
+  </body>
+  <script>
+    logout.onclick = async () => {
+      await axios.get("http://127.0.0.1:8080/logout", {
+        withCredentials: true,
+      });
 
-</body>
-<script>
+      document.cookie =
+        "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      window.location.href = "http://127.0.0.1:5500/frontend/index.html";
+    };
+
     async function getAPI() {
       try {
         const { data } = await axios.get("http://127.0.0.1:8080/mypages", {

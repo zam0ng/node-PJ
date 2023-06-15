@@ -48,69 +48,12 @@ body {
   .nav .logoBox img {
     height: 80px;
   }
-  
-  /* main img */
-  .mainImgBox {
-    width: 100%;
-    height: 250px;
-    background-color: #ffeed2;
-    display: flex;
-    justify-content: center;
-  }
-  .mainImgBox img {
-  }
-  
-  /* view top 5 list */
-  /* star top 5 list */
-  .viewContainer,
-  .starContainer {
+  .checkContainer{
     margin-top: 10px;
-  }
-  .viewContainer .viewWrap,
-  .starContainer .starWrap {
     margin: 0 auto;
     max-width: 1100px;
   }
-  .viewContainer .viewWrap .viewTitle,
-  .starContainer .starWrap .starTitle {
-    margin: 10px 0;
-  }
-  
-  .viewTitle span,
-  .starTitle span {
-    font-size: 18px;
-  }
-  
-  #viewList,
-  #starList {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .viewList .viewCard,
-  .starList .starCard {
-    width: 20%;
-    height: 260px;
-    margin: 0 auto;
-  }
-  
-  .viewCard img,
-  .starCard img {
-    width: 200px;
-    height: 220px;
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-  .viewCard .cardText,
-  .starCard .cardText {
-    width: 200px;
-    margin: 5px 10px;
-  }
-  .viewCard .cardText span:last-child,
-  .starCard .cardText span:last-child {
-    display: block;
-  }
+
   #signUp{
     float: right;
   }
@@ -162,21 +105,41 @@ body {
     transform: scaleX(0);  
     transition: transform 250ms ease-in-out;
   }
-  .genre span:hover:after { transform: scaleX(1); }
-  
-  #allview { 
-    color: #000;
-    display:inline-block; 
-    margin:0;
-    text-transform:uppercase;
-    cursor: pointer;
-   }
-  
-  #allview:after {
-    display:block;
-    content: '';
-    border-bottom: solid 3px orange;  
-    transform: scaleX(0);  
-    transition: transform 250ms ease-in-out;
+  .genre span:hover:after { 
+    transform: scaleX(1); 
   }
-  #allview:hover:after { transform: scaleX(1); }
+  
+  .bar{
+    width: 1100px;
+    height: 5px;
+    background: gray;
+  }
+ 
+  .bookcover{
+    width: 190px;
+    height: 200px;
+    border: 1px solid black;
+  }
+  .checklist{
+    width: 1100px;
+  }
+  .title{
+    width: 200px;
+    height: 50px;
+    border:  1px solid;
+  }
+  #list{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .booklist{
+    display: flex;
+    width: 190px;
+    border: 1px solid;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  
