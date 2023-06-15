@@ -4,11 +4,12 @@ const url = require("url");
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
-  // 가져온 책의 번호
-  const booknum = req.params.id;
-  // 로그인한 유저의 id
-  const tempuser_id = req.decoded.id;
+  // console.log("req");
+  // console.log(req);
   try {
+    // 가져온 책의 번호
+    const booknum = req.params.id;
+
     // 책에 대한 정보와 작가의 정보 가져오기
     const bookdata = await User.findOne(
       {
@@ -77,21 +78,14 @@ exports.viewInfo = async (req, res) => {
     // --------------------------------------------
     // follow 기능 추가되면 추가 해야됨
     // --------------------------------------------
-    const authordata = await User.findOne(
-      {
-        attributes: [
-          [sequelize.fn("count", sequelize.col("user_id")), "writebooks"],
-        ],
-        where: { id: bookdata.dataValues.id },
-      },
-      {
-        include: [{ model: Books }],
-        group: ["user_id"],
-      }
-    );
-
-    // 로그인한 유저의 정보 가져오기
-    const userdata = await User.findOne({ where: { id: tempuser_id } });
+    // console.log(bookdata);
+    const authordata = await Books.findOne({
+      attributes: [
+        [sequelize.fn("count", sequelize.col("writer")), "writebooks"],
+      ],
+      where : {writer : bookdata.nickname},
+      group: ["writer"],
+    });
 
     // 책에 대한 별점 개수, 총점
     let stardata = await review.findAll({
@@ -102,6 +96,9 @@ exports.viewInfo = async (req, res) => {
       ],
       group: ["star"],
       order: [["star", "DESC"]],
+      where: {
+        book_id: booknum,
+      },
       raw: true,
     });
 
@@ -113,8 +110,18 @@ exports.viewInfo = async (req, res) => {
         },
       ],
     });
+    console.log("-------------------req.decoded")
+    console.log(req.decoded)
+    console.log("-------------------req.decoded")
+    if (req.decoded?.id) {
+      // 로그인한 유저의 id
+      const tempuser_id = req.decoded.id;
+      // 로그인한 유저의 정보 가져오기
+      const userdata = await User.findOne({ where: { id: tempuser_id } });
+      res.json({ bookdata, userdata, stardata, authordata, reviewdata });
+    }
 
-    res.json({ bookdata, userdata, stardata, authordata, reviewdata });
+    res.json({ bookdata, stardata, authordata, reviewdata });
   } catch (error) {
     console.error(error);
   }

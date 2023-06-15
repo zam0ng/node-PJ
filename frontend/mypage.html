@@ -21,7 +21,7 @@
         <li class="category">
           <a href="http://127.0.0.1:5500/frontend/index.html">Home</a>
         </li>
-        <li class="category"><a href="">My Books</a></li>
+        <li class="category"><a href="http://127.0.0.1:5500/frontend/checklist.html">My Books</a></li>
       </ul>
       <ul style="display: flex; align-items: center">
         <button id="logout">Log-Out</button>
@@ -130,13 +130,15 @@
       img1.src = `http://127.0.0.1:8080${data.user_img}`;
 
       // img1.src = data.user_img;
+      let tb = data.checks;
+      let tc = tb.split(",");
 
       nickname1.innerHTML = data.nickname;
       nickname2.innerHTML = data.nickname;
       gender1.innerHTML = data.gender;
       age1.innerHTML = data.age;
       grade1.innerHTML = data.grade;
-      checks.innerHTML = data.checks;
+      checks.innerHTML = tc.length;
       userId.innerHTML = data.user_id;
     } catch (error) {
       console.log(error);
