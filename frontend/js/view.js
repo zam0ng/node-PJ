@@ -213,7 +213,6 @@ async function getView() {
           reviewStarSpan[i].innerText = "☆";
         }
         // ♡ ♥
-        
       }
     };
   });
@@ -267,14 +266,17 @@ async function getView() {
 
   };
 
-  getStarAvg(starInfo);
+  getStarAvg();
   getComments();
 }
 
 // ==================================================
 // ========== then에서 빼서 별도의 함수로 만들것 ===========
 // ==================================================
-async function getStarAvg(starInfo) {
+async function getStarAvg() {
+  const data = await booksAllData();
+  const starInfo = data.data.stardata;
+
   // Community Reviews
   console.log("getStarAvg");
   console.log(starInfo);
@@ -567,7 +569,7 @@ async function booksAllData() {
   const getParams = new URLSearchParams(getUrl.search);
 
   const getId = getParams.get("id");
-  
+
   const data = await axios.get(`http://127.0.0.1:8080/view/${getId}`, {
     withCredentials: true,
   });
@@ -614,7 +616,6 @@ getView();
 const wantToReadBtn = document.querySelector(".wantToReadBtn");
 
 // want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
-wantToReadBtn.onclick = () =>{
-
-  checks.innerHTML = "♥"
-}
+wantToReadBtn.onclick = () => {
+  checks.innerHTML = "♥";
+};

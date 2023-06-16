@@ -25,6 +25,8 @@ const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
 const checkRouter = require("./routers/checklist")
 
+
+
 app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: false }));
@@ -80,6 +82,30 @@ app.use("/allview", allview);
 app.use("/view", viewRouter);
 app.use("/check",checkRouter)
 
+
 const server = app.listen(8080, () => {
   console.log("Server On!");
+});
+const io = socketio(server,{
+  cors:{
+    origin:"*",
+    credentials:true
+  }
+});
+
+io.on("connect",(socket)=>{
+  console.log("socket 시작함")
+
+  socket.on("joinRoom",(userid)=>{
+
+    socket.join(userid);
+    // io.to(room).emit("joinRoom",room,name)
+
+})
+  socket.on("message",(userid,msg)=>{
+    console.log("message")
+    console.log(userid)
+    console.log()
+    // io.to(userid).emit("message", userid,msg);
+  });
 });
