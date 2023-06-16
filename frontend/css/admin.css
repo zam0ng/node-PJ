@@ -39,11 +39,14 @@ body {
   border-radius: 10px;
 }
 
-.content {
-  background-color: white;
-  height: 100vh;
-  width: 800px;
-  border: 1px solid rgb(158, 158, 158);
+.content{
+    background-color: white;
+    height: 100vh;
+    width: 800px;
+    border: 1px solid rgb(158, 158, 158);
+    position: relative;
+
+
 }
 
 #user_agree,
@@ -64,6 +67,7 @@ body {
 }
 
 #tab_title {
+
   width: 780px;
   height: 10%;
   background-color: rgb(208, 208, 208);
@@ -106,17 +110,79 @@ body {
   width: 90px;
 }
 
-.accept,
-.reject {
-  margin-left: 10px;
-  margin-top: 11px;
-  width: 75px;
-  height: 25px;
-  background-image: url("../../backend/img/accept.jpg");
-  background-size: contain;
-  border: 0;
-  background-repeat: no-repeat;
+.accept,.reject{
+    margin-left: 10px;
+    margin-top: 11px;
+    width: 75px;
+    height: 25px;
+    background-image: url("../../backend/img/accept.jpg");
+    background-size:  contain;
+    border: 0;
+    background-repeat: no-repeat;
 }
-.reject {
-  background-image: url("../../backend/img/reject.jpg");
+.accept2,.reject2{
+    margin-left: 10px;
+    margin-top: 11px;
+    width: 75px;
+    height: 25px;
+    background-image: url("../../backend/img/accept.jpg");
+    background-size:  contain;
+    border: 0;
+    background-repeat: no-repeat;
+}
+.reject{
+    background-image: url("../../backend/img/reject.jpg");
+}
+.reject2{
+    background-image: url("../../backend/img/reject.jpg");
+}
+
+
+.book_img{
+    width: 250px;
+    height: 300px;
+    text-align: center;
+
+
+}
+.book_img img{
+    width: 200px;
+    height: 200px;
+}
+#main_content2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.book_title{
+    width: 250px;
+    height: 50px;
+    text-align: left;
+}
+
+#reject_reason{
+    /* width: 800px;
+    height: 670px; */
+    width: 400px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 30px;
+    position: absolute;
+    top:300px;
+    left: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(75, 75, 75, 0.733);
+}
+#reject_reason input{
+    width: 300px;
+    height: 30px;
+    border: 1px solid blue;
+    
+}
+
+#reject_reason label{
+    color : white
 }

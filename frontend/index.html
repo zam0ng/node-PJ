@@ -71,14 +71,14 @@
       const { data } = await axios.get("http://127.0.0.1:8080/main/viewlist");
       console.log(data);
       data.forEach((el, index) => {
-        viewList.innerHTML += `<div class="viewCard">
+        viewList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
             <img src="../backend/${el.img}" alt="" />
             <div class="cardText">
               <span>☻</span>
               <span>${el.viewcnt}</span>
               <span>${el.title}</span>
             </div>
-          </div>`;
+          </div></a>`;
       });
     }
 
@@ -87,14 +87,14 @@
       const { data } = await axios.get("http://127.0.0.1:8080/main/starlist");
       console.log(data);
       data.forEach((el, index) => {
-        starList.innerHTML += `<div class="viewCard">
+        starList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
             <img src="../backend/${el.img}" alt="" />
             <div class="cardText">
               <span>☻</span>
               <span>${el.orderstar}</span>
               <span>${el.title}</span>
             </div>
-          </div>`;
+          </div></a>`;
       });
     }
     getStarList();

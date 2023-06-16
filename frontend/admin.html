@@ -27,13 +27,27 @@
             </div>
             <div class="content">
                 <div id="tab_title">가입 승인</div>
-                <div id="main_content">
+                <div id="reject_reason">
+
+                        <label for="" id="">반려사유</label>
+                        <select id="reason">
+                            <option value="1">부적절한 책표지</option>
+                            <option value="2">부적절한 책제목</option>
+                            <option value="3">부적절한 책내용</option>
+                            <option value="4">내용과 장르선택 불일치 </option>
+                            
+                        </select>
+                        <button id="rejectbtn">보내기</button>
+                        <button id="closee">닫기</button>
+                        
                     
-                    
-                   
                 </div>
+                <div id="main_content"></div>
+                <div id="main_content2"></div>
             </div>
         </div>
+
+        
 </body>
 
 <script>
@@ -45,6 +59,7 @@
     user_agree.style.color ="black";
     post_agree.style.color ="rgb(158, 158, 158)";
     chat_agree.style.color ="rgb(158, 158, 158)";
+    reject_reason.style.visibility = "hidden";
 
     const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
 
@@ -172,6 +187,9 @@
     user_agree.style.color ="black";
     post_agree.style.color ="rgb(158, 158, 158)";
     chat_agree.style.color ="rgb(158, 158, 158)";
+    main_content2.style.visibility="hidden";
+    reject_reason.style.visibility = "hidden";
+
 
     const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
 
@@ -182,6 +200,7 @@
     console.log(data);
 
     if(data.data.length==0){
+        main_content.style.display="block";
         return main_content.innerHTML =`가입 승인 대기중인 유저가 없습니다.`
     }
 
@@ -257,18 +276,136 @@
         })
     });
    }
+   closee.onclick = () =>{
+    reject_reason.style.visibility = "hidden";
+   }
    
    
-   post_agree.onclick = () =>{
+   // 게시글 관리
+   post_agree.onclick = async() =>{
+    main_content2.innerHTML = "";
+    main_content2.style.visibility = "visible";
     tab_title.innerText = "게시글 관리";
     user_agree.style.color ="rgb(158, 158, 158)";
     post_agree.style.color ="black";
     chat_agree.style.color ="rgb(158, 158, 158)";
+    main_content.style.display="none";
+    console.log("클릭 되냐>?");
+        const data = await axios.get("http://127.0.0.1:8080/nonagreeuser/posts",{
+        withCredentials : true,
+    })
 
-//     const data = axios.get("http://127.0.0.1:8080/nonagressuser/post",{
-//         withCredentials : true,
-//     })
+        console.log(data);
+
+        data.data.forEach((el) => {
+            console.log(el.img);
+            
+
+            main_content2.innerHTML += `
+                <div class="book_img">
+                <img src="http://127.0.0.1:8080/${el.img}" alt="">
+                <div class="book_title">${el.title}</div>
+                        <button class="accept2">  </button>
+                        <button class="reject2">  </button>
+                </div>
+            `
+        const accept2 =document.querySelectorAll(".accept2");
+        const reject2 =document.querySelectorAll(".reject2");
+
+        accept2.forEach((e,index)=>{
+            e.onclick = async ()=>{
+
+                console.log("클릭됨")
+                console.log(index)
+
+                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser/posts",{
+                withCredentials:true,
+                })
+
+                data.data.forEach((e,indexx) => {
+                    // console.log(index,indexx);
+                    // console.log("Xxxxxxxx")
+                    // console.log(typeof(e.accept));
+
+                    if(index ==indexx){
+                        e.accept = parseInt(e.accept) + 1;
+                        console.log(e.accept);
+                        console.log(e.id);
+                        axios.get("http://127.0.0.1:8080/nonagreeuser/acceptUpdate",{
+
+                            withCredentials : true,
+
+                            params :{
+                                accept : e.accept,
+                                id : e.id,
+                            }
+                        })
+                    }
+                });
+                location.reload();
+            }
+        });
+
+        reject2.forEach((e,index)=>{
+            
+        e.onclick = async()=>{
+            reject_reason.style.visibility = "visible";
+
+            rejectbtn.onclick = async () =>{
+
+                
+                // reject_reason.style.display = "block";
+
+                const reasonvalue = reason.options[reason.selectedIndex].value;
+                console.log("클릭");
+
+                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser/posts",{
+                withCredentials:true,
+                })
+
+                data.data.forEach((e,indexx) => {
+                    console.log(index,indexx);
+                    console.log("Xxxxxxxx")
+                    console.log(typeof(e.accept));
+
+                    if(index ==indexx){
+                        e.accept = parseInt(e.accept) - 1;
+                        console.log(e.grade);
+                        console.log(e.id);
+                        axios.get("http://127.0.0.1:8080/nonagreeuser/acceptUpdate",{
+
+                            withCredentials : true,
+
+                            params :{
+                                accept : e.accept,
+                                id : e.id,
+                                reject : reasonvalue,
+                            }
+                        })
+                    }
+                });
+                reject_reason.style.visibility = "hidden";
+                location.reload();
+            }
+        }
+        })
+
+        });
    }
+
+//    rejectbtn.onclick = () =>{
+//         console.log(reason.options[reason.selectedIndex].value);
+//         const reasonvalue = reason.options[reason.selectedIndex].value;
+        
+//         axios.get("http://127.0.0.1:8080/nonagreeuser/rejectUpdate",{
+
+//             withCredentials: true,
+
+//             params : {
+//                 reject : reasonvalue,
+//             }
+//         })
+//    }
 
    chat_agree.onclick = () =>{
     tab_title.innerText = "고객 문의";

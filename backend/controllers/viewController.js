@@ -4,11 +4,16 @@ const url = require("url");
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
-  // 가져온 책의 번호
-  const booknum = req.params.id;
-  // 로그인한 유저의 id
-  const tempuser_id = req.decoded.id;
+  // console.log("req");
+  // console.log(req);
+  // console.log("req");
+  // console.log(req);
   try {
+    // 가져온 책의 번호
+    let booknum = req.params.id;
+    console.log("const booknum = req.params.id;");
+    console.log(booknum);
+
     // 책에 대한 정보와 작가의 정보 가져오기
     const bookdata = await User.findOne(
       {
@@ -77,24 +82,15 @@ exports.viewInfo = async (req, res) => {
     // --------------------------------------------
     // follow 기능 추가되면 추가 해야됨
     // --------------------------------------------
-    const authordata = await User.findOne(
-      {
-        attributes: [
-          [sequelize.fn("count", sequelize.col("user_id")), "writebooks"],
-        ],
-        where: { id: bookdata.dataValues.id },
-      },
-      {
-        include: [{ model: Books }],
-        group: ["user_id"],
-      }
-    );
-
-    // 로그인한 유저의 정보 가져오기
-    const userdata = await User.findOne({ where: { id: tempuser_id } });
+    const authordata = await Books.findOne({
+      attributes: [
+        [sequelize.fn("count", sequelize.col("writer")), "writebooks"],
+      ],
+      group: ["writer"],
+    });
 
     // 책에 대한 별점 개수, 총점
-    let stardata = await review.findAll({
+    const stardata = await review.findAll({
       attributes: [
         "star",
         [sequelize.fn("count", sequelize.col("star")), "starCnt"],
@@ -102,6 +98,9 @@ exports.viewInfo = async (req, res) => {
       ],
       group: ["star"],
       order: [["star", "DESC"]],
+      where: {
+        book_id: booknum,
+      },
       raw: true,
     });
 
@@ -112,9 +111,22 @@ exports.viewInfo = async (req, res) => {
           include: [{ model: User }],
         },
       ],
+      where: {
+        book_id: booknum,
+      },
     });
+    console.log("-------------------req.decoded")
+    console.log(req.decoded)
+    console.log("-------------------req.decoded")
+    if (req.decoded?.id) {
+      // 로그인한 유저의 id
+      const tempuser_id = req.decoded.id;
+      // 로그인한 유저의 정보 가져오기
+      const userdata = await User.findOne({ where: { id: tempuser_id } });
+      res.json({ bookdata, userdata, stardata, authordata, reviewdata });
+    }
 
-    res.json({ bookdata, userdata, stardata, authordata, reviewdata });
+    res.json({ bookdata, stardata, authordata, reviewdata });
   } catch (error) {
     console.error(error);
   }
@@ -122,14 +134,19 @@ exports.viewInfo = async (req, res) => {
 
 // 작성된 리뷰 저장
 exports.insertReview = async (req, res) => {
-  const { book_id, nickname, star, comment, user_id } = req.body;
+  // console.log("exports.insertReview");
+  // console.log(req.decoded);
+  const { nickname, id } = req.decoded;
+  const { book_id, star, comment } = req.body;
+  console.log("const { book_id, star, comment } = req.body;");
+  console.log(req.body);
   try {
     await review.create({
       book_id,
       nickname,
       comment,
       star,
-      user_id,
+      user_id: id,
     });
   } catch (error) {
     console.log(error);
@@ -139,9 +156,10 @@ exports.insertReview = async (req, res) => {
 exports.insertReReview = async (req, res) => {
   // console.log("insertReReview");
   // console.log(req);
-  const { nickname, review, user_id, review_id } = req.body;
+  const { nickname,id} = req.decoded;
+  const { review,review_id } = req.body;
   try {
-    await r_review.create({ nickname, review, user_id, review_id });
+    await r_review.create({ nickname, review, user_id:id, review_id });
   } catch (error) {
     console.error(error);
   }

@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const {User} =require("../models");
+const {User,Books} =require("../models");
 const { findAll } = require("../models/review");
 
 exports.nonagreeuser = async(req,res) =>{
@@ -50,11 +50,42 @@ exports.gradeUpdate = async(req,res)=>{
 }
 
 exports.nonagreepost = async(req,res) =>{
-
+    console.log("nonagreepost 여기 들어와짐?")
     try {
-        
+        const data = await Books.findAll({
+            //datavalues 만 들어옴
+            raw : true,
+            where :{
+                accept : false,
+            }
+        })
+
+        console.log(data);
+        res.json(data);
     } catch (error) {
-        
+        console.log("nonagresspost 에서 오류"+ error);
     }
 
+}
+exports.acceptUpdate = async (req,res)=>{
+    try {
+        console.log(req.query);
+        const {accept,id,reject} =req.query;
+
+        await Books.update({
+            accept : accept,
+            reject : reject,
+        },{where : {id}});
+    } catch (error) {
+        console.log("acceptUpdate에서 오류" +error);
+    }
+}
+
+exports.rejectUpdate = async (req,res)=>{
+    try {
+        console.log(req.query);
+        await Books.d
+    } catch (error) {
+        console.log("rejectUpdate 에서 오류남"+error);
+    }
 }

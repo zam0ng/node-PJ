@@ -58,8 +58,13 @@ body {
 }
 
 .wantToReadBtn {
-  background-color: #377458;
-  color: #fff;
+  /* background-color: white; */
+  color: red;
+}
+.wantToReadBtn span{
+  width: 30px;
+  height: 30px;
+  font-size:large;
 }
 
 /* 우측 사이드바 별점 잔해 */
@@ -145,15 +150,12 @@ body {
 
 .colStars .colStarEmpty,
 .colStars .colStarFull {
-  width: 25px;
   height: 25px;
   position: absolute;
   box-sizing: border-box;
   color: #e87400;
 }
 .colStars .colStarFull {
-  /* 추후에 별점 총점 가져와서 그리기 이거 수정해야함 */
-  width: 100px;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -663,4 +665,8 @@ body {
 .reCommentBtn:hover {
   cursor: pointer;
   background-color: #393939;
+}
+
+#checks{
+
 }

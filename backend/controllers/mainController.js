@@ -30,6 +30,7 @@ exports.OrderByStar = async (req, res) => {
       // attributes select 와 비슷한 동작을 하는듯
       // img, title, avg(star) 값을 출력
       attributes: [
+        "id",
         "img",
         "title",
         [sequelize.fn("AVG", sequelize.col("star")), "orderstar"],
@@ -62,9 +63,10 @@ exports.OrderByStar = async (req, res) => {
       where: {
         accept: true,
       },
+      raw: true,
     });
-
-    // console.log(data);
+    console.log("exports.OrderByStar");
+    console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
