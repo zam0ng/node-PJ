@@ -6,7 +6,7 @@ const session = require("express-session");
 
 exports.login = async (req, res) => {
   try {
-    const { user_id, user_pw } = req.body.data;
+    const { user_id, user_pw } = req.query;
 
     const data = await User.findOne({ where: { user_id } });
     // console.log(data.user_pw);
@@ -42,8 +42,8 @@ exports.login = async (req, res) => {
 
 
       req.session.access_token = token;
-      console.log("logincontroller / req.sessionID")
-      console.log(req.sessionID)
+      // console.log("logincontroller / req.sessionID")
+      // console.log(req.sessionID)
       await User.update({
         tk: req.sessionID,
       }, { where: { user_id } }).then((e) => {

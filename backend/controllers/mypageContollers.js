@@ -65,7 +65,7 @@ exports.NickChange = async (req,res)=>{
       console.log(changenick);
       await User.update({nickname:changenick},{where:{user_id : user_id}})
       console.log("nicknamechange contoller 빠짐");
-      res.redirect('/frontend/mypage.html');
+      res.redirect('/mypage.html');
   } catch (error) {
       
   }
