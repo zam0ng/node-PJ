@@ -40,12 +40,14 @@ sequelize
   });
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use("/img", express.static(path.join(__dirname, "img")));
 app.use("/css", express.static(path.join(__dirname, "frontend/css")));
 app.use("/upload", express.static(path.join(__dirname, "upload")));
+app.use(express.static("../frontend"));
 
 app.get("/", (req, res) => {
-  res.send("응답함");
+  res.redirect("/index.html");
 });
 
 app.use(
