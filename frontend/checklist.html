@@ -52,31 +52,32 @@
       </div>
     </div>
   </div>
-
+  
   <script>
     async function checkAPI() {
-      try {
-        const { data } = await axios.get(
-          "http://127.0.0.1:8080/check/list",
-          { withCredentials: true, }
-        );
-        console.log("kkkk")
-        console.log(data.checks)
-        let numArray = data.checks.split(',')
-        console.log(numArray)
-        numArray.forEach(checknum => {
-          console.log(checknum)
-          list.innerHTML += `
+        try {
+          const data = await axios.get(
+            "http://127.0.0.1:8080/check/list",
+            { withCredentials: true, }
+          );
+
+          console.log(data);
+          data.data.forEach((el) => {
+            console.log(el.img)
+            console.log(el.title)
+            list.innerHTML += `
+          <a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}">
         <div class="booklist">
-            <div class="bookcover">book cover</div>
-            <div>book's id : ${checknum}</div>
+            <div class="bookcover"><img src="http://127.0.0.1:8080/${el.img}" alt=""></div>
+            <div>book's title : ${el.title}</div>
         </div>
+      </a>
         `
-        })
-      } catch (error) {
-        console.log(error)
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
-    }
     checkAPI();
   </script>
 

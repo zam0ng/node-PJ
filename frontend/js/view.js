@@ -1,8 +1,8 @@
 async function getView() {
   const data = await booksAllData();
   // .then((e) => {
-  console.log("then");
-  console.log(data);
+  // console.log("then");
+  // console.log(data);
   const author = data.data.bookdata;
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
@@ -10,28 +10,28 @@ async function getView() {
   let userInfo;
   if (data.data?.userdata) {
     userInfo = data.data.userdata;
-    console.log("로그인한 유저 정보 : userInfo");
-    console.log(userInfo);
+    // console.log("로그인한 유저 정보 : userInfo");
+    // console.log(userInfo);
   }
   const starInfo = data.data.stardata;
   const authordata = data.data.authordata;
   const reviewInfo = data.data.reviewdata;
   // const userAlldata = e.data.userAlldata;
   // 넘어오는 데이터 콘솔 로그
-  console.log("작가 정보 : author");
-  console.log(author);
-  console.log("책 정보 : bookInfo");
-  console.log(bookInfo);
-  console.log("책에 있는 댓글들 모음 : thisReview");
-  console.log(thisReview);
+  // console.log("작가 정보 : author");
+  // console.log(author);
+  // console.log("책 정보 : bookInfo");
+  // console.log(bookInfo);
+  // console.log("책에 있는 댓글들 모음 : thisReview");
+  // console.log(thisReview);
   // console.log("로그인한 유저 정보 : userInfo");
   // console.log(userInfo);
-  console.log("리뷰 점수 : starInfo");
-  console.log(starInfo);
-  console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
-  console.log(authordata);
-  console.log("특정 책에 있는 댓글과 대댓글 가져오기 : reviewInfo");
-  console.log(reviewInfo);
+  // console.log("리뷰 점수 : starInfo");
+  // console.log(starInfo);
+  // console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
+  // console.log(authordata);
+  // console.log("특정 책에 있는 댓글과 대댓글 가져오기 : reviewInfo");
+  // console.log(reviewInfo);
   // console.log(userAlldata);
 
   //===============================================
@@ -267,6 +267,7 @@ async function getView() {
   };
 
   getStarAvg();
+  getStarAvg();
   getComments();
 }
 
@@ -278,8 +279,8 @@ async function getStarAvg() {
   const starInfo = data.data.stardata;
 
   // Community Reviews
-  console.log("getStarAvg");
-  console.log(starInfo);
+  const data = await booksAllData();
+  const starInfo = data.data.stardata;
 
   let starTotalStore = 0;
   let starTotalCnt = 0;
@@ -610,6 +611,7 @@ async function logincheck() {
     }
   }
 }
+
 getView();
 // logincheck();
 

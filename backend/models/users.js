@@ -40,7 +40,6 @@ class User extends Model {
         },
         checks: {
           type: DataTypes.STRING,
-          allowNull: false,
         },
       },
       {

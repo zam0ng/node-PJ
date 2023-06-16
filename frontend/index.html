@@ -16,25 +16,70 @@
     <!-- 로고 부분 -->
     <div class="nav">
       <div class="logoBox">
-        <a href="http://127.0.0.1:5500/frontend/index.html"><img src="../backend/img/Black logo - no background.png" alt="" /></a>        <div class="functionBox">
+        <a href="/index.html"
+          ><img src="../backend/img/Color_logo_-_no_background.png" alt=""
+        /></a>
+        <div class="functionBox">
+          <span id="insert"
+            ><a href="/books.html"
+              >✏️ writing</a
+            ></span
+          >
           <span id="allview">📙books</span>
           <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
-          <span id="nick"></span><a href=""></a></span>
-          <span id="login"><a href="http://127.0.0.1:5500/frontend/login.html"> login</a></span>
-          <span id="signUp"><a href="http://127.0.0.1:5500/frontend/signup.html"> signUp</a></span>
+          <span id="nick"
+            ><a href="http://127.0.0.1:5500/frontend/writerpage.html"></a
+          ></span>
+          <span id="login"
+            ><a href="http://127.0.0.1:5500/frontend/login.html">
+              login</a
+            ></span
+          >
+          <span id="signUp"
+            ><a href="http://127.0.0.1:5500/frontend/signup.html">
+              signUp</a
+            ></span
+          >
           <button id="logout">logout</button>
         </div>
       </div>
       <div class="toggle">
         <div class="genre">
-          
-          <span id="all"><a href="http://127.0.0.1:5500/frontend/genre/all.html">전체</a></span>
-          <span id="conan"><a href="http://127.0.0.1:5500/frontend/genre/conan.html">추리</a></span>
-          <span id="horror"><a href="http://127.0.0.1:5500/frontend/genre/horror.html">공포•스릴러</a></span>
-          <span id="fantasy"><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html">판타지</a></span>
-          <span id="sorim"><a href="http://127.0.0.1:5500/frontend/genre/sorim.html">무협</a></span>
-          <span id="game"><a href="http://127.0.0.1:5500/frontend/genre/game.html">게임</a></span>
-          <span id="romance"><a href="http://127.0.0.1:5500/frontend/genre/romance.html">로맨스</a></span>
+          <span id="all"
+            ><a href="http://127.0.0.1:5500/frontend/genre/all.html"
+              >전체</a
+            ></span
+          >
+          <span id="conan"
+            ><a href="http://127.0.0.1:5500/frontend/genre/conan.html"
+              >추리</a
+            ></span
+          >
+          <span id="horror"
+            ><a href="http://127.0.0.1:5500/frontend/genre/horror.html"
+              >공포•스릴러</a
+            ></span
+          >
+          <span id="fantasy"
+            ><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html"
+              >판타지</a
+            ></span
+          >
+          <span id="sorim"
+            ><a href="http://127.0.0.1:5500/frontend/genre/sorim.html"
+              >무협</a
+            ></span
+          >
+          <span id="game"
+            ><a href="http://127.0.0.1:5500/frontend/genre/game.html"
+              >게임</a
+            ></span
+          >
+          <span id="romance"
+            ><a href="http://127.0.0.1:5500/frontend/genre/romance.html"
+              >로맨스</a
+            ></span
+          >
         </div>
       </div>
     </div>
@@ -71,7 +116,7 @@
       const { data } = await axios.get("http://127.0.0.1:8080/main/viewlist");
       console.log(data);
       data.forEach((el, index) => {
-        viewList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
+        viewList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
             <img src="../backend/${el.img}" alt="" />
             <div class="cardText">
               <span>☻</span>
@@ -87,7 +132,7 @@
       const { data } = await axios.get("http://127.0.0.1:8080/main/starlist");
       console.log(data);
       data.forEach((el, index) => {
-        starList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
+        starList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
             <img src="../backend/${el.img}" alt="" />
             <div class="cardText">
               <span>☻</span>
@@ -157,11 +202,11 @@
 
       console.log(role);
       if (role == "writer") {
-        window.location.href = "http://127.0.0.1:5500/frontend/writerpage.html";
+        window.location.href = "/writerpage.html";
       }
 
       if (role == "reader") {
-        window.location.href = "http://127.0.0.1:5500/frontend/mypage.html";
+        window.location.href = "/mypage.html";
       }
     };
     logincheck();

@@ -196,8 +196,8 @@
 
 // }
 async function logincheck() {
-  const at = document.cookie.slice(8);
-  console.log(at);
+  // const at = document.cookie.slice(8);
+  // console.log(at);
 
   const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할

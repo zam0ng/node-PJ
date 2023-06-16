@@ -433,6 +433,69 @@
     <!-- 상세페이지 end -->
   </body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+  // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
+  // 하트가 눌려져있게 표시
+  window.onload = async () => {
+      const getUrl = new URL(window.location.href);
+
+      const getParams = new URLSearchParams(getUrl.search);
+
+      const getId = getParams.get("id");
+
+      const data1 = await axios.get("http://127.0.0.1:8080/view/user/checks", {
+        withCredentials: true,
+      })
+      const teststr = data1.data.checks;
+      const tta = teststr.split(",");
+
+      tta.forEach((el) => {
+        if (el == getId) {
+
+          checks.innerHTML = "♥";
+
+        }
+      });
+    }
+    const wantToReadBtn = document.querySelector(".wantToReadBtn");
+
+// want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
+wantToReadBtn.onclick = async() =>{
+
+  // 현재 url에 있는 id의 값을 가져옴
+  const getUrl = new URL(window.location.href);
+  
+  const getParams = new URLSearchParams(getUrl.search);
+
+  const getId = getParams.get("id");
+
+  
+  if(checks.innerHTML == "♥"){
+    checks.innerHTML = "♡"
+    console.log("찜 해체할거임")
+    const data = await axios.get(`http://127.0.0.1:8080/view/checks/delete/${getId}`, {
+    withCredentials: true,
+  });
+  }
+  else{
+    checks.innerHTML = "♥"
+    console.log("찜 할거임")
+    const data = await axios.get(`http://127.0.0.1:8080/view/checks/add/${getId}`, {
+    withCredentials: true,
+  });
+  }
+
+  
+
+  // const data2 = await axios.get("http://127.0.0.1:8080/view/qwer/qw" ,{
+  //   withCredentials : true,
+  // })
+
+  
+}
+
+  </script>
   <script src="./genre/genre.js"></script>
   <script src="./js/view.js"></script>
+  
 </html>
