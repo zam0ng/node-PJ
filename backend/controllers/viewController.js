@@ -1,9 +1,12 @@
+const { raw } = require("express");
 const { Books, User, review, r_review } = require("../models");
 const { sequelize } = require("../models");
 const url = require("url");
+const e = require("express");
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
+  console.log("하이");
   // console.log("req");
   // console.log(req);
   // console.log("req");
@@ -11,8 +14,8 @@ exports.viewInfo = async (req, res) => {
   try {
     // 가져온 책의 번호
     let booknum = req.params.id;
-    console.log("const booknum = req.params.id;");
-    console.log(booknum);
+    // console.log("const booknum = req.params.id;");
+    // console.log(booknum);
 
     // 책에 대한 정보와 작가의 정보 가져오기
     const bookdata = await User.findOne(
@@ -115,9 +118,6 @@ exports.viewInfo = async (req, res) => {
         book_id: booknum,
       },
     });
-    console.log("-------------------req.decoded")
-    console.log(req.decoded)
-    console.log("-------------------req.decoded")
     if (req.decoded?.id) {
       // 로그인한 유저의 id
       const tempuser_id = req.decoded.id;
@@ -163,3 +163,98 @@ exports.insertReReview = async (req, res) => {
     console.error(error);
   }
 };
+
+exports.checksadd = async(req,res)=>{
+
+  try {
+    
+    const {user_id} = req.decoded;
+    const userdata = await User.findOne({
+      where : {user_id},
+      raw:true,
+    })
+   
+    let tz;
+    console.log("userdata-------------------")
+    console.log(userdata.checks);
+    if(userdata.checks == ""){
+      console.log("true");
+    }
+    console.log("userdata-----------------")
+    if(userdata.checks==""){
+      tz = req.params.id;
+    }
+    else{
+      tz = userdata.checks+","+req.params.id
+    }
+    await User.update({
+      checks : tz,
+    },{where : {user_id}})
+
+  } catch (error) {
+    console.log("view컨트롤러 checks에서 오류남"+error);
+  }
+}
+
+exports.checksdel = async(req,res)=>{
+
+  try {
+    
+    const {user_id} = req.decoded;
+    const userdata = await User.findOne({
+      where : {user_id},
+      raw:true,
+    })
+
+    console.log(userdata.checks);
+    const checksstr = userdata.checks;
+    const splitchecksstr = checksstr.split(",");
+    
+    const result = splitchecksstr.filter(num => num!=req.params.id);
+
+    console.log("----------------result")
+    console.log(splitchecksstr);
+    console.log(result)
+    console.log("----------------result")
+    const result2 = result.join();
+    console.log(result2);
+
+    await User.update({
+      checks : result2,
+    },{where : {user_id}})
+    
+   
+    // let tz;
+    // console.log("userdata-------------------")
+    // console.log(userdata.checks);
+    // if(userdata.checks == ""){
+    //   console.log("true");
+    // }
+    // console.log("userdata-----------------")
+    // if(userdata.checks==""){
+    //   tz = req.params.id;
+    // }
+    // else{
+    //   tz = userdata.checks+","+req.params.id
+    // }
+    
+
+  } catch (error) {
+    console.log("view컨트롤러 checks에서 오류남"+error);
+  }
+}
+exports.userchecks = async(req,res) =>{
+  try {
+    const {user_id} =req.decoded;
+
+    const data = await User.findOne({
+      where :{user_id},
+      raw:true,
+    })
+
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    console.log("view 컨트롤러 userchecks 에서 오류남"+ error);
+  }
+}

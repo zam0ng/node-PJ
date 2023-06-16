@@ -23,6 +23,7 @@ const allview = require("./routers/allview");
 const mainRouter = require("./routers/mainRouter");
 const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
+const checkRouter = require("./routers/checklist"); 
 
 app.use(bodyParser.json());
 
@@ -39,12 +40,14 @@ sequelize
   });
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use("/img", express.static(path.join(__dirname, "img")));
 app.use("/css", express.static(path.join(__dirname, "frontend/css")));
 app.use("/upload", express.static(path.join(__dirname, "upload")));
+app.use(express.static("../frontend"));
 
 app.get("/", (req, res) => {
-  res.send("응답함");
+  res.redirect("/index.html");
 });
 
 app.use(
@@ -77,6 +80,7 @@ app.use("/nonagreeuser", nonagreeuser);
 app.use("/logout", logoutrouter);
 app.use("/allview", allview);
 app.use("/view", viewRouter);
+app.use("/check",checkRouter);
 
 const server = app.listen(8080, () => {
   console.log("Server On!");
