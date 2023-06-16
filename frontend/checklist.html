@@ -19,27 +19,27 @@
   <!-- 로고 부분 -->
   <div class="nav">
     <div class="logoBox">
-      <a href="http://127.0.0.1:5500/frontend/index.html"><img src="../backend/img/Black logo - no background.png"
+      <a href="/frontend/index.html"><img src="../backend/img/Black logo - no background.png"
           alt="" /></a>
       <div class="functionBox">
         <span id="allview">📙books</span>
         <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
         <span id="nick"></span><a href=""></a></span>
         <!-- <span id="login"><a href="http://17.0.0.1:5500/frontend/login.html"> login</a></span>
-          <span id="signUp"><a href="http://127.0.0.1:5500/frontend/signup.html"> signUp</a></span>
+          <span id="signUp"><a href="/frontend/signup.html"> signUp</a></span>
           <button id="logout">logout</button> -->
       </div>
     </div>
     <div class="toggle">
       <div class="genre">
 
-        <span id="all"><a href="http://127.0.0.1:5500/frontend/genre/all.html">전체</a></span>
-        <span id="conan"><a href="http://127.0.0.1:5500/frontend/genre/conan.html">추리</a></span>
-        <span id="horror"><a href="http://127.0.0.1:5500/frontend/genre/horror.html">공포•스릴러</a></span>
-        <span id="fantasy"><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html">판타지</a></span>
-        <span id="sorim"><a href="http://127.0.0.1:5500/frontend/genre/sorim.html">무협</a></span>
-        <span id="game"><a href="http://127.0.0.1:5500/frontend/genre/game.html">게임</a></span>
-        <span id="romance"><a href="http://127.0.0.1:5500/frontend/genre/romance.html">로맨스</a></span>
+        <span id="all"><a href="/frontend/genre/all.html">전체</a></span>
+        <span id="conan"><a href="/frontend/genre/conan.html">추리</a></span>
+        <span id="horror"><a href="/frontend/genre/horror.html">공포•스릴러</a></span>
+        <span id="fantasy"><a href="/frontend/genre/fantasy.html">판타지</a></span>
+        <span id="sorim"><a href="/frontend/genre/sorim.html">무협</a></span>
+        <span id="game"><a href="/frontend/genre/game.html">게임</a></span>
+        <span id="romance"><a href="/frontend/genre/romance.html">로맨스</a></span>
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@
     async function checkAPI() {
         try {
           const data = await axios.get(
-            "http://127.0.0.1:8080/check/list",
+            "http://13.209.64.80/check/list",
             { withCredentials: true, }
           );
 
@@ -66,9 +66,9 @@
             console.log(el.img)
             console.log(el.title)
             list.innerHTML += `
-          <a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}">
+          <a href="/frontend/view.html?id=${el.id}">
         <div class="booklist">
-            <div class="bookcover"><img src="http://127.0.0.1:8080/${el.img}" alt=""></div>
+            <div class="bookcover"><img src="http://13.209.64.80/${el.img}" alt=""></div>
             <div>book's title : ${el.title}</div>
         </div>
       </a>

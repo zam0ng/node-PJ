@@ -1,9 +1,9 @@
 // // all.onclick = async () => {
 
-// //     // window.location.href="http://127.0.0.1:5500/frontend/genre/all.html"
+// //     // window.location.href="/frontend/genre/all.html"
 
 // //     viewList.innerHTML = "";
-// //     const { data } = await axios.get("http://127.0.0.1:8080/allview/all");
+// //     const { data } = await axios.get("http://13.209.64.80/allview/all");
 
 // //     console.log(data);
 
@@ -30,7 +30,7 @@
 // // }
 // conan.onclick = async() =>{
 //     viewList.innerHTML = "";
-//     const {data} = await axios.get("http://127.0.0.1:8080/allview/conan");
+//     const {data} = await axios.get("http://13.209.64.80/allview/conan");
 
 //     console.log(data);
 
@@ -58,7 +58,7 @@
 
 // horror.onclick = async() =>{
 //     viewList.innerHTML = "";
-//     const {data} = await axios.get("http://127.0.0.1:8080/allview/horror");
+//     const {data} = await axios.get("http://13.209.64.80/allview/horror");
 
 //     console.log(data);
 
@@ -86,7 +86,7 @@
 
 // fantasy.onclick = async() =>{
 //     viewList.innerHTML = "";
-//     const {data} = await axios.get("http://127.0.0.1:8080/allview/fantasy");
+//     const {data} = await axios.get("http://13.209.64.80/allview/fantasy");
 
 //     console.log(data);
 
@@ -114,7 +114,7 @@
 
 // sorim.onclick = async() =>{
 //     viewList.innerHTML = "";
-//     const {data} = await axios.get("http://127.0.0.1:8080/allview/sorim");
+//     const {data} = await axios.get("http://13.209.64.80/allview/sorim");
 
 //     console.log(data);
 
@@ -142,7 +142,7 @@
 
 // game.onclick = async() =>{
 //     viewList.innerHTML = "";
-//     const {data} = await axios.get("http://127.0.0.1:8080/allview/game");
+//     const {data} = await axios.get("http://13.209.64.80/allview/game");
 
 //     console.log(data);
 
@@ -170,7 +170,7 @@
 
 // romance.onclick = async() =>{
 //     viewList.innerHTML = "";
-//     const {data} = await axios.get("http://127.0.0.1:8080/allview/romance");
+//     const {data} = await axios.get("http://13.209.64.80/allview/romance");
 
 //     console.log(data);
 
@@ -199,7 +199,7 @@ async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);
 
-  const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
+  const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
 
@@ -239,7 +239,7 @@ async function logincheck() {
 logincheck();
 
 logout.onclick = async () => {
-  await axios.get("http://127.0.0.1:8080/logout", {
+  await axios.get("http://13.209.64.80/logout", {
     withCredentials: true,
   });
 
@@ -256,7 +256,7 @@ allview.onclick = async () => {
 };
 
 nick.onclick = async () => {
-  const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
+  const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
   });
@@ -264,10 +264,10 @@ nick.onclick = async () => {
 
   console.log(role);
   if (role == "writer") {
-    window.location.href = "http://127.0.0.1:5500/frontend/writerpage.html";
+    window.location.href = "/frontend/writerpage.html";
   }
 
   if (role == "reader") {
-    window.location.href = "http://127.0.0.1:5500/frontend/mypage.html";
+    window.location.href = "/frontend/mypage.html";
   }
 };

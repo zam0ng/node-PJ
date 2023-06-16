@@ -31,7 +31,7 @@
 
       <div id="newto">New to Goodreads?</div>
       <div id="signupdiv">
-        <a href="http://127.0.0.1:5500/frontend/signup.html" id="signup"
+        <a href="/frontend/signup.html" id="signup"
           >Create Account</a
         >
       </div>
@@ -54,7 +54,7 @@
         return;
       }
       axios
-        .post("http://127.0.0.1:8080/login", {
+        .post("http://13.209.64.80/login", {
           withCredentials: true,
 
           data: {
@@ -64,7 +64,7 @@
         })
         // console.log(data);
         // if(data =="1"){
-        //     window.location.href="http://127.0.0.1:5500/frontend/index.html";
+        //     window.location.href="/frontend/index.html";
         // }
         .then((e) => {
           console.log(e);
@@ -76,9 +76,9 @@
             // console.log("werwer");
             document.cookie = `mytoken=${e.data.token}; path=/`;
             // console.log(document.cookie);
-            window.location.href = "http://127.0.0.1:5500/frontend/index.html";
+            window.location.href = "/frontend/index.html";
           } else if (e.data == "어드민") {
-            window.location.href = "http://127.0.0.1:5500/frontend/admin.html";
+            window.location.href = "/frontend/admin.html";
           } else if (e.data == "비밀번호 틀림") {
             undefinedID.innerText = "";
             pwderr.innerHTML = "wrong password";
@@ -104,7 +104,7 @@
       console.log(keycode);
       if (keycode == "Enter") {
         axios
-          .post("http://127.0.0.1:8080/login", {
+          .post("http://13.209.64.80/login", {
             withCredentials: true,
 
             data: {
@@ -116,10 +116,10 @@
             console.log(e);
             if (e.data == "로그인 성공") {
               window.location.href =
-                "http://127.0.0.1:5500/frontend/index.html";
+                "/frontend/index.html";
             } else if (e.data == "어드민") {
               window.location.href =
-                "http://127.0.0.1:5500/frontend/admin.html";
+                "/frontend/admin.html";
             } else if (e.data == "비밀번호 틀림") {
               undefinedID.innerText = "";
               pwderr.innerHTML = "wrong password";

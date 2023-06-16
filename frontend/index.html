@@ -111,7 +111,7 @@
   <script>
     // 조회수가 가장 많은 5개의 리스트를 가져옴
     async function getViewList() {
-      const { data } = await axios.get("http://127.0.0.1:8080/main/viewlist");
+      const { data } = await axios.get("http://13.209.64.80/main/viewlist");
       console.log(data);
       data.forEach((el, index) => {
         viewList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
@@ -127,7 +127,7 @@
 
     // 별점이 높은 순으로 5개의 리스트를 가져옴
     async function getStarList() {
-      const { data } = await axios.get("http://127.0.0.1:8080/main/starlist");
+      const { data } = await axios.get("http://13.209.64.80/main/starlist");
       console.log(data);
       data.forEach((el, index) => {
         starList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
@@ -148,7 +148,7 @@
       console.log(at);
 
       const { data } = await axios.get(
-        "http://127.0.0.1:8080/main/logincheck",
+        "http://13.209.64.80/main/logincheck",
         {
           // 이게 rawheader에 쿠키를 저장하는 역할
           withCredentials: true,
@@ -190,7 +190,7 @@
     }
     nick.onclick = async () => {
       const { data } = await axios.get(
-        "http://127.0.0.1:8080/main/logincheck",
+        "http://13.209.64.80/main/logincheck",
         {
           // 이게 rawheader에 쿠키를 저장하는 역할
           withCredentials: true,
@@ -210,7 +210,7 @@
     logincheck();
 
     logout.onclick = async () => {
-      await axios.get("http://127.0.0.1:8080/logout", {
+      await axios.get("http://13.209.64.80/logout", {
         withCredentials: true,
       });
 

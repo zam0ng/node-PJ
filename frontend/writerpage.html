@@ -11,7 +11,7 @@
 
   <body>
     <div class="header">
-      <a href="http://127.0.0.1:5500/frontend/index.html">
+      <a href="/frontend/index.html">
         <img
           class="header-img"
           src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
@@ -20,7 +20,7 @@
       <div class="ulheader">
         <ul style="display: flex; align-items: center">
           <li class="category">
-            <a href="http://127.0.0.1:5500/frontend/index.html">Home</a>
+            <a href="/frontend/index.html">Home</a>
           </li>
           <li class="category"><a href="">My Books</a></li>
         </ul>
@@ -45,7 +45,7 @@
             <h3 class="margin1">프로필 변경</h3>
             <input class="margin1" type="file" id="file" style=" width: 200px;">
             <button id="uploadBtn" class="button">change</button>
-            <form action="http://127.0.0.1:8080/writer/nick" method="post">
+            <form action="http://13.209.64.80/writer/nick" method="post">
                 <h3  class="margin1">닉네임 변경</h3>
                 <input class="margin1" type="text" name="changenick">
                 <button class="button" id="nickBtn">change</button>
@@ -111,22 +111,22 @@
   </body>
   <script>
     logout.onclick = async () => {
-      await axios.get("http://127.0.0.1:8080/logout", {
+      await axios.get("http://13.209.64.80/logout", {
         withCredentials: true,
       });
 
       document.cookie =
         "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-      window.location.href = "http://127.0.0.1:5500/frontend/index.html";
+      window.location.href = "/frontend/index.html";
     };
 
     async function getAPI() {
       try {
-        const { data } = await axios.get("http://127.0.0.1:8080/writer", {
+        const { data } = await axios.get("http://13.209.64.80/writer", {
           withCredentials: true,
         });
         console.log(data.user_img);
-        img1.src = `http://127.0.0.1:8080${data.user_img}`;
+        img1.src = `http://13.209.64.80${data.user_img}`;
         nickname1.innerHTML = data.nickname;
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
@@ -147,7 +147,7 @@
       form.append("upload", file.files[0]);
       console.log(file.files[0]);
       axios
-        .post("http://127.0.0.1:8080/writer", form, {
+        .post("http://13.209.64.80/writer", form, {
           withCredentials: true,
           "Content-Type": "multipart/form-data",
         })
@@ -202,7 +202,7 @@
     async function acceptAPI() {
       try {
         const { data } = await axios.get(
-          "http://127.0.0.1:8080/writer/result",
+          "http://13.209.64.80/writer/result",
           {
             withCredentials: true,
           }
@@ -223,7 +223,7 @@
     acceptAPI()
     async function rejectAPI(){
         try {
-            const {data}= await axios.get('http://127.0.0.1:8080/writer/result2',{
+            const {data}= await axios.get('http://13.209.64.80/writer/result2',{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {
@@ -262,7 +262,7 @@
 
     async function waitingAPI(){
         try {
-            const {data}= await axios.get('http://127.0.0.1:8080/writer/result3',{
+            const {data}= await axios.get('http://13.209.64.80/writer/result3',{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {

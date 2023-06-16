@@ -12,7 +12,7 @@
     <div class="main-box">
         <div class="title">
             
-        <a href="http://127.0.0.1:5500/frontend/index.html"><img src="../../backend/img/White_logo_-_no_background.png" class="title-img" alt=""></a>
+        <a href="/frontend/index.html"><img src="../../backend/img/White_logo_-_no_background.png" class="title-img" alt=""></a>
             
 
         </div>
@@ -61,7 +61,7 @@
     chat_agree.style.color ="rgb(158, 158, 158)";
     reject_reason.style.visibility = "hidden";
 
-    const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+    const data =await axios.get("http://13.209.64.80/nonagreeuser",{
 
         withCredentials:true,
     })
@@ -115,7 +115,7 @@
                 console.log("클릭됨")
                 console.log(index)
 
-                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+                const data =await axios.get("http://13.209.64.80/nonagreeuser",{
                 withCredentials:true,
                 })
 
@@ -130,7 +130,7 @@
                         e.grade = e.grade + 1;
                         // console.log(e.grade);
                         console.log(e.user_id);
-                        axios.post("http://127.0.0.1:8080/nonagreeuser",{
+                        axios.post("http://13.209.64.80/nonagreeuser",{
 
                             withCredentials : true,
 
@@ -149,7 +149,7 @@
             e.onclick = async () =>{
                 console.log("클릭");
 
-                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+                const data =await axios.get("http://13.209.64.80/nonagreeuser",{
                 withCredentials:true,
                 })
 
@@ -162,7 +162,7 @@
                         e.grade = e.grade - 1;
                         // console.log(e.grade);
                         console.log(e.user_id);
-                        axios.post("http://127.0.0.1:8080/nonagreeuser",{
+                        axios.post("http://13.209.64.80/nonagreeuser",{
 
                             withCredentials : true,
 
@@ -191,7 +191,7 @@
     reject_reason.style.visibility = "hidden";
 
 
-    const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+    const data =await axios.get("http://13.209.64.80/nonagreeuser",{
 
         withCredentials:true,
     })
@@ -245,7 +245,7 @@
                 console.log("클릭됨")
                 console.log(index)
 
-                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser",{
+                const data =await axios.get("http://13.209.64.80/nonagreeuser",{
                 withCredentials:true,
                 })
 
@@ -260,7 +260,7 @@
                         e.grade = e.grade + 1;
                         // console.log(e.grade);
                         console.log(e.user_id);
-                        axios.post("http://127.0.0.1:8080/nonagreeuser",{
+                        axios.post("http://13.209.64.80/nonagreeuser",{
 
                             withCredentials : true,
 
@@ -291,7 +291,7 @@
     chat_agree.style.color ="rgb(158, 158, 158)";
     main_content.style.display="none";
     console.log("클릭 되냐>?");
-        const data = await axios.get("http://127.0.0.1:8080/nonagreeuser/posts",{
+        const data = await axios.get("http://13.209.64.80/nonagreeuser/posts",{
         withCredentials : true,
     })
 
@@ -303,7 +303,7 @@
 
             main_content2.innerHTML += `
                 <div class="book_img">
-                <img src="http://127.0.0.1:8080/${el.img}" alt="">
+                <img src="http://13.209.64.80/${el.img}" alt="">
                 <div class="book_title">${el.title}</div>
                         <button class="accept2">  </button>
                         <button class="reject2">  </button>
@@ -318,7 +318,7 @@
                 console.log("클릭됨")
                 console.log(index)
 
-                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser/posts",{
+                const data =await axios.get("http://13.209.64.80/nonagreeuser/posts",{
                 withCredentials:true,
                 })
 
@@ -331,7 +331,7 @@
                         e.accept = parseInt(e.accept) + 1;
                         console.log(e.accept);
                         console.log(e.id);
-                        axios.get("http://127.0.0.1:8080/nonagreeuser/acceptUpdate",{
+                        axios.get("http://13.209.64.80/nonagreeuser/acceptUpdate",{
 
                             withCredentials : true,
 
@@ -359,7 +359,7 @@
                 const reasonvalue = reason.options[reason.selectedIndex].value;
                 console.log("클릭");
 
-                const data =await axios.get("http://127.0.0.1:8080/nonagreeuser/posts",{
+                const data =await axios.get("http://13.209.64.80/nonagreeuser/posts",{
                 withCredentials:true,
                 })
 
@@ -372,7 +372,7 @@
                         e.accept = parseInt(e.accept) - 1;
                         console.log(e.grade);
                         console.log(e.id);
-                        axios.get("http://127.0.0.1:8080/nonagreeuser/acceptUpdate",{
+                        axios.get("http://13.209.64.80/nonagreeuser/acceptUpdate",{
 
                             withCredentials : true,
 
@@ -397,7 +397,7 @@
 //         console.log(reason.options[reason.selectedIndex].value);
 //         const reasonvalue = reason.options[reason.selectedIndex].value;
         
-//         axios.get("http://127.0.0.1:8080/nonagreeuser/rejectUpdate",{
+//         axios.get("http://13.209.64.80/nonagreeuser/rejectUpdate",{
 
 //             withCredentials: true,
 
@@ -416,6 +416,6 @@
    
    
     
-
+   
 </script>
 </html>
