@@ -263,6 +263,7 @@ async function getView() {
     // 댓글을 쓰고 난 후 댓글창 초기화
     writeReviewContainerInput.value = "";
     getView();
+
   };
 
   getStarAvg();
@@ -529,10 +530,10 @@ async function getComments() {
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
           x.onclick = (e) => {
-            if (!userInfo) {
-              alert("로그인 후 이용해주세요.");
-              return;
-            }
+            // if (!userInfo) {
+            //   alert("로그인 후 이용해주세요.");
+            //   return;
+            // }
             if (!reCommentInput[y].value) {
               alert("댓글을 입력해주세요.");
               return;
@@ -544,9 +545,9 @@ async function getComments() {
               "http://127.0.0.1:8080/view/r_reviewInsert",
 
               {
-                nickname: userInfo.nickname,
+                
                 review: reCommentInput[y].value,
-                user_id: userInfo.id,
+               
                 review_id: thisReview[index].id,
               },
               { withCredentials: true }

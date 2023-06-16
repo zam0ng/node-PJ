@@ -6,19 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/chat.css" />
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
   </head>
   <body>
     <!-- chat  -->
     <!-- <div class="chatWrap">
       <img src="../backend/img/happy_yellow.png" />
     </div> -->
-    <div class="chatContainer">
-      <div class="chatMain">
+    <div id="chatContainer">
+      <div id="chatMain">
         <div class="chatHeader">
           <span>나작작 고객센터</span>
+          <span class="close-btn">
+          </div>
+          <div class="text-box">
+          <ul id="textlist">
+          </ul>
         </div>
-      </div>
+          <div id="send">
+          <input type="text" name="" id="msg">
+          <button id="sendBtn">보내기</button>
+        </div>
+        </div>
+        </div>
+        
     </div>
   </body>
-  <script src="./js/chat.js"></script>
+ 
+  <script>
+    sendBtn.onclick = () => {
+    console.log(msg.value)
+    };
+  </script>
+   <script src="./js/chat.js"></script>
 </html>

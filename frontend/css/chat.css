@@ -7,7 +7,7 @@
 
 #chatWrap img {
   width: 50px;
-  height: 50px;
+  height: 50px;       
   filter: drop-shadow(5px 5px 5px #000);
   transition: 1s;
 }
@@ -22,15 +22,73 @@
 .chatContainer {
 }
 
-.chatMain {
+#chatMain {
+  position: relative;
   width: 300px;
   height: 500px;
   border: 1px solid;
   border-radius: 20px;
+  display: none;
 }
 
 .chatHeader {
   margin: 10px 0;
   height: 30px;
   border: 1px solid;
+  display: flex;
+  justify-content: space-between;
+}
+.close-btn{
+  width: 5px;
+  height: 5px;
+  padding: 10px;
+  display: block;
+  float: right;
+  position: relative;
+  right: 15px;
+  cursor: pointer;
+}
+.close-btn::after,
+.close-btn::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    height: 2px;
+    width: 100%;
+    background-color: rgb(108, 108, 108);
+}
+.close-btn::before{
+    transform: translate(-50%,-50%) rotate(-45deg);
+}
+#send{
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+#textlist{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.text-box{
+  overflow:auto;
+  height: 400px;
+  display: flex;
+  flex-direction: column-reverse;
+  
+}
+.text-box::-webkit-scrollbar{
+  width: 10px;
+  background-color: black;
+}
+.text-box::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+}
+.text-box::-webkit-scrollbar-track {
+  background-color: white
 }

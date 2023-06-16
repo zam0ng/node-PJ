@@ -10,22 +10,17 @@
   </head>
   <body onkeydown="javascript:onEnterLogin(event);">
     <div class="main-box">
-      <div class="title">
-        <img
-          src="../backend/img/Color_logo_-_no_background.png"
-          class="title-img"
-          alt=""
-        />
-      </div>
-      <div class="title2">Sign in</div>
-
-      <div class="user-info">
-        <label for="" class="user-label">ID</label><span id="undefinedID"></span
-        ><br />
-        <input type="text" id="user_id_input" /><br />
-        <label for="" class="user-label">PASSWORD</label
-        ><span id="pwderr"></span>
-        <input type="password" id="user_pw_input" name="user_pw" /><br />
+        <div class="title">
+        
+            <img src="../backend/img/Color_logo_-_no_background.png" class="title-img" alt="">
+        </div>
+        <div class="title2">Sign in</div>
+        
+        <div class="user-info">
+        <label for="" class="user-label">ID</label><span id="undefinedID"></span><BR>
+        <input type="text" id="user_id_input" ><br>
+        <label for="" class="user-label">PASSWORD</label><span id="pwderr"></span>
+        <input type="password" id="user_pw_input" name="user_pw"><br>
         <button id="btn">Sign in</button>
       </div>
 
@@ -38,33 +33,23 @@
 
       <div id="copy">© 2023 najakjak.Inc.</div>
     </div>
-  </body>
-  <script>
-    btn.onclick = async () => {
-      if (!user_id_input.value) {
-        pwderr.innerHTML = "";
-        undefinedID.innerText = "Please enter your ID";
-        undefinedID.style.color = "red";
-        return;
-      }
-      if (!user_pw_input.value) {
-        undefinedID.innerHTML = "";
-        pwderr.innerText = "Please enter your password";
-        pwderr.style.color = "red";
-        return;
-      }
-      axios
-        .post("http://127.0.0.1:8080/login", {
-          withCredentials: true,
 
-          data: {
-            user_id: user_id_input.value,
-            user_pw: user_pw_input.value,
-          },
+
+</body>
+<script>
+    btn.onclick = async ()=>{
+        axios.post("http://127.0.0.1:8080/login",{
+
+            withCredentials:true,
+
+            data :{
+                user_id : user_id_input.value,
+                user_pw : user_pw_input.value,
+            }
         })
         // console.log(data);
         // if(data =="1"){
-        //     window.location.href="http://127.0.0.1:5500/frontend/index.html";
+        //     window.location.href="http://127.0.0.1:5501/frontend/index.html";
         // }
         .then((e) => {
           console.log(e);

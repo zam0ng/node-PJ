@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 exports.islogin = async (req, res, next) => {
   try {
+    console.log(req);
     const th = req.rawHeaders[29].slice(8);
     // console.log(req.rawHeaders);
     // console.log("--------th---------", th);

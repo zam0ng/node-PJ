@@ -67,7 +67,7 @@ exports.NickChange = async (req,res)=>{
       console.log("nicknamechange contoller 빠짐");
       res.redirect('http://127.0.0.1:5500/frontend/mypage.html');
   } catch (error) {
-      
+      console.log(error)
   }
 }
 // 작성한 댓글 업로드
