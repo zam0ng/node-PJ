@@ -1,6 +1,6 @@
 // // all.onclick = async () => {
 
-// //     // window.location.href="/frontend/genre/all.html"
+// //     // window.location.href="/genre/all.html"
 
 // //     viewList.innerHTML = "";
 // //     const { data } = await axios.get("http://13.209.64.80/allview/all");
@@ -264,10 +264,10 @@ nick.onclick = async () => {
 
   console.log(role);
   if (role == "writer") {
-    window.location.href = "/frontend/writerpage.html";
+    window.location.href = "/writerpage.html";
   }
 
   if (role == "reader") {
-    window.location.href = "/frontend/mypage.html";
+    window.location.href = "/mypage.html";
   }
 };
