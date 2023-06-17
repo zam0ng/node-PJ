@@ -19,11 +19,11 @@ window.onload = () => {
   // 버튼을 누르면 소켓에 연결되면서 로그인한 유저정보를 가져옴
   chatWrap.onclick = (e) => {
     try {
-      let chat_id = "2";
-      let user_name = "test1";
+      let userId = "1";
+      let userName = "admin";
       // 소켓 관련 작업 내용 정리 공간  ==========================
       const socket = io.connect("http://localhost:8080");
-      socket.emit("joinRoom", chat_id);
+      socket.emit("joinRoom", userName);
       // 소켓 관련 작업 내용 정리 공간 끝 =========================
 
       // console.log("이거 chatbtn");
@@ -33,27 +33,26 @@ window.onload = () => {
 
       // 메세지 보내기===============================
 
-      function sendMsg(chat_id, user_name, msg) {
+      function sendMsg(userid, userName, msg) {
         // if (msg) {
         let listItem = document.createElement("li");
-        listItem.textContent = user_name + " : " + msg;
+        listItem.textContent = userName + " : " + msg;
         let textList = document.getElementById("textlist");
         textList.appendChild(listItem);
-        // console.log("sendMsg() done");
-        // console.log(listItem);
+        console.log("sendMsg() done");
         // }
       }
       console.log("메세지 보내기 버튼 눌림?");
       sendBtn.onclick = () => {
         // 입력한 메시지를 서버로 보냄
-        socket.emit("message", chat_id, user_name, msg.value);
-        msg.value = "";
+        socket.emit("message", userId, userName, msg.value);
+        // 보낸 메시지가 다시 돌아옴
+        socket.on("message", (userid, userName, msg) => {
+          console.log("socket.on 'message'");
+          sendMsg(userid, userName, msg);
+          msg.value = "";
+        });
       };
-      // 보낸 메시지가 다시 돌아옴
-      socket.on("message", (chat_id, user_name, msg) => {
-        // console.log("socket.on 'message'");
-        sendMsg(chat_id, user_name, msg);
-      });
     } catch (error) {
       console.error(error);
     }

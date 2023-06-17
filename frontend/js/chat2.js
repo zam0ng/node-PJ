@@ -19,11 +19,11 @@ window.onload = () => {
   // 버튼을 누르면 소켓에 연결되면서 로그인한 유저정보를 가져옴
   chatWrap.onclick = (e) => {
     try {
-      let chat_id = "2";
-      let user_name = "test1";
+      let chat_id = "3";
+      let user_name = "test2";
       // 소켓 관련 작업 내용 정리 공간  ==========================
       const socket = io.connect("http://localhost:8080");
-      socket.emit("joinRoom", chat_id);
+      socket.emit("joinRoom", user_name);
       // 소켓 관련 작업 내용 정리 공간 끝 =========================
 
       // console.log("이거 chatbtn");
@@ -39,8 +39,8 @@ window.onload = () => {
         listItem.textContent = user_name + " : " + msg;
         let textList = document.getElementById("textlist");
         textList.appendChild(listItem);
-        // console.log("sendMsg() done");
-        // console.log(listItem);
+        console.log("sendMsg() done");
+        console.log(listItem);
         // }
       }
       console.log("메세지 보내기 버튼 눌림?");
@@ -51,7 +51,7 @@ window.onload = () => {
       };
       // 보낸 메시지가 다시 돌아옴
       socket.on("message", (chat_id, user_name, msg) => {
-        // console.log("socket.on 'message'");
+        console.log("socket.on 'message'");
         sendMsg(chat_id, user_name, msg);
       });
     } catch (error) {
