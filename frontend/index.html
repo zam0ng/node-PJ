@@ -144,10 +144,10 @@
     getViewList();
 
     async function logincheck() {
-      const at = document.cookie.slice(8);
-      console.log(at);
+      // const at = document.cookie.slice(8);
+      // console.log(at);
 
-      const { data } = await axios.get(
+      const data  = await axios.get(
         "http://13.209.64.80/main/logincheck",
         {
           // 이게 rawheader에 쿠키를 저장하는 역할
