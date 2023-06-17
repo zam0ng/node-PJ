@@ -149,6 +149,9 @@ exports.logout2 = async (req, res) => {
  
   try {
     console.log(req.session);
+    req.session ="";
+    console.log("-------------------req.session")
+    console.log(req.session)
   } catch (error) {
     console.log("로그아웃 컨트롤러에서 오류" + error);
   }
