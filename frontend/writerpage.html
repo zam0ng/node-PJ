@@ -128,10 +128,11 @@
         console.log(data.user_img);
         img1.src = `http://13.209.64.80${data.user_img}`;
 
+        let tc;
         let tb = data.checks;
         if(tb!=null){
 
-        let tc = tb.split(",");
+        tc = tb.split(",");
       }
         nickname1.innerHTML = data.nickname;
         gender1.innerHTML = data.gender;
