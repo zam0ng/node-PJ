@@ -148,11 +148,20 @@ exports.logout = async (req, res) => {
 exports.logout2 = async (req, res) => {
  
   try {
-    let {access_token} = req.session;
-    console.log(access_token);
-    access_token = null;
+    
+    // let {access_token} = req.session;
+    // console.log(access_token);
+    // access_token = null;
+    // console.log("-------------------access_token")
+    // console.log(access_token)
+
+
+    console.log(req.session);
+    req.session = null;
+    
     console.log("-------------------access_token")
-    console.log(access_token)
+    console.log(req.session)
+
     res.sendStatus(200);
   } catch (error) {
     console.log("로그아웃 컨트롤러에서 오류" + error);
