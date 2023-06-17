@@ -7,7 +7,8 @@ exports.islogin = async (req, res, next) => {
     jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
       if (err) {
         console.log("다시 로그인");
-        window.location.href = "/index.html";
+        // window.location.href = "/index.html";
+        res.redirect("/index.html");
       } else {
         console.log("islogin");
         console.log(decoded);
