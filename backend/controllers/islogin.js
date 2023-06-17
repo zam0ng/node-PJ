@@ -8,7 +8,7 @@ exports.islogin = async (req, res, next) => {
       if (err) {
         console.log("다시 로그인");
         // window.location.href = "/index.html";
-        res.redirect("/index.html");
+        res.redirect("//index.html");
       } else {
         console.log("islogin");
         console.log(decoded);
