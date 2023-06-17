@@ -59,9 +59,6 @@ exports.NickChange = async (req,res)=>{
 exports.bookResult = async(req,res)=>{
 
     const {id} = req.decoded;
-    console.log("-------------nickname----------");
-    console.log(nickname);
-    console.log("-------------nickname----------");
     try {
       const data = await Books.findAll({
         where :{
