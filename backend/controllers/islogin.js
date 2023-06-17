@@ -8,7 +8,8 @@ exports.islogin = async (req, res, next) => {
       if (err) {
         console.log("다시 로그인");
         // window.location.href = "http://13.209.64.80/";
-        res.redirect("http://13.209.64.80/");
+        // res.redirect("http://13.209.64.80/");
+        res.send("relogin");
         // next();
       } else {
         console.log("islogin");
