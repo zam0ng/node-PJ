@@ -152,6 +152,7 @@ exports.logout2 = async (req, res) => {
     req.session ="";
     console.log("-------------------req.session")
     console.log(req.session)
+    res.sendStatus(200);
   } catch (error) {
     console.log("로그아웃 컨트롤러에서 오류" + error);
   }
