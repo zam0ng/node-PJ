@@ -10,8 +10,8 @@ router.post("/",Mypage.single("upload"),MypageUpload);
 //     res.send("ddddd")
 // });
 router.get('/',islogin,UserImg)
-router.get('/reviews',islogin2,reviewUpload)
-router.post("/nick",islogin2,NickChange)
+router.get('/reviews',islogin,reviewUpload)
+router.post("/nick",islogin,NickChange)
 module.exports = router;
 
 

@@ -10,12 +10,12 @@ const {
 const { islogin, islogin2 } = require("../controllers/islogin");
 
 router.get("/:id", viewInfo);
-router.get("/checks/delete/:id",islogin2,checksdel);
-router.get("/checks/add/:id",islogin2,checksadd);
+router.get("/checks/delete/:id",islogin,checksdel);
+router.get("/checks/add/:id",islogin,checksadd);
 
-router.get("/user/checks",islogin2, userchecks);
+router.get("/user/checks",islogin, userchecks);
 
-router.post("/reviewInsert", islogin2, insertReview);
-router.post("/r_reviewInsert", islogin2, insertReReview);
+router.post("/reviewInsert", islogin, insertReview);
+router.post("/r_reviewInsert", islogin, insertReReview);
 
 module.exports = router;
