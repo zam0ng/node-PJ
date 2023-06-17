@@ -23,9 +23,7 @@ const allview = require("./routers/allview");
 const mainRouter = require("./routers/mainRouter");
 const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
-const checkRouter = require("./routers/checklist")
-
-
+const checkRouter = require("./routers/checklist");
 
 app.use(bodyParser.json());
 
@@ -86,26 +84,24 @@ app.use("/view", viewRouter);
 const server = app.listen(8080, () => {
   console.log("Server On!");
 });
-const io = socketio(server,{
-  cors:{
-    origin:"*",
-    credentials:true
-  }
+const io = socketio(server, {
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
 });
 
-io.on("connect",(socket)=>{
-  console.log("socket 시작함")
+io.on("connect", (socket) => {
+  console.log("socket 시작함");
 
-  socket.on("joinRoom",(userid)=>{
-
+  socket.on("joinRoom", (userid) => {
     socket.join(userid);
     // io.to(room).emit("joinRoom",room,name)
-
-})
-  socket.on("message",(userid,msg)=>{
-    console.log("message")
-    console.log(userid)
-    console.log()
+  });
+  socket.on("message", (userid, msg) => {
+    console.log("message");
+    console.log(userid);
+    console.log();
     // io.to(userid).emit("message", userid,msg);
   });
 });
