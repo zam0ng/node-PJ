@@ -299,6 +299,11 @@
 
         console.log(data);
 
+        if(data.data.length==0){
+        main_content2.style.visibility="hidden";
+        return main_content.innerHTML =`승인 대기중인 게시글이 없습니다.`
+    }
+
         data.data.forEach((el) => {
             console.log(el.img);
             

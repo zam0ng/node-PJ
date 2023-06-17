@@ -72,7 +72,7 @@ async function getView() {
 
   // 사이드바 책 표지 출력
   const sideWrapImg = document.querySelector(".sideWrapImg");
-  sideWrapImg.setAttribute("src", `http://13.209.64.80${bookInfo.img}`);
+  sideWrapImg.setAttribute("src", `http://13.209.64.80/${bookInfo.img}`);
 
   // 책 타이틀, 지은이 출력
   const viewMainWrap = document.querySelector(".viewMainWrap");
