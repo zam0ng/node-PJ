@@ -156,12 +156,21 @@ exports.logout2 = async (req, res) => {
     // console.log(access_token)
 
 
-    console.log(req.session);
-    req.session = null;
+    // console.log(req.session);
+    // req.session = null;
     
-    console.log("-------------------access_token")
-    console.log(req.session)
+    // console.log("-------------------access_token")
+    // console.log(req.session)
 
+    req.session.destroy(function(err) {
+      if (err) {
+        console.log("Error destroying session:", err);
+      } else {
+        // Session destroyed successfully
+        // Any associated session data is cleared
+      }
+    });
+    
     res.sendStatus(200);
   } catch (error) {
     console.log("로그아웃 컨트롤러에서 오류" + error);
