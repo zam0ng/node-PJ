@@ -72,7 +72,7 @@ async function getView() {
 
   // 사이드바 책 표지 출력
   const sideWrapImg = document.querySelector(".sideWrapImg");
-  sideWrapImg.setAttribute("src", `../../backend/${bookInfo.img}`);
+  sideWrapImg.setAttribute("src", `http://13.209.64.80${bookInfo.img}`);
 
   // 책 타이틀, 지은이 출력
   const viewMainWrap = document.querySelector(".viewMainWrap");
@@ -574,28 +574,39 @@ async function booksAllData() {
 }
 
 async function logincheck() {
-  const at = document.cookie.slice(8);
+  // const at = document.cookie.slice(8);
+  // console.log(at);
 
-  const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
-    // 이게 rawheader에 쿠키를 저장하는 역할
-    withCredentials: true,
+  const data  = await axios.get(
+    "http://13.209.64.80/main/logincheck",
+    {
+      // 이게 rawheader에 쿠키를 저장하는 역할
+      withCredentials: true,
 
-    //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
-  });
+      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+    }
+  );
 
-  const { nickname, role } = data;
+  console.log(data);
+
+  const { nickname, role } = data.data;
+  console.log(nickname);
   let who;
+  console.log(role);
 
   if (role == "writer") {
     who = "작가";
-  } else {
+  } else{
     who = "독자";
   }
 
-  if (data == "다시 로그인") {
+  console.log(who);
+
+  if (data.data == "relogin") {
     login.style.display = "block";
     signUp.style.display = "block";
     nick.style.display = "none";
+    logout.style.visibility = "hidden";
   } else {
     login.style.display = "none";
     signUp.style.display = "none";

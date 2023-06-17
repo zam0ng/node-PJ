@@ -115,7 +115,7 @@
       console.log(data);
       data.forEach((el, index) => {
         viewList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
-            <img src="../backend/${el.img}" alt="" />
+            <img src="http://13.209.64.80${el.img}" alt="" />
             <div class="cardText">
               <span>☻</span>
               <span>${el.viewcnt}</span>
@@ -131,7 +131,7 @@
       console.log(data);
       data.forEach((el, index) => {
         starList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
-            <img src="../backend/${el.img}" alt="" />
+            <img src="http://13.209.64.80${el.img}" alt="" />
             <div class="cardText">
               <span>☻</span>
               <span>${el.orderstar}</span>

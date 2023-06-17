@@ -22,7 +22,7 @@
           <li class="category">
             <a href="/index.html">Home</a>
           </li>
-          <li class="category"><a href="">My Books</a></li>
+          <li class="category"><a href="/checklist.html">My Books</a></li>
         </ul>
         <ul style="display: flex; align-items: center">
           <button id="logout">Log-Out</button>
@@ -127,11 +127,17 @@
         });
         console.log(data.user_img);
         img1.src = `http://13.209.64.80${data.user_img}`;
+
+        let tb = data.checks;
+        if(tb!=null){
+
+        let tc = tb.split(",");
+      }
         nickname1.innerHTML = data.nickname;
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
         grade1.innerHTML = data.grade;
-        checks.innerHTML = data.checks;
+        checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
         console.log(error);
@@ -159,6 +165,7 @@
           console.log("=================================================");
           console.log(err);
         });
+        window.location.reload();
     };
     nickBtn.onclick = () => {
       try {

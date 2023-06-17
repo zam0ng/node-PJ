@@ -157,7 +157,7 @@ exports.logout2 = async (req, res) => {
 
 
     // console.log(req.session);
-    // req.session = null;
+    // req.session = nul;l"""
     
     // console.log("-------------------access_token")
     // console.log(req.session)
@@ -170,7 +170,7 @@ exports.logout2 = async (req, res) => {
         // Any associated session data is cleared
       }
     });
-    
+
     res.sendStatus(200);
   } catch (error) {
     console.log("로그아웃 컨트롤러에서 오류" + error);

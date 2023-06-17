@@ -115,7 +115,7 @@ body {
     margin-top: 11px;
     width: 75px;
     height: 25px;
-    background-image: url("../../backend/img/accept.jpg");
+    background-image: url("http://13.209.64.80/backend/img/accept.jpg");
     background-size:  contain;
     border: 0;
     background-repeat: no-repeat;
@@ -125,16 +125,16 @@ body {
     margin-top: 11px;
     width: 75px;
     height: 25px;
-    background-image: url("../../backend/img/accept.jpg");
+    background-image: url("http://13.209.64.80/backend/img/accept.jpg");
     background-size:  contain;
     border: 0;
     background-repeat: no-repeat;
 }
 .reject{
-    background-image: url("../../backend/img/reject.jpg");
+    background-image: url("http://13.209.64.80/backend/img/reject.jpg");
 }
 .reject2{
-    background-image: url("../../backend/img/reject.jpg");
+    background-image: url("http://13.209.64.80/backend/img/reject.jpg");
 }
 
 

@@ -131,7 +131,10 @@
 
       // img1.src = data.user_img;
       let tb = data.checks;
-      let tc = tb.split(",");
+      if(tb!=null){
+
+        let tc = tb.split(",");
+      }
 
       nickname1.innerHTML = data.nickname;
       nickname2.innerHTML = data.nickname;
