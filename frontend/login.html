@@ -12,7 +12,7 @@
     <div class="main-box">
       <div class="title">
         <img
-          src="../backend/img/Color_logo_-_no_background.png"
+          src="http://13.209.64.80/img/Color_logo_-_no_background.png"
           class="title-img"
           alt=""
         />
@@ -31,7 +31,7 @@
 
       <div id="newto">New to Goodreads?</div>
       <div id="signupdiv">
-        <a href="http://127.0.0.1:5500/frontend/signup.html" id="signup"
+        <a href="/signup.html" id="signup"
           >Create Account</a
         >
       </div>
@@ -53,20 +53,19 @@
         pwderr.style.color = "red";
         return;
       }
-      axios
-        .post("http://127.0.0.1:8080/login", {
+      const e = await axios.get("http://13.209.64.80/login", {
           withCredentials: true,
 
-          data: {
+          params: {
             user_id: user_id_input.value,
             user_pw: user_pw_input.value,
           },
         })
         // console.log(data);
         // if(data =="1"){
-        //     window.location.href="http://127.0.0.1:5500/frontend/index.html";
+        //     window.location.href="/index.html";
         // }
-        .then((e) => {
+        
           console.log(e);
           if (e.data.msg == "로그인 성공") {
             console.log(e.data.token);
@@ -74,11 +73,11 @@
             // document.cookie="";
             // console.log(document);
             // console.log("werwer");
-            document.cookie = `mytoken=${e.data.token}; path=/`;
+            // document.cookie = `mytoken=${e.data.token}; path=/`;
             // console.log(document.cookie);
-            window.location.href = "http://127.0.0.1:5500/frontend/index.html";
+            window.location.href = "/index.html";
           } else if (e.data == "어드민") {
-            window.location.href = "http://127.0.0.1:5500/frontend/admin.html";
+            window.location.href = "/admin.html";
           } else if (e.data == "비밀번호 틀림") {
             undefinedID.innerText = "";
             pwderr.innerHTML = "wrong password";
@@ -96,7 +95,7 @@
             undefinedID.innerText = "";
             alert("승인이 거절된 아이디입니다.");
           }
-        });
+        
     };
 
     function onEnterLogin(event) {
@@ -104,7 +103,7 @@
       console.log(keycode);
       if (keycode == "Enter") {
         axios
-          .post("http://127.0.0.1:8080/login", {
+          .post("http://13.209.64.80/login", {
             withCredentials: true,
 
             data: {
@@ -116,10 +115,10 @@
             console.log(e);
             if (e.data == "로그인 성공") {
               window.location.href =
-                "http://127.0.0.1:5500/frontend/index.html";
+                "/index.html";
             } else if (e.data == "어드민") {
               window.location.href =
-                "http://127.0.0.1:5500/frontend/admin.html";
+                "/admin.html";
             } else if (e.data == "비밀번호 틀림") {
               undefinedID.innerText = "";
               pwderr.innerHTML = "wrong password";

@@ -174,7 +174,7 @@ async function getView() {
   const authorImg = document.querySelector(".authorImg");
   const authorImgImg = authorImg.querySelector("img");
 
-  authorImgImg.setAttribute("src", `http://127.0.0.1:8080${author.user_img}`);
+  authorImgImg.setAttribute("src", `http://13.209.64.80${author.user_img}`);
 
   // 작가 이름
   const authorName = document.querySelector(".authorName");
@@ -194,7 +194,7 @@ async function getView() {
   const myImgImg = myImg.querySelector("img");
 
   if (userInfo) {
-    myImgImg.setAttribute("src", `http://127.0.0.1:8080${userInfo.user_img}`);
+    myImgImg.setAttribute("src", `http://13.209.64.80${userInfo.user_img}`);
   }
 
   // Ratings & Reviews 별 누르면 별 채워지는 기능
@@ -240,7 +240,7 @@ async function getView() {
     // console.log(reviewsScore);
     // console.log(reviewInput);
     axios.post(
-      "http://127.0.0.1:8080/view/reviewInsert",
+      "http://13.209.64.80/view/reviewInsert",
 
       {
         book_id: bookInfo.id,
@@ -431,7 +431,7 @@ async function getComments() {
         <div class="commentWrap">
         <div class="commentProfile">
           <div class="commentProfileImg">
-            <img src="http://127.0.0.1:8080${el.User.user_img}" alt="" />
+            <img src="http://13.209.64.80${el.User.user_img}" alt="" />
           </div>
           <div class="commentProfileInfo">
           <span>${el.User.nickname}</span>
@@ -491,7 +491,7 @@ async function getComments() {
                 <div class="reCommentsWrap">
                     <div class="reCommentsInner">
                       <div class="reCommentsProfileImgs">
-                        <img src="http://127.0.0.1:8080${x.User.user_img}" alt="" />
+                        <img src="http://13.209.64.80${x.User.user_img}" alt="" />
                       </div>
                       <div class="reComments">
                         <span>${x.nickname}</span>
@@ -504,7 +504,7 @@ async function getComments() {
           reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
-                        <img src="http://127.0.0.1:8080${userInfo.user_img}" alt="" />
+                        <img src="http://13.209.64.80${userInfo.user_img}" alt="" />
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
@@ -515,7 +515,7 @@ async function getComments() {
           reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
-                        <img src="http://127.0.0.1:8080/img/basic.png" alt="" />
+                        <img src="http://13.209.64.80/img/basic.png" alt="" />
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
@@ -541,7 +541,7 @@ async function getComments() {
             // 대댓글 등록
 
             axios.post(
-              "http://127.0.0.1:8080/view/r_reviewInsert",
+              "http://13.209.64.80/view/r_reviewInsert",
 
               {
                 nickname: userInfo.nickname,
@@ -579,7 +579,7 @@ async function booksAllData() {
 async function logincheck() {
   const at = document.cookie.slice(8);
 
-  const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
+  const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
 

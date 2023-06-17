@@ -2,14 +2,12 @@ const jwt = require("jsonwebtoken");
 
 exports.islogin = async (req, res, next) => {
   try {
-    const th = req.rawHeaders[29].slice(8);
-    // console.log(req.rawHeaders);
-    // console.log("--------th---------", th);
-    // console.log(th);
-    jwt.verify(th, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
+    const {access_token} = req.session;
+
+    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
       if (err) {
         console.log("다시 로그인");
-        res.send("다시 로그인");
+        window.location.href = "/index.html";
       } else {
         console.log("islogin");
         console.log(decoded);

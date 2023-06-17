@@ -12,13 +12,13 @@
     <!-- 로고 부분 -->
     <div class="nav">
       <div class="logoBox">
-        <a href="http://127.0.0.1:5500/frontend/index.html"
-          ><img src="../../backend/img/Black logo - no background.png" alt=""
+        <a href="/index.html"
+          ><img src="http://13.209.64.80/img/Black logo - no background.png" alt=""
         /></a>
 
         <div class="functionBox">
           <span id="insert"
-            ><a href="http://127.0.0.1:5500/frontend/books.html"
+            ><a href="/books.html"
               >✏️ writing</a
             ></span
           >
@@ -26,12 +26,12 @@
           <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
           <a href=""><span id="nick"></span></a>
           <span id="login"
-            ><a href="http://127.0.0.1:5500/frontend/login.html">
+            ><a href="/login.html">
               login</a
             ></span
           >
           <span id="signUp"
-            ><a href="http://127.0.0.1:5500/frontend/signup.html">
+            ><a href="/signup.html">
               signUp</a
             ></span
           >
@@ -41,37 +41,37 @@
       <div class="toggle">
         <div class="genre">
           <span id="all"
-            ><a href="http://127.0.0.1:5500/frontend/genre/all.html"
+            ><a href="/genre/all.html"
               >전체</a
             ></span
           >
           <span id="conan"
-            ><a href="http://127.0.0.1:5500/frontend/genre/conan.html"
+            ><a href="/genre/conan.html"
               >추리</a
             ></span
           >
           <span id="horror"
-            ><a href="http://127.0.0.1:5500/frontend/genre/horror.html"
+            ><a href="/genre/horror.html"
               >공포•스릴러</a
             ></span
           >
           <span id="fantasy"
-            ><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html"
+            ><a href="/genre/fantasy.html"
               >판타지</a
             ></span
           >
           <span id="sorim"
-            ><a href="http://127.0.0.1:5500/frontend/genre/sorim.html"
+            ><a href="/genre/sorim.html"
               >무협</a
             ></span
           >
           <span id="game"
-            ><a href="http://127.0.0.1:5500/frontend/genre/game.html"
+            ><a href="/genre/game.html"
               >게임</a
             ></span
           >
           <span id="romance"
-            ><a href="http://127.0.0.1:5500/frontend/genre/romance.html"
+            ><a href="/genre/romance.html"
               >로맨스</a
             ></span
           >
@@ -110,7 +110,7 @@
   <script>
     window.onload = async () => {
       viewList.innerHTML = "";
-      const { data } = await axios.get("http://127.0.0.1:8080/allview/game");
+      const { data } = await axios.get("http://13.209.64.80/allview/game");
 
       console.log(data);
 
@@ -119,8 +119,8 @@
       data.forEach((el, index) => {
         console.log(el.img);
         console.log(el.id);
-        viewList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
-          <img src="../../backend/${el.img}" alt="" />
+        viewList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
+          <img src="http://13.209.64.80/${el.img}" alt="" />
           <div class="cardText">
             <span>☻</span>
             <span>${el.viewcnt}</span>

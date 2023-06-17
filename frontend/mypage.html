@@ -12,16 +12,16 @@
 
 <body>
   <div class="header">
-    <a href="http://127.0.0.1:5500/frontend/index.html">
+    <a href="/index.html">
       <img class="header-img"
         src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
         alt="" /></a>
     <div class="ulheader">
       <ul style="display: flex; align-items: center">
         <li class="category">
-          <a href="http://127.0.0.1:5500/frontend/index.html">Home</a>
+          <a href="/index.html">Home</a>
         </li>
-        <li class="category"><a href="http://127.0.0.1:5500/frontend/checklist.html">My Books</a></li>
+        <li class="category"><a href="/checklist.html">My Books</a></li>
       </ul>
       <ul style="display: flex; align-items: center">
         <button id="logout">Log-Out</button>
@@ -33,7 +33,7 @@
       <h3 class="margin1">프로필 변경</h3>
       <input class="margin1" type="file" id="file" onchange="loadImg(event)" style="width: 200px" />
       <button id="uploadBtn" class="button">change</button>
-      <form action="http://127.0.0.1:8080/mypages/nick" method="post">
+      <form action="http://13.209.64.80/mypages/nick" method="post">
         <h3 class="margin1">닉네임 변경</h3>
         <input class="margin1" type="text" name="changenick" />
         <button class="button" id="nickBtn">change</button>
@@ -112,22 +112,22 @@
 </body>
 <script>
   logout.onclick = async () => {
-    await axios.get("http://127.0.0.1:8080/logout", {
+    await axios.get("http://13.209.64.80/logout", {
       withCredentials: true,
     });
 
     document.cookie =
       "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-    window.location.href = "http://127.0.0.1:5500/frontend/index.html";
+    window.location.href = "/index.html";
   };
 
   async function getAPI() {
     try {
       const { data } = await axios.get(
-        "http://127.0.0.1:8080/mypages",
+        "http://13.209.64.80/mypages",
         { withCredentials: true }
       );
-      img1.src = `http://127.0.0.1:8080${data.user_img}`;
+      img1.src = `http://13.209.64.80${data.user_img}`;
 
       // img1.src = data.user_img;
       let tb = data.checks;
@@ -155,7 +155,7 @@
     form.append("upload", file.files[0]);
     console.log(file.files[0]);
     axios
-      .post("http://127.0.0.1:8080/mypages", form, {
+      .post("http://13.209.64.80/mypages", form, {
         //이것때문에 req 가 안읽힘
         withCredentials: true,
 
@@ -226,7 +226,7 @@
   async function commentAPI() {
     try {
       const { data } = await axios.get(
-        "http://127.0.0.1:8080/mypages/reviews",
+        "http://13.209.64.80/mypages/reviews",
         {
           withCredentials: true,
         }
@@ -260,7 +260,7 @@
             <li>${el.comment}<br>${revisedFormattedDate}
               
             <div id="contain">
-              <div id="immg"><img id="imgg" src="/backend/${el.Book.img}" alt=""></div>
+              <div id="immg"><img id="imgg" src="http://13.209.64.80/${el.Book.img}" alt=""></div>
               <div id="r_title">${el.Book.title}</div>
             </div>
               </li>
@@ -285,7 +285,7 @@
   async function replies(){
     try {
       const { data } = await axios.get(
-        "http://127.0.0.1:8080/mypages/reviews",
+        "http://13.209.64.80/mypages/reviews",
         {
           withCredentials: true,
         }
