@@ -148,9 +148,9 @@ exports.logout = async (req, res) => {
 exports.logout2 = async (req, res) => {
  
   try {
-    const {access_token} = req.session;
+    let {access_token} = req.session;
     console.log(access_token);
-    access_token = "";
+    access_token = null;
     console.log("-------------------access_token")
     console.log(access_token)
     res.sendStatus(200);
