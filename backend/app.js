@@ -4,6 +4,7 @@ const cors = require("cors");
 const dot = require("dotenv").config();
 const path = require("path");
 const socketio = require("socket.io");
+const axios = require("axios");
 
 const { sequelize, User } = require("./models");
 const { adminsignup } = require("./controllers/admin");
@@ -24,6 +25,7 @@ const mainRouter = require("./routers/mainRouter");
 const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
 const checkRouter = require("./routers/checklist");
+const chatRouter = require("./routers/chatRouter");
 
 app.use(bodyParser.json());
 
@@ -52,6 +54,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
+    // origin: "http://13.209.64.80",
     origin: "http://127.0.0.1:5500",
     credentials: true,
   })
@@ -80,6 +83,8 @@ app.use("/nonagreeuser", nonagreeuser);
 app.use("/logout", logoutrouter);
 app.use("/allview", allview);
 app.use("/view", viewRouter);
+app.use("/check", checkRouter);
+app.use("/chat", chatRouter);
 
 const server = app.listen(8080, () => {
   console.log("Server On!");
@@ -92,16 +97,32 @@ const io = socketio(server, {
 });
 
 io.on("connect", (socket) => {
-  console.log("socket 시작함");
+  // console.log("socket 시작함");
 
-  socket.on("joinRoom", (userid) => {
-    socket.join(userid);
+  socket.on("joinRoom", (chat_id) => {
+    // console.log(chat_id, " 입장");
+    socket.join(chat_id);
+    // console.log(user_name + "님과 채팅을 시작합니다.");
     // io.to(room).emit("joinRoom",room,name)
   });
-  socket.on("message", (userid, msg) => {
-    console.log("message");
-    console.log(userid);
-    console.log();
-    // io.to(userid).emit("message", userid,msg);
+
+  socket.on("leaveRoom", (chat_id) => {
+    socket.leave(chat_id);
+  });
+
+  socket.on("message", (chat_id, user_name, text) => {
+    axios.post(
+      "http://127.0.0.1:8080/chat",
+      {
+        chat_id,
+        user_name,
+        text,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+    io.to(chat_id).emit("message", chat_id, user_name, text);
   });
 });
