@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 exports.islogin = async (req, res, next) => {
   try {
-    const {access_token} = req.session;
+    const { access_token } = req.session;
 
     jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
       if (err) {

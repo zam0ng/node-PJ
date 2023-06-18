@@ -7,7 +7,7 @@
 
 #chatWrap img {
   width: 50px;
-  height: 50px;       
+  height: 50px;
   filter: drop-shadow(5px 5px 5px #000);
   transition: 1s;
 }
@@ -29,16 +29,25 @@
   border: 1px solid;
   border-radius: 20px;
   display: none;
+  background-color: rgba(160, 160, 160, 0.39);
 }
 
 .chatHeader {
-  margin: 10px 0;
-  height: 30px;
-  border: 1px solid;
+  height: 65px;
   display: flex;
   justify-content: space-between;
+  position: relative;
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
-.close-btn{
+.header-img {
+  width: 150px;
+  height: 70px;
+  position: absolute;
+  top: -10%;
+}
+.close-btn {
   width: 5px;
   height: 5px;
   padding: 10px;
@@ -47,42 +56,62 @@
   position: relative;
   right: 15px;
   cursor: pointer;
+  position: absolute;
+  top: 30%;
 }
 .close-btn::after,
-.close-btn::before{
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) rotate(45deg);
-    height: 2px;
-    width: 100%;
-    background-color: rgb(108, 108, 108);
+.close-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  height: 2px;
+  width: 100%;
+  background-color: rgb(108, 108, 108);
 }
-.close-btn::before{
-    transform: translate(-50%,-50%) rotate(-45deg);
+.close-btn::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
-#send{
+#send {
   position: absolute;
   bottom: 0%;
   width: 100%;
   box-sizing: border-box;
   display: flex;
+  align-items: center;
 }
-#textlist{
-  list-style: none;
+.text-box {
+  overflow: auto;
+  height: 380px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 0 20px;
+  padding: 10px;
 }
-.text-box{
-  overflow:auto;
-  height: 400px;
-  display: flex;
-  flex-direction: column-reverse;
-  
+
+.text-box .userSpan {
+  background-color: yellow;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  align-self: flex-end;
+  word-break: break-word;
 }
-.text-box::-webkit-scrollbar{
+
+.text-box .adminSpan {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  align-self: flex-start;
+  word-break: break-word;
+}
+
+.text-box::-webkit-scrollbar {
   width: 10px;
   background-color: black;
 }
@@ -90,5 +119,49 @@
   background-color: #2f3542;
 }
 .text-box::-webkit-scrollbar-track {
-  background-color: white
+  background-color: white;
+}
+input {
+  width: 230px;
+  height: 40px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+  margin: 7px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+  height: 30px;
+}
+.btn-style {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  margin-right: 10px;
+}
+.text-box {
+  overflow: auto;
+  height: 400px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.text-box::-webkit-scrollbar {
+  width: 10px;
+  background-color: black;
+}
+.text-box::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+}
+.text-box::-webkit-scrollbar-track {
+  background-color: white;
 }

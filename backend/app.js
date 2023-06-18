@@ -97,9 +97,10 @@ const io = socketio(server, {
 });
 
 io.on("connect", (socket) => {
-  console.log("socket 시작함");
+  // console.log("socket 시작함");
 
   socket.on("joinRoom", (chat_id) => {
+    // console.log(chat_id, " 입장");
     socket.join(chat_id);
     // console.log(user_name + "님과 채팅을 시작합니다.");
     // io.to(room).emit("joinRoom",room,name)

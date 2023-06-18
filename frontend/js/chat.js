@@ -17,10 +17,24 @@ window.onload = () => {
 
   // ==========================================================
   // 버튼을 누르면 소켓에 연결되면서 로그인한 유저정보를 가져옴
-  chatWrap.onclick = (e) => {
+  chatWrap.onclick = async (e) => {
     try {
-      let chat_id = "2";
+      let chat_id = 2;
       let user_name = "test1";
+
+      const chatdata = await axios.get(
+        "http://127.0.0.1:8080/chat/getChatData",
+        {
+          withCredentials: true,
+          params: {
+            id: chat_id,
+          },
+        }
+      );
+
+      chatdata.data.forEach((el, index) => {
+        sendMsg(el.chat_id, el.user_name, el.text);
+      });
       // 소켓 관련 작업 내용 정리 공간  ==========================
       const socket = io.connect("http://localhost:8080");
       socket.emit("joinRoom", chat_id);
@@ -34,14 +48,19 @@ window.onload = () => {
       // 메세지 보내기===============================
 
       function sendMsg(chat_id, user_name, msg) {
-        // if (msg) {
-        let listItem = document.createElement("li");
-        listItem.textContent = user_name + " : " + msg;
-        let textList = document.getElementById("textlist");
-        textList.appendChild(listItem);
-        // console.log("sendMsg() done");
-        // console.log(listItem);
-        // }
+        const textBox = document.querySelector(".text-box");
+        const textBoxSpan = document.createElement("span");
+        if (user_name == "admin") {
+          textBoxSpan.classList = "adminSpan";
+        } else {
+          textBoxSpan.classList = "userSpan";
+        }
+        textBoxSpan.textContent = user_name + " : " + msg;
+        textBox.appendChild(textBoxSpan);
+        // let listItem = document.createElement("li");
+        // listItem.textContent = user_name + " : " + msg;
+        // let textList = document.getElementById("textlist");
+        // textList.appendChild(listItem);
       }
       console.log("메세지 보내기 버튼 눌림?");
       sendBtn.onclick = () => {

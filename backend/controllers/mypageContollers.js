@@ -67,7 +67,7 @@ exports.NickChange = async (req,res)=>{
       console.log("nicknamechange contoller 빠짐");
       res.redirect('/mypage.html');
   } catch (error) {
-      
+      console.log(error)
   }
 }
 // 작성한 댓글 업로드

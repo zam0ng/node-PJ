@@ -21,3 +21,13 @@ exports.getUserInfo = async (req, res) => {
     console.error(error);
   }
 };
+
+exports.getChatData = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const data = await Chat.findAll({ where: { chat_id: id }, raw: true });
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+  }
+};

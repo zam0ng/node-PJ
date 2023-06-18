@@ -93,7 +93,7 @@ exports.viewInfo = async (req, res) => {
     });
 
     // 책에 대한 별점 개수, 총점
-    let stardata = await review.findAll({
+    const stardata = await review.findAll({
       attributes: [
         "star",
         [sequelize.fn("count", sequelize.col("star")), "starCnt"],
@@ -156,9 +156,10 @@ exports.insertReview = async (req, res) => {
 exports.insertReReview = async (req, res) => {
   // console.log("insertReReview");
   // console.log(req);
-  const { nickname, review, user_id, review_id } = req.body;
+  const { nickname,id} = req.decoded;
+  const { review,review_id } = req.body;
   try {
-    await r_review.create({ nickname, review, user_id, review_id });
+    await r_review.create({ nickname, review, user_id:id, review_id });
   } catch (error) {
     console.error(error);
   }
