@@ -3,6 +3,8 @@ const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const session = require("express-session");
+const nodemailer = require("nodemailer");
+const { raw } = require("express");
 
 exports.login = async (req, res) => {
   try {
