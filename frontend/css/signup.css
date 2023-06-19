@@ -35,6 +35,7 @@ body {
 #user_pw_input,
 #user_re_pw_input,
 #user_nick_input,
+#email_input,
 #btn{
     width: 230px;
     border-radius: 30px;

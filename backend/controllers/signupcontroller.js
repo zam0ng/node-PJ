@@ -10,7 +10,8 @@ exports.signup = async (req,res) =>{
         user_gender,
         user_role,
         user_age,
-        user_nick} =req.body.data;
+        user_nick,
+        email} =req.body.data;
         // console.log(user_id);
         // console.log(user_pw);
         // console.log( user_re_pw);
@@ -43,6 +44,8 @@ exports.signup = async (req,res) =>{
             grade : "0",
             nickname : user_nick,
             tk : "",
+            checks : "",
+            email : email,
         }).then((e)=>{
             return res.send("가입성공");
         })
