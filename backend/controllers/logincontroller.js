@@ -208,6 +208,8 @@ exports.mailauth= async(req,res)=>{
   },{where :{
     user_id:user_id,
   }})
+   res.send("일치!");
+
   console.log(process.env.gmailpass);
   const transport = nodemailer.createTransport({
     service: "Gmail",
