@@ -206,7 +206,7 @@ exports.mailauth= async(req,res)=>{
   },{where :{
     user_id:user_id,
   }})
-
+  console.log(process.env.gmailpass);
   const transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
