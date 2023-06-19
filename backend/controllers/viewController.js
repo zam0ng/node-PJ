@@ -258,3 +258,32 @@ exports.userchecks = async(req,res) =>{
     console.log("view 컨트롤러 userchecks 에서 오류남"+ error);
   }
 }
+
+exports.viewcnt = async(req,res)=>{
+  console.log("-------------------------req.params.id");
+
+  console.log(req.params.id);
+  console.log("-------------------------req.params.id");
+  try {
+    const data = await Books.findOne({
+      where :{
+        id : req.params.id,
+      }, raw : true,
+    })
+
+    console.log(data);
+    console.log(data.viewcnt);
+    
+    await Books.update({
+      viewcnt : data.viewcnt+1,
+
+      
+    },{
+      where :{
+        id : req.params.id,
+      }
+    })
+  } catch (error) {
+    console.log("viewcnt 컨트롤러에서 오류"+error);
+  }
+}

@@ -41,6 +41,12 @@ class User extends Model {
         checks: {
           type: DataTypes.STRING,
         },
+        email :{
+          type: DataTypes.STRING,
+        },
+        auth :{
+          type : DataTypes.STRING,
+        },
       },
       {
         sequelize,

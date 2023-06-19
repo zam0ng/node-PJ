@@ -109,6 +109,24 @@
   </body>
 
   <script>
+    if (document.addEventListener) {
+          window.addEventListener(
+            "pageshow",
+            function (event) {
+              console.log(event.persisted);
+              console.log(window.performance);
+              console.log(window.performance.navigation.type);
+              if (
+                event.persisted ||
+                (window.performance && window.performance.navigation.type == 2)
+              ) {
+                // console.log("hi");
+                location.reload();
+              }
+            },
+            true
+          );
+        }
     // 조회수가 가장 많은 5개의 리스트를 가져옴
     async function getViewList() {
       const { data } = await axios.get("http://13.209.64.80/main/viewlist");

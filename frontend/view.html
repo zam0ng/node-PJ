@@ -456,6 +456,12 @@
 
         }
       });
+      // 페이지에 들어올 떄 viewcnt 증가
+    const data = await axios.get(`http://13.209.64.80/view/checks/viewcnt/${getId}`, {
+      withCredentials: true,
+    });
+
+
     }
     const wantToReadBtn = document.querySelector(".wantToReadBtn");
 
