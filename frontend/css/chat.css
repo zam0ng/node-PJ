@@ -19,17 +19,21 @@
 }
 
 /* 버튼 누르면 나오는곳 */
-.chatContainer {
+#chatContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 #chatMain {
   position: relative;
   width: 300px;
   height: 500px;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 20px;
   display: none;
   background-color: rgba(160, 160, 160, 0.39);
+  box-shadow: 3px 3px 20px;
 }
 
 .chatHeader {
@@ -83,43 +87,51 @@
 }
 .text-box {
   overflow: auto;
-  height: 380px;
-  display: flex;
+
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 20px;
-  padding: 10px;
+  padding: 10px; */
+}
+.chatArea {
+  overflow: auto;
+  height: 380px;
+  padding: 0 20px;
 }
 
-.text-box .userSpan {
+.chatArea .userSpan {
+  display: block;
   background-color: yellow;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
   max-width: 80%;
-  align-self: flex-end;
+  float: right;
+  clear: both;
   word-break: break-word;
 }
 
-.text-box .adminSpan {
+.chatArea .adminSpan {
+  display: block;
   background-color: white;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
   max-width: 80%;
-  align-self: flex-start;
+  float: left;
+  clear: both;
   word-break: break-word;
 }
 
-.text-box::-webkit-scrollbar {
+.chatArea::-webkit-scrollbar {
   width: 10px;
-  background-color: black;
 }
-.text-box::-webkit-scrollbar-thumb {
+.chatArea::-webkit-scrollbar-thumb {
   background-color: #2f3542;
+  border-radius: 5px;
 }
-.text-box::-webkit-scrollbar-track {
-  background-color: white;
+.chatArea::-webkit-scrollbar-track {
 }
 input {
   width: 230px;
@@ -142,6 +154,7 @@ li {
   margin-top: 10px;
   height: 30px;
 }
+
 .btn-style {
   background-color: white;
   border: none;

@@ -12,15 +12,18 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap"
       rel="stylesheet"
     />
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="./css/chat.css" />
   </head>
   <body>
     <!-- 로고 부분 -->
     <div class="nav">
       <div class="logoBox">
         <a href="/index.html"
-          ><img src="http://13.209.64.80/img/Color_logo_-_no_background.png" alt=""
+          ><img
+            src="http://13.209.64.80/img/Color_logo_-_no_background.png"
+            alt=""
         /></a>
         <div class="functionBox">
           <span id="insert"><a href="/books.html">✏️ writing</a></span>
@@ -110,15 +113,12 @@
       const at = document.cookie.slice(8);
       console.log(at);
 
-      const { data } = await axios.get(
-        "http://13.209.64.80/main/logincheck",
-        {
-          // 이게 rawheader에 쿠키를 저장하는 역할
-          withCredentials: true,
+      const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
+        // 이게 rawheader에 쿠키를 저장하는 역할
+        withCredentials: true,
 
-          //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
-        }
-      );
+        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+      });
 
       console.log(data);
 
@@ -152,13 +152,10 @@
       }
     }
     nick.onclick = async () => {
-      const { data } = await axios.get(
-        "http://13.209.64.80/main/logincheck",
-        {
-          // 이게 rawheader에 쿠키를 저장하는 역할
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
+        // 이게 rawheader에 쿠키를 저장하는 역할
+        withCredentials: true,
+      });
       const { nickname, role } = data;
 
       console.log(role);
@@ -188,4 +185,5 @@
       toggle.classList.toggle("active");
     };
   </script>
+  <script src="./js/chat.js"></script>
 </html>

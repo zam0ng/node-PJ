@@ -12,7 +12,7 @@
     <div class="main-box">
       <div class="title">
         <img
-          src="http://13.209.64.80/img/Color_logo_-_no_background.png"
+          src="http://127.0.0.1:8080/img/Color_logo_-_no_background.png"
           class="title-img"
           alt=""
         />
@@ -31,7 +31,9 @@
 
       <div id="newto">New to Goodreads?</div>
       <div id="signupdiv">
-        <a href="/signup.html" id="signup">Create Account</a>
+        <a href="http://127.0.0.1:5500/frontend/signup.html" id="signup"
+          >Create Account</a
+        >
       </div>
 
       <div id="copy">© 2023 najakjak.Inc.</div>
@@ -39,10 +41,10 @@
   </body>
   <script>
     btn.onclick = async () => {
-      axios.post("http://127.0.0.1:8080/login", {
+      const e = await axios.get("http://127.0.0.1:8080/login", {
         withCredentials: true,
 
-        data: {
+        params: {
           user_id: user_id_input.value,
           user_pw: user_pw_input.value,
         },
@@ -52,8 +54,9 @@
       //     window.location.href="http://127.0.0.1:5501/frontend/index.html";
       // }
 
+      console.log("login.html");
       console.log(e);
-      if (e.data.msg == "로그인 성공") {
+      if (e.data?.msg == "로그인 성공") {
         console.log(e.data.token);
 
         // document.cookie="";
@@ -61,7 +64,7 @@
         // console.log("werwer");
         // document.cookie = `mytoken=${e.data.token}; path=/`;
         // console.log(document.cookie);
-        window.location.href = "/index.html";
+        window.location.href = "http://127.0.0.1:5500/frontend/index.html";
       } else if (e.data == "어드민") {
         window.location.href = "/admin.html";
       } else if (e.data == "비밀번호 틀림") {
@@ -88,10 +91,10 @@
       console.log(keycode);
       if (keycode == "Enter") {
         axios
-          .post("http://13.209.64.80/login", {
+          .get("http://127.0.0.1:8080/login", {
             withCredentials: true,
 
-            data: {
+            params: {
               user_id: user_id_input.value,
               user_pw: user_pw_input.value,
             },
@@ -99,7 +102,8 @@
           .then((e) => {
             console.log(e);
             if (e.data == "로그인 성공") {
-              window.location.href = "/index.html";
+              window.location.href =
+                "http://127.0.0.1:5500/frontend/index.html";
             } else if (e.data == "어드민") {
               window.location.href = "/admin.html";
             } else if (e.data == "비밀번호 틀림") {

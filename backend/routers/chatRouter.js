@@ -4,6 +4,10 @@ const {
   getUserInfo,
   getChatData,
 } = require("../controllers/chatController");
+const { getLoginUser } = require("../controllers/islogin");
+
+// 로그인한 유저의 정보를 가져옴
+router.get("/getLoginUser", getLoginUser);
 
 // 대화 내용 저장
 router.post("/", saveChat);

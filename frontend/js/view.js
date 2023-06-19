@@ -263,7 +263,6 @@ async function getView() {
     // 댓글을 쓰고 난 후 댓글창 초기화
     writeReviewContainerInput.value = "";
     getView();
-
   };
 
   getStarAvg();
@@ -275,9 +274,6 @@ async function getView() {
 // ========== then에서 빼서 별도의 함수로 만들것 ===========
 // ==================================================
 async function getStarAvg() {
-  const data = await booksAllData();
-  const starInfo = data.data.stardata;
-
   // Community Reviews
   const data = await booksAllData();
   const starInfo = data.data.stardata;
@@ -545,9 +541,8 @@ async function getComments() {
               "http://13.209.64.80/view/r_reviewInsert",
 
               {
-                
                 review: reCommentInput[y].value,
-               
+
                 review_id: thisReview[index].id,
               },
               { withCredentials: true }

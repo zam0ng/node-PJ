@@ -7,6 +7,7 @@ const session = require("express-session");
 exports.login = async (req, res) => {
   try {
     const { user_id, user_pw } = req.query;
+    console.log(req.query);
 
     const data = await User.findOne({ where: { user_id } });
     // console.log(data.user_pw);
@@ -26,54 +27,61 @@ exports.login = async (req, res) => {
     const hash = bcrypt.compareSync(user_pw, data.user_pw);
     // console.log(hash);
     if (hash) {
-      let token = jwt.sign({
-        id: data.id,
-        user_img: data.user_img,
-        user_id: data.user_id,
-        nickname: data.nickname,
-        role: data.role,
-        gender: data.gender,
-        checks: data.checks,
-        age: data.age,
-        sessionID: req.sessionID,
-      }, process.env.ACCESS_TOKEN_KEY, {
-        expiresIn: "60m",
-      })
-
+      let token = jwt.sign(
+        {
+          id: data.id,
+          user_img: data.user_img,
+          user_id: data.user_id,
+          nickname: data.nickname,
+          role: data.role,
+          gender: data.gender,
+          checks: data.checks,
+          age: data.age,
+          sessionID: req.sessionID,
+        },
+        process.env.ACCESS_TOKEN_KEY,
+        {
+          expiresIn: "60m",
+        }
+      );
 
       req.session.access_token = token;
       // console.log("logincontroller / req.sessionID")
       // console.log(req.sessionID)
-      await User.update({
-        tk: req.sessionID,
-      }, { where: { user_id } }).then((e) => {
-        console.log("tk insert com")
-      }).catch((err) => {
-        console.log(err);
-      })
+      await User.update(
+        {
+          tk: req.sessionID,
+        },
+        { where: { user_id } }
+      )
+        .then((e) => {
+          console.log("tk insert com");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       // req.query = token;
       // console.log(req.query);
       console.log("bbbbbbbbbbbbbbbbbbb");
       if (user_id == "admin") {
         res.send("어드민");
-      }
-      else {
-        return res.send({ msg: "로그인 성공", token: req.session.access_token });
+      } else {
+        return res.send({
+          msg: "로그인 성공",
+          token: req.session.access_token,
+        });
         //  res.send("로그인 성공");
         // return res.json("1")
         // res.redirect("http://127.0.0.1:5500/frontend/index.html");
       }
-    }
-    else {
+    } else {
       return res.send("비밀번호 틀림");
     }
-
-
   } catch (error) {
     console.log("로그인 컨트롤러 오류" + error);
   }
-}
+};
 
 exports.logout = async (req, res) => {
   console.log(req);
