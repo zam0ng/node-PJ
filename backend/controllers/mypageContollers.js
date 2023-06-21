@@ -71,50 +71,62 @@ exports.NickChange = async (req,res)=>{
   }
 }
 // 작성한 댓글 업로드
- exports.reviewUpload = async(req,res)=>{
-    try {
-      const {nickname} = req.decoded;
-      const data = await review.findAll({
-        // 리뷰 테이블과 books 테이블이 조인되어있으니깐
-        // include 로 books를 가져오고
-        // attributes 로 가져오고 싶은 컬럼 셀렉한다
-        include: [{
-          model: Books,
-          
-          attributes :["img","title"]
-          
-        }],
-          // include: [{
-          //   model: r_review,
-          // }],
-      },{
-        where:{
-          nickname:nickname
-      },raw:true,}
-      )
-      
+exports.reviewUpload = async(req,res)=>{
+  try {
+    const {nickname} = req.decoded;
 
-      const data2 = await r_review.findAll({
+    console.log(nickname);
+    // const data = await review.findAll({
+    //   // 리뷰 테이블과 books 테이블이 조인되어있으니깐
+    //   // include 로 books를 가져오고
+    //   // attributes 로 가져오고 싶은 컬럼 셀렉한다
+    //   include: [{
+    //     model: Books,
+    //   }],
+    //     // include: [{
+    //     //   model: r_review,
+    //     // }],
+
+    //   where:{
+    //     nickname:nickname,
         
-        include: [{
-          model: review,
-          
-          attributes :["comment"]
-          
-        }],
-          // include: [{
-          //   model: r_review,
-          // }],
-      },{
+    // },raw:true, 
+    // });
+
+    const data = await review.findAll({
+      // 리뷰 테이블과 books 테이블이 조인되어있으니깐
+      // include 로 books를 가져오고
+      // attributes 로 가져오고 싶은 컬럼 셀렉한다
+      include: [{
+        model: Books,
+        attributes :["img","title"]
+      }],
+      where: {
+        nickname: nickname,
+
+      }
+    })
+
+    console.log(data);
+    
+
+    const data2 = await r_review.findAll({
+      
+      include: [{
+        model: review,
+        
+        attributes :["comment"]
+        
+      }],
         where:{
           nickname:nickname
-      },raw:true,}
-      )
-    
-      const dataobj = {data,data2};
-      res.json(dataobj)
-    } catch (error) {
-      console.log(error)
-    }
- }
+      }
+    })
+  
+    const dataobj = {data,data2};
+    res.json(dataobj);
+  } catch (error) {
+    console.log(error)
+  }
+}
 
