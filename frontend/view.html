@@ -216,7 +216,7 @@
             </div>
             <div class="authorFollow">
               <div class="followBtn">
-                <span>Follow</span>
+                <span class="ft">Follow</span>
               </div>
             </div>
           </div>
@@ -438,6 +438,7 @@
   // 하트가 눌려져있게 표시a
   window.onload = async () => {
       const followBtn = document.querySelector(".followBtn");
+      const ft = document.querySelector(".ft");
       const getUrl = new URL(window.location.href);
 
       const getParams = new URLSearchParams(getUrl.search);
