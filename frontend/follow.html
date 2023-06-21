@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>checklist</title>
+  <link rel="stylesheet" href="./css/following.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <!-- 로고 부분 -->
+  <div class="nav">
+    <div class="logoBox">
+      <a href="http://127.0.0.1:5500/frontend/index.html"><img src="http://127.0.0.1:8080/img/Black logo - no background.png"
+          alt="" /></a>
+      <div class="functionBox">
+        <span id="allview">📙books</span>
+        <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+        <span id="nick"></span><a href=""></a></span>
+        <!-- <span id="login"><a href="http://17.0.0.1:5500/login.html"> login</a></span>
+          <span id="signUp"><a href="/signup.html"> signUp</a></span>
+          <button id="logout">logout</button> -->
+      </div>
+    </div>
+    <div class="toggle">
+      <div class="genre">
+
+        <span id="all"><a href="http://127.0.0.1:5500/frontend/genre/all.html">전체</a></span>
+        <span id="conan"><a href="http://127.0.0.1:5500/frontend/genre/conan.html">추리</a></span>
+        <span id="horror"><a href="http://127.0.0.1:5500/frontend/genre/horror.html">공포•스릴러</a></span>
+        <span id="fantasy"><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html">판타지</a></span>
+        <span id="sorim"><a href="http://127.0.0.1:5500/frontend/genre/sorim.html">무협</a></span>
+        <span id="game"><a href="http://127.0.0.1:5500/frontend/genre/game.html">게임</a></span>
+        <span id="romance"><a href="http://127.0.0.1:5500/frontend/genre/romance.html">로맨스</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="checkContainer">
+    <span>Following List</span>
+    <div class="bar"></div>
+    <div class="checklist">
+      <div id="list">
+
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    async function followAPI() {
+      try {
+        const data2 = await axios.get(
+           "http://127.0.0.1:8080/follow/add",
+           { withCredentials: true}
+        );
+        console.log("-----------------")
+        console.log(data2.data);
+        const tr = data2.data
+        console.log(tr)
+        tr.forEach((el) => {
+          console.log("hfjhkdhjfhdhfkhkd")
+          list.innerHTML += `
+        <div class="booklist">
+            <div class="bookcover"><img class="img-box" src="http://127.0.0.1:8080${el.user_img}" alt=""></div>
+            <div>writer name : ${el.nickname}</div>
+        </div>`
+
+        });
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    followAPI() 
+  //  async function followAPI() {
+  //   try {
+  //     const data = await axios.get(
+  //       "http://127.0.0.1:8080/follow/list",
+  //       { withCredentials: true}
+  //     );
+  //     console.log(data);
+  //     data.data.forEach((e) => {
+  //       console.log(writer)
+      //   list.innerHTML += `
+      //   <div class="booklist">
+      //       <div class="bookcover">writer img</div>
+      //       <div>writer : ${e.following}</div>
+      //   </div>
+      //  </a>
+      //    `
+  //     });
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //  }
+  </script>
+
+</html>
