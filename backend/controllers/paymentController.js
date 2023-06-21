@@ -64,20 +64,19 @@ exports.payApprove = async (req, res) => {
       },
     });
 
-    const buysChk = await User.findOne({ where: { user_id } });
+    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
 
-    if (buysChk?.buys) {
-      const buys = [...JSON.parse(buysChk.buys)];
-      buys.push(books_id);
-      // console.log(buys);
-      await User.update({ buys: JSON.stringify(buys) }, { where: { user_id } });
-    } else {
-      const buys = [];
-      buys.push(books_id);
-      await User.update({ buys }, { where: { user_id } });
+    const buysChk = await User.findOne({ where: { user_id } });
+    if (!buysChk) {
+      await User.update({ buys: books_id }, { where: { user_id } });
     }
 
-    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+    if (buysChk?.buys) {
+      const buys = buysChk.buys + "," + books_id;
+
+      await User.update({ buys: buys }, { where: { user_id } });
+    }
+
     res.write("<script>alert('결제가 완료되었습니다.')</script>");
     res.write(
       `<script>window.location = "${process.env.frontend}index.html"</script>`
