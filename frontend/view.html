@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/view.css" />
-    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
      <!-- 로고 부분 -->
@@ -439,6 +439,7 @@
   window.onload = async () => {
       const followBtn = document.querySelector(".followBtn");
       const ft = document.querySelector(".ft");
+
       const getUrl = new URL(window.location.href);
 
       const getParams = new URLSearchParams(getUrl.search);
@@ -514,6 +515,7 @@
           ft.innerText = "Follow"
 
         }
+
          if(ft.innerText == "Follow"){
 
           await axios.get(`${backend}/follow/list`,{
