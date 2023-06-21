@@ -45,6 +45,8 @@ exports.signup = async (req,res) =>{
             nickname : user_nick,
             tk : "",
             checks : "",
+            auth : "",
+            following : "",
             email : email,
         }).then((e)=>{
             return res.send("가입성공");
