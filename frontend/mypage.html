@@ -40,11 +40,11 @@
           style="width: 200px"
         />
         <button id="uploadBtn" class="button">change</button>
-        <form action="http://13.209.64.80/mypages/nick" method="post">
+        
           <h3 class="margin1">닉네임 변경</h3>
-          <input class="margin1" type="text" name="changenick" />
+          <input class="margin1" type="text" name="changenick" id="nickchange"/>
           <button class="button" id="nickBtn">change</button>
-        </form>
+        
       </div>
       <div class="content2">
         <div>
@@ -186,7 +186,7 @@
       try {
         console.log("닉버튼 찍힘?");
       await axios.post(`
-      ${backend}/writer/nick"`,{
+      ${backend}/writer/nick`,{
         
         changenick : nickchange.value
       },
