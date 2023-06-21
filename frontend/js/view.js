@@ -164,7 +164,6 @@ async function getView() {
 
   if (userInfo) {
     myImgImg.setAttribute("src", `${backend}${userInfo.user_img}`);
-    myImgImg.setAttribute("src", `${backend}${userInfo.user_img}`);
   }
 
   // Ratings & Reviews 별 누르면 별 채워지는 기능
@@ -208,7 +207,7 @@ async function getView() {
 
     axios.post(
       `${backend}/view/reviewInsert`,
-      
+
       {
         book_id: bookInfo.id,
         star: reviewsScore,
@@ -458,7 +457,7 @@ async function getComments() {
                     <div class="reCommentsInner">
                       <div class="reCommentsProfileImgs">
                         <img src="${backend}${x.User.user_img}" alt="" />
-                        <img src="${backend}${x.User.user_img}" alt="" />
+                        
                       </div>
                       <div class="reComments">
                         <span>${x.nickname}</span>
@@ -483,7 +482,7 @@ async function getComments() {
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
                         <img src="${backend}/img/basic.png" alt="" />
-                        <img src="${backend}/img/basic.png" alt="" />
+                        
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
