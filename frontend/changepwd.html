@@ -47,9 +47,9 @@
       </div>
     <h3 id="str">변경하실 비밀번호를 입력하세요.</h3>
     <span id="errstr"></span><Br>
-    <label for="" class ="attr">PASSWORD :</label>
+    <label for="" id ="attr">PASSWORD :</label>
     <input type="password" id="pwd_input"><br>
-    <label for="" class= "attr">Re-enter PASSWORD :</label>
+    <label for="" id= "attr2">Re-enter PASSWORD :</label>
     <input type="password" id="repwd_input"><br>
 
     <button id="changebtn">비밀번호 변경</button><br>
@@ -61,7 +61,6 @@
 <script src="./js/address.js"></script>
 <script>
     changebtn.onclick = async () => {
-        let attr= document.querySelectorAll(".attr");
         console.log(pwd_input.value);
         console.log(repwd_input.value);
         if(pwd_input.value!=repwd_input.value){
@@ -72,6 +71,7 @@
         repwd_input.style.display= "none";
         changebtn.style.display= "none";
         attr.style.display="none";
+        attr2.style.display="none";
         str.innerText= "비밀번호 변경이 완료되었습니다.";
 
             const getUrl = new URL(window.location.href);
