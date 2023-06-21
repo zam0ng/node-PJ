@@ -45,6 +45,7 @@
       <div id="copy">© 2023 najakjak.Inc.</div>
     </div>
   </body>
+  <script src="../js/index.js"></script>
   <script>
     btn.onclick = async () => {
       if (!user_id_input.value) {
@@ -59,7 +60,7 @@
         pwderr.style.color = "red";
         return;
       }
-      const e = await axios.get(`${process.env.backend}/login`, {
+      const e = await axios.get(`${backend}/login`, {
           withCredentials: true,
 
           params: {
@@ -81,9 +82,9 @@
             // console.log("werwer");
             // document.cookie = `mytoken=${e.data.token}; path=/`;
             // console.log(document.cookie);
-            window.location.href = `${process.env.frontend}index.html`;
+            window.location.href = `${frontend}index.html`;
           } else if (e.data == "어드민") {
-            window.location.href = `${process.env.frontend}admin.html`;
+            window.location.href = `${frontend}admin.html`;
           } else if (e.data == "비밀번호 틀림") {
             undefinedID.innerText = "";
             pwderr.innerHTML = "wrong password";
@@ -109,7 +110,7 @@
       console.log(keycode);
       if (keycode == "Enter") {
         axios
-          .post(`${process.env.backend}/login`, {
+          .post(`${backend}/login`, {
             withCredentials: true,
 
             data: {
@@ -121,10 +122,10 @@
             console.log(e);
             if (e.data == "로그인 성공") {
               window.location.href =
-                `${process.env.frontend}index.html`;
+                `${frontend}index.html`;
             } else if (e.data == "어드민") {
               window.location.href =
-                `${process.env.frontend}admin.html`;
+                `${frontend}admin.html`;
             } else if (e.data == "비밀번호 틀림") {
               undefinedID.innerText = "";
               pwderr.innerHTML = "wrong password";

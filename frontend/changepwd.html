@@ -58,6 +58,7 @@
     <button id="authbtn">확인</button> -->
 </body>
 </html>
+<script src="../js/index.js"></script>
 <script>
     changebtn.onclick = async () => {
         let attr= document.querySelectorAll(".attr");
@@ -77,7 +78,7 @@
             const getParams = new URLSearchParams(getUrl.search);
             const getId = getParams.get("id");
 
-            await axios.get(`${process.env.backend}/login/changepwd`, {
+            await axios.get(`${backend}/login/changepwd`, {
                 withcredential: true,
 
                 params: {

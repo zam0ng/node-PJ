@@ -72,16 +72,17 @@
     </div>
     
 </body>
+<script src="../js/index.js"></script>
 <script>
 
     logout.onclick = async ()=>{
       
-      await axios.get(`${process.env.backend}/logout`,{
+      await axios.get(`${backend}/logout`,{
         withCredentials:true,  
       })
 
       document.cookie = 'mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
-      window.location.href=`${process.env.frontend}index.html`;
+      window.location.href=`${frontend}index.html`;
     }
     
 
@@ -108,7 +109,7 @@
         form.append('genre', genre.options[genre.selectedIndex].value);
         form.append('page', page.value);
         form.append('publish', publish.value);
-        axios.post(`${process.env.backend}/books`, form, {
+        axios.post(`${backend}/books`, form, {
             withCredentials: true,
             'Content-Type': 'multipart/form-data'
         }).then((e) => {
@@ -116,7 +117,7 @@
             console.log(e);
 
             if(e.data =="여기 완!"){
-                window.location.href=`${process.env.frontend}index.html`;
+                window.location.href=`${frontend}index.html`;
             }
         
         }).catch((err) => {

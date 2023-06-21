@@ -107,10 +107,11 @@
     </div> -->
   </body>
   <script src="./genre.js"></script>
+  <script src="../js/index.js"></script>
   <script>
     window.onload = async () => {
       viewList.innerHTML = "";
-      const { data } = await axios.get(`${process.env.backend}/allview/horror`);
+      const { data } = await axios.get(`${backend}/allview/horror`);
 
       console.log(data);
 
@@ -119,8 +120,8 @@
       data.forEach((el, index) => {
         console.log(el.img);
         console.log(el.id);
-        viewList.innerHTML += `<a href="${process.env.frontend}view.html?id=${el.id}"><div class="viewCard">
-          <img src="${process.env.backend}/${el.img}" alt="" />
+        viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
+          <img src="${backend}/${el.img}" alt="" />
           <div class="cardText">
             <span>☻</span>
             <span>${el.viewcnt}</span>

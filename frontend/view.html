@@ -433,6 +433,7 @@
     <!-- 상세페이지 end -->
   </body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../js/index.js"></script>
   <script>
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
   // 하트가 눌려져있게 표시a
@@ -443,7 +444,7 @@
 
       const getId = getParams.get("id");
 
-      const data1 = await axios.get(`${process.env.backend}/view/user/checks`, {
+      const data1 = await axios.get(`${backend}/view/user/checks`, {
         withCredentials: true,
       })
       const teststr = data1.data.checks;
@@ -457,7 +458,7 @@
         }
       });
       // 페이지에 들어올 떄 viewcnt 증가
-    await axios.get(`${process.env.backend}/view/checks/viewcnt/${getId}`, {
+    await axios.get(`${backend}/view/checks/viewcnt/${getId}`, {
       withCredentials: true,
     });
 
@@ -465,7 +466,7 @@
     // view 페이지에 들어왔을때 해당작가를 팔로우 한 상태이면 follow 버튼이 white 로 보이게
     // user 에서 팔로잉 값 가져와서 split 으로 짜르고 배열 만든후에 작가 id 랑 비교해서 맞으면 
     // follow 버튼 흰색
-    const data2 = await axios.get(`${process.env.backend}/view/user/follow`,{
+    const data2 = await axios.get(`${backend}/view/user/follow`,{
       withCredentials:true,
     })
     const f = data2.data.following;
@@ -496,7 +497,7 @@
       console.log("---------------------------")
 
         if (ft.innerText == "Following") {
-          await axios.get(`${process.env.backend}/follow/del`,{
+          await axios.get(`${backend}/follow/del`,{
             withCredentials:true,
             
             params :{
@@ -510,7 +511,7 @@
         }
          if(ft.innerText == "Follow"){
 
-          await axios.get(`${process.env.backend}/follow/list`,{
+          await axios.get(`${backend}/follow/list`,{
             withCredentials:true,
 
             params: {
@@ -542,14 +543,14 @@ wantToReadBtn.onclick = async() =>{
   if(checks.innerHTML == "♥"){
     checks.innerHTML = "♡"
     console.log("찜 해체할거임")
-    const data = await axios.get(`${process.env.backend}/view/checks/delete/${getId}`, {
+    const data = await axios.get(`${backend}/view/checks/delete/${getId}`, {
     withCredentials: true,
   });
   }
   else{
     checks.innerHTML = "♥"
     console.log("찜 할거임")
-    const data = await axios.get(`${process.env.backend}/view/checks/add/${getId}`, {
+    const data = await axios.get(`${backend}/view/checks/add/${getId}`, {
     withCredentials: true,
   });
   }

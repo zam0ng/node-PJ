@@ -109,24 +109,25 @@
         </div>
     </div>
   </body>
+  <script src="../js/index.js"></script>
   <script>
     logout.onclick = async () => {
-      await axios.get(`${process.env.backend}/logout`, {
+      await axios.get(`${backend}/logout`, {
         withCredentials: true,
       });
 
       document.cookie =
         "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-      window.location.href = `${process.env.frontend}index.html`;
+      window.location.href = `${frontend}index.html`;
     };
 
     async function getAPI() {
       try {
-        const { data } = await axios.get(`${process.env.backend}/writer`, {
+        const { data } = await axios.get(`${backend}/writer`, {
           withCredentials: true,
         });
         console.log(data.user_img);
-        img1.src = `${process.env.backend}${data.user_img}`;
+        img1.src = `${backend}${data.user_img}`;
 
         let tc;
         let tb = data.checks;
@@ -154,7 +155,7 @@
       form.append("upload", file.files[0]);
       console.log(file.files[0]);
       axios
-        .post(`${process.env.backend}/writer`, form, {
+        .post(`${backend}/writer`, form, {
           withCredentials: true,
           "Content-Type": "multipart/form-data",
         })
@@ -210,7 +211,7 @@
     async function acceptAPI() {
       try {
         const { data } = await axios.get(
-          `${process.env.backend}/writer/result`,
+          `${backend}/writer/result`,
           {
             withCredentials: true,
           }
@@ -231,7 +232,7 @@
     acceptAPI()
     async function rejectAPI(){
         try {
-            const {data}= await axios.get(`${process.env.backend}/writer/result2`,{
+            const {data}= await axios.get(`${backend}/writer/result2`,{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {
@@ -270,7 +271,7 @@
 
     async function waitingAPI(){
         try {
-            const {data}= await axios.get(`${process.env.backend}/writer/result3`,{
+            const {data}= await axios.get(`${backend}/writer/result3`,{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {

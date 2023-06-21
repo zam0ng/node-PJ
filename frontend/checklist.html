@@ -52,12 +52,14 @@
       </div>
     </div>
   </div>
-  
+</body>
+</html>
+  <script src="../js/index.js"></script>
   <script>
     async function checkAPI() {
         try {
           const data = await axios.get(
-            `${process.env.backend}/check/list`,
+            `${backend}/check/list`,
             { withCredentials: true, }
           );
 
@@ -66,9 +68,9 @@
             console.log(el.img)
             console.log(el.title)
             list.innerHTML += `
-          <a href="${process.env.frontend}view.html?id=${el.id}">
+          <a href="${frontend}view.html?id=${el.id}">
         <div class="booklist">
-            <div class="bookcover"><img src="${process.env.backend}/${el.img}" alt=""></div>
+            <div class="bookcover"><img src="${backend}/${el.img}" alt=""></div>
             <div>book's title : ${el.title}</div>
         </div>
       </a>
@@ -80,5 +82,3 @@
       }
     checkAPI();
   </script>
-
-</html>

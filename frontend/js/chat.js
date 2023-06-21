@@ -1,3 +1,6 @@
+let backend = "http://13.209.64.80" ;
+let frontend = "/" ;
+
 window.onload = () => {
   // ==========================================================
   // 채팅 div 그리기
@@ -62,7 +65,7 @@ window.onload = () => {
   // 버튼을 누르면 소켓에 연결되면서 로그인한 유저정보를 가져옴
   chatWrap.onclick = async (e) => {
     try {
-      const data = await axios.get(`${process.env.backend}/chat/getLoginUser`, {
+      const data = await axios.get(`${backend}/chat/getLoginUser`, {
         // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
 
@@ -78,7 +81,7 @@ window.onload = () => {
 
       // 대화내용 가져오기
       const chatdata = await axios.get(
-        `${process.env.backend}/chat/getChatData`,
+        `${backend}/chat/getChatData`,
         {
           withCredentials: true,
           params: {
@@ -98,7 +101,7 @@ window.onload = () => {
       }, 0);
 
       // 소켓 관련 작업 내용 정리 공간  ==========================
-      socket = io.connect(`${process.env.backend}`);
+      socket = io.connect(`${backend}`);
       socket.emit("joinRoom", chat_id);
       // 소켓 관련 작업 내용 정리 공간 끝 =========================
 

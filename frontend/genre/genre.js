@@ -195,11 +195,15 @@
 //     });
 
 // }
+
+let backend = "http://13.209.64.80" ;
+let frontend = "/" ;
+
 async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);
 
-  const { data } = await axios.get(`${process.env.backend}/main/logincheck`, {
+  const { data } = await axios.get(`${backend}/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
 
@@ -239,7 +243,7 @@ async function logincheck() {
 logincheck();
 
 logout.onclick = async () => {
-  await axios.get(`${process.env.backend}/logout`, {
+  await axios.get(`${backend}/logout`, {
     withCredentials: true,
   });
 
@@ -256,7 +260,7 @@ allview.onclick = async () => {
 };
 
 nick.onclick = async () => {
-  const { data } = await axios.get(`${process.env.backend}/main/logincheck`, {
+  const { data } = await axios.get(`${backend}/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
   });
@@ -264,10 +268,10 @@ nick.onclick = async () => {
 
   console.log(role);
   if (role == "writer") {
-    window.location.href = `${process.env.frontend}writerpage.html`;
+    window.location.href = `${frontend}writerpage.html`;
   }
 
   if (role == "reader") {
-    window.location.href = `${process.env.frontend}mypage.html`;
+    window.location.href = `${frontend}mypage.html`;
   }
 };
