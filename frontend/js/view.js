@@ -1,5 +1,3 @@
-let backend = "http://13.209.64.80" ;
-let frontend = "/" ;
 
 async function getView() {
   const data = await booksAllData();
