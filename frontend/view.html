@@ -501,10 +501,11 @@
 
     followBtn.onclick = async () => {
       console.log("---------------------------")
-
+      console.log(author.id);
         if (ft.innerText == "Following") {
           await axios.get(`${backend}/follow/del`,{
             withCredentials:true,
+            
             
             params :{
               author_id : author.id,
