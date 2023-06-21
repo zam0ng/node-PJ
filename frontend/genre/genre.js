@@ -1,5 +1,5 @@
-const backend = "http://127.0.0.1:8080";
-const frontend = "http://127.0.0.1:5500/frontend/";
+const backend = "http://13.209.64.80";
+const frontend = "/";
 
 async function logincheck() {
   // const at = document.cookie.slice(8);

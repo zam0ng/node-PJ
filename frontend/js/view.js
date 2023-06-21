@@ -42,7 +42,6 @@ async function getView() {
   // 사이드바 책 표지 출력
   const sideWrapImg = document.querySelector(".sideWrapImg");
   sideWrapImg.setAttribute("src", `${backend}/${bookInfo.img}`);
-  sideWrapImg.setAttribute("src", `${backend}/${bookInfo.img}`);
 
   // 책 타이틀, 지은이 출력
   const viewMainWrap = document.querySelector(".viewMainWrap");
@@ -145,7 +144,6 @@ async function getView() {
   const authorImgImg = authorImg.querySelector("img");
 
   authorImgImg.setAttribute("src", `${backend}${author.user_img}`);
-  authorImgImg.setAttribute("src", `${backend}${author.user_img}`);
 
   // 작가 이름
   const authorName = document.querySelector(".authorName");
@@ -202,7 +200,6 @@ async function getView() {
       alert("별점을 선택해주세요.");
       return;
     }
-    const reviewInput = writeReviewContainerInput.value;
     const reviewInput = writeReviewContainerInput.value;
     if (!writeReviewContainerInput.value) {
       alert("댓글을 입력해주세요.");
@@ -535,8 +532,6 @@ async function booksAllData() {
   const getParams = new URLSearchParams(getUrl.search);
 
   const getId = getParams.get("id");
-
-  const data = await axios.get(`${backend}/view/${getId}`, {
 
   const data = await axios.get(`${backend}/view/${getId}`, {
     withCredentials: true,
