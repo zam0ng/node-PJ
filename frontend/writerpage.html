@@ -45,11 +45,11 @@
         <h3 class="margin1">프로필 변경</h3>
         <input class="margin1" type="file" id="file" style="width: 200px" />
         <button id="uploadBtn" class="button">change</button>
-        <form action="http://13.209.64.80/writer/nick" method="post">
+        
           <h3 class="margin1">닉네임 변경</h3>
-          <input class="margin1" type="text" name="changenick" />
+          <input class="margin1" type="text" name="changenick" id="nickchange" />
           <button class="button" id="nickBtn">change</button>
-        </form>
+        
       </div>
       <div class="content2">
         <h3>information</h3>
@@ -166,9 +166,15 @@
         });
         window.location.reload();
     };
-    nickBtn.onclick = () => {
+    nickBtn.onclick = async() => {
       try {
         console.log("닉버튼 찍힘?");
+      await axios.post(`
+      ${backend}/writer/nick"`,{
+        
+        changenick : nickchange.value
+      },
+      {withCredentials:true});
         alert("개인정보가 변경되어 다시 로그인하세요!ㅎㅎ");
         logout.onclick = async () => {
       await axios.get(`${backend}/logout`, {
