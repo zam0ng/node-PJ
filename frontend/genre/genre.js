@@ -199,6 +199,10 @@
 let backend = "http://13.209.64.80" ;
 let frontend = "/" ;
 
+// backend = "http://127.0.0.1:8080" ;
+// let frontend = "http://127.0.0.1:5500/frontend/" ;
+
+
 async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);

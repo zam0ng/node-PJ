@@ -4,6 +4,7 @@ const {User,Books}=require("../models")
 exports.followingList = async(req,res)=>{
 
     try {
+      console.log("this.followingList")
       const {author_id} = req.query;
       const {user_id} = req.decoded;
       console.log(author_id);
