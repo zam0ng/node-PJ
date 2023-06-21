@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500",
+    origin: "http://13.209.64.80",
     credentials: true,
   })
 );

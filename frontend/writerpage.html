@@ -11,7 +11,7 @@
 
   <body>
     <div class="header">
-      <a href=/index.html`>
+      <a href="/index.html">
         <img
           class="header-img"
           src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
@@ -136,7 +136,7 @@
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
         grade1.innerHTML = data.grade;
-        checks.innerHTML = tc.length;
+        checks.innerHTML = tc.length-1;
         userId.innerHTML = data.user_id;
       } catch (error) {
         console.log(error);
