@@ -169,7 +169,18 @@
     nickBtn.onclick = () => {
       try {
         console.log("닉버튼 찍힘?");
-        window.location.reload();
+        alert("개인정보가 변경되어 다시 로그인하세요!ㅎㅎ");
+        logout.onclick = async () => {
+      await axios.get(`${backend}/logout`, {
+        withCredentials: true,
+      });
+
+      document.cookie =
+        "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      window.location.href = `${frontend}index.html`;
+    };
+        window.location.href="/login.html";
+        
       } catch (error) {
         console.log("여기 nick ERR");
         console.log(error);
