@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 exports.islogin = async (req, res, next) => {
   try {
-    const {access_token} = req.session;
+    const { access_token } = req.session;
 
     jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
       if (err) {
@@ -12,8 +12,8 @@ exports.islogin = async (req, res, next) => {
         res.send("relogin");
         // next();
       } else {
-        console.log("islogin");
-        console.log(decoded);
+        // console.log("islogin");
+        // console.log(decoded);
         req.decoded = decoded;
         next();
       }
@@ -24,11 +24,7 @@ exports.islogin = async (req, res, next) => {
 };
 exports.islogin2 = async (req, res, next) => {
   try {
-    // console.log(req.rawHeaders[39]);
-    // console.log(th);
     let th;
-    console.log("req.rawHeaders");
-    console.log(req.rawHeaders);
     req.rawHeaders.forEach((element, index) => {
       const name = "mytoken";
 
@@ -37,7 +33,6 @@ exports.islogin2 = async (req, res, next) => {
       }
     });
 
-    console.log("---------th-------");
     th = th.slice(8);
 
     jwt.verify(th, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
@@ -45,8 +40,6 @@ exports.islogin2 = async (req, res, next) => {
         console.log("다시 로그인");
         res.send("다시 로그인");
       } else {
-        console.log("islogin2");
-        console.log(decoded);
         req.decoded = decoded;
 
         next();
@@ -82,19 +75,16 @@ exports.getLoginUser = async (req, res) => {
 // console.log(req.sessionID);
 // console.log(req.sessionStore.sessions);
 // if(req.sessionID in req.sessionStore.sessions){
-//     console.log("같음");
+// console.log("같음");
 // }
 // else{
-//     console.log("다름");
+// console.log("다름");
 // }
 // console.log("req.query" +req.query);
 // console.log(req);
 // console.log("islogin");
 // const  {access_token} =req.sessionStore.sessions;
 // console.log(access_token);
-// // console.log(req);
-// // console.log("제발 초기화")
-// // console.log(access_token);
 
 // let ta = JSON.stringify(access_token);
 // // let tb = ta.split(",");

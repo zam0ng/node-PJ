@@ -30,83 +30,80 @@
       </div>
     </div>
     <div class="main">
-        <div class="content1">
-            <h3 class="margin1">Writer-Page</h3>
-            <div style="display: flex;justify-content: space-around;">
-                <img id="img1" class="img-box" alt="" src="">
-            </div>
-            <div class="id-info">
-                <span>ID : </span>
-                <span id="userId"></span>
-            </div>
-            <div>
-                <a class="writer-result" href="">책 작성 승인 결과</a>
-            </div>
-            <h3 class="margin1">프로필 변경</h3>
-            <input class="margin1" type="file" id="file" style=" width: 200px;">
-            <button id="uploadBtn" class="button">change</button>
-            <form action="http://13.209.64.80/writer/nick" method="post">
-                <h3  class="margin1">닉네임 변경</h3>
-                <input class="margin1" type="text" name="changenick">
-                <button class="button" id="nickBtn">change</button>
-            </form>
+      <div class="content1">
+        <h3 class="margin1">Writer-Page</h3>
+        <div style="display: flex; justify-content: space-around">
+          <img id="img1" class="img-box" alt="" src="" />
         </div>
-        <div class="content2">
-            <h3>information</h3>
-            <div class="info">
-                <span>nickname : </span>
-                <span id="nickname1"></span>
-            </div> 
-            <span class="block"></span>
-            <div class="info">
-                <span>gender : </span>
-                <span id="gender1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>age : </span>
-                <span id="age1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>grade : </span>
-                <span id="grade1"></span>
-            </div>
-            <span class="block"></span>
-            <div class="info">
-                <span>❤️ : </span>
-                <span id="checks"></span>
-            </div>
-
+        <div class="id-info">
+          <span>ID : </span>
+          <span id="userId"></span>
         </div>
-        <div class="result"><h3>result</h3>
-            <ul class="tab">
-                <li class="tab_item active">accept</li>
-                <li class="tab_item">reject</li>
-                <li class="tab_item">waiting</li>
-            </ul>
-                <div class="tab_inner active">accept list
-                    <div id="acceptList">
-                        <ul>
-
-                        </ul>
-                    </div>
-                </div>
-                <div class="tab_inner">reject list
-                    <div id="rejectList">
-                        <ul>
-
-                        </ul>
-                    </div>
-                </div>
-                <div class="tab_inner">waiting list
-                    <div id="waitingList">
-                        <ul>
-
-                        </ul>
-                    </div>
-                </div>
+        <div>
+          <a class="writer-result" href="">책 작성 승인 결과</a>
         </div>
+        <h3 class="margin1">프로필 변경</h3>
+        <input class="margin1" type="file" id="file" style="width: 200px" />
+        <button id="uploadBtn" class="button">change</button>
+        <form action="http://13.209.64.80/writer/nick" method="post">
+          <h3 class="margin1">닉네임 변경</h3>
+          <input class="margin1" type="text" name="changenick" />
+          <button class="button" id="nickBtn">change</button>
+        </form>
+      </div>
+      <div class="content2">
+        <h3>information</h3>
+        <div class="info">
+          <span>nickname : </span>
+          <span id="nickname1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>gender : </span>
+          <span id="gender1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>age : </span>
+          <span id="age1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>grade : </span>
+          <span id="grade1"></span>
+        </div>
+        <span class="block"></span>
+        <div class="info">
+          <span>❤️ : </span>
+          <span id="checks"></span>
+        </div>
+      </div>
+      <div class="result">
+        <h3>result</h3>
+        <ul class="tab">
+          <li class="tab_item active">accept</li>
+          <li class="tab_item">reject</li>
+          <li class="tab_item">waiting</li>
+        </ul>
+        <div class="tab_inner active">
+          accept list
+          <div id="acceptList">
+            <ul></ul>
+          </div>
+        </div>
+        <div class="tab_inner">
+          reject list
+          <div id="rejectList">
+            <ul></ul>
+          </div>
+        </div>
+        <div class="tab_inner">
+          waiting list
+          <div id="waitingList">
+            <ul></ul>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script src="./js/address.js"></script>
@@ -240,23 +237,25 @@
                 switch (el.reject) {
                        case "1": el.reject = "부적절한 책표지";
 
-                           break;
-                       case "2": el.reject = "부적절한 책제목";
+              break;
+            case "2":
+              el.reject = "부적절한 책제목";
 
-                           break;
-                       case "3": el.reject = "부적절한 책내용";
+              break;
+            case "3":
+              el.reject = "부적절한 책내용";
 
-                           break;
-                       case "4": el.reject = "부적절한 책표지";
+              break;
+            case "4":
+              el.reject = "부적절한 책표지";
 
-                           break;
+              break;
 
-
-                       default:
-                           break;
-                   }
-                   console.log(el.reject);
-                rejectList.innerHTML +=`
+            default:
+              break;
+          }
+          console.log(el.reject);
+          rejectList.innerHTML += `
                 <li>
             <div class="list-warp">
             <div> title : ${el.title} </div>
@@ -267,7 +266,7 @@
         });
       } catch (error) {}
     }
-    rejectAPI()
+    rejectAPI();
 
     async function waitingAPI(){
         try {
@@ -282,16 +281,10 @@
             
             </div>
                 </li>
-                `
-               });
-        } catch (error) {
-            
-        }
+                `;
+        });
+      } catch (error) {}
     }
     waitingAPI();
-
-
-
-</script>
-
+  </script>
 </html>

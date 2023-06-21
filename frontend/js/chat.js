@@ -65,30 +65,26 @@ window.onload = () => {
   // 버튼을 누르면 소켓에 연결되면서 로그인한 유저정보를 가져옴
   chatWrap.onclick = async (e) => {
     try {
+      // ==========================================
+      chatArea.innerHTML = "";
+      // ==========================================
       const data = await axios.get(`${backend}/chat/getLoginUser`, {
         // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
-
-        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
       });
       console.log(data);
-      // const textBox = document.querySelector(".text-box");
-      // const chatArea = textBox.querySelector(".chatArea");
       chatWrap.style.display = "none";
 
       let chat_id = data.data.id;
       let user_name = data.data.nickname;
 
       // 대화내용 가져오기
-      const chatdata = await axios.get(
-        `${backend}/chat/getChatData`,
-        {
-          withCredentials: true,
-          params: {
-            id: chat_id,
-          },
-        }
-      );
+      const chatdata = await axios.get(`${backend}/chat/getChatData`, {
+        withCredentials: true,
+        params: {
+          id: chat_id,
+        },
+      });
 
       // 데이터베이스에서 사용자와 운영자가 나눈 대화를 가져옴
       chatdata.data.forEach((el, index) => {
@@ -118,12 +114,10 @@ window.onload = () => {
         } else {
           textBoxSpan.classList = "userSpan";
         }
-        // textBoxSpan.textContent = user_name + " : " + msg;
         textBoxSpan.textContent += msg;
         chatArea.appendChild(textBoxSpan);
         chatArea.scrollTop = chatArea.scrollHeight;
       }
-      // console.log("메세지 보내기 버튼 눌림?");
       sendBtn.onclick = () => {
         // 입력한 메시지를 서버로 보냄
         socket.emit("message", chat_id, user_name, msg.value);
@@ -142,7 +136,6 @@ window.onload = () => {
   // ==========================================================
   // 활성화된 채팅 창에서 x를 눌러 스마일표시로 되돌아감
   chatHeaderSpan.onclick = () => {
-    // console.log("close 버튼 눌림?");
     chatMain.style.display = "none";
     chatWrap.style.display = "block";
     socket.off("message");

@@ -55,16 +55,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .wantToReadBtn {
   /* background-color: white; */
   color: red;
 }
-.wantToReadBtn span{
+.wantToReadBtn span {
   width: 30px;
   height: 30px;
-  font-size:large;
+  font-size: large;
 }
 
 /* 우측 사이드바 별점 잔해 */
@@ -145,7 +146,6 @@ body {
   height: 30px;
   display: flex;
   position: relative;
-  transform: translateX(10%);
 }
 
 .colStars .colStarEmpty,
@@ -667,6 +667,5 @@ body {
   background-color: #393939;
 }
 
-#checks{
-
+#checks {
 }

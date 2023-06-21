@@ -236,7 +236,7 @@
           <!-- 작가 이미지, 이름, 팔로우 버튼 -->
           <div class="reviewWrap">
             <div class="myImg">
-              <img src="http://13.209.64.80/img/basic.png" alt="" />
+              <!-- <img src="http://13.209.64.80/img/basic.png" alt="" /> -->
             </div>
             <div class="reivewForm">
               <div class="reviewStars">
@@ -434,7 +434,7 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./genre/genre.js"></script>
-
+  <script src="./js/view.js"></script>
   <script>
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
   // 하트가 눌려져있게 표시a
@@ -478,7 +478,6 @@
       withCredentials:true,
     })
     const f = data2.data.following;
-    console.log(f)
     const data = await booksAllData();
     const author = data.data.bookdata;
     console.log("============")
@@ -493,7 +492,6 @@
             followBtn.style.backgroundColor = "white";
             ft.style.color="black"
             ft.innerText = "Following"
-  
           }
         });
     }
@@ -516,7 +514,6 @@
           followBtn.style.backgroundColor = "black";
           ft.style.color="white"
           ft.innerText = "Follow"
-
         }
 
          if(ft.innerText == "Follow"){
@@ -527,7 +524,7 @@
             params: {
               author_id : author.id,
             }
-          })
+          });
 
           followBtn.style.backgroundColor = "white";
           ft.style.color="black"
@@ -556,25 +553,16 @@ wantToReadBtn.onclick = async() =>{
     const data = await axios.get(`${backend}/view/checks/delete/${getId}`, {
     withCredentials: true,
   });
-  }
-  else{
+  } else {
     checks.innerHTML = "♥"
     console.log("찜 할거임")
     const data = await axios.get(`${backend}/view/checks/add/${getId}`, {
     withCredentials: true,
   });
-  }
-
-  
-
-  // const data2 = await axios.get("http://13.209.64.80/view/qwer/qw" ,{
-  //   withCredentials : true,
-  // })
-
-  
+  } 
 }
 
   </script>
-  <script src="./js/view.js"></script>
+
   
 </html>

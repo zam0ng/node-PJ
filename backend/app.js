@@ -6,7 +6,6 @@ const path = require("path");
 const socketio = require("socket.io");
 const axios = require("axios");
 
-
 const { sequelize, User } = require("./models");
 const { adminsignup } = require("./controllers/admin");
 
@@ -25,8 +24,11 @@ const allview = require("./routers/allview");
 const mainRouter = require("./routers/mainRouter");
 const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
-const checkRouter = require("./routers/checklist"); 
+const checkRouter = require("./routers/checklist");
 const chatRouter = require("./routers/chatRouter");
+// ===========================================
+const paymentRouter = require("./routers/paymentRouter");
+// ===========================================
 const followRouter = require("./routers/follow");
 
 
@@ -53,12 +55,12 @@ app.use(express.static("../frontend"));
 
 app.get("/", (req, res) => {
   // res.redirect("http://127.0.0.1:5500/index.html");
-  res.send("응답합")
+  res.send("응답합");
 });
 
 app.use(
   cors({
-    origin: "${process.env.backend}",
+    origin: "http://127.0.0.1:5500",
     credentials: true,
   })
 );
@@ -86,10 +88,13 @@ app.use("/nonagreeuser", nonagreeuser);
 app.use("/logout", logoutrouter);
 app.use("/allview", allview);
 app.use("/view", viewRouter);
-app.use("/check",checkRouter);
+app.use("/check", checkRouter);
 app.use("/chat", chatRouter);
 app.use("/follow",followRouter);
 
+// ===========================================
+app.use("/v1/payment", paymentRouter);
+// ===========================================
 
 const server = app.listen(8080, () => {
   console.log("Server On!");

@@ -8,7 +8,3 @@ let frontend = "/" ;
 
 // # ${process.env.backend}
 // # ${process.env.frontend}
-
-// ${frontend}
-// ${backend}
-// <script src="../js/index.js"></script>

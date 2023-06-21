@@ -47,8 +47,8 @@ class User extends Model {
         email :{
           type: DataTypes.STRING,
         },
-        auth :{
-          type : DataTypes.STRING,
+        buys: {
+          type: DataTypes.STRING,
         },
       },
       {

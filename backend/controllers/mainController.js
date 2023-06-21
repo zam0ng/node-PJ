@@ -33,7 +33,10 @@ exports.OrderByStar = async (req, res) => {
         "id",
         "img",
         "title",
-        [sequelize.fn("AVG", sequelize.col("star")), "orderstar"],
+        [
+          sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("star")), 2),
+          "orderstar",
+        ],
       ],
       // include는 참조하는 테이블을 명시
       // model : review -> review 테이블에 조인
@@ -65,8 +68,8 @@ exports.OrderByStar = async (req, res) => {
       },
       raw: true,
     });
-    console.log("exports.OrderByStar");
-    console.log(data);
+    // console.log("exports.OrderByStar");
+    // console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
