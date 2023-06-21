@@ -67,7 +67,7 @@ exports.payApprove = async (req, res) => {
     res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
 
     const buysChk = await User.findOne({ where: { user_id } });
-    if (!buysChk) {
+    if (buysChk == "") {
       await User.update({ buys: books_id }, { where: { user_id } });
     }
 
