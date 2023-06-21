@@ -11,7 +11,7 @@ window.onload = () => {
   // const socketio = require("socket.io");
 
   chatWrap.setAttribute("id", "chatWrap");
-  chatImg.setAttribute("src", "/backend/img/happy_yellow.png");
+  chatImg.setAttribute("src", `${backend}/img/happy_yellow.png`);
 
   chatWrap.append(chatImg);
   document.body.appendChild(chatWrap);
