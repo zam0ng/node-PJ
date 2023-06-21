@@ -1,5 +1,5 @@
-let backend = "http://13.209.64.80" ;
-let frontend = "/" ;
+// let backend = "http://13.209.64.80" ;
+// let frontend = "/" ;
 
 window.onload = () => {
   // ==========================================================
