@@ -437,6 +437,7 @@
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
   // 하트가 눌려져있게 표시a
   window.onload = async () => {
+      const followBtn = document.querySelector(".followBtn");
       const getUrl = new URL(window.location.href);
 
       const getParams = new URLSearchParams(getUrl.search);
@@ -529,7 +530,7 @@
       }
 
 
-    }
+}
     const wantToReadBtn = document.querySelector(".wantToReadBtn");
 
 // want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
