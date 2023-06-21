@@ -214,7 +214,7 @@ async function getView() {
           reviewStarSpan[i].innerText = "☆";
         }
         // ♡ ♥
-        
+
       }
     };
   });
@@ -235,7 +235,7 @@ async function getView() {
       alert("별점을 선택해주세요.");
       return;
     }
-    const reviewInput = writeReviewContainerInput.value;  
+    const reviewInput = writeReviewContainerInput.value;
     if (!writeReviewContainerInput.value) {
       alert("댓글을 입력해주세요.");
     }
@@ -446,9 +446,8 @@ async function getComments() {
               <span>${reviewStar}</span>
             </div>
             <div class="commentMainDate">
-            <span>${dateSplit[1]} ${dateSplit[2].slice(0, 2)}, ${
-      dateSplit[0]
-    }</span>
+            <span>${dateSplit[1]} ${dateSplit[2].slice(0, 2)}, ${dateSplit[0]
+      }</span>
             </div>
           </div>
           <div class="commentArea">
@@ -456,9 +455,8 @@ async function getComments() {
               ${el.comment}
             </p>
           </div>
-          <span class="r_reviewOpen">${
-            reviewInfo[index].r_reviews.length
-          } comments</span>
+          <span class="r_reviewOpen">${reviewInfo[index].r_reviews.length
+      } comments</span>
           <div class="reCommentArea">
             <div class="reCommentsWrap">
             </div
@@ -567,7 +565,7 @@ async function booksAllData() {
   const getParams = new URLSearchParams(getUrl.search);
 
   const getId = getParams.get("id");
-  
+
   const data = await axios.get(`${backend}/view/${getId}`, {
     withCredentials: true,
   });
@@ -578,7 +576,7 @@ async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);
 
-  const data  = await axios.get(
+  const data = await axios.get(
     `${backend}/main/logincheck`,
     {
       // 이게 rawheader에 쿠키를 저장하는 역할
@@ -597,7 +595,7 @@ async function logincheck() {
 
   if (role == "writer") {
     who = "작가";
-  } else{
+  } else {
     who = "독자";
   }
 
