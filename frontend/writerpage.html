@@ -11,7 +11,7 @@
 
   <body>
     <div class="header">
-      <a href="/index.html">
+      <a href=/index.html`>
         <img
           class="header-img"
           src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
@@ -111,22 +111,22 @@
   </body>
   <script>
     logout.onclick = async () => {
-      await axios.get("http://13.209.64.80/logout", {
+      await axios.get(`${process.env.backend}/logout`, {
         withCredentials: true,
       });
 
       document.cookie =
         "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-      window.location.href = "/index.html";
+      window.location.href = `${process.env.frontend}index.html`;
     };
 
     async function getAPI() {
       try {
-        const { data } = await axios.get("http://13.209.64.80/writer", {
+        const { data } = await axios.get(`${process.env.backend}/writer`, {
           withCredentials: true,
         });
         console.log(data.user_img);
-        img1.src = `http://13.209.64.80${data.user_img}`;
+        img1.src = `${process.env.backend}${data.user_img}`;
 
         let tc;
         let tb = data.checks;
@@ -154,7 +154,7 @@
       form.append("upload", file.files[0]);
       console.log(file.files[0]);
       axios
-        .post("http://13.209.64.80/writer", form, {
+        .post(`${process.env.backend}/writer`, form, {
           withCredentials: true,
           "Content-Type": "multipart/form-data",
         })
@@ -210,7 +210,7 @@
     async function acceptAPI() {
       try {
         const { data } = await axios.get(
-          "http://13.209.64.80/writer/result",
+          `${process.env.backend}/writer/result`,
           {
             withCredentials: true,
           }
@@ -231,7 +231,7 @@
     acceptAPI()
     async function rejectAPI(){
         try {
-            const {data}= await axios.get('http://13.209.64.80/writer/result2',{
+            const {data}= await axios.get(`${process.env.backend}/writer/result2`,{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {
@@ -270,7 +270,7 @@
 
     async function waitingAPI(){
         try {
-            const {data}= await axios.get('http://13.209.64.80/writer/result3',{
+            const {data}= await axios.get(`${process.env.backend}/writer/result3`,{
                 withCredentials :true})
                 console.log(data)
                data.forEach((el) => {

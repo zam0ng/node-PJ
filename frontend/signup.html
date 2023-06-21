@@ -71,7 +71,7 @@
         });
         console.log(role);
         console.log(gender);
-        axios.post('http://13.209.64.80/signup',{
+        axios.post(`${process.env.backend}/signup`,{
 
             withCredentials:true,
 
@@ -91,15 +91,15 @@
             console.log(e);
             
             if(e.data=='이미 존재하는 계정'){
-               return window.location.href= "/singupErr2.html"
+               return window.location.href= `${process.env.frontend}singupErr2.html`
             }
             
             if(e.data=='비밀번호 불일치'){
-                return window.location.href ="/singupErr.html"
+                return window.location.href =`${process.env.frontend}singupErr.html`
             }
 
             if(e.data=='가입성공'){
-                return window.location.href ="/login.html"
+                return window.location.href =`${process.env.frontend}login.html`
             }
         })
     }

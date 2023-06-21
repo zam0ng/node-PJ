@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="./css/admin.css">
+<link rel="stylesheet" href="./css/adminchat.css">
 <body>
     <div class="main-box">
         <div class="title">
@@ -44,6 +46,28 @@
                 </div>
                 <div id="main_content"></div>
                 <div id="main_content2"></div>
+
+                <div id="main_content3">
+                    <div style="display: flex;">
+                    <div id="chat_list">
+                        <ul class="chat_user_id">
+                            
+                           
+                        </ul>
+                    </div>
+                    <div id="chat_room">
+                        <div id="who_room"></div>
+                        <div class="text-box">
+                            <div class="chatArea"></div>
+                        </div>
+                        <div id="send">
+                            <input type="text" placeholder="Please enter your message" name="" id="adminMsg">
+                            <button class="btn-style" id="sendBtn">send</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
             </div>
         </div>
 
@@ -60,8 +84,9 @@
     post_agree.style.color ="rgb(158, 158, 158)";
     chat_agree.style.color ="rgb(158, 158, 158)";
     reject_reason.style.visibility = "hidden";
+    main_content3.style.display= "none";
 
-    const data =await axios.get("http://13.209.64.80/nonagreeuser",{
+    const data =await axios.get(`${process.env.backend}/nonagreeuser`,{
 
         withCredentials:true,
     })
@@ -115,7 +140,7 @@
                 console.log("클릭됨")
                 console.log(index)
 
-                const data =await axios.get("http://13.209.64.80/nonagreeuser",{
+                const data =await axios.get(`${process.env.backend}/nonagreeuser`,{
                 withCredentials:true,
                 })
 
@@ -130,7 +155,7 @@
                         e.grade = e.grade + 1;
                         // console.log(e.grade);
                         console.log(e.user_id);
-                        axios.post("http://13.209.64.80/nonagreeuser",{
+                        axios.post(`${process.env.backend}/nonagreeuser`,{
 
                             withCredentials : true,
 
@@ -149,7 +174,7 @@
             e.onclick = async () =>{
                 console.log("클릭");
 
-                const data =await axios.get("http://13.209.64.80/nonagreeuser",{
+                const data =await axios.get(`${process.env.backend}/nonagreeuser`,{
                 withCredentials:true,
                 })
 
@@ -162,7 +187,7 @@
                         e.grade = e.grade - 1;
                         // console.log(e.grade);
                         console.log(e.user_id);
-                        axios.post("http://13.209.64.80/nonagreeuser",{
+                        axios.post(`${process.env.backend}/nonagreeuser`,{
 
                             withCredentials : true,
 
@@ -187,13 +212,19 @@
     user_agree.style.color ="black";
     post_agree.style.color ="rgb(158, 158, 158)";
     chat_agree.style.color ="rgb(158, 158, 158)";
+
+    
     main_content2.style.visibility="hidden";
+    // main_content2.style.display="none";
     reject_reason.style.visibility = "hidden";
     main_content.style.display="block";
 
+    //0619
+    main_content3.style.display = "none";
 
 
-    const data =await axios.get("http://13.209.64.80/nonagreeuser",{
+
+    const data = await axios.get(`${process.env.backend}/nonagreeuser`,{
 
         withCredentials:true,
     })
@@ -247,7 +278,7 @@
                 console.log("클릭됨")
                 console.log(index)
 
-                const data =await axios.get("http://13.209.64.80/nonagreeuser",{
+                const data =await axios.get(`${process.env.backend}/nonagreeuser`,{
                 withCredentials:true,
                 })
 
@@ -262,7 +293,7 @@
                         e.grade = e.grade + 1;
                         // console.log(e.grade);
                         console.log(e.user_id);
-                        axios.post("http://13.209.64.80/nonagreeuser",{
+                        axios.post(`${process.env.backend}/nonagreeuser`,{
 
                             withCredentials : true,
 
@@ -287,13 +318,16 @@
    post_agree.onclick = async() =>{
     main_content2.innerHTML = "";
     main_content2.style.visibility = "visible";
+    main_content.style.display="none";
+    //0619
+    main_content3.style.visibility = "hidden";
+
     tab_title.innerText = "게시글 관리";
     user_agree.style.color ="rgb(158, 158, 158)";
     post_agree.style.color ="black";
     chat_agree.style.color ="rgb(158, 158, 158)";
-    main_content.style.display="none";
     console.log("클릭 되냐>?");
-        const data = await axios.get("http://13.209.64.80/nonagreeuser/posts",{
+        const data = await axios.get(`${process.env.backend}/nonagreeuser/posts`,{
         withCredentials : true,
     })
 
@@ -310,7 +344,7 @@
 
             main_content2.innerHTML += `
                 <div class="book_img">
-                <img src="http://13.209.64.80/${el.img}" alt="">
+                <img src="${process.env.backend}/${el.img}" alt="">
                 <div class="book_title">${el.title}</div>
                         <button class="accept2">  </button>
                         <button class="reject2">  </button>
@@ -325,7 +359,7 @@
                 console.log("클릭됨")
                 console.log(index)
 
-                const data =await axios.get("http://13.209.64.80/nonagreeuser/posts",{
+                const data =await axios.get(`${process.env.backend}/nonagreeuser/posts`,{
                 withCredentials:true,
                 })
 
@@ -338,7 +372,7 @@
                         e.accept = parseInt(e.accept) + 1;
                         console.log(e.accept);
                         console.log(e.id);
-                        axios.get("http://13.209.64.80/nonagreeuser/acceptUpdate",{
+                        axios.get(`${process.env.backend}/nonagreeuser/acceptUpdate`,{
 
                             withCredentials : true,
 
@@ -366,7 +400,7 @@
                 const reasonvalue = reason.options[reason.selectedIndex].value;
                 console.log("클릭");
 
-                const data =await axios.get("http://13.209.64.80/nonagreeuser/posts",{
+                const data =await axios.get(`${process.env.backend}/nonagreeuser/posts`,{
                 withCredentials:true,
                 })
 
@@ -379,7 +413,7 @@
                         e.accept = parseInt(e.accept) - 1;
                         console.log(e.grade);
                         console.log(e.id);
-                        axios.get("http://13.209.64.80/nonagreeuser/acceptUpdate",{
+                        axios.get(`${process.env.backend}/nonagreeuser/acceptUpdate`,{
 
                             withCredentials : true,
 
@@ -404,7 +438,7 @@
 //         console.log(reason.options[reason.selectedIndex].value);
 //         const reasonvalue = reason.options[reason.selectedIndex].value;
         
-//         axios.get("http://13.209.64.80/nonagreeuser/rejectUpdate",{
+//         axios.get("http://127.0.0.1:8080/nonagreeuser/rejectUpdate",{
 
 //             withCredentials: true,
 
@@ -414,15 +448,184 @@
 //         })
 //    }
 
-   chat_agree.onclick = () =>{
-    tab_title.innerText = "고객 문의";
-    user_agree.style.color ="rgb(158, 158, 158)";
-    post_agree.style.color ="rgb(158, 158, 158)";
-    chat_agree.style.color ="black";
-   }
-   
-   
+
+   chat_agree.onclick = async () => {
+        let chatUserId = document.querySelector(".chat_user_id");
+        tab_title.innerText = "고객 문의";
+        user_agree.style.color = "rgb(158, 158, 158)";
+        post_agree.style.color = "rgb(158, 158, 158)";
+        chat_agree.style.color = "black";
+
+        //0619
+        chatUserId.innerHTML = "";
+        main_content3.style.display = "block";
+        main_content3.style.visibility = "visible";
+        main_content2.style.visibility = "hidden";
+        main_content.style.display = "none";
+
+        let chatArea = document.querySelector(".chatArea");
+
+        
+        // confirm 이 0인 값을 가져와보자.
+        const confirmZero = await axios.get(`${process.env.backend}/chat/confirmZero`,{
+            withCredentials:true,
+        })
+
+        console.log(confirmZero.data);
+
+        confirmZero.data.forEach((el,index) => {
+            console.log(el)
+        });
+
+       
+        // 채팅을 한번이라도 한 유저 이름 가져와야함
+        const un = await axios.get(`${process.env.backend}/chat/username`, {
+            withCredentials: true,
+        })
+
+        const socket = io.connect(`${process.env.backend}`);
+            let chat_id;
+            const userName = "admin";
+            let userTemp;
+            let chatUserInfo;
+
+            console.log(un.data);
+            
+
+            confirmZero.data.forEach((el,index) => {
+            // const { user_name } = el;
+            // console.log(user_name);
+            if(el.zeroCnt == 0){
+                chatUserId.innerHTML +=
+                `
+             <li class="userClick"><span class="usn">${el.user_name}</span>
+            </li>`
+                
+            } else {
+            chatUserId.innerHTML +=
+                `
+             <li class="userClick"><span class="usn">${el.user_name}</span><span class="zeroCnt">${el.zeroCnt}</span>
+            </li>
+                                  
+            `}
+            //usn : User Span Name 
+            let userClick = document.querySelectorAll(".userClick");
+            let usn = document.querySelectorAll(".usn")
+
+            userClick.forEach((el, index) => {
+                el.style.backgroundColor="";
+                el.onclick = async(e) => {
+                    console.log(e.target.querySelector(".zeroCnt"));
+                    const zeroCnt = e.target.querySelector(".zeroCnt");
+
+                    zeroCnt.style.display="none";
+
+                    chatArea.innerHTML = "";
+                    if (userTemp) {
+                        socket.emit("leaveRoom", chat_id);
+                    }
+                    // el.style.backgroundColor="red"
+                    console.log(index + "누름");
+                    let str = confirmZero.data[index].user_name;
+                    console.log(str)
+
+                    who_room.innerText = str;
+
+                    chatUserInfo = await axios.get(`${process.env.backend}/chat/getUserInfo`, {
+                        withCredentials: true,
+                        params: {
+                            user_id: str,
+                        } 
+                    });
+                    chat_id = chatUserInfo.data.id;
+                    console.log(chat_id);
+
+                    socket.emit("joinRoom", chat_id);
+
+                    // 소켓 연결됬을때 카톡 읽은것처럼 1로 바꿈.
+                    // console.log(socket.on("joinRoom", chat_id))
+
+                    if(socket.emit("joinRoom", chat_id).connected){
+
+                        const data = axios.get(`${process.env.backend}/chat/changeone`,{
+                            withCredentials : true,
+
+                            params : {
+                                chat_id : chat_id,
+                            }
+                        })
+                    
+                    }
+                    userTemp = chat_id;
+
+                    console.log(str)
+                    console.log(chat_id);
+
+                    const chatdata = await axios.get(
+                        `${process.env.backend}/chat/getChatData`,
+                        {
+                            withCredentials: true,
+                            params: {
+                                id: chat_id,
+                            },
+                        }
+                    );
+
+                    console.log(chatdata);
+                    
+
+                    chatdata.data.forEach((el, index) => {
+                        console.log(el.chat_id, el.user_name, el.text);
+                        
+                        if(el.user_name=="admin"){
+
+                            chatArea.innerHTML += `
     
+                                <span class="adminSpan">${el.text}</span>
+                            `
+                        }
+                        else{
+                            chatArea.innerHTML += `
+    
+                                <span class="userSpan">${el.text}</span>
+                            `
+                        }
+                    });
+                    // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
+                    setTimeout(() => {
+                        chatArea.scrollTop = chatArea.scrollHeight;
+                    }, 0);
+                }
+            });
+        });
+
+        sendBtn.onclick = () => {
+           // console.log(user_name);
+           socket.emit("message", chat_id, userName, adminMsg.value);
+           adminMsg.value ="";
+        };
+
+        socket.on("message", (chat_id, user_name, msg) => {
+           console.log(chat_id, " ", user_name, " ", msg); 
+           if (user_name == "admin") {
+
+                chatArea.innerHTML += `
+
+                <span class="adminSpan">${msg}</span>
+                `
+            }
+            else {
+                chatArea.innerHTML += `
+
+            <span class="userSpan">${msg}</span>
+                `
+            }
+            // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
+            chatArea.scrollTop = chatArea.scrollHeight;
+       });
+        
+    }
    
 </script>
+<!-- <script src="./js/adminChat.js"></script> -->
 </html>

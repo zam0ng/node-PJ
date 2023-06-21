@@ -56,6 +56,23 @@ exports.islogin2 = async (req, res, next) => {
     console.log("islogin 컨트롤러에서 오류남" + error);
   }
 };
+
+exports.getLoginUser = async (req, res) => {
+  try {
+    const { access_token } = req.session;
+
+    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
+      if (err) {
+        console.log("로그인 정보 만료");
+      } else {
+        const data = decoded;
+        res.json(data);
+      }
+    });
+  } catch (error) {
+    console.error("getLoginUser", error);
+  }
+};
 // console.log(req);
 // console.log(req.rawHeaders);
 // console.log(req.rawHeaders[29]);

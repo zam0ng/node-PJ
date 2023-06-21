@@ -435,7 +435,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
-  // 하트가 눌려져있게 표시
+  // 하트가 눌려져있게 표시a
   window.onload = async () => {
       const getUrl = new URL(window.location.href);
 
@@ -443,7 +443,7 @@
 
       const getId = getParams.get("id");
 
-      const data1 = await axios.get("http://13.209.64.80/view/user/checks", {
+      const data1 = await axios.get(`${process.env.backend}/view/user/checks`, {
         withCredentials: true,
       })
       const teststr = data1.data.checks;
@@ -457,9 +457,72 @@
         }
       });
       // 페이지에 들어올 떄 viewcnt 증가
-    const data = await axios.get(`http://13.209.64.80/view/checks/viewcnt/${getId}`, {
+    await axios.get(`${process.env.backend}/view/checks/viewcnt/${getId}`, {
       withCredentials: true,
     });
+
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    // view 페이지에 들어왔을때 해당작가를 팔로우 한 상태이면 follow 버튼이 white 로 보이게
+    // user 에서 팔로잉 값 가져와서 split 으로 짜르고 배열 만든후에 작가 id 랑 비교해서 맞으면 
+    // follow 버튼 흰색
+    const data2 = await axios.get(`${process.env.backend}/view/user/follow`,{
+      withCredentials:true,
+    })
+    const f = data2.data.following;
+    console.log(f)
+    const data = await booksAllData();
+    const author = data.data.bookdata;
+    console.log("============")
+    console.log(author)
+    console.log(author.id);
+    if(f==null){
+      const ff = f.split(",");
+  
+        ff.forEach((el) => {
+          if (el == author.id) {
+  
+            followBtn.style.backgroundColor = "white";
+            ft.style.color="black"
+            ft.innerText = "Following"
+  
+          }
+        });
+    }
+
+    // 팔로우 버튼을 클릭했을 때 그 안에 text 가 following 이면 
+    // User 가져와서 해당 작가번호 지우고 업데이트
+
+    followBtn.onclick = async () => {
+      console.log("---------------------------")
+
+        if (ft.innerText == "Following") {
+          await axios.get(`${process.env.backend}/follow/del`,{
+            withCredentials:true,
+            
+            params :{
+              author_id : author.id,
+            }
+          })
+          followBtn.style.backgroundColor = "black";
+          ft.style.color="white"
+          ft.innerText = "Follow"
+
+        }
+         if(ft.innerText == "Follow"){
+
+          await axios.get(`${process.env.backend}/follow/list`,{
+            withCredentials:true,
+
+            params: {
+              author_id : author.id,
+            }
+          })
+
+          followBtn.style.backgroundColor = "white";
+          ft.style.color="black"
+          ft.innerText = "Following"
+        }
+      }
 
 
     }
@@ -479,14 +542,14 @@ wantToReadBtn.onclick = async() =>{
   if(checks.innerHTML == "♥"){
     checks.innerHTML = "♡"
     console.log("찜 해체할거임")
-    const data = await axios.get(`http://13.209.64.80/view/checks/delete/${getId}`, {
+    const data = await axios.get(`${process.env.backend}/view/checks/delete/${getId}`, {
     withCredentials: true,
   });
   }
   else{
     checks.innerHTML = "♥"
     console.log("찜 할거임")
-    const data = await axios.get(`http://13.209.64.80/view/checks/add/${getId}`, {
+    const data = await axios.get(`${process.env.backend}/view/checks/add/${getId}`, {
     withCredentials: true,
   });
   }

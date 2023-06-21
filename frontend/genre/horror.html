@@ -110,7 +110,7 @@
   <script>
     window.onload = async () => {
       viewList.innerHTML = "";
-      const { data } = await axios.get("http://13.209.64.80/allview/horror");
+      const { data } = await axios.get(`${process.env.backend}/allview/horror`);
 
       console.log(data);
 
@@ -119,8 +119,8 @@
       data.forEach((el, index) => {
         console.log(el.img);
         console.log(el.id);
-        viewList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
-          <img src="http://13.209.64.80/${el.img}" alt="" />
+        viewList.innerHTML += `<a href="${process.env.frontend}view.html?id=${el.id}"><div class="viewCard">
+          <img src="${process.env.backend}/${el.img}" alt="" />
           <div class="cardText">
             <span>☻</span>
             <span>${el.viewcnt}</span>
