@@ -208,8 +208,7 @@ async function getView() {
 
     axios.post(
       `${backend}/view/reviewInsert`,
-      `${backend}/view/reviewInsert`,
-
+      
       {
         book_id: bookInfo.id,
         star: reviewsScore,
