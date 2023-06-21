@@ -40,6 +40,7 @@ exports.signup = async (req, res) => {
             checks : "",
             auth : "",
             following : "",
+            buys : "",
             email : email,
         }).then((e)=>{
             return res.send("가입성공");
