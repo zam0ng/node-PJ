@@ -27,6 +27,7 @@ const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
 const checkRouter = require("./routers/checklist"); 
 const chatRouter = require("./routers/chatRouter");
+const followRouter = require("./routers/follow");
 
 
 app.use(bodyParser.json());
@@ -87,6 +88,7 @@ app.use("/allview", allview);
 app.use("/view", viewRouter);
 app.use("/check",checkRouter);
 app.use("/chat", chatRouter);
+app.use("/follow",followRouter);
 
 
 const server = app.listen(8080, () => {
