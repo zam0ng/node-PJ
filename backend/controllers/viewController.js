@@ -3,6 +3,7 @@ const { Books, User, review, r_review } = require("../models");
 const { sequelize } = require("../models");
 const url = require("url");
 const e = require("express");
+const { param } = require("../routers/books");
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
@@ -93,7 +94,7 @@ exports.viewInfo = async (req, res) => {
     });
 
     // 책에 대한 별점 개수, 총점
-    const stardata = await review.findAll({
+    let stardata = await review.findAll({
       attributes: [
         "star",
         [sequelize.fn("count", sequelize.col("star")), "starCnt"],
@@ -156,10 +157,9 @@ exports.insertReview = async (req, res) => {
 exports.insertReReview = async (req, res) => {
   // console.log("insertReReview");
   // console.log(req);
-  const { nickname,id} = req.decoded;
-  const { review,review_id } = req.body;
+  const { nickname, review, user_id, review_id } = req.body;
   try {
-    await r_review.create({ nickname, review, user_id:id, review_id });
+    await r_review.create({ nickname, review, user_id, review_id });
   } catch (error) {
     console.error(error);
   }
@@ -246,6 +246,7 @@ exports.checksdel = async(req,res)=>{
 }
 exports.userchecks = async(req,res) =>{
   try {
+    console.log("userchecks 들어왔니?")
     const {user_id} =req.decoded;
 
     const data = await User.findOne({
@@ -257,5 +258,98 @@ exports.userchecks = async(req,res) =>{
     res.json(data);
   } catch (error) {
     console.log("view 컨트롤러 userchecks 에서 오류남"+ error);
+  }
+}
+
+exports.viewcnt = async(req,res)=>{
+  console.log("-------------------------req.params.id");
+
+  console.log(req.params.id);
+  console.log("-------------------------req.params.id");
+  try {
+    const data = await Books.findOne({
+      where :{
+        id : req.params.id,
+      }, raw : true,
+    })
+
+    console.log(data);
+    console.log(data.viewcnt);
+    
+    await Books.update({
+      viewcnt : data.viewcnt+1,
+
+      
+    },{
+      where :{
+        id : req.params.id,
+      }
+    })
+    res.send();
+  } catch (error) {
+    console.log("viewcnt 컨트롤러에서 오류"+error);
+  }
+}
+exports.followadd = async(req,res)=>{
+  try {
+      const {user_id}=req.decoded;
+      const data = await User.findOne({ where: {user_id:user_id},raw:true});
+      console.log("여기 followadd임")
+      console.log(data);
+      const as = data.following
+      console.log (JSON.parse(data.following))
+      if(data.followig==""){
+        // User.update({following : },{ where: {user_id}});
+      }
+      const qw = as.split(",")
+      const data2 = await User.findAll({where:{id:qw}})
+      
+     console.log("=====================")
+      console.log(data2)
+      res.json(data2)
+  } catch (error) {
+      console.log("여기 followadd error임")
+    console.log(error)  
+  }
+}
+
+
+
+
+exports.followdel = async(req,res)=>{
+  try {
+    req.parmas
+    // const {user_id}=req.decoded;
+    // const data = await User.findOne({ where : {user_id},raw:true})
+    // console.log("----------여기 followdel")
+    // console.log(data.following)
+    // const followstr = data.following;
+    // const tr = followstr.split(",");
+    // const result = tr.filter(num => num!=req.params.id)
+    // console.log("----------------result")
+    // console.log(tr);
+    // console.log(result)
+    // console.log("----------------result")
+    // const result2 = result.join();
+    // await User.update({
+    //   following : result2},{where:{user_id}})
+  } catch (error) {
+    console.log("followdel에서 오류남"+error);
+  }
+}
+exports.userfollow = async(req,res) =>{
+  try {
+    console.log('userfollow 들어옴?');
+    const {user_id} =req.decoded;
+
+    const data = await User.findOne({
+      where :{user_id},
+      raw:true,
+    })
+
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    console.log("view 컨트롤러userfollow 에서 오류남"+ error);
   }
 }

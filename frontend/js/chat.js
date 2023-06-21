@@ -53,7 +53,7 @@ sendButton.addEventListener("click", sendMsg);
 msg.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     event.preventDefault();
-    let inputText = msg.value.trim(); // Get the input text and remove leading/trailing whitespace
+    let inputText = msg.value.trim();
     if (inputText !== "") {
       let listItem = document.createElement("li");
       listItem.textContent = inputText;

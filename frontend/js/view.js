@@ -16,12 +16,54 @@ async function getView() {
   const starInfo = data.data.stardata;
   const authordata = data.data.authordata;
   const reviewInfo = data.data.reviewdata;
+
+  // const followBtn = document.querySelector(".followBtn");
+ //onload 되었을 때 유저 following를 확인해서 내가 팔로잉을 한작가라면 
+ //followBtn이.clicked이 되어진 상태로 있을 수 있게
+  // window.onload = async ()=>{
+  //   const followBtn = document.querySelector(".followBtn");
+  //   const text = document.querySelector(".follow-text")
+  //   const data2 = await axios.get("http://127.0.0.1:8080/view/user/checks",{
+  //     withCredentials:true,
+  //   })
+  //   console.log(data2)
+  //   const qw = data2.data
+  //   const tr = qw.following
+  //   console.log(tr)
+  //   const ttr = tr.split(",");
+  //   console.log(ttr)
+
+  //   ttr.forEach((e)=>{
+  //     if(e ==author.id){
+  //       followBtn.style.backgroundColor = 'white';
+  //       text.style.color = 'black'
+  //     }
+  //   })
+
+  // }
+
+  
+    // follow 버튼 클릭시 유저의 following에 writer의 정보가 담겨지기
+  // followBtn.onclick = async()=>{
+  // followBtn.classList.toggle('clicked');
+  //   console.log("follow 버튼 클릭")
+  //   const fo = author.id
+  //   console.log("ssssss")
+  //   console.log(fo)
+  //   axios.get(`http://127.0.0.1:8080/follow/list`,{
+  //   withCredentials:true,
+  //   params : {id:fo}})
+  //   }
+  
+ 
+
+
   // const userAlldata = e.data.userAlldata;
   // 넘어오는 데이터 콘솔 로그
-  // console.log("작가 정보 : author");
-  // console.log(author);
-  // console.log("책 정보 : bookInfo");
-  // console.log(bookInfo);
+  console.log("작가 정보 : author");
+  console.log(author.id);
+  console.log("책 정보 : bookInfo");
+  console.log(bookInfo);
   // console.log("책에 있는 댓글들 모음 : thisReview");
   // console.log(thisReview);
   // console.log("로그인한 유저 정보 : userInfo");
@@ -72,7 +114,7 @@ async function getView() {
 
   // 사이드바 책 표지 출력
   const sideWrapImg = document.querySelector(".sideWrapImg");
-  sideWrapImg.setAttribute("src", `../../backend/${bookInfo.img}`);
+  sideWrapImg.setAttribute("src", `http://127.0.0.1:8080/${bookInfo.img}`);
 
   // 책 타이틀, 지은이 출력
   const viewMainWrap = document.querySelector(".viewMainWrap");
@@ -213,6 +255,7 @@ async function getView() {
           reviewStarSpan[i].innerText = "☆";
         }
         // ♡ ♥
+        
       }
     };
   });
@@ -233,7 +276,7 @@ async function getView() {
       alert("별점을 선택해주세요.");
       return;
     }
-    const reviewInput = writeReviewContainerInput.value;
+    const reviewInput = writeReviewContainerInput.value;  
     if (!writeReviewContainerInput.value) {
       alert("댓글을 입력해주세요.");
     }
@@ -263,24 +306,20 @@ async function getView() {
     // 댓글을 쓰고 난 후 댓글창 초기화
     writeReviewContainerInput.value = "";
     getView();
-
   };
 
   getStarAvg();
-  getStarAvg();
   getComments();
-}
 
+}
 // ==================================================
 // ========== then에서 빼서 별도의 함수로 만들것 ===========
 // ==================================================
 async function getStarAvg() {
-  const data = await booksAllData();
-  const starInfo = data.data.stardata;
-
   // Community Reviews
   const data = await booksAllData();
   const starInfo = data.data.stardata;
+  const documentStyleSheet = document.styleSheets[0];
 
   let starTotalStore = 0;
   let starTotalCnt = 0;
@@ -530,10 +569,10 @@ async function getComments() {
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
           x.onclick = (e) => {
-            // if (!userInfo) {
-            //   alert("로그인 후 이용해주세요.");
-            //   return;
-            // }
+            if (!userInfo) {
+              alert("로그인 후 이용해주세요.");
+              return;
+            }
             if (!reCommentInput[y].value) {
               alert("댓글을 입력해주세요.");
               return;
@@ -545,9 +584,9 @@ async function getComments() {
               "http://127.0.0.1:8080/view/r_reviewInsert",
 
               {
-                
+                nickname: userInfo.nickname,
                 review: reCommentInput[y].value,
-               
+                user_id: userInfo.id,
                 review_id: thisReview[index].id,
               },
               { withCredentials: true }
@@ -570,7 +609,7 @@ async function booksAllData() {
   const getParams = new URLSearchParams(getUrl.search);
 
   const getId = getParams.get("id");
-
+  
   const data = await axios.get(`http://127.0.0.1:8080/view/${getId}`, {
     withCredentials: true,
   });
@@ -578,28 +617,39 @@ async function booksAllData() {
 }
 
 async function logincheck() {
-  const at = document.cookie.slice(8);
+  // const at = document.cookie.slice(8);
+  // console.log(at);
 
-  const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
-    // 이게 rawheader에 쿠키를 저장하는 역할
-    withCredentials: true,
+  const data  = await axios.get(
+    "http://127.0.0.1:8080/main/logincheck",
+    {
+      // 이게 rawheader에 쿠키를 저장하는 역할
+      withCredentials: true,
 
-    //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
-  });
+      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+    }
+  );
 
-  const { nickname, role } = data;
+  console.log(data);
+
+  const { nickname, role } = data.data;
+  console.log(nickname);
   let who;
+  console.log(role);
 
   if (role == "writer") {
     who = "작가";
-  } else {
+  } else{
     who = "독자";
   }
 
-  if (data == "다시 로그인") {
+  console.log(who);
+
+  if (data.data == "relogin") {
     login.style.display = "block";
     signUp.style.display = "block";
     nick.style.display = "none";
+    logout.style.visibility = "hidden";
   } else {
     login.style.display = "none";
     signUp.style.display = "none";
@@ -612,12 +662,6 @@ async function logincheck() {
   }
 }
 
+
 getView();
 // logincheck();
-
-const wantToReadBtn = document.querySelector(".wantToReadBtn");
-
-// want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
-wantToReadBtn.onclick = () => {
-  checks.innerHTML = "♥";
-};
