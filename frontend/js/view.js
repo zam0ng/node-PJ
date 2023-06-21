@@ -17,11 +17,12 @@ async function getView() {
   const authordata = data.data.authordata;
   const reviewInfo = data.data.reviewdata;
   // const userAlldata = e.data.userAlldata;
+
   // 넘어오는 데이터 콘솔 로그
   // console.log("작가 정보 : author");
   // console.log(author);
-  // console.log("책 정보 : bookInfo");
-  // console.log(bookInfo);
+  console.log("책 정보 : bookInfo");
+  console.log(bookInfo);
   // console.log("책에 있는 댓글들 모음 : thisReview");
   // console.log(thisReview);
   // console.log("로그인한 유저 정보 : userInfo");
@@ -34,45 +35,12 @@ async function getView() {
   // console.log(reviewInfo);
   // console.log(userAlldata);
 
-  //===============================================
-  // 넘어온 데이터 가공 하는 곳
-  //===============================================
-
-  // 별점이 비어있는 경우 비어 있는 별점 채우기
-
-  // if (starInfo.length != 5) {
-  //   for (let i = 0; i < 5; i++) {
-  //     for (let j = 5; j > 0; j--) {
-  //       if (starInfo[i]?.star != "5") {
-  //         console.log("별점 정보가 없는 별점 숫자 찾기");
-  //         console.log("starInfo", j, "undefined");
-  //         starInfo[j] = { star: `${j}`, starCnt: 0, starSum: 0 };
-  //         continue;
-  //       }
-  //     }
-
-  //     // for (let j = 5; (j = j); j--) {
-  //     //   if (parseInt(starInfo[i].star) != j) {
-  //     //     console.log("별점 정보가 없는 별점 숫자 찾기");
-  //     //     console.log("starInfo", j, "undefined");
-  //     //     starInfo[i] = { star: `${j}`, starCnt: 0, starSum: 0 };
-  //     //     break;
-  //     //   }
-  //     // }
-  //   }
-  //   // starInfo.sort((a, b) => a.star - b.star);
-  //   // starInfo.reverse();
-  // }
-
-  //===============================================
-
-  // if (data.status == 200) {
   // index.html의 스타일 시트를 가져옴
   const documentStyleSheet = document.styleSheets[0];
 
   // 사이드바 책 표지 출력
   const sideWrapImg = document.querySelector(".sideWrapImg");
-  sideWrapImg.setAttribute("src", `../../backend/${bookInfo.img}`);
+  sideWrapImg.setAttribute("src", `${backend}/${bookInfo.img}`);
 
   // 책 타이틀, 지은이 출력
   const viewMainWrap = document.querySelector(".viewMainWrap");
@@ -97,7 +65,7 @@ async function getView() {
   let starTotalCnt = 0;
   let starAvg = 0;
   // 최대 width 값
-  let starMaxWidth = 155;
+  let starMaxWidth = 178;
 
   starInfo.forEach((el, index) => {
     // console.log(el);
@@ -174,7 +142,7 @@ async function getView() {
   const authorImg = document.querySelector(".authorImg");
   const authorImgImg = authorImg.querySelector("img");
 
-  authorImgImg.setAttribute("src", `http://13.209.64.80${author.user_img}`);
+  authorImgImg.setAttribute("src", `${backend}${author.user_img}`);
 
   // 작가 이름
   const authorName = document.querySelector(".authorName");
@@ -194,7 +162,7 @@ async function getView() {
   const myImgImg = myImg.querySelector("img");
 
   if (userInfo) {
-    myImgImg.setAttribute("src", `http://13.209.64.80${userInfo.user_img}`);
+    myImgImg.setAttribute("src", `${backend}${userInfo.user_img}`);
   }
 
   // Ratings & Reviews 별 누르면 별 채워지는 기능
@@ -225,10 +193,6 @@ async function getView() {
   const postBtn = document.querySelector(".postBtn");
 
   postBtn.onclick = () => {
-    // if (!userInfo) {
-    //   alert("로그인 후 댓글을 작성 할 수 있습니다.");
-    //   return;
-    // }
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
       return;
@@ -236,11 +200,11 @@ async function getView() {
     const reviewInput = writeReviewContainerInput.value;
     if (!writeReviewContainerInput.value) {
       alert("댓글을 입력해주세요.");
+      return;
     }
-    // console.log(reviewsScore);
-    // console.log(reviewInput);
+
     axios.post(
-      "http://13.209.64.80/view/reviewInsert",
+      `${backend}/view/reviewInsert`,
 
       {
         book_id: bookInfo.id,
@@ -265,6 +229,18 @@ async function getView() {
     getView();
   };
 
+  // =========================================================
+  // 구매 기능
+  const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
+  BuyTheBookBtn.onclick = async () => {
+    if (confirm(`${bookInfo.title} 을 구매하시겠습니까?`)) {
+      window.location.href = `${backend}/v1/payment/ready?item_name=${bookInfo.title}&quantity=1&total_amount=${bookInfo.price}&vat_amount=0&tax_free_amount=0&books_id=${bookInfo.id}`;
+    } else {
+      return;
+    }
+  };
+  // =========================================================
+
   getStarAvg();
   getStarAvg();
   getComments();
@@ -275,6 +251,8 @@ async function getView() {
 // ==================================================
 async function getStarAvg() {
   // Community Reviews
+  const documentStyleSheet = document.styleSheets[0];
+
   const data = await booksAllData();
   const starInfo = data.data.stardata;
 
@@ -285,15 +263,9 @@ async function getStarAvg() {
   let starMaxWidth = 155;
 
   starInfo.forEach((el, index) => {
-    // console.log(el);
     starTotalStore += parseInt(el.starSum);
     starTotalCnt += parseInt(el.starCnt);
   });
-
-  // console.log("=============================");
-  // console.log(starTotalStore);
-  // console.log(starTotalCnt);
-  // console.log("=============================");
 
   starAvg = (starTotalStore / starTotalCnt).toFixed(2);
 
@@ -302,7 +274,6 @@ async function getStarAvg() {
   const colStarAvgSpan = colStarAvg.querySelector("span");
 
   // 가져온 별점 점수별 정리
-  console.log("Community Reviews");
   const ratingsContainer = document.querySelector(".ratingsContainer");
   const fullBar = ratingsContainer.querySelectorAll(".fullBar");
   const ratingsTotal = ratingsContainer.querySelectorAll(".ratingsTotal");
@@ -394,7 +365,6 @@ async function getComments() {
   const commentMainStar = commentContainer.querySelectorAll(".commentMainStar");
 
   const commentMainDate = commentContainer.querySelectorAll(".commentMainDate");
-  console.log("댓글 테스트 구간");
 
   thisReview.forEach((el, index) => {
     let dateSplit = el.createdAt.split("-");
@@ -428,16 +398,14 @@ async function getComments() {
         <div class="commentWrap">
         <div class="commentProfile">
           <div class="commentProfileImg">
-            <img src="http://13.209.64.80${el.User.user_img}" alt="" />
+            <img src="${backend}${el.User.user_img}" alt="" />
           </div>
           <div class="commentProfileInfo">
           <span>${el.User.nickname}</span>
           <span>0 review</span>
           <span>0 follows</span>
           </div>
-          <div class="commentProfileFollowbtn">
-            <span>Follow</span>
-          </div>
+         
         </div>
         <div class="commentMainWrap">
           <div class="commentMainHeader">
@@ -488,7 +456,7 @@ async function getComments() {
                 <div class="reCommentsWrap">
                     <div class="reCommentsInner">
                       <div class="reCommentsProfileImgs">
-                        <img src="http://13.209.64.80${x.User.user_img}" alt="" />
+                        <img src="${backend}${x.User.user_img}" alt="" />
                       </div>
                       <div class="reComments">
                         <span>${x.nickname}</span>
@@ -501,7 +469,7 @@ async function getComments() {
           reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
-                        <img src="http://13.209.64.80${userInfo.user_img}" alt="" />
+                        <img src="${backend}${userInfo.user_img}" alt="" />
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
@@ -512,7 +480,7 @@ async function getComments() {
           reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
-                        <img src="http://13.209.64.80/img/basic.png" alt="" />
+                        <img src="${backend}/img/basic.png" alt="" />
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
@@ -526,19 +494,14 @@ async function getComments() {
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
           x.onclick = (e) => {
-            // if (!userInfo) {
-            //   alert("로그인 후 이용해주세요.");
-            //   return;
-            // }
             if (!reCommentInput[y].value) {
               alert("댓글을 입력해주세요.");
               return;
             }
-            // console.log(reCommentArea[index]);
             // 대댓글 등록
 
             axios.post(
-              "http://13.209.64.80/view/r_reviewInsert",
+              `${backend}/view/r_reviewInsert`,
 
               {
                 review: reCommentInput[y].value,
@@ -566,23 +529,21 @@ async function booksAllData() {
 
   const getId = getParams.get("id");
 
-  const data = await axios.get(`http://127.0.0.1:8080/view/${getId}`, {
+  const data = await axios.get(`${backend}/view/${getId}`, {
     withCredentials: true,
   });
   return data;
 }
 
 async function logincheck() {
-  const at = document.cookie.slice(8);
-
-  const { data } = await axios.get("http://13.209.64.80/main/logincheck", {
+  const data = await axios.get(`${backend}/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
 
     //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
   });
 
-  const { nickname, role } = data;
+  const { nickname, role } = data.data;
   let who;
 
   if (role == "writer") {
@@ -591,10 +552,11 @@ async function logincheck() {
     who = "독자";
   }
 
-  if (data == "다시 로그인") {
+  if (data.data == "relogin") {
     login.style.display = "block";
     signUp.style.display = "block";
     nick.style.display = "none";
+    logout.style.visibility = "hidden";
   } else {
     login.style.display = "none";
     signUp.style.display = "none";
@@ -608,11 +570,9 @@ async function logincheck() {
 }
 
 getView();
-// logincheck();
 
-const wantToReadBtn = document.querySelector(".wantToReadBtn");
-
-// want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
-wantToReadBtn.onclick = () => {
-  checks.innerHTML = "♥";
-};
+// =========================================================
+// 배포, 로컬에서 변하는 곳 정의
+const myImg = document.querySelector(".myImg");
+myImg.innerHTML = `<img src="${backend}/img/basic.png" alt="" />`;
+// =========================================================

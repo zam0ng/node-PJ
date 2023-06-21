@@ -119,25 +119,28 @@
   </body>
   <script>
     logout.onclick = async () => {
-      await axios.get("http://13.209.64.80/logout", {
+      await axios.get(`${process.env.backend}/logout`, {
         withCredentials: true,
       });
 
       document.cookie =
         "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-      window.location.href = "/index.html";
+      window.location.href = `${process.env.frontend}index.html`;
     };
 
     async function getAPI() {
       try {
-        const { data } = await axios.get("http://13.209.64.80/mypages", {
+        const { data } = await axios.get(`${process.env.backend}/mypages`, {
           withCredentials: true,
         });
-        img1.src = `http://13.209.64.80${data.user_img}`;
+        img1.src = `${process.env.backend}${data.user_img}`;
 
         // img1.src = data.user_img;
         let tb = data.checks;
-        let tc = tb.split(",");
+        let tc;
+        if (tb != null) {
+          tc = tb.split(",");
+        }
 
         nickname1.innerHTML = data.nickname;
         nickname2.innerHTML = data.nickname;
@@ -161,7 +164,7 @@
       form.append("upload", file.files[0]);
       console.log(file.files[0]);
       axios
-        .post("http://13.209.64.80/mypages", form, {
+        .post(`${process.env.backend}/mypages`, form, {
           //이것때문에 req 가 안읽힘
           withCredentials: true,
 
@@ -230,7 +233,7 @@
     async function commentAPI() {
       try {
         const { data } = await axios.get(
-          "http://13.209.64.80/mypages/reviews",
+          `${process.env.backend}/mypages/reviews`,
           {
             withCredentials: true,
           }
@@ -264,7 +267,7 @@
             <li>${el.comment}<br>${revisedFormattedDate}
               
             <div id="contain">
-              <div id="immg"><img id="imgg" src="http://13.209.64.80/${el.Book.img}" alt=""></div>
+              <div id="immg"><img id="imgg" src="${process.env.backend}/${el.Book.img}" alt=""></div>
               <div id="r_title">${el.Book.title}</div>
             </div>
               </li>
@@ -289,7 +292,7 @@
     async function replies() {
       try {
         const { data } = await axios.get(
-          "http://13.209.64.80/mypages/reviews",
+          `${process.env.backend}/mypages/reviews`,
           {
             withCredentials: true,
           }

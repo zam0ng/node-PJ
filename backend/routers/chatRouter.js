@@ -3,6 +3,9 @@ const {
   saveChat,
   getUserInfo,
   getChatData,
+  getUserName,
+  confirmZero,
+  changeone,
 } = require("../controllers/chatController");
 const { getLoginUser } = require("../controllers/islogin");
 
@@ -15,5 +18,9 @@ router.post("/", saveChat);
 router.get("/getUserInfo", getUserInfo);
 // 고객센터 버튼을 누른 유저가 한 대화의 내용을 가져옴
 router.get("/getChatData", getChatData);
+
+router.get("/username",getUserName);
+router.get("/confirmZero", confirmZero);
+router.get("/changeone",changeone);
 
 module.exports = router;

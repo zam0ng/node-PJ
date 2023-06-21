@@ -7,7 +7,9 @@
     <title>Document</title>
 </head> 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="./css/admin.css">
+<link rel="stylesheet" href="./css/adminchat.css">
 <body>
     <div class="main-box">
         <div class="title">
@@ -42,13 +44,35 @@
                         
                     
                 </div>
-                <div id="main_content">
-                    <h1>hi</h1>
+                <div id="main_content"></div>
+                <div id="main_content2"></div>
+
+                <div id="main_content3">
+                    <div style="display: flex;">
+                    <div id="chat_list">
+                        <ul class="chat_user_id">
+                            
+                           
+                        </ul>
+                    </div>
+                    <div id="chat_room">
+                        <div id="who_room"></div>
+                        <div class="text-box">
+                            <div class="chatArea"></div>
+                        </div>
+                        <div id="send">
+                            <input type="text" placeholder="Please enter your message" name="" id="adminMsg">
+                            <button class="btn-style" id="sendBtn">send</button>
+                        </div>
+                    </div>
                 </div>
+                </div>
+
             </div>
         </div>
 
         
 </body>
+<script src="./js/address.js"></script>
 <script src="./js/admin.js"></script>
 </html>

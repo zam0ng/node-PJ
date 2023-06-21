@@ -64,8 +64,9 @@ body {
 
 #newto{
     margin-top: 50px;
-    width: 118px;
+    width: 136px;
     margin:25px auto 0;
+    text-align: center;
 }
 #signupdiv{
     width: 93px;

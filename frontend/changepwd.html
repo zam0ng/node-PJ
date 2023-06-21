@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    .attr{
+        width: 50px;
+        height: 10px;
+        /* border: 1px solid black; */
+    }
+    #authnum,#authbtn,#authnum_input{
+        display: none;
+    }
+    #authnum_input{
+        margin-top: -20px
+    }
+    #errstr{
+        color: red;
+    }
+    .title{
+    /* width: 1100px; */
+    height: 70px;
+    font-size: xx-large;
+    margin : 0 auto;
+    text-align: center;
+    line-height: 70px;
+}
+.title-img
+{
+    margin: 0 auto;
+    width: 150px;
+    height: 80px;
+}
+
+</style>
+<body>
+    <div class="title">
+        <img
+          src="http://13.209.64.80/img/Color_logo_-_no_background.png"
+          class="title-img"
+          alt=""
+        />
+      </div>
+    <h3 id="str">변경하실 비밀번호를 입력하세요.</h3>
+    <span id="errstr"></span><Br>
+    <label for="" class ="attr">PASSWORD :</label>
+    <input type="password" id="pwd_input"><br>
+    <label for="" class= "attr">Re-enter PASSWORD :</label>
+    <input type="password" id="repwd_input"><br>
+
+    <button id="changebtn">비밀번호 변경</button><br>
+    <!-- <label for="" id ="authnum">Authentication number</label><br>
+    <input type="text" id="authnum_input">
+    <button id="authbtn">확인</button> -->
+</body>
+</html>
+<script>
+    changebtn.onclick = async () => {
+        let attr= document.querySelectorAll(".attr");
+        console.log(pwd_input.value);
+        console.log(repwd_input.value);
+        if(pwd_input.value!=repwd_input.value){
+            window.location.reload();
+            return errstr.innerText= "wrong password";
+        }
+        pwd_input.style.display= "none";
+        repwd_input.style.display= "none";
+        changebtn.style.display= "none";
+        attr.style.display="none";
+        str.innerText= "비밀번호 변경이 완료되었습니다.";
+
+            const getUrl = new URL(window.location.href);
+            const getParams = new URLSearchParams(getUrl.search);
+            const getId = getParams.get("id");
+
+            await axios.get(`${process.env.backend}/login/changepwd`, {
+                withcredential: true,
+
+                params: {
+                    id : getId,
+                    user_pw: pwd_input.value,
+                    user_repw: repwd_input.value,
+                }
+            })
+        }
+</script>

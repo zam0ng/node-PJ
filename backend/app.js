@@ -26,6 +26,9 @@ const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
 const checkRouter = require("./routers/checklist");
 const chatRouter = require("./routers/chatRouter");
+// ===========================================
+const paymentRouter = require("./routers/paymentRouter");
+// ===========================================
 
 app.use(bodyParser.json());
 
@@ -49,12 +52,12 @@ app.use("/upload", express.static(path.join(__dirname, "upload")));
 app.use(express.static("../frontend"));
 
 app.get("/", (req, res) => {
-  res.redirect("/index.html");
+  // res.redirect("http://127.0.0.1:5500/index.html");
+  res.send("응답합");
 });
 
 app.use(
   cors({
-    // origin: "http://13.209.64.80",
     origin: "http://127.0.0.1:5500",
     credentials: true,
   })
@@ -86,9 +89,14 @@ app.use("/view", viewRouter);
 app.use("/check", checkRouter);
 app.use("/chat", chatRouter);
 
+// ===========================================
+app.use("/v1/payment", paymentRouter);
+// ===========================================
+
 const server = app.listen(8080, () => {
   console.log("Server On!");
 });
+
 const io = socketio(server, {
   cors: {
     origin: "*",
@@ -112,7 +120,7 @@ io.on("connect", (socket) => {
 
   socket.on("message", (chat_id, user_name, text) => {
     axios.post(
-      "http://127.0.0.1:8080/chat",
+      `${process.env.backend}/chat`,
       {
         chat_id,
         user_name,

@@ -13,68 +13,30 @@
     <div class="nav">
       <div class="logoBox">
         <a href="/index.html"
-          ><img src="http://13.209.64.80/img/Black logo - no background.png" alt=""
+          ><img
+            src="http://13.209.64.80/img/Black logo - no background.png"
+            alt=""
         /></a>
 
         <div class="functionBox">
-          <span id="insert"
-            ><a href="/books.html"
-              >✏️ writing</a
-            ></span
-          >
+          <span id="insert"><a href="/books.html">✏️ writing</a></span>
           <span id="allview">📙books</span>
           <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
           <a href=""><span id="nick"></span></a>
-          <span id="login"
-            ><a href="/login.html">
-              login</a
-            ></span
-          >
-          <span id="signUp"
-            ><a href="/signup.html">
-              signUp</a
-            ></span
-          >
+          <span id="login"><a href="/login.html"> login</a></span>
+          <span id="signUp"><a href="/signup.html"> signUp</a></span>
           <button id="logout">logout</button>
         </div>
       </div>
       <div class="toggle">
         <div class="genre">
-          <span id="all"
-            ><a href="/genre/all.html"
-              >전체</a
-            ></span
-          >
-          <span id="conan"
-            ><a href="/genre/conan.html"
-              >추리</a
-            ></span
-          >
-          <span id="horror"
-            ><a href="/genre/horror.html"
-              >공포•스릴러</a
-            ></span
-          >
-          <span id="fantasy"
-            ><a href="/genre/fantasy.html"
-              >판타지</a
-            ></span
-          >
-          <span id="sorim"
-            ><a href="/genre/sorim.html"
-              >무협</a
-            ></span
-          >
-          <span id="game"
-            ><a href="/genre/game.html"
-              >게임</a
-            ></span
-          >
-          <span id="romance"
-            ><a href="/genre/romance.html"
-              >로맨스</a
-            ></span
-          >
+          <span id="all"><a href="/genre/all.html">전체</a></span>
+          <span id="conan"><a href="/genre/conan.html">추리</a></span>
+          <span id="horror"><a href="/genre/horror.html">공포•스릴러</a></span>
+          <span id="fantasy"><a href="/genre/fantasy.html">판타지</a></span>
+          <span id="sorim"><a href="/genre/sorim.html">무협</a></span>
+          <span id="game"><a href="/genre/game.html">게임</a></span>
+          <span id="romance"><a href="/genre/romance.html">로맨스</a></span>
         </div>
       </div>
     </div>
@@ -110,7 +72,9 @@
   <script>
     window.onload = async () => {
       viewList.innerHTML = "";
-      const { data } = await axios.get("http://13.209.64.80/allview/romance");
+      const { data } = await axios.get(
+        `${process.env.backend}/allview/romance`
+      );
 
       console.log(data);
 
@@ -119,8 +83,8 @@
       data.forEach((el, index) => {
         console.log(el.img);
         console.log(el.id);
-        viewList.innerHTML += `<a href="/view.html?id=${el.id}"><div class="viewCard">
-          <img src="http://13.209.64.80/${el.img}" alt="" />
+        viewList.innerHTML += `<a href="${process.env.frontend}view.html?id=${el.id}"><div class="viewCard">
+          <img src="${process.env.backend}/${el.img}" alt="" />
           <div class="cardText">
             <span>☻</span>
             <span>${el.viewcnt}</span>

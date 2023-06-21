@@ -38,7 +38,7 @@ window.onload = () => {
   sendInput.setAttribute("placeholder", "Please enter your message");
   const sendBtn = document.createElement("button");
   sendBtn.setAttribute("class", "btn-style");
-  sendBtn.setAttribute("id", "setBtn");
+  sendBtn.setAttribute("id", "sendBtn");
   sendBtn.innerHTML = "send";
 
   chatHeader.append(chatHeaderImg);
@@ -62,29 +62,26 @@ window.onload = () => {
   // 버튼을 누르면 소켓에 연결되면서 로그인한 유저정보를 가져옴
   chatWrap.onclick = async (e) => {
     try {
-      const data = await axios.get("http://127.0.0.1:8080/chat/getLoginUser", {
+      // ==========================================
+      chatArea.innerHTML = "";
+      // ==========================================
+      const data = await axios.get(`${backend}/chat/getLoginUser`, {
         // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
-
-        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
       });
       console.log(data);
-      // const textBox = document.querySelector(".text-box");
-      // const chatArea = textBox.querySelector(".chatArea");
       chatWrap.style.display = "none";
 
       let chat_id = data.data.id;
       let user_name = data.data.nickname;
 
-      const chatdata = await axios.get(
-        "http://127.0.0.1:8080/chat/getChatData",
-        {
-          withCredentials: true,
-          params: {
-            id: chat_id,
-          },
-        }
-      );
+      // 대화내용 가져오기
+      const chatdata = await axios.get(`${backend}/chat/getChatData`, {
+        withCredentials: true,
+        params: {
+          id: chat_id,
+        },
+      });
 
       // 데이터베이스에서 사용자와 운영자가 나눈 대화를 가져옴
       chatdata.data.forEach((el, index) => {
@@ -97,7 +94,7 @@ window.onload = () => {
       }, 0);
 
       // 소켓 관련 작업 내용 정리 공간  ==========================
-      socket = io.connect("http://localhost:8080");
+      socket = io.connect(`${backend}`);
       socket.emit("joinRoom", chat_id);
       // 소켓 관련 작업 내용 정리 공간 끝 =========================
 
@@ -114,12 +111,10 @@ window.onload = () => {
         } else {
           textBoxSpan.classList = "userSpan";
         }
-        // textBoxSpan.textContent = user_name + " : " + msg;
         textBoxSpan.textContent += msg;
         chatArea.appendChild(textBoxSpan);
         chatArea.scrollTop = chatArea.scrollHeight;
       }
-      // console.log("메세지 보내기 버튼 눌림?");
       sendBtn.onclick = () => {
         // 입력한 메시지를 서버로 보냄
         socket.emit("message", chat_id, user_name, msg.value);
@@ -138,7 +133,6 @@ window.onload = () => {
   // ==========================================================
   // 활성화된 채팅 창에서 x를 눌러 스마일표시로 되돌아감
   chatHeaderSpan.onclick = () => {
-    // console.log("close 버튼 눌림?");
     chatMain.style.display = "none";
     chatWrap.style.display = "block";
     socket.off("message");

@@ -11,7 +11,7 @@
 
   <body>
     <div class="header">
-      <a href="/index.html">
+      <a href=/index.html`>
         <img
           class="header-img"
           src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
@@ -22,7 +22,7 @@
           <li class="category">
             <a href="/index.html">Home</a>
           </li>
-          <li class="category"><a href="">My Books</a></li>
+          <li class="category"><a href="/checklist.html">My Books</a></li>
         </ul>
         <ul style="display: flex; align-items: center">
           <button id="logout">Log-Out</button>
@@ -108,27 +108,34 @@
   </body>
   <script>
     logout.onclick = async () => {
-      await axios.get("http://13.209.64.80/logout", {
+      await axios.get(`${process.env.backend}/logout`, {
         withCredentials: true,
       });
 
       document.cookie =
         "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-      window.location.href = "/index.html";
+      window.location.href = `${process.env.frontend}index.html`;
     };
 
     async function getAPI() {
       try {
-        const { data } = await axios.get("http://13.209.64.80/writer", {
+        const { data } = await axios.get(`${process.env.backend}/writer`, {
           withCredentials: true,
         });
         console.log(data.user_img);
-        img1.src = `http://13.209.64.80${data.user_img}`;
+        img1.src = `${process.env.backend}${data.user_img}`;
+
+        let tc;
+        let tb = data.checks;
+        if(tb!=null){
+
+        tc = tb.split(",");
+      }
         nickname1.innerHTML = data.nickname;
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
         grade1.innerHTML = data.grade;
-        checks.innerHTML = data.checks;
+        checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
         console.log(error);
@@ -144,7 +151,7 @@
       form.append("upload", file.files[0]);
       console.log(file.files[0]);
       axios
-        .post("http://13.209.64.80/writer", form, {
+        .post(`${process.env.backend}/writer`, form, {
           withCredentials: true,
           "Content-Type": "multipart/form-data",
         })
@@ -156,6 +163,7 @@
           console.log("=================================================");
           console.log(err);
         });
+        window.location.reload();
     };
     nickBtn.onclick = () => {
       try {
@@ -198,9 +206,12 @@
 
     async function acceptAPI() {
       try {
-        const { data } = await axios.get("http://13.209.64.80/writer/result", {
-          withCredentials: true,
-        });
+        const { data } = await axios.get(
+          `${process.env.backend}/writer/result`,
+          {
+            withCredentials: true,
+          }
+        );
         console.log(data);
         data.forEach((el) => {
           acceptList.innerHTML += `
@@ -214,18 +225,16 @@
         });
       } catch (error) {}
     }
-    acceptAPI();
-    async function rejectAPI() {
-      try {
-        const { data } = await axios.get("http://13.209.64.80/writer/result2", {
-          withCredentials: true,
-        });
-        console.log(data);
-        data.forEach((el) => {
-          console.log(el.reject);
-          switch (el.reject) {
-            case "1":
-              el.reject = "부적절한 책표지";
+    acceptAPI()
+    async function rejectAPI(){
+        try {
+            const {data}= await axios.get(`${process.env.backend}/writer/result2`,{
+                withCredentials :true})
+                console.log(data)
+               data.forEach((el) => {
+                console.log(el.reject);
+                switch (el.reject) {
+                       case "1": el.reject = "부적절한 책표지";
 
               break;
             case "2":
@@ -258,14 +267,13 @@
     }
     rejectAPI();
 
-    async function waitingAPI() {
-      try {
-        const { data } = await axios.get("http://13.209.64.80/writer/result3", {
-          withCredentials: true,
-        });
-        console.log(data);
-        data.forEach((el) => {
-          waitingList.innerHTML += `
+    async function waitingAPI(){
+        try {
+            const {data}= await axios.get(`${process.env.backend}/writer/result3`,{
+                withCredentials :true})
+                console.log(data)
+               data.forEach((el) => {
+                waitingList.innerHTML +=`
                 <li>
             <div class="list-warp">
             <div> title : ${el.title} </div>

@@ -13,6 +13,10 @@ class Chat extends Model {
           type: DataTypes.TEXT,
           allowNull: false,
         },
+        confirm :{
+          type:DataTypes.INTEGER,
+          defaultValue : "0"
+        }
       },
       {
         sequelize,

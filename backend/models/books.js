@@ -48,6 +48,10 @@ class Books extends Model {
           type: DataTypes.INTEGER,
           defaultValue: 0,
         },
+        price: {
+          type: DataTypes.INTEGER,
+          defaultValue: 0,
+        },
       },
       {
         sequelize,
