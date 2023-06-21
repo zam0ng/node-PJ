@@ -447,15 +447,19 @@
         withCredentials: true,
       })
       const teststr = data1.data.checks;
-      const tta = teststr.split(",");
 
-      tta.forEach((el) => {
-        if (el == getId) {
+      if(teststr!=""){
 
-          checks.innerHTML = "♥";
-
-        }
-      });
+        const tta = teststr.split(",");
+  
+        tta.forEach((el) => {
+          if (el == getId) {
+  
+            checks.innerHTML = "♥";
+  
+          }
+        });
+      }
       // 페이지에 들어올 떄 viewcnt 증가
     await axios.get(`${backend}/view/checks/viewcnt/${getId}`, {
       withCredentials: true,
