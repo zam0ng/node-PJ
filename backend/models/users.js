@@ -41,6 +41,9 @@ class User extends Model {
         checks: {
           type: DataTypes.STRING,
         },
+        following :{
+          type: DataTypes.STRING,
+        },
         email :{
           type: DataTypes.STRING,
         },
