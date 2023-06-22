@@ -183,9 +183,9 @@
           <!-- people currently reading -->
           <div class="currentlyWrap">
             <div class="peopleContainer">
-              <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="buypeopleImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="buypeopleImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="buypeopleImg" src="http://13.209.64.80/img/basic.png" />
               <span id="buypeoplecnt">100</span>
               <span> people are currently reading</span>
             </div>
@@ -193,9 +193,9 @@
           <!-- people want to read -->
           <div class="readWrap">
             <div class="peopleContainer">
-              <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="checkspeopleImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="checkspeopleImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="checkspeopleImg" src="http://13.209.64.80/img/basic.png" />
               <span id ="checkpeoplecnt">100 </span>
               <span>people want to read</span>
             </div>
@@ -553,7 +553,9 @@
       // 책 구매한 사람, 찜한 사람 수
       // buypeoplecnt
       // checkpeoplecnt
-
+      // buypeopleImg
+      // checkspeopleImg
+      
       const buycnt = await axios.get(`${backend}/view/buy/cnt`, {
         withCredentials: true,
 
@@ -562,6 +564,9 @@
         }
       });
       console.log(buycnt);
+      buycnt.data.forEach((el) => {
+        console.log(el);
+      });
       // buypeoplecnt.innerText= buycnt.data;
 
       const checkscnt = await axios.get(`${backend}/view/checks/cnt`, {
