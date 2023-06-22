@@ -58,7 +58,7 @@ exports.NickChange = async (req,res)=>{
 // 작성한 댓글 업로드
 exports.reviewUpload = async(req,res)=>{
   try {
-    const {nickname} = req.decoded;
+    const {nickname,user_id} = req.decoded;
 
     console.log(nickname);
     // const data = await review.findAll({
@@ -87,7 +87,7 @@ exports.reviewUpload = async(req,res)=>{
         attributes :["img","title"]
       }],
       where: {
-        nickname: nickname,
+        user_id: user_id,
 
       }
     })
@@ -104,7 +104,7 @@ exports.reviewUpload = async(req,res)=>{
         
       }],
         where:{
-          nickname:nickname
+          user_id:user_id
       }
     })
   
