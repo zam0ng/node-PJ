@@ -162,7 +162,7 @@ async function getView() {
   console.log(followusercnt);
   // -----------------------------------------------
   // ------------------ 작가가 쓴 책의 총 갯수 + 작가 팔로워 수
-  authorNameSpans[1].innerHTML = `${authordata.writebooks} books, 876 followers`;
+  authorNameSpans[1].innerHTML = `${authordata.writebooks} books, ${followusercnt.data} followers`;
   // -----------------------------------------------
   
 
