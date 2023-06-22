@@ -216,6 +216,7 @@ async function getView() {
       if(data.data="unde"){
           alert("로그인 후 이용해주세요!ㅎㅎ");
           window.location.href = `${frontend}login.html`;
+          return;
         }
  
     
@@ -546,6 +547,7 @@ async function getComments() {
               if(data.data="unde"){
                   alert("로그인 후 이용해주세요!ㅎㅎ");
                   window.location.href = `${frontend}login.html`;
+                  return;
                 }
              
             if (!reCommentInput[y].value) {
