@@ -452,6 +452,7 @@ async function logincheck2() {
   if(data.data="unde"){
       alert("로그인 후 이용해주세요!ㅎㅎ");
       window.location.href = `${frontend}login.html`;
+      return;
     }
   }
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
@@ -603,10 +604,8 @@ async function logincheck2() {
       const buycheck = await axios.get(`${backend}/view/checks/buys/${getId}`,{
         withCredentials:true,
       })
-      console.log(buycheck);
-      console.log("-----------------!buycheck");
-      console.log(buycheck.data==null);
-      console.log("-----------------!buycheck");
+      console.log(buycheck.data)
+      console.log("----------------buycheck.data")
       if(buycheck.data!=null){
         const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
         buyspan.innerText = "thank you 👍";
