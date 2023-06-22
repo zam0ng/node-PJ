@@ -168,6 +168,7 @@ exports.checksadd = async (req, res) => {
       },
       { where: { user_id } }
     );
+    res.send();
   } catch (error) {
     console.log("view컨트롤러 checks에서 오류남" + error);
   }
@@ -194,6 +195,7 @@ exports.checksdel = async (req, res) => {
       },
       { where: { user_id } }
     );
+    res.send();
   } catch (error) {
     console.log("view컨트롤러 checks에서 오류남" + error);
   }
