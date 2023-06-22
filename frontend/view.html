@@ -606,7 +606,7 @@ async function logincheck2() {
       })
       console.log(buycheck.data)
       console.log("----------------buycheck.data")
-      if(buycheck.data!=null){
+      if(buycheck.data!=null || buycheck.data !="relogin"){
         const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
         buyspan.innerText = "thank you 👍";
         BuyTheBookBtn.onclick =  (e) => {
