@@ -553,8 +553,8 @@
       // 책 구매한 사람, 찜한 사람 수
       // buypeoplecnt
       // checkpeoplecnt
-      // buypeopleImg
-      // checkspeopleImg
+      const buypeopleImg =document.querySelectorAll(".buypeopleImg");
+      const checkspeopleImg=document.querySelectorAll(".checkspeopleImg");
       
       const buycnt = await axios.get(`${backend}/view/buy/cnt`, {
         withCredentials: true,
@@ -566,6 +566,7 @@
       console.log(buycnt);
       buycnt.data.forEach((el) => {
         console.log(el);
+        checkspeopleImg.src = el.user_img;
       });
       // buypeoplecnt.innerText= buycnt.data;
 
