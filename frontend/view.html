@@ -563,13 +563,11 @@
           id : bookNum,
         }
       });
-      console.log(buycnt);
+      
       buycnt.data.forEach((el,index) => {
-        console.log(el.user_img);
-        checkspeopleImg[index].src = el.user_img;
-        // buypeopleImg.setAttribute("src", `${backend}/${el.user_img}`);
+        buypeopleImg[index].src = el.user_img;
       });
-      // buypeoplecnt.innerText= buycnt.data;
+      buypeoplecnt.innerText= buycnt.data.length;
 
       const checkscnt = await axios.get(`${backend}/view/checks/cnt`, {
         withCredentials: true,
@@ -578,8 +576,11 @@
           id : bookNum,
         }
       });
+      checkscnt.data.forEach((el,index) => {
+        checkspeopleImg[index].src = el.user_img;
+      });
 
-      checkpeoplecnt.innerText = checkscnt.data;
+      checkpeoplecnt.innerText = checkscnt.data.length;
 
       // onload 끝
     }

@@ -346,9 +346,6 @@ exports.buycnt = async(req,res)=>{
         }
       },raw:true,
     })
-    console.log("--------------data");
-    console.log(data.user_img)
-    console.log("--------------data");
     res.json(data);
     
   } catch (error) {
@@ -368,10 +365,10 @@ exports.checkscnt = async(req,res)=>{
         checks: {
           [Op.ne]: "", 
           [Op.like]: `%${id}%`
-        }
+        },raw:true,
       }
     })
-    res.json(data.length);
+    res.json(data);
   } catch (error) {
     console.log("view컨트롤러 checkscnt 에 오류남" +error); 
   }
