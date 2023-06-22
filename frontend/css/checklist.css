@@ -48,7 +48,8 @@ body {
   .nav .logoBox img {
     height: 80px;
   }
-  .checkContainer{
+  .checkContainer,
+  .buysContainer{
     margin-top: 10px;
     margin: 0 auto;
     max-width: 1100px;
@@ -120,7 +121,8 @@ body {
     height: 200px;
     border: 1px solid black;
   }
-  .checklist{
+  .checklist,
+  .buyslist{
     width: 1100px;
   }
   .title{
