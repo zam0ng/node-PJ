@@ -133,6 +133,7 @@ body {
     list-style: none;
     flex-direction: row;
     overflow-y: scroll;
+    height: 310px;
   }
   .booklist{
     display: flex;
