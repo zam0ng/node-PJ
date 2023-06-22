@@ -533,6 +533,7 @@
         }
       }
       console.log(data);
+      console.log(data.data.bookdata.Books.id);
       console.log("------------------data");
       const price = await axios.get(`${backend}/view/how/price`, {
         withCredentials: true,
