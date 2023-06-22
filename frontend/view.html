@@ -566,7 +566,8 @@
       console.log(buycnt);
       buycnt.data.forEach((el) => {
         console.log(el);
-        checkspeopleImg.src = el.user_img;
+        // checkspeopleImg.src = el.user_img;
+        buypeopleImg.setAttribute("src", `${backend}/${el.user_img}`);
       });
       // buypeoplecnt.innerText= buycnt.data;
 
