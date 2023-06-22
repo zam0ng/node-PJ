@@ -218,7 +218,29 @@ async function getView() {
           window.location.href = `${frontend}login.html`;
           return;
         }
- 
+    // 사용자가 책을 구매했는지 확인
+    const buyChk = await getBuysList();
+    if (!buyChk) {
+      alert("책을 구매해야만 댓글을 작성 할 수 있습니다.");
+      return;
+    }
+    // 댓글 3개 이상 못쓰게 하기
+    const cnt = await getReviewCount();
+    if (cnt.data == 3) {
+      alert("댓글을 3개 이상 입력 할 수 없습니다.");
+      // 댓글을 쓰고 난 후 별 초기화
+      reviewStarSpan.forEach((el, index) => {
+        for (let i = 0; i <= 4; i++) {
+          reviewStarSpan[i].innerText = "☆";
+        }
+        reviewsScore = 0;
+      });
+
+      // 댓글을 쓰고 난 후 댓글창 초기화
+      writeReviewContainerInput.value = "";
+      getView();
+      return;
+    }
     
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
@@ -302,7 +324,7 @@ async function getStarAvg() {
   let starTotalCnt = 0;
   let starAvg = 0;
   // 최대 width 값
-  let starMaxWidth = 155;
+  let starMaxWidth = 178;
 
   starInfo.forEach((el, index) => {
     starTotalStore += parseInt(el.starSum);
@@ -579,11 +601,7 @@ async function getComments() {
 // 책에 대한 모든 정보를 가져오는 axios 문법
 async function booksAllData() {
   // 현재 url에 있는 id의 값을 가져옴
-  const getUrl = new URL(window.location.href);
-
-  const getParams = new URLSearchParams(getUrl.search);
-
-  const getId = getParams.get("id");
+  const getId = await getBookId();
 
   const data = await axios.get(`${backend}/view/${getId}`, {
     withCredentials: true,
@@ -641,3 +659,40 @@ logincheck();
 const myImg = document.querySelector(".myImg");
 myImg.innerHTML = `<img src="${backend}/img/basic.png" alt="" />`;
 // =========================================================
+
+
+async function getBookId() {
+  const getUrl = new URL(window.location.href);
+
+  const getParams = new URLSearchParams(getUrl.search);
+
+  const getId = getParams.get("id");
+
+  return getId;
+}
+
+// =========================================================
+// 댓글을 3개 이상 쓰지 못하게 하기
+async function getReviewCount() {
+  const data = await axios.get(`${backend}/view/review/count`, {
+    withCredentials: true,
+  });
+  return data;
+}
+// =========================================================
+
+// =========================================================
+// 사용자가 책을 구매 했는지 확인
+async function getBuysList() {
+  const bookId = await getBookId();
+  const { data } = await axios.get(`${backend}/view/review/buys`, {
+    withCredentials: true,
+    params: {
+      id: bookId,
+    },
+  });
+  return data;
+}
+
+// =========================================================
+

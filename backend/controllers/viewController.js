@@ -128,6 +128,7 @@ exports.insertReview = async (req, res) => {
       star,
       user_id: id,
     });
+    res.send();
   } catch (error) {
     console.log(error);
   }
@@ -138,6 +139,7 @@ exports.insertReReview = async (req, res) => {
   const { review, review_id } = req.body;
   try {
     await r_review.create({ nickname, review, user_id: id, review_id });
+    res.send();
   } catch (error) {
     console.error(error);
   }
@@ -395,3 +397,47 @@ exports.checkbuys =async(req,res)=>{
     
   }
 }
+
+exports.getReviewCount = async (req, res) => {
+  try {
+    const { nickname } = req.decoded;
+
+    const [data] = await review.findAll({
+      attributes: [
+        "nickname",
+        [sequelize.fn("count", sequelize.col("nickname")), "nickcnt"],
+      ],
+      where: { nickname },
+      group: "nickname",
+      raw: true,
+    });
+
+    if (data?.nickcnt >= 3) {
+      res.send("3");
+    } else {
+      res.send();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.getBuysList = async (req, res) => {
+  try {
+    const { nickname } = req.decoded;
+    const { id } = req.query;
+    const data = await User.findOne({
+      where: { nickname, buys: { [Op.like]: `%${id}%` } },
+      raw: true,
+    });
+
+    // 책을 구매했으면 true, 구매하지 않았으면 false 반환
+    if (data?.nickname) {
+      res.send("true");
+    } else {
+      res.send("false");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
