@@ -534,6 +534,8 @@
       }
       console.log(author);
       console.log(author.Books)
+      const bookInfo = author.Books;
+      console.log(bookInfo.id);
       console.log("------------author");
       const price = await axios.get(`${backend}/view/how/price`, {
         withCredentials: true,
