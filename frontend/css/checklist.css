@@ -130,7 +130,8 @@ body {
     height: 50px;
     border:  1px solid;
   }
-  #list{
+  #list,
+  #list2{
     display: flex;
     list-style: none;
     flex-direction: row;
