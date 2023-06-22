@@ -210,10 +210,10 @@ async function getView() {
         withCredentials: true,
       });
     
-      alert("로그인 후 이용해주세요!ㅎㅎ");
-      window.location.href = `${frontend}login.html`;
-      return;
       if(data.data=="unde"){
+          alert("로그인 후 이용해주세요!ㅎㅎ");
+          window.location.href = `${frontend}login.html`;
+          return;
         }
 
     
