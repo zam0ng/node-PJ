@@ -1,4 +1,4 @@
-// window.onload = async () => {
+window.onload = async () => {
 
   async function admincheck() {
     // const at = document.cookie.slice(8);
@@ -113,7 +113,7 @@
       };
     });
   });
-// };
+};
 user_agree.onclick = async () => {
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
