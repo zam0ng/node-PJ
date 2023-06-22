@@ -156,5 +156,6 @@ body {
     border-radius: 5px;
   }
   #list::-webkit-scrollbar-track {
+    background-color: #f4f2e9;
   }
   
