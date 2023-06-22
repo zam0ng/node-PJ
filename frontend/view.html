@@ -96,7 +96,7 @@
               <span id="checks">♡</span>
             </div>
             <div class="BuyTheBookBtn">
-              <span>Buy The Book</span>
+              <span id="buyspan">Buy The Book</span>
             </div>
             <!-- 우측 사이드 별점 일단 보류 -->
             <!-- <div class="bookStars">
@@ -547,11 +547,11 @@ async function logincheck2() {
           ft.innerText = "Following"
         }
       }
-      console.log(author);
-      console.log(author.Books)
+      //console.log(author);
+      //console.log(author.Books)
       const bookInfo = author.Books;
-      console.log(bookInfo[0].id);
-      console.log("------------author");
+      //console.log(bookInfo[0].id);
+      //console.log("------------author");
       const bookNum = bookInfo[0].id;
       const price = await axios.get(`${backend}/view/how/price`, {
         withCredentials: true,
@@ -561,7 +561,7 @@ async function logincheck2() {
         }
       });
 
-      console.log(price);
+      //console.log(price);
 
       buyprice_span.innerText = price.data;
 
@@ -597,6 +597,21 @@ async function logincheck2() {
 
       checkpeoplecnt.innerText = checkscnt.data.length;
 
+
+      //buyspan
+      // 책 번호 가져와서 유저 테이블에서 있는지 조회하고 있으면 버튼 비활성화 / innertext = thank you
+      const buycheck = await axios.get(`${backend}/view/checks/buys/${getId}`,{
+        withCredentials:true,
+      })
+
+      if(!buycheck){
+        
+        BuyTheBookBtn.onclick =  (e) => {
+          buyspan.innerText = "thank you 👍";
+          e.preventDefault();
+        }
+      }
+
       // onload 끝
     }
     
@@ -615,13 +630,13 @@ wantToReadBtn.onclick = async() =>{
   
   if(checks.innerHTML == "♥"){
     checks.innerHTML = "♡"
-    console.log("찜 해체할거임")
+    //console.log("찜 해체할거임")
     const data = await axios.get(`${backend}/view/checks/delete/${getId}`, {
     withCredentials: true,
   });
   } else {
     checks.innerHTML = "♥"
-    console.log("찜 할거임")
+    //console.log("찜 할거임")
     const data = await axios.get(`${backend}/view/checks/add/${getId}`, {
     withCredentials: true,
   });

@@ -373,3 +373,23 @@ exports.checkscnt = async(req,res)=>{
     console.log("view컨트롤러 checkscnt 에 오류남" +error); 
   }
 }
+
+exports.checkbuys =async(req,res)=>{
+  try { //req.params.id
+    const {user_id}= req.decoded;
+    const data = await User.findOne({
+      where :{
+        user_id : user_id,
+        buys: {
+          [Op.ne]: "",
+          [Op.like]: `${req.params.id}`
+        }
+      }
+    })
+
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    
+  }
+}

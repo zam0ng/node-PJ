@@ -14,6 +14,7 @@ const {
   usercnt,
   buycnt,
   checkscnt,
+  checkbuys,
 } = require("../controllers/viewController");
 const { islogin, islogin2 } = require("../controllers/islogin");
 
@@ -33,6 +34,7 @@ router.get("/checks/cnt",checkscnt);
 
 
 router.get("/checks/viewcnt/:id",islogin,viewcnt);
+router.get("/checks/buys/:id", islogin,checkbuys)
 
 router.get("/user/checks",islogin, userchecks);
 // router.get("/user/checkss",islogin, userchecks);
