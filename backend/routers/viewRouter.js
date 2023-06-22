@@ -43,7 +43,7 @@ router.get("/user/checks",islogin, userchecks);
 router.get("/user/follow",islogin, userfollow);
 
 // 사용자가 책을 구매했는지 확인
-router.get("/review/buys", islogin, getBuysList);
+router.get("/review/buyss", islogin, getBuysList);
 // 댓글 3개 이상 못쓰게 하기
 router.get("/review/count", islogin, getReviewCount);
 
