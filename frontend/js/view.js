@@ -204,8 +204,8 @@ async function getView() {
   // 댓글 작성 버튼
   const postBtn = document.querySelector(".postBtn");
 
-  postBtn.onclick = () => {
-    async function logincheck2() {
+  postBtn.onclick = async() => {
+    
       const data = await axios.get(`${backend}/main/viewcheck`, {
         // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
@@ -217,8 +217,7 @@ async function getView() {
           alert("로그인 후 이용해주세요!ㅎㅎ");
           window.location.href = `${frontend}login.html`;
         }
-      }
-      logincheck2() ;
+ 
     
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
@@ -535,8 +534,8 @@ async function getComments() {
         const reCommentInput = commentContainer.querySelectorAll("input");
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
-          x.onclick = (e) => {
-            async function logincheck2() {
+          x.onclick = async(e) => {
+            
               const data = await axios.get(`${backend}/main/viewcheck`, {
                 // 이게 rawheader에 쿠키를 저장하는 역할
                 withCredentials: true,
@@ -548,8 +547,7 @@ async function getComments() {
                   alert("로그인 후 이용해주세요!ㅎㅎ");
                   window.location.href = `${frontend}login.html`;
                 }
-              }
-              logincheck2() ;
+             
             if (!reCommentInput[y].value) {
               alert("댓글을 입력해주세요.");
               return;
