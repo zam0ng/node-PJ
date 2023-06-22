@@ -104,7 +104,7 @@ exports.logincheck = async (req, res, next) => {
 //     const {user_id}= req.decoded;
 //     console.log()
 //     if(user_id != "admin" || user_id ==""){
-      
+
 //       res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
 //       res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
 //     res.write(

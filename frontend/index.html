@@ -9,44 +9,89 @@
     <link rel="stylesheet" href="./css/chat.css" />
     <script src="http://13.209.64.80/socket.io/socket.io.js"></script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-</head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
 
-<body>
-  <!-- 로고 부분 -->
-  <div class="nav">
-    <div class="logoBox">
-      <a href="/index.html"><img src="http://13.209.64.80/img/Color_logo_-_no_background.png" alt="" /></a>
-      <div class="functionBox">
-        <span id="insert"><a href="/books.html">✏️ writing</a></span>
-        <span id="allview">📙books</span>
-        <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
-        <span id="nick"><a href="/writerpage.html"></a></span>
-        <span id="login"><a href="/login.html">
-            login</a></span>
-        <span id="signUp"><a href="/signup.html">
-            signUp</a></span>
-        <button id="logout">logout</button>
+  <body>
+    <!-- 로고 부분 -->
+    <div class="nav">
+      <div class="logoBox">
+        <a href="http://127.0.0.1:5500/frontend/index.html"
+          ><img
+            src="http://13.209.64.80/img/Color_logo_-_no_background.png"
+            alt=""
+        /></a>
+        <div class="functionBox">
+          <span id="insert"
+            ><a href="http://127.0.0.1:5500/frontend/books.html"
+              >✏️ writing</a
+            ></span
+          >
+          <span id="allview">📙books</span>
+          <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+          <span id="nick"
+            ><a href="http://127.0.0.1:5500/frontend/writerpage.html"></a
+          ></span>
+          <span id="login"
+            ><a href="http://127.0.0.1:5500/frontend/login.html">
+              login</a
+            ></span
+          >
+          <span id="signUp"
+            ><a href="http://127.0.0.1:5500/frontend/signup.html">
+              signUp</a
+            ></span
+          >
+          <button id="logout">logout</button>
+        </div>
+      </div>
+      <div class="toggle">
+        <div class="genre">
+          <span id="all"
+            ><a href="http://127.0.0.1:5500/frontend/genre/all.html"
+              >전체</a
+            ></span
+          >
+          <span id="conan"
+            ><a href="http://127.0.0.1:5500/frontend/genre/conan.html"
+              >추리</a
+            ></span
+          >
+          <span id="horror"
+            ><a href="http://127.0.0.1:5500/frontend/genre/horror.html"
+              >공포•스릴러</a
+            ></span
+          >
+          <span id="fantasy"
+            ><a href="http://127.0.0.1:5500/frontend/genre/fantasy.html"
+              >판타지</a
+            ></span
+          >
+          <span id="sorim"
+            ><a href="http://127.0.0.1:5500/frontend/genre/sorim.html"
+              >무협</a
+            ></span
+          >
+          <span id="game"
+            ><a href="http://127.0.0.1:5500/frontend/genre/game.html"
+              >게임</a
+            ></span
+          >
+          <span id="romance"
+            ><a href="http://127.0.0.1:5500/frontend/genre/romance.html"
+              >로맨스</a
+            ></span
+          >
+        </div>
       </div>
     </div>
-    <div class="toggle">
-      <div class="genre">
-        <span id="all"><a href="/genre/all.html">전체</a></span>
-        <span id="conan"><a href="/genre/conan.html">추리</a></span>
-        <span id="horror"><a href="/genre/horror.html">공포•스릴러</a></span>
-        <span id="fantasy"><a href="/genre/fantasy.html">판타지</a></span>
-        <span id="sorim"><a href="/genre/sorim.html">무협</a></span>
-        <span id="game"><a href="/genre/game.html">게임</a></span>
-        <span id="romance"><a href="/genre/romance.html">로맨스</a></span>
-      </div>
+    <!-- main img -->
+    <div class="mainImgBox">
+      <img
+        src="https://s.gr-assets.com/assets/home/homepage_promos/summer_reading_2023/Summer23_HomepageMasthead_desktop@2x.png"
+        alt=""
+      />
     </div>
-  </div>
-  <!-- main img -->
-  <div class="mainImgBox">
-    <img
-      src="https://s.gr-assets.com/assets/home/homepage_promos/summer_reading_2023/Summer23_HomepageMasthead_desktop@2x.png"
-      alt="" />
-  </div>
 
     <!-- view top 5 list -->
     <div class="viewContainer">

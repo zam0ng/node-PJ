@@ -1,8 +1,6 @@
-
 async function getView() {
   const data = await booksAllData();
   // .then((e) => {
-  // console.log("then");
   // console.log(data);
   const author = data.data.bookdata;
   const bookInfo = author.Books[0];
@@ -22,8 +20,8 @@ async function getView() {
   // 넘어오는 데이터 콘솔 로그
   // console.log("작가 정보 : author");
   // console.log(author);
-  console.log("책 정보 : bookInfo");
-  console.log(bookInfo);
+  // console.log("책 정보 : bookInfo");
+  // console.log(bookInfo);
   // console.log("책에 있는 댓글들 모음 : thisReview");
   // console.log(thisReview);
   // console.log("로그인한 유저 정보 : userInfo");
@@ -182,7 +180,6 @@ async function getView() {
           reviewStarSpan[i].innerText = "☆";
         }
         // ♡ ♥
-
       }
     };
   });
@@ -194,11 +191,37 @@ async function getView() {
   // 댓글 작성 버튼
   const postBtn = document.querySelector(".postBtn");
 
-  postBtn.onclick = () => {
+  postBtn.onclick = async () => {
+    // 사용자가 책을 구매했는지 확인
+    const buyChk = await getBuysList();
+    if (!buyChk) {
+      alert("책을 구매해야만 댓글을 작성 할 수 있습니다.");
+      return;
+    }
+    // 댓글 3개 이상 못쓰게 하기
+    const cnt = await getReviewCount();
+    if (cnt.data == 3) {
+      alert("댓글을 3개 이상 입력 할 수 없습니다.");
+      // 댓글을 쓰고 난 후 별 초기화
+      reviewStarSpan.forEach((el, index) => {
+        for (let i = 0; i <= 4; i++) {
+          reviewStarSpan[i].innerText = "☆";
+        }
+        reviewsScore = 0;
+      });
+
+      // 댓글을 쓰고 난 후 댓글창 초기화
+      writeReviewContainerInput.value = "";
+      getView();
+      return;
+    }
+
+    // 댓글 유효성 검사
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
       return;
     }
+
     const reviewInput = writeReviewContainerInput.value;
     if (!writeReviewContainerInput.value) {
       alert("댓글을 입력해주세요.");
@@ -235,6 +258,12 @@ async function getView() {
   // 구매 기능
   const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
   BuyTheBookBtn.onclick = async () => {
+    // const buyChk = await getBuysList();
+    // console.log(buyChk);
+    // if (buyChk) {
+    //   alert("이미 구매한 상품입니다.");
+    //   return;
+    // }
     if (confirm(`${bookInfo.title} 을 구매하시겠습니까?`)) {
       window.location.href = `${backend}/v1/payment/ready?item_name=${bookInfo.title}&quantity=1&total_amount=${bookInfo.price}&vat_amount=0&tax_free_amount=0&books_id=${bookInfo.id}`;
     } else {
@@ -243,7 +272,6 @@ async function getView() {
   };
   // =========================================================
 
-  getStarAvg();
   getStarAvg();
   getComments();
 }
@@ -262,7 +290,7 @@ async function getStarAvg() {
   let starTotalCnt = 0;
   let starAvg = 0;
   // 최대 width 값
-  let starMaxWidth = 155;
+  let starMaxWidth = 178;
 
   starInfo.forEach((el, index) => {
     starTotalStore += parseInt(el.starSum);
@@ -415,8 +443,9 @@ async function getComments() {
               <span>${reviewStar}</span>
             </div>
             <div class="commentMainDate">
-            <span>${dateSplit[1]} ${dateSplit[2].slice(0, 2)}, ${dateSplit[0]
-      }</span>
+            <span>${dateSplit[1]} ${dateSplit[2].slice(0, 2)}, ${
+      dateSplit[0]
+    }</span>
             </div>
           </div>
           <div class="commentArea">
@@ -424,8 +453,9 @@ async function getComments() {
               ${el.comment}
             </p>
           </div>
-          <span class="r_reviewOpen">${reviewInfo[index].r_reviews.length
-      } comments</span>
+          <span class="r_reviewOpen">${
+            reviewInfo[index].r_reviews.length
+          } comments</span>
           <div class="reCommentArea">
             <div class="reCommentsWrap">
             </div
@@ -525,11 +555,7 @@ async function getComments() {
 // 책에 대한 모든 정보를 가져오는 axios 문법
 async function booksAllData() {
   // 현재 url에 있는 id의 값을 가져옴
-  const getUrl = new URL(window.location.href);
-
-  const getParams = new URLSearchParams(getUrl.search);
-
-  const getId = getParams.get("id");
+  const getId = await getBookId();
 
   const data = await axios.get(`${backend}/view/${getId}`, {
     withCredentials: true,
@@ -557,10 +583,9 @@ async function logincheck() {
   if (role == "writer") {
     who = "작가";
   }
-  if(role == "reader"){
+  if (role == "reader") {
     who = "독자";
   }
-
 
   if (data.data == "relogin") {
     login.style.display = "block";
@@ -586,4 +611,39 @@ logincheck();
 // 배포, 로컬에서 변하는 곳 정의
 const myImg = document.querySelector(".myImg");
 myImg.innerHTML = `<img src="${backend}/img/basic.png" alt="" />`;
+// =========================================================
+
+async function getBookId() {
+  const getUrl = new URL(window.location.href);
+
+  const getParams = new URLSearchParams(getUrl.search);
+
+  const getId = getParams.get("id");
+
+  return getId;
+}
+
+// =========================================================
+// 댓글을 3개 이상 쓰지 못하게 하기
+async function getReviewCount() {
+  const data = await axios.get(`${backend}/view/review/count`, {
+    withCredentials: true,
+  });
+  return data;
+}
+// =========================================================
+
+// =========================================================
+// 사용자가 책을 구매 했는지 확인
+async function getBuysList() {
+  const bookId = await getBookId();
+  const { data } = await axios.get(`${backend}/view/review/buys`, {
+    withCredentials: true,
+    params: {
+      id: bookId,
+    },
+  });
+  return data;
+}
+
 // =========================================================

@@ -24,17 +24,13 @@ exports.islogin = async (req, res, next) => {
 };
 
 exports.adminislogin = async (req, res) => {
-  
   try {
-
     const { access_token } = req.session;
     console.log(access_token);
-    console.log(access_token==undefined)
-    console.log(access_token=="undefined")
-    if(access_token == undefined){
-      
-      res.send("undi")
-      
+    console.log(access_token == undefined);
+    console.log(access_token == "undefined");
+    if (access_token == undefined) {
+      res.send("undi");
     }
   } catch (error) {
     console.log("adminislogin 컨트롤러에서 오류남" + error);

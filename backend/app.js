@@ -31,7 +31,6 @@ const paymentRouter = require("./routers/paymentRouter");
 // ===========================================
 const followRouter = require("./routers/follow");
 
-
 app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: false }));
@@ -46,8 +45,6 @@ sequelize
     console.error(err);
   });
 
-app.use(express.urlencoded({ extended: false }));
-
 app.use("/img", express.static(path.join(__dirname, "img")));
 app.use("/css", express.static(path.join(__dirname, "frontend/css")));
 app.use("/upload", express.static(path.join(__dirname, "upload")));
@@ -60,7 +57,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "http://13.209.64.80",
+    origin: "http://127.0.0.1:5500",
     credentials: true,
   })
 );
@@ -90,7 +87,7 @@ app.use("/allview", allview);
 app.use("/view", viewRouter);
 app.use("/check", checkRouter);
 app.use("/chat", chatRouter);
-app.use("/follow",followRouter);
+app.use("/follow", followRouter);
 
 // ===========================================
 app.use("/v1/payment", paymentRouter);
