@@ -346,6 +346,9 @@ exports.buycnt = async(req,res)=>{
         }
       }
     })
+    console.log("--------------data");
+    console.log(data);
+    console.log("--------------data");
     res.json(data.length);
     
   } catch (error) {
