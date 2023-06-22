@@ -11,13 +11,15 @@ const {
   followdel,
   userfollow,
   howprice,
-
+  usercnt,
 } = require("../controllers/viewController");
 const { islogin, islogin2 } = require("../controllers/islogin");
 
 router.get("/:id", viewInfo);
 router.get("/checks/delete/:id",islogin,checksdel);
 router.get("/checks/add/:id",islogin,checksadd);
+
+router.get("/how/usercnt",usercnt);
 
 router.get("/how/price",howprice);
 
