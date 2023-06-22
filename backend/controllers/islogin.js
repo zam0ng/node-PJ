@@ -22,6 +22,21 @@ exports.islogin = async (req, res, next) => {
     console.log("islogin 컨트롤러에서 오류남" + error);
   }
 };
+exports.viewislogin = async (req, res) => {
+  
+  try {
+    
+    const { access_token } = req.session;
+
+    if(access_token == undefined){
+      
+      res.send("unde");
+      
+    }
+  } catch (error) {
+    console.log("viewislogin 컨트롤러에서 오류남" + error);
+  }
+};
 
 exports.adminislogin = async (req, res) => {
   

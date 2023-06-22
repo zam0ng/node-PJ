@@ -440,9 +440,24 @@
   <script src="./genre/genre.js"></script>
   <script src="./js/view.js"></script>
   <script>
+
+async function logincheck2() {
+  const data = await axios.get(`${backend}/main/viewcheck`, {
+    // 이게 rawheader에 쿠키를 저장하는 역할
+    withCredentials: true,
+
+    //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+  });
+
+  if(data.data="unde"){
+      alert("로그인 후 이용해주세요!ㅎㅎ");
+      window.location.href = `${frontend}login.html`;
+    }
+  }
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
   // 하트가 눌려져있게 표시a
   window.onload = async () => {
+    
       const followBtn = document.querySelector(".followBtn");
       const ft = document.querySelector(".ft");
 
@@ -502,7 +517,7 @@
       // User 가져와서 해당 작가번호 지우고 업데이트
 
       followBtn.onclick = async () => {
-        
+        logincheck();
         if (ft.innerText == "Following") {
           await axios.get(`${backend}/follow/del`, {
             withCredentials: true,
@@ -563,7 +578,7 @@
           id : bookNum,
         }
       });
-      
+
       buycnt.data.forEach((el,index) => {
         buypeopleImg[index].src = el.user_img;
       });
@@ -589,7 +604,7 @@
 
 // want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
 wantToReadBtn.onclick = async() =>{
-
+  logincheck2();
   // 현재 url에 있는 id의 값을 가져옴
   const getUrl = new URL(window.location.href);
   
@@ -611,8 +626,8 @@ wantToReadBtn.onclick = async() =>{
     withCredentials: true,
   });
   } 
+
 }
-  
 </script>
 
   
