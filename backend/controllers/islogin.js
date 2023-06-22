@@ -23,14 +23,17 @@ exports.islogin = async (req, res, next) => {
   }
 };
 
-exports.adminislogin = async (req, res, next) => {
+exports.adminislogin = async (req, res) => {
+  
   try {
+    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+
     const { access_token } = req.session;
     console.log(access_token);
     console.log(access_token==undefined)
     console.log(access_token=="undefined")
-    if(access_token == "undefined"){
-      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+    if(access_token == undefined){
+
       res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
       res.write(
       `<script>window.location = "${process.env.frontend}login.html"</script>`
