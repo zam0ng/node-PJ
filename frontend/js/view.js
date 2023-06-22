@@ -151,10 +151,6 @@ async function getView() {
 
   authorNameSpans[0].innerHTML = `${author.nickname}`;
 
-  console.log("------------------------bookInfo.id");
-  console.log(bookInfo.id);
-  console.log("------------------------bookInfo.id");
-
   const followusercnt = await axios.get(`${backend}/view/how/usercnt`, {
     withCredentials: true,
 
@@ -162,6 +158,7 @@ async function getView() {
       id : bookInfo.id,
     }
   });
+  console.log("------------------------followusercnt");
   console.log(followusercnt);
   // -----------------------------------------------
   // ------------------ 작가가 쓴 책의 총 갯수 + 작가 팔로워 수

@@ -3,6 +3,7 @@ const { Books, User, review, r_review } = require("../models");
 const { sequelize } = require("../models");
 const url = require("url");
 const e = require("express");
+const { Op } = require('sequelize');
 
 // 책번호를 가져와 books의 정보와 작가의 정보를 가져옴
 exports.viewInfo = async (req, res) => {
