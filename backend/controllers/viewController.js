@@ -308,3 +308,27 @@ exports.howprice = async(req,res) =>{
     console.log("view컨트롤러 howprice 에 오류남" +error); 
   }
 }
+
+exports.usercnt = async(req,res) =>{
+
+  try {
+    const {id}= req.query;
+      console.log(id);
+      // 책번호 
+    const data = await User.findAll({
+      attributes :["following"],
+
+      where :{
+        following: {
+          [Op.ne]: null, 
+          [Op.like]: `%${id}%`
+        },raw:true,
+      }
+    })
+
+    console.log(data);
+    console.log(data.length);
+  } catch (error) {
+    console.log("view컨트롤러 usercnt 에 오류남" +error); 
+  }
+}
