@@ -302,6 +302,7 @@ exports.howprice = async(req,res) =>{
       })
       
       console.log(data.price);
+      res.json(data.price);
 
   } catch (error) {
     console.log("view컨트롤러 howprice 에 오류남" +error); 
