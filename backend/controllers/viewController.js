@@ -344,10 +344,11 @@ exports.buycnt = async(req,res)=>{
           [Op.ne]: "", 
           [Op.like]: `%${id}%`
         }
-      }
+      },raw:true,
     })
     console.log("--------------data");
     console.log(data);
+    console.log(data.user_img)
     console.log(data.dataValuse.user_img);
     console.log("--------------data");
     res.json(data.length);
