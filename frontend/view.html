@@ -517,7 +517,7 @@ async function logincheck2() {
       // User 가져와서 해당 작가번호 지우고 업데이트
 
       followBtn.onclick = async () => {
-        logincheck();
+        logincheck2();
         if (ft.innerText == "Following") {
           await axios.get(`${backend}/follow/del`, {
             withCredentials: true,
