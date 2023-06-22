@@ -382,7 +382,7 @@ exports.checkbuys =async(req,res)=>{
         user_id : user_id,
         buys: {
           [Op.ne]: "",
-          [Op.like]: `${req.params.id}`
+          [Op.like]: `%${req.params.id}%`
         }
       }
     })
