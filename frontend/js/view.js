@@ -204,22 +204,6 @@ async function getView() {
   // 댓글 작성 버튼
   const postBtn = document.querySelector(".postBtn");
 
-  // =========================================================
-// 사용자가 책을 구매 했는지 확인
-async function getBuysList() {
-  const bookId = await getBookId();
-  const { data } = await axios.get(`${backend}/view/review/buys`, {
-    withCredentials: true,
-    params: {
-      id: bookId,
-    },
-  });
-  console.log("tatatatatatatatatatatatatatatatatatatata")
-  return data;
-}
-
-// =========================================================
-
   postBtn.onclick = async() => {
     
       const data = await axios.get(`${backend}/main/viewcheck`, {
@@ -697,6 +681,21 @@ async function getReviewCount() {
   });
   return data;
 }
+// =========================================================
+ // =========================================================
+// 사용자가 책을 구매 했는지 확인
+async function getBuysList() {
+  const bookId = await getBookId();
+  const { data } = await axios.get(`${backend}/view/review/buys`, {
+    withCredentials: true,
+    params: {
+      id: bookId,
+    },
+  });
+  console.log("tatatatatatatatatatatatatatatatatatatata")
+  return data;
+}
+
 // =========================================================
 
 

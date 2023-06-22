@@ -433,8 +433,11 @@ exports.getBuysList = async (req, res) => {
 
     // 책을 구매했으면 true, 구매하지 않았으면 false 반환
     if (data?.nickname) {
+      console.log("true")
       res.send("true");
     } else {
+      console.log("false");
+
       res.send("false");
     }
   } catch (error) {
