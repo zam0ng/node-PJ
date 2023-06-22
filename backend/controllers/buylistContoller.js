@@ -3,10 +3,22 @@ const {User, Books} = require("../models")
 exports.buyList = async(req,res)=>{
     try {
         const {user_id}=req.decoded;
-        const data = await User.findOne({ where: {user_id:user_id},raw:true, });
+        const data = await User.findOne({ where: {user_id:user_id, }, raw:true});
         console.log(data.buys);
         const as = data.buys;
         const zx = as.split(",");
+        let q;
+        if (data.buys == "") {
+          q = req.params.id;
+        } else {
+        q = data.buys + "," + req.params.id;
+        }
+        await User.update(
+          {
+              buys: q,
+          },
+          { where: { user_id } }
+        );
 
         const data2 = await Books.findAll({
             where :{id:zx},raw:true
@@ -19,3 +31,4 @@ exports.buyList = async(req,res)=>{
         console.log(error)
     }
 }
+
