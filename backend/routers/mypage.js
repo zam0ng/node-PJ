@@ -4,7 +4,7 @@ const {MypageUpload,UserImg,NickChange,reviewUpload} = require("../controllers/m
 const {Mypage} = require("../img");
 
 
-router.post("/",Mypage.single("upload"),MypageUpload);
+router.post("/",islogin,Mypage.single("upload"),MypageUpload);
 // router.post("/",Mypage.single("upload"),islogin,(req,res)=>{
 //     console.log("제발")
 //     res.send("ddddd")
