@@ -131,7 +131,8 @@ body {
   #list{
     display: flex;
     list-style: none;
-    flex-wrap: wrap;
+    flex-direction: row;
+    overflow-y: scroll;
   }
   .booklist{
     display: flex;
@@ -145,5 +146,15 @@ body {
   .bookcover img{
     width: 190px;
     height: 200px;
+  }
+
+  #list::-webkit-scrollbar {
+    width: 10px;
+  }
+  #list::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 5px;
+  }
+  #list::-webkit-scrollbar-track {
   }
   
