@@ -29,8 +29,11 @@ exports.viewislogin = async (req, res) => {
     const { access_token } = req.session;
 
     if(access_token == undefined){
-    }
       res.send("unde");
+    } else{
+      res.send();
+    }
+      
   } catch (error) {
     console.log("viewislogin 컨트롤러에서 오류남" + error);
   }
