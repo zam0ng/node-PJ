@@ -349,14 +349,27 @@ exports.buycnt = async(req,res)=>{
     res.json(data.length);
     
   } catch (error) {
-    
+    console.log("view컨트롤러 buycnt 에 오류남" +error); 
   }
 }
 
 exports.checkscnt = async(req,res)=>{
   try {
     
+    const {id}= req.query;
+      // 책번호 
+    const data = await User.findAll({
+      attributes :["user_img"],
+
+      where :{
+        checks: {
+          [Op.ne]: "", 
+          [Op.like]: `%${id}%`
+        }
+      }
+    })
+    res.json(data.length);
   } catch (error) {
-    
+    console.log("view컨트롤러 checkscnt 에 오류남" +error); 
   }
 }

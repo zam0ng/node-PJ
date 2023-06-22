@@ -561,8 +561,17 @@
           id : bookNum,
         }
       });
-      buypeoplecnt.innerHTML = buycnt.data;
+      buypeoplecnt.innerText= buycnt.data;
 
+      const checkscnt = await axios.get(`${backend}/view/checks/cnt`, {
+        withCredentials: true,
+
+        params :{
+          id : bookNum,
+        }
+      });
+
+      checkpeoplecnt.innerText = checkscnt.data;
 
       // onload 끝
     }
