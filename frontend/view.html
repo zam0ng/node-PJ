@@ -550,6 +550,20 @@
 
       buyprice_span.innerText = price.data;
 
+      // 책 구매한 사람, 찜한 사람 수
+      // buypeoplecnt
+      // checkpeoplecnt
+
+      const buycnt = await axios.get(`${backend}/view/buy/cnt`, {
+        withCredentials: true,
+
+        params :{
+          id : bookNum,
+        }
+      });
+      buypeoplecnt.innerHTML = buycnt.data;
+
+
       // onload 끝
     }
     

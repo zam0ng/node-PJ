@@ -12,6 +12,8 @@ const {
   userfollow,
   howprice,
   usercnt,
+  buycnt,
+  checkscnt,
 } = require("../controllers/viewController");
 const { islogin, islogin2 } = require("../controllers/islogin");
 
@@ -26,6 +28,8 @@ router.get("/how/price",howprice);
 router.get("/follow/add/",islogin,followadd)
 router.get("/follow/del",islogin,followdel)
 
+router.get("/buy/cnt",buycnt);
+router.get("/checks/cnt",checkscnt);
 
 
 router.get("/checks/viewcnt/:id",islogin,viewcnt);

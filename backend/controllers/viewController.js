@@ -330,3 +330,33 @@ exports.usercnt = async(req,res) =>{
     console.log("view컨트롤러 usercnt 에 오류남" +error); 
   }
 }
+
+exports.buycnt = async(req,res)=>{
+  try {
+
+    const {id}= req.query;
+      // 책번호 
+    const data = await User.findAll({
+      attributes :["user_img"],
+
+      where :{
+        buys: {
+          [Op.ne]: "", 
+          [Op.like]: `%${id}%`
+        }
+      }
+    })
+    res.json(data.length);
+    
+  } catch (error) {
+    
+  }
+}
+
+exports.checkscnt = async(req,res)=>{
+  try {
+    
+  } catch (error) {
+    
+  }
+}
