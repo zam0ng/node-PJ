@@ -77,7 +77,7 @@ exports.reviewUpload = async(req,res)=>{
         
     // },raw:true, 
     // });
-
+    console.log(user_id);
     const data = await review.findAll({
       // 리뷰 테이블과 books 테이블이 조인되어있으니깐
       // include 로 books를 가져오고
