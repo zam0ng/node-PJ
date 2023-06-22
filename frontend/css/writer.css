@@ -100,8 +100,8 @@ body{
 }
 .result{
         width: 400px;
-        height: 700px;
-        display: none;
+        height: 650px;
+        /* display: none; */
         background-color:  #e0e0e0;
 }
 .info{

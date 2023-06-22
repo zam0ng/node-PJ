@@ -131,7 +131,7 @@ body{
 .id-info{
     border: 3px solid rgb(200, 200, 200);
     border-radius: 10px;
-    width: 100px;
+    width: 110px;
     height: 30px;
     display: flex;
     justify-content: space-evenly;
