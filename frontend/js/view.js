@@ -207,16 +207,13 @@ async function getView() {
   postBtn.onclick = async() => {
     
       const data = await axios.get(`${backend}/main/viewcheck`, {
-        // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
-    
-        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
       });
     
-      if(data.data="unde"){
-          alert("로그인 후 이용해주세요!ㅎㅎ");
-          window.location.href = `${frontend}login.html`;
-          return;
+      alert("로그인 후 이용해주세요!ㅎㅎ");
+      window.location.href = `${frontend}login.html`;
+      return;
+      if(data.data=="unde"){
         }
 
     
@@ -307,7 +304,6 @@ async function getView() {
   };
   // =========================================================
 
-  getStarAvg();
   getStarAvg();
   getComments();
 }

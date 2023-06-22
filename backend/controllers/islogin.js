@@ -29,10 +29,8 @@ exports.viewislogin = async (req, res) => {
     const { access_token } = req.session;
 
     if(access_token == undefined){
-      
-      res.send("unde");
-      
     }
+      res.send("unde");
   } catch (error) {
     console.log("viewislogin 컨트롤러에서 오류남" + error);
   }
@@ -59,6 +57,8 @@ exports.adminislogin = async (req, res) => {
       
       res.send("undi")
       
+    } else {
+      res.send();
     }
   } catch (error) {
     console.log("adminislogin 컨트롤러에서 오류남" + error);
