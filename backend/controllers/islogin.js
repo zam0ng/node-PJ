@@ -27,8 +27,9 @@ exports.adminislogin = async (req, res, next) => {
   try {
     const { access_token } = req.session;
     console.log(access_token);
-
-    if(access_token == undefined){
+    console.log(access_token==undefined)
+    console.log(access_token=="undefined")
+    if(access_token == "undefined"){
       res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
       res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
       res.write(
