@@ -98,22 +98,22 @@ exports.logincheck = async (req, res, next) => {
   res.json(data);
 };
 
-exports.admincheck = async(req,res) =>{
+// exports.admincheck = async(req,res) =>{
 
-  try {
-    const {user_id}= req.decoded;
-
-    if(user_id != "admin" || user_id ==""){
+//   try {
+//     const {user_id}= req.decoded;
+//     console.log()
+//     if(user_id != "admin" || user_id ==""){
       
-      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
-      res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
-    res.write(
-      `<script>window.location = "${process.env.frontend}login.html"</script>`
-    );
+//       res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+//       res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
+//     res.write(
+//       `<script>window.location = "${process.env.frontend}login.html"</script>`
+//     );
 
-    res.send();
-    }
-  } catch (error) {
-    console.log("maincontroller/ admincheck 오류남"+error);
-  }
-}
+//     res.send();
+//     }
+//   } catch (error) {
+//     console.log("maincontroller/ admincheck 오류남"+error);
+//   }
+// }

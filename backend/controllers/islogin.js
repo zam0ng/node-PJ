@@ -22,6 +22,23 @@ exports.islogin = async (req, res, next) => {
     console.log("islogin 컨트롤러에서 오류남" + error);
   }
 };
+
+exports.adminislogin = async (req, res, next) => {
+  try {
+    const { access_token } = req.session;
+    console.log(access_token);
+
+    if(access_token == undefined){
+      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+      res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
+      res.write(
+      `<script>window.location = "${process.env.frontend}login.html"</script>`
+    );
+    }
+  } catch (error) {
+    console.log("adminislogin 컨트롤러에서 오류남" + error);
+  }
+};
 exports.islogin2 = async (req, res, next) => {
   try {
     let th;

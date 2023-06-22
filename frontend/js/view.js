@@ -548,11 +548,19 @@ async function logincheck() {
   const { nickname, role } = data.data;
   let who;
 
+  // if (role == "writer") {
+  //   who = "작가";
+  // } else {
+  //   who = "독자";
+  // }
+
   if (role == "writer") {
     who = "작가";
-  } else {
+  }
+  if(role == "reader"){
     who = "독자";
   }
+
 
   if (data.data == "relogin") {
     login.style.display = "block";
@@ -572,6 +580,7 @@ async function logincheck() {
 }
 
 getView();
+logincheck();
 
 // =========================================================
 // 배포, 로컬에서 변하는 곳 정의

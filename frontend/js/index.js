@@ -70,7 +70,8 @@ async function logincheck() {
 
   if (role == "writer") {
     who = "작가";
-  } else {
+  }
+  if(role == "reader"){
     who = "독자";
   }
 
