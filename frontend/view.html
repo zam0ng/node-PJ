@@ -564,10 +564,10 @@
         }
       });
       console.log(buycnt);
-      buycnt.data.forEach((el) => {
-        console.log(el);
-        // checkspeopleImg.src = el.user_img;
-        buypeopleImg.setAttribute("src", `${backend}/${el.user_img}`);
+      buycnt.data.forEach((el,index) => {
+        console.log(el.user_img);
+        checkspeopleImg[index].src = el.user_img;
+        // buypeopleImg.setAttribute("src", `${backend}/${el.user_img}`);
       });
       // buypeoplecnt.innerText= buycnt.data;
 
