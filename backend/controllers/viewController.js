@@ -298,10 +298,10 @@ exports.howprice = async(req,res) =>{
       const data = await Books.findOne({
         where :{
           id : id,
-        }
+        },raw :true,
       })
       
-      console.log(data);
+      console.log(data.price);
 
   } catch (error) {
     console.log("view컨트롤러 howprice 에 오류남" +error); 
