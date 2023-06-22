@@ -349,9 +349,8 @@ exports.buycnt = async(req,res)=>{
     console.log("--------------data");
     console.log(data);
     console.log(data.user_img)
-    console.log(data.dataValuse.user_img);
     console.log("--------------data");
-    res.json(data.length);
+    res.json(data.user_img);
     
   } catch (error) {
     console.log("view컨트롤러 buycnt 에 오류남" +error); 

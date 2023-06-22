@@ -561,7 +561,8 @@
           id : bookNum,
         }
       });
-      buypeoplecnt.innerText= buycnt.data;
+      console.log(buycnt);
+      // buypeoplecnt.innerText= buycnt.data;
 
       const checkscnt = await axios.get(`${backend}/view/checks/cnt`, {
         withCredentials: true,
