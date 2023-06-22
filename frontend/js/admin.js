@@ -1,4 +1,18 @@
 window.onload = async () => {
+
+  async function admincheck() {
+    // const at = document.cookie.slice(8);
+    // console.log(at);
+  
+    await axios.get(`${backend}/main/admincheck`, {
+      // 이게 rawheader에 쿠키를 저장하는 역할
+      withCredentials: true,
+  
+      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+    });
+  }
+  admincheck();
+
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
   post_agree.style.color = "rgb(158, 158, 158)";

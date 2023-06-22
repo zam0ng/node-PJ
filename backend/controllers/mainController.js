@@ -97,3 +97,23 @@ exports.logincheck = async (req, res, next) => {
   const data = { nickname, role };
   res.json(data);
 };
+
+exports.admincheck = async(req,res) =>{
+
+  try {
+    const {user_id}= req.decoded;
+
+    if(user_id != "admin" || user_id ==""){
+      
+      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
+      res.write("<script>alert('어드민 계정이 아닙니다.')</script>");
+    res.write(
+      `<script>window.location = "${process.env.frontend}login.html"</script>`
+    );
+
+    res.send();
+    }
+  } catch (error) {
+    console.log("maincontroller/ admincheck 오류남"+error);
+  }
+}

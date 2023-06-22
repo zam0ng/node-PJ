@@ -31,6 +31,7 @@ exports.login = async (req, res) => {
     if (hash) {
       let token = jwt.sign(
         {
+          
           id: data.id,
           user_img: data.user_img,
           user_id: data.user_id,
@@ -66,7 +67,7 @@ exports.login = async (req, res) => {
       // req.query = token;
       // console.log(req.query);
       console.log("bbbbbbbbbbbbbbbbbbb");
-      if (user_id == "admin") {
+      if (user_id == "testadmin") {
         res.send("어드민");
       } else {
         return res.send({
