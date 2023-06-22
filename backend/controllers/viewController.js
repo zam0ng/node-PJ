@@ -365,8 +365,8 @@ exports.checkscnt = async(req,res)=>{
         checks: {
           [Op.ne]: "", 
           [Op.like]: `%${id}%`
-        },raw:true,
-      }
+        }
+      },raw:true,
     })
     res.json(data);
   } catch (error) {
