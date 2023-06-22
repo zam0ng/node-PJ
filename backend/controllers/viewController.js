@@ -292,8 +292,18 @@ exports.userfollow = async (req, res) => {
 exports.howprice = async(req,res) =>{
 
   try {
-    
+      const {id}= req.query;
+      console.log(id);
+
+      const data = await Books.findOne({
+        where :{
+          id : id,
+        }
+      })
+      
+      console.log(data);
+
   } catch (error) {
-    
+    console.log("view컨트롤러 howprice 에 오류남" +error); 
   }
 }

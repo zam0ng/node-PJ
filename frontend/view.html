@@ -537,8 +537,13 @@
       const bookInfo = author.Books;
       console.log(bookInfo[0].id);
       console.log("------------author");
+      const bookNum = bookInfo[0].id;
       const price = await axios.get(`${backend}/view/how/price`, {
         withCredentials: true,
+
+        params :{
+          id : bookNum
+        }
       });
 
       console.log(price);
