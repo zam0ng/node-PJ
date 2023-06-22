@@ -7,21 +7,6 @@
   exports.MypageUpload = async (req,res) => {
     try {
       
-      console.log("여기 mypage contoller");
-      console.log(req.session);
-      const th = req.rawHeaders[33].slice(8);
-      console.log(th);
-
-      jwt.verify(th,process.env.ACCESS_TOKEN_KEY,(err,decoded)=>{
-
-        if(err){
-            res.send("다시 로그인");
-        }
-        else{
-            req.decoded = decoded;
-        }
-    })
-      
       const { file, body } = req;
       const {user_id}= req.decoded;
       
