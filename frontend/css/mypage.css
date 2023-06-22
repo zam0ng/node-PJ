@@ -114,7 +114,7 @@ body{
 .rp_result{
     width: 400px;
     height: 600px;
-    display: none;
+    /* display: none; */
     /* overflow:auto; */
     /* overflow: scroll; */
     background-color:  #FFEED2;

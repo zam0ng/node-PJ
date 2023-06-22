@@ -88,7 +88,7 @@
           <span id="checks"></span>
         </div>
       </div>
-      <div class="rp_result">
+      <div class="rp_result" style="display: none;">
         <div class="tab_list">
           <div class="flex1">
             <div class="tab active">
@@ -214,7 +214,7 @@
     myComment.addEventListener("click", function (e) {
       console.log("댓글 클릭?");
       e.preventDefault();
-      if (comments.style.display === "none") {
+      if (comments.style.display == "none") {
         comments.style.display = "block";
       } else {
         comments.style.display = "none";
