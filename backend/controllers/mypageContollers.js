@@ -13,7 +13,7 @@
       // console.log(req.file,'여기는 마이페이지 업로드');
       console.log(req.file.path);
       await User.update({
-        user_img: req.file.path,
+        user_img: "/" + req.file.path,
 
       },{where:{user_id:user_id}});
 
