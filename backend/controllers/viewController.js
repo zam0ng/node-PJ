@@ -377,6 +377,7 @@ exports.checkscnt = async(req,res)=>{
 exports.checkbuys =async(req,res)=>{
   try { //req.params.id
     const {user_id}= req.decoded;
+    console.log(req.params.id);
     const data = await User.findOne({
       where :{
         user_id : user_id,
