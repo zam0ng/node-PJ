@@ -532,9 +532,8 @@
           ft.innerText = "Following"
         }
       }
-      console.log(data);
-      console.log(data.data.bookdata.Books.id);
-      console.log("------------------data");
+      console.log(author);
+      console.log("------------author");
       const price = await axios.get(`${backend}/view/how/price`, {
         withCredentials: true,
       });
