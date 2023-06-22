@@ -58,7 +58,7 @@ exports.NickChange = async (req,res)=>{
 // 작성한 댓글 업로드
 exports.reviewUpload = async(req,res)=>{
   try {
-    const {nickname,user_id} = req.decoded;
+    const {nickname,id} = req.decoded;
 
     console.log(nickname);
     // const data = await review.findAll({
@@ -77,7 +77,9 @@ exports.reviewUpload = async(req,res)=>{
         
     // },raw:true, 
     // });
-    console.log(user_id);
+    console.log("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡid");
+    console.log(id);
+    console.log("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡid");
     const data = await review.findAll({
       // 리뷰 테이블과 books 테이블이 조인되어있으니깐
       // include 로 books를 가져오고
@@ -87,7 +89,7 @@ exports.reviewUpload = async(req,res)=>{
         attributes :["img","title"]
       }],
       where: {
-        user_id: user_id,
+        user_id: id,
 
       }
     })
@@ -104,7 +106,7 @@ exports.reviewUpload = async(req,res)=>{
         
       }],
         where:{
-          user_id:user_id
+          user_id:id,
       }
     })
   
