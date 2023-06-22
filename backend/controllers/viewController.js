@@ -348,6 +348,7 @@ exports.buycnt = async(req,res)=>{
     })
     console.log("--------------data");
     console.log(data);
+    console.log(data.user_img);
     console.log("--------------data");
     res.json(data.length);
     
