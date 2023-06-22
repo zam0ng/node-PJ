@@ -205,6 +205,21 @@ async function getView() {
   const postBtn = document.querySelector(".postBtn");
 
   postBtn.onclick = () => {
+    async function logincheck2() {
+      const data = await axios.get(`${backend}/main/viewcheck`, {
+        // 이게 rawheader에 쿠키를 저장하는 역할
+        withCredentials: true,
+    
+        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+      });
+    
+      if(data.data="unde"){
+          alert("로그인 후 이용해주세요!ㅎㅎ");
+          window.location.href = `${frontend}login.html`;
+        }
+      }
+      logincheck2() ;
+    
     if (!reviewsScore) {
       alert("별점을 선택해주세요.");
       return;
@@ -521,6 +536,20 @@ async function getComments() {
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
           x.onclick = (e) => {
+            async function logincheck2() {
+              const data = await axios.get(`${backend}/main/viewcheck`, {
+                // 이게 rawheader에 쿠키를 저장하는 역할
+                withCredentials: true,
+            
+                //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+              });
+            
+              if(data.data="unde"){
+                  alert("로그인 후 이용해주세요!ㅎㅎ");
+                  window.location.href = `${frontend}login.html`;
+                }
+              }
+              logincheck2() ;
             if (!reCommentInput[y].value) {
               alert("댓글을 입력해주세요.");
               return;
