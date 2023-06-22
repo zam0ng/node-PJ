@@ -321,9 +321,9 @@ exports.usercnt = async(req,res) =>{
 
       where :{
         following: {
-          [Op.ne]: null, 
+          [Op.ne]: "", 
           [Op.like]: `%${id}%`
-        },raw:true,
+        }
       }
     })
 
