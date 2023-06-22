@@ -45,6 +45,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.buyprice,
 .wantToReadBtn,
 .BuyTheBookBtn {
   width: 80%;
@@ -62,6 +63,7 @@ body {
   /* background-color: white; */
   color: red;
 }
+.buyprice span,
 .wantToReadBtn span {
   width: 30px;
   height: 30px;
