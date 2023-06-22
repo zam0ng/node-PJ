@@ -152,15 +152,18 @@ body {
     height: 200px;
   }
 
-  #list::-webkit-scrollbar {
+  #list::-webkit-scrollbar,
+  #list2::-webkit-scrollbar {
     width: 0px;
     height: 10px;
   }
-  #list::-webkit-scrollbar-thumb {
+  #list::-webkit-scrollbar-thumb,
+  #list2::-webkit-scrollbar-thumb {
     background-color: #2f3542;
     border-radius: 5px;
   }
-  #list::-webkit-scrollbar-track {
+  #list::-webkit-scrollbar-track,
+  #list2::-webkit-scrollbar-track {
     background-color: #f4f2e9;
   }
   
