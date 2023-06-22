@@ -686,7 +686,7 @@ async function getReviewCount() {
 // 사용자가 책을 구매 했는지 확인
 async function getBuysList() {
   const bookId = await getBookId();
-  const { data } = await axios.get(`${backend}/view/review/buyss`, {
+  const { data } = await axios.get(`${backend}/view/review/buys`, {
     withCredentials: true,
     params: {
       id: bookId,
