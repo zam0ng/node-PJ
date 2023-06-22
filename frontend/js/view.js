@@ -691,6 +691,7 @@ async function getBuysList() {
       id: bookId,
     },
   });
+  console.log("tatatatatatatatatatatatatatatatatatatata")
   return data;
 }
 
