@@ -1,0 +1,79 @@
+#btn{
+    color: red;
+}
+body {
+    width: 100%;
+}
+.main-box{
+    /* position: relative; */
+    max-width: 1100px;
+    height: 100vh;
+    margin: 0 auto; 
+}
+.title,
+.title2{
+    /* width: 1100px; */
+    height: 70px;
+    font-size: xx-large;
+    margin : 0 auto;
+    text-align: center;
+    line-height: 70px;
+}
+
+.title2{
+    font-weight: 600;
+}
+
+.user-info{
+    width: 250px;
+    margin  : 0 auto;
+}
+.user-label,#gender,.Already,#copy,#pw_err{
+    font-size: small;
+}
+#user_id_input,
+#user_pw_input,
+#user_re_pw_input,
+#user_nick_input,
+#email_input,
+#btn{
+    width: 230px;
+    border-radius: 30px;
+    border :1px solid gray;
+    height: 30px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(245, 245, 245);
+}
+#btn{
+    width: 245px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+#gender,
+#role,
+#age,
+#user_nick_input,.Already,
+#copy
+#btn
+
+{
+    margin-bottom: 15px;
+}
+.title-img
+{
+    margin: 0 auto;
+    width: 150px;
+    height: 80px;
+}
+#copy{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#pw_err{
+    padding-left: 50px;
+    color : red;
+    text-align: center;
+}

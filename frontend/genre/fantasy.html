@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main</title>
+    <link rel="stylesheet" href="../css/index.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- 로고 부분 -->
+    <div class="nav">
+      <div class="logoBox">
+        <a href="/index.html"
+          ><img
+            src="http://13.209.64.80/img/Black logo - no background.png"
+            alt=""
+        /></a>
+
+        <div class="functionBox">
+          <span id="insert"><a href="/books.html">✏️ writing</a></span>
+          <span id="allview">📙books</span>
+          <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+          <a href=""><span id="nick"></span></a>
+          <span id="login"><a href="/login.html"> login</a></span>
+          <span id="signUp"><a href="/signup.html"> signUp</a></span>
+          <button id="logout">logout</button>
+        </div>
+      </div>
+      <div class="toggle">
+        <div class="genre">
+          <span id="all"><a href="/genre/all.html">전체</a></span>
+          <span id="conan"><a href="/genre/conan.html">추리</a></span>
+          <span id="horror"><a href="/genre/horror.html">공포•스릴러</a></span>
+          <span id="fantasy"><a href="/genre/fantasy.html">판타지</a></span>
+          <span id="sorim"><a href="/genre/sorim.html">무협</a></span>
+          <span id="game"><a href="/genre/game.html">게임</a></span>
+          <span id="romance"><a href="/genre/romance.html">로맨스</a></span>
+        </div>
+      </div>
+    </div>
+    <!-- main img -->
+    <div class="mainImgBox">
+      <img
+        src="https://s.gr-assets.com/assets/home/homepage_promos/summer_reading_2023/Summer23_HomepageMasthead_desktop@2x.png"
+        alt=""
+      />
+    </div>
+
+    <!-- view top 5 list -->
+    <div class="viewContainer">
+      <div class="viewWrap">
+        <div class="viewTitle">
+          <span>총 <span id="cnt"></span>개의 작품</span>
+          <hr />
+        </div>
+        <div id="viewList"></div>
+      </div>
+    </div>
+    <!-- star top 5 list -->
+    <!-- <div class="starContainer">
+      <div class="starWrap">
+        <div class="starTitle">
+          <span>STAR TOP 5 LIST</span>
+        </div>
+        <div id="starList"></div>
+      </div>
+    </div> -->
+  </body>
+  <script src="./genre.js"></script>
+  <script>
+    window.onload = async () => {
+      viewList.innerHTML = "";
+      const { data } = await axios.get(`${backend}/allview/fantasy`);
+
+      console.log(data);
+
+      cnt.innerText = data.length;
+
+      data.forEach((el, index) => {
+        console.log(el.img);
+        console.log(el.id);
+        viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
+          <img src="${backend}/${el.img}" alt="" />
+          <div class="cardText">
+            <span>☻</span>
+            <span>${el.viewcnt}</span>
+            <span>${el.title}</span>
+          </div>
+        </div></a>`;
+      });
+    };
+  </script>
+</html>
