@@ -457,87 +457,90 @@
       })
       const teststr = data1.data.checks;
 
-      if(teststr!=null){
+      if (teststr != null) {
 
         const tta = teststr.split(",");
-  
+
         tta.forEach((el) => {
           if (el == getId) {
-  
+
             checks.innerHTML = "♥";
-  
+
           }
         });
       }
       // 페이지에 들어올 떄 viewcnt 증가
-    await axios.get(`${backend}/view/checks/viewcnt/${getId}`, {
-      withCredentials: true,
-    });
+      await axios.get(`${backend}/view/checks/viewcnt/${getId}`, {
+        withCredentials: true,
+      });
 
-    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-    // view 페이지에 들어왔을때 해당작가를 팔로우 한 상태이면 follow 버튼이 white 로 보이게
-    // user 에서 팔로잉 값 가져와서 split 으로 짜르고 배열 만든후에 작가 id 랑 비교해서 맞으면 
-    // follow 버튼 흰색
-    const data2 = await axios.get(`${backend}/view/user/follow`,{
-      withCredentials:true,
-    })
-    const f = data2.data.following;
-    const data = await booksAllData();
-    const author = data.data.bookdata;
-    console.log("============")
-    console.log(author)
-    console.log(author.id);
-    if(f!=null){
-      const ff = f.split(",");
-  
+      //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+      // view 페이지에 들어왔을때 해당작가를 팔로우 한 상태이면 follow 버튼이 white 로 보이게
+      // user 에서 팔로잉 값 가져와서 split 으로 짜르고 배열 만든후에 작가 id 랑 비교해서 맞으면 
+      // follow 버튼 흰색
+      const data2 = await axios.get(`${backend}/view/user/follow`, {
+        withCredentials: true,
+      })
+      const f = data2.data.following;
+      const data = await booksAllData();
+      const author = data.data.bookdata;
+      
+      if (f != null) {
+        const ff = f.split(",");
+
         ff.forEach((el) => {
           if (el == author.id) {
-  
+
             followBtn.style.backgroundColor = "white";
-            ft.style.color="black"
+            ft.style.color = "black"
             ft.innerText = "Following"
           }
         });
-    }
+      }
 
-    // 팔로우 버튼을 클릭했을 때 그 안에 text 가 following 이면 
-    // User 가져와서 해당 작가번호 지우고 업데이트
+      // 팔로우 버튼을 클릭했을 때 그 안에 text 가 following 이면 
+      // User 가져와서 해당 작가번호 지우고 업데이트
 
-    followBtn.onclick = async () => {
-      console.log("---------------------------")
-      console.log(author.id);
+      followBtn.onclick = async () => {
+        
         if (ft.innerText == "Following") {
-          await axios.get(`${backend}/follow/del`,{
-            withCredentials:true,
-            
-            
-            params :{
-              author_id : author.id,
+          await axios.get(`${backend}/follow/del`, {
+            withCredentials: true,
+
+
+            params: {
+              author_id: author.id,
             }
           })
           followBtn.style.backgroundColor = "black";
-          ft.style.color="white"
+          ft.style.color = "white"
           ft.innerText = "Follow"
         }
 
-         if(ft.innerText == "Follow"){
+        if (ft.innerText == "Follow") {
 
-          await axios.get(`${backend}/follow/list`,{
-            withCredentials:true,
+          await axios.get(`${backend}/follow/list`, {
+            withCredentials: true,
 
             params: {
-              author_id : author.id,
+              author_id: author.id,
             }
           });
 
           followBtn.style.backgroundColor = "white";
-          ft.style.color="black"
+          ft.style.color = "black"
           ft.innerText = "Following"
         }
       }
+      console.log(data);
+      console.log("------------------data");
+      const price = await axios.get(`${backend}/view/how/price`, {
+        withCredentials: true,
+      });
 
+      console.log(price);
 
-}
+    }
     const wantToReadBtn = document.querySelector(".wantToReadBtn");
 
 // want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록
@@ -565,8 +568,8 @@ wantToReadBtn.onclick = async() =>{
   });
   } 
 }
-
-  </script>
+  
+</script>
 
   
 </html>

@@ -288,3 +288,12 @@ exports.userfollow = async (req, res) => {
     console.log("view 컨트롤러userfollow 에서 오류남" + error);
   }
 };
+
+exports.howprice = async(req,res) =>{
+
+  try {
+    
+  } catch (error) {
+    
+  }
+}
