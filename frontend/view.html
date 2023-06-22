@@ -607,7 +607,7 @@ async function logincheck2() {
       console.log("-----------------!buycheck");
       console.log(buycheck.data==null);
       console.log("-----------------!buycheck");
-      if(buycheck.data==null){
+      if(buycheck.data!=null){
         const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
         buyspan.innerText = "thank you 👍";
         BuyTheBookBtn.onclick =  (e) => {
