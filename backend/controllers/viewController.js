@@ -314,7 +314,6 @@ exports.usercnt = async(req,res) =>{
 
   try {
     const {id}= req.query;
-      console.log(id);
       // 책번호 
     const data = await User.findAll({
       attributes :["following"],
@@ -326,9 +325,7 @@ exports.usercnt = async(req,res) =>{
         }
       }
     })
-
-    console.log(data);
-    console.log(data.length);
+    res.json(data.length);
   } catch (error) {
     console.log("view컨트롤러 usercnt 에 오류남" +error); 
   }
