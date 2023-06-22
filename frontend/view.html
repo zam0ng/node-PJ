@@ -603,7 +603,7 @@ async function logincheck2() {
       const buycheck = await axios.get(`${backend}/view/checks/buys/${getId}`,{
         withCredentials:true,
       })
-
+      console.log(buycheck);
       console.log("-----------------!buycheck");
       console.log(buycheck==null);
       console.log("-----------------!buycheck");
