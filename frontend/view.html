@@ -90,7 +90,7 @@
           <div class="sideWrapBtn">
             <div class="buyprice">
               <span>₩</span>
-              <span id="buyprice_span">♡</span>
+              <span id="buyprice_span"></span>
             </div>
             <div class="wantToReadBtn">
               <span id="checks">♡</span>
@@ -164,7 +164,7 @@
           <!-- 책 페이지수 -->
           <div class="bookpage">
             <!-- 여기에 페이지 수 받아오기 -->
-            <span>100</span>
+            <span></span>
             <span>Pages</span>
           </div>
           <!-- 책 페이지수 end -->
@@ -186,7 +186,7 @@
               <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
               <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
               <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
-              <span>100</span>
+              <span id="buypeoplecnt">100</span>
               <span> people are currently reading</span>
             </div>
           </div>
@@ -196,7 +196,7 @@
               <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
               <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
               <img class="peopleProfileImg" src="http://13.209.64.80/img/basic.png" />
-              <span>100 </span>
+              <span id ="checkpeoplecnt">100 </span>
               <span>people want to read</span>
             </div>
           </div>
@@ -550,8 +550,9 @@
 
       buyprice_span.innerText = price.data;
 
-
+      // onload 끝
     }
+    
     const wantToReadBtn = document.querySelector(".wantToReadBtn");
 
 // want to read 눌렀을 때 유저의 checks 에 book title 이 담기도록

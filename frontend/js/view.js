@@ -150,11 +150,15 @@ async function getView() {
   const authorNameSpans = authorName.querySelectorAll("span");
 
   authorNameSpans[0].innerHTML = `${author.nickname}`;
-
+  
+  console.log("------------------------bookInfo.id");
+  console.log(bookInfo.id);
+  console.log("------------------------bookInfo.id");
   // -----------------------------------------------
   // ------------------ 작가가 쓴 책의 총 갯수 + 작가 팔로워 수
   authorNameSpans[1].innerHTML = `${authordata.writebooks} books, 876 followers`;
   // -----------------------------------------------
+  
 
   // Ratings & Reviews 기능
 
