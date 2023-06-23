@@ -439,6 +439,16 @@ chat_agree.onclick = async () => {
   };
 
   socket.on("message", (chat_id, user_name, msg) => {
+
+    const data = axios.get(`${backend}/chat/changeone`, {
+      withCredentials: true,
+
+      params: {
+        chat_id: chat_id,
+      },
+    });
+
+
     if (user_name == "testadmin") {
       chatArea.innerHTML += `
 
