@@ -452,11 +452,14 @@ async function logincheck2() {
     //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
   });
 
-  if(data.data="unde"){
+  if(data.data=="unde"){
       alert("로그인 후 이용해주세요!ㅎㅎ");
       window.location.href = `${frontend}login.html`;
       return;
     }
+  else{
+    return;
+  }
   }
   // onload 되었을 때 유저 checks를 확인해서 이 페이지의 아이디가 있으면
   // 하트가 눌려져있게 표시a
