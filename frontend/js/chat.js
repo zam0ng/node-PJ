@@ -77,7 +77,7 @@
 
       let chat_id = data.data.id;
       // let user_name = data.data.nickname;
-      let user_name = data.data.user_id;
+      let user_name = data.data.user_id; 
 
       // 대화내용 가져오기
       const chatdata = await axios.get(`${backend}/chat/getChatData`, {
@@ -110,7 +110,7 @@
       // 메세지 보내기===============================
       function sendMsg(chat_id, user_name, msg) {
         const textBoxSpan = document.createElement("span");
-        if (user_name == "admin") {
+        if (user_name == "testadmin") {
           textBoxSpan.classList = "adminSpan";
         } else {
           textBoxSpan.classList = "userSpan";
