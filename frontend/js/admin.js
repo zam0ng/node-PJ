@@ -14,6 +14,8 @@ window.onload = async () => {
     if(data.data="undi"){
       alert("어드민 계정으로 로그인하세요");
       window.location.href = `${frontend}login.html`;
+      return;
+      // isLoading.classList.add("disable");
     }
   }
   admincheck();
