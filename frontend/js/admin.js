@@ -414,12 +414,12 @@ chat_agree.onclick = async () => {
           if (el.user_name == "testadmin") {
             chatArea.innerHTML += `
     
-                                <span class="adminSpan">${el.text}</span>
+                                <span class="userSpan">${el.text}</span>
                             `;
           } else {
             chatArea.innerHTML += `
     
-                                <span class="userSpan">${el.text}</span>
+                                <span class="adminSpan">${el.text}</span>
                             `;
           }
         });
