@@ -363,9 +363,9 @@ async function getComments() {
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
   let userInfo;
-  if (data.data?.userdata) {
-    userInfo = data.data.userdata;
-  }
+  // if (data.data?.userdata) {
+  //   userInfo = data.data.userdata;
+  // }
   const reviewInfo = data.data.reviewdata;
   // reviews area
   const commentContainer = document.querySelector(".commentContainer");
@@ -379,23 +379,6 @@ async function getComments() {
   commentContainerReviewCnt.innerText = `Displaying 1 - ${thisReview.length} of ${thisReview.length} reviews`;
 
   // 댓글 그려주기
-
-  const commentWrap = commentContainer.querySelector(".commentWrap");
-  const commentProfile = commentContainer.querySelectorAll(".commentProfile");
-  const commentProfileImg =
-    commentContainer.querySelectorAll(".commentProfileImg");
-  const commentProfileImgImg = commentContainer.querySelectorAll("img");
-
-  const commentProfileInfo = commentContainer.querySelectorAll(
-    ".commentProfileInfo"
-  );
-
-  const commentArea = commentContainer.querySelectorAll(".commentArea");
-
-  const commentMainStar = commentContainer.querySelectorAll(".commentMainStar");
-
-  const commentMainDate = commentContainer.querySelectorAll(".commentMainDate");
-
   thisReview.forEach((el, index) => {
     let dateSplit = el.createdAt.split("-");
 
@@ -411,15 +394,11 @@ async function getComments() {
     if (dateSplit[1] == "10") dateSplit[1] = "Oct";
     if (dateSplit[1] == "11") dateSplit[1] = "Nov";
     if (dateSplit[1] == "12") dateSplit[1] = "Dec";
+
     let reviewStar;
-    let restNum;
-    // console.log("댓글 별점");
-    // console.log(el.star);
     if (el.star < 5) {
       reviewStar = "★".repeat(parseInt(el.star));
       restStar = "☆".repeat(5 - parseInt(el.star));
-      // console.log("restStar");
-      // console.log(restStar);
       reviewStar += restStar;
     } else {
       reviewStar = "★".repeat(parseInt(el.star));
@@ -431,9 +410,8 @@ async function getComments() {
             <img src="${backend}${el.User.user_img}" alt="" />
           </div>
           <div class="commentProfileInfo">
-          <span>${el.User.nickname}</span>
-          <span>0 review</span>
-          <span>0 follows</span>
+            <span>${el.User.nickname}</span>
+            <span class="${el.id}">remove</span>
           </div>
          
         </div>
@@ -467,13 +445,10 @@ async function getComments() {
   });
 
   // 대댓글 comments 버튼 누르면 대댓글을 불러옴
-
   const commentMainWrap = document.querySelectorAll(".commentMainWrap");
   const reCommentArea = document.querySelectorAll(".reCommentArea");
   const reCommentsWrap = commentContainer.querySelectorAll(".reCommentsWrap");
   const r_reviewOpen = commentContainer.querySelectorAll(".r_reviewOpen");
-  const reCommentInput = commentContainer.querySelectorAll(".reCommentInput");
-  const reCommentInputInput = commentContainer.querySelectorAll("input");
 
   commentMainWrap.forEach((el, index) => {
     r_reviewOpen[index].onclick = (e, i) => {
@@ -500,7 +475,7 @@ async function getComments() {
           reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
-                        <img src="$${backend}${userInfo.user_img}" alt="" />
+                        <img src="${backend}${userInfo.user_img}" alt="" />
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
@@ -523,6 +498,7 @@ async function getComments() {
 
         const reCommentBtn = commentContainer.querySelectorAll(".reCommentBtn");
         const reCommentInput = commentContainer.querySelectorAll("input");
+
         reCommentBtn.forEach((x, y) => {
           // console.log("reCommentBtn.forEach");
           x.onclick = (e) => {
@@ -530,14 +506,12 @@ async function getComments() {
               alert("댓글을 입력해주세요.");
               return;
             }
-            // 대댓글 등록
 
+            // 대댓글 등록
             axios.post(
               `${backend}/view/r_reviewInsert`,
-
               {
                 review: reCommentInput[y].value,
-
                 review_id: thisReview[index].id,
               },
               { withCredentials: true }
@@ -545,11 +519,40 @@ async function getComments() {
             getView();
           };
         });
-
         reCommentsWrap[index].classList.add("active");
       }
     };
   });
+
+  // =========================================================
+  // 댓글 삭제 기능
+  // getComments의 동작이 끝난뒤 실행되는 함수
+  const loginUser = await getLogin();
+  const commentProfileInfo = document.querySelectorAll(".commentProfileInfo");
+
+  commentProfileInfo.forEach((e, i) => {
+    const remove = commentProfileInfo[i].querySelectorAll("span");
+
+    remove[1].onclick = async function (e) {
+      if (!loginUser.data) {
+        alert("삭제 할 수 없습니다.");
+      } else {
+        if (remove[0].innerHTML == loginUser.data.nickname) {
+          if (confirm("댓글을 삭제 하시겠습니까?")) {
+            // console.log(this.className);
+            axios.get("http://127.0.0.1:8080/view/review/delete", {
+              withCredentials: true,
+              params: {
+                id: this.className,
+              },
+            });
+            getView();
+          }
+        }
+      }
+    };
+  });
+  // =========================================================
 }
 
 // 책에 대한 모든 정보를 가져오는 axios 문법
@@ -567,8 +570,6 @@ async function logincheck() {
   const data = await axios.get(`${backend}/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
-
-    //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
   });
 
   const { nickname, role } = data.data;
@@ -603,9 +604,6 @@ async function logincheck() {
     }
   }
 }
-
-getView();
-logincheck();
 
 // =========================================================
 // 배포, 로컬에서 변하는 곳 정의
@@ -645,5 +643,49 @@ async function getBuysList() {
   });
   return data;
 }
+// =========================================================
 
 // =========================================================
+// 로그인한 유저 정보 가져오기
+async function getLogin() {
+  const data = await axios.get(`${backend}/view/get/logininfo`, {
+    withCredentials: true,
+  });
+  return data;
+}
+// =========================================================
+
+// // =========================================================
+// // 댓글 삭제 기능
+// // getComments의 동작이 끝난뒤 실행되는 함수
+// async function deleteReview() {
+//   const { data } = await getLogin();
+//   const commentProfileInfo = document.querySelectorAll(".commentProfileInfo");
+
+//   commentProfileInfo.forEach((e, i) => {
+//     const remove = commentProfileInfo[i].querySelectorAll("span");
+
+//     remove[1].onclick = async function (e) {
+//       if (!data) {
+//         alert("삭제 할 수 없습니다.");
+//       } else {
+//         if (remove[0].innerHTML == data.nickname) {
+//           if (confirm("댓글을 삭제 하시겠습니까?")) {
+//             // console.log(this.className);
+//             await axios.get("http://127.0.0.1:8080/view/review/delete", {
+//               withCredentials: true,
+//               params: {
+//                 id: this.className,
+//               },
+//             });
+//           }
+//         }
+//       }
+//     };
+//   });
+// }
+
+// // =========================================================
+
+getView();
+logincheck();

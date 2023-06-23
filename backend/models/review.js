@@ -35,6 +35,7 @@ class review extends Model {
     db.review.hasMany(db.r_review, {
       foreignKey: "review_id",
       sourceKey: "id",
+      onDelete: "CASCADE",
     });
 
     db.review.belongsTo(db.Books, { foreignKey: "book_id", targetKey: "id" });

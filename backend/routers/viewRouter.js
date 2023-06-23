@@ -12,8 +12,9 @@ const {
   userfollow,
   getReviewCount,
   getBuysList,
+  reviewDelete,
 } = require("../controllers/viewController");
-const { islogin } = require("../controllers/islogin");
+const { islogin, getLoginUser } = require("../controllers/islogin");
 
 router.get("/:id", viewInfo);
 router.get("/checks/delete/:id", islogin, checksdel);
@@ -34,5 +35,10 @@ router.get("/review/buys", islogin, getBuysList);
 router.get("/review/count", islogin, getReviewCount);
 router.post("/reviewInsert", islogin, insertReview);
 router.post("/r_reviewInsert", islogin, insertReReview);
+
+// 댓글 삭제를 위해 로그인한 유저 정보를 보내줌
+router.get("/get/logininfo", getLoginUser);
+// 댓글 삭제
+router.get("/review/delete", islogin, reviewDelete);
 
 module.exports = router;

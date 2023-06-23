@@ -66,16 +66,20 @@ exports.islogin2 = async (req, res, next) => {
 
 exports.getLoginUser = async (req, res) => {
   try {
-    const { access_token } = req.session;
+    if (req.session?.access_token) {
+      const { access_token } = req.session;
 
-    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
-      if (err) {
-        console.log("로그인 정보 만료");
-      } else {
-        const data = decoded;
-        res.json(data);
-      }
-    });
+      jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
+        if (err) {
+          console.log("로그인 정보 만료");
+        } else {
+          const data = decoded;
+          res.json(data);
+        }
+      });
+    } else {
+      res.send("false");
+    }
   } catch (error) {
     console.error("getLoginUser", error);
   }
