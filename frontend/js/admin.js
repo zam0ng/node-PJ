@@ -338,9 +338,10 @@ chat_agree.onclick = async () => {
   const userName = "admin";
   let userTemp;
   let chatUserInfo;
-
+  console.log(confirmZero);
   confirmZero.data.forEach((el, index) => {
     // const { user_name } = el;
+    console.log(el);
     console.log(zeroCnt);
     if (el.zeroCnt == 0) {
       chatUserId.innerHTML += `
