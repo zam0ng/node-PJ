@@ -79,7 +79,7 @@ exports.adminislogin = async (req, res) => {
       
     } else {
 
-      const {user_id} = req.dec;
+      const {user_id} = req.decoded;
       console.log("--------------------------user_id")
       console.log(user_id)
       console.log("--------------------------user_id")
