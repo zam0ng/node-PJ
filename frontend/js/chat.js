@@ -140,4 +140,5 @@ window.onload = () => {
     chatWrap.style.display = "block";
     socket.off("message");
   };
+  isLoading.classList.add("disable");
 };
