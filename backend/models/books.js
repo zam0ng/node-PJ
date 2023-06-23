@@ -29,6 +29,10 @@ class Books extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        price: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         publish: {
           type: DataTypes.STRING,
           allowNull: false,

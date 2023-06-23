@@ -1,10 +1,10 @@
 logout.onclick = async () => {
-  await axios.get(`${backend}/logout`, {
+  await axios.get(`http://127.0.0.1:8080/logout`, {
     withCredentials: true,
   });
 
   document.cookie = "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-  window.location.href = `${frontend}index.html`;
+  window.location.href = `http://127.0.0.1:5500/frontend/index.html`;
 };
 
 uploadBtn.onclick = () => {
@@ -26,13 +26,13 @@ uploadBtn.onclick = () => {
   form.append("price", price.value);
   form.append("publish", publish.value);
   axios
-    .post(`${backend}/books`, form, {
+    .post(`http://127.0.0.1:8080/books`, form, {
       withCredentials: true,
       "Content-Type": "multipart/form-data",
     })
     .then((e) => {
       if (e.data == "여기 완!") {
-        window.location.href = `${frontend}index.html`;
+        window.location.href = `http://127.0.0.1:5500/frontend/index.html`;
       }
     })
     .catch((err) => {});

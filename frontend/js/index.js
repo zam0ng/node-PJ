@@ -18,11 +18,11 @@ if (document.addEventListener) {
 }
 // 조회수가 가장 많은 5개의 리스트를 가져옴
 async function getViewList() {
-  const { data } = await axios.get(`${backend}/main/viewlist`);
+  const { data } = await axios.get(`http://127.0.0.1:8080/main/viewlist`);
   console.log(data);
   data.forEach((el, index) => {
-    viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
-            <img src="${backend}/${el.img}" alt="" />
+    viewList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
+            <img src="http://127.0.0.1:8080/${el.img}" alt="" />
             <div class="cardText">
               <span>👁️‍🗨️</span>
               <span>${el.viewcnt}</span>
@@ -34,11 +34,11 @@ async function getViewList() {
 
 // 별점이 높은 순으로 5개의 리스트를 가져옴
 async function getStarList() {
-  const { data } = await axios.get(`${backend}/main/starlist`);
+  const { data } = await axios.get(`http://127.0.0.1:8080/main/starlist`);
   console.log(data);
   data.forEach((el, index) => {
-    starList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
-            <img src="${backend}/${el.img}" alt="" />
+    starList.innerHTML += `<a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}"><div class="viewCard">
+            <img src="http://127.0.0.1:8080/${el.img}" alt="" />
             <div class="cardText">
               <span>⭐</span>
               <span>${el.orderstar}</span>
@@ -54,7 +54,7 @@ async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);
 
-  const data = await axios.get(`${backend}/main/logincheck`, {
+  const data = await axios.get(`http://127.0.0.1:8080/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
 
@@ -94,7 +94,7 @@ async function logincheck() {
   }
 }
 nick.onclick = async () => {
-  const { data } = await axios.get(`${backend}/main/logincheck`, {
+  const { data } = await axios.get(`http://127.0.0.1:8080/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
   });
@@ -102,17 +102,17 @@ nick.onclick = async () => {
 
   console.log(role);
   if (role == "writer") {
-    window.location.href = `${frontend}writerpage.html`;
+    window.location.href = `http://127.0.0.1:5500/frontend/writerpage.html`;
   }
 
   if (role == "reader") {
-    window.location.href = `${frontend}mypage.html`;
+    window.location.href = `http://127.0.0.1:5500/frontend/mypage.html`;
   }
 };
 logincheck();
 
 logout.onclick = async () => {
-  await axios.get(`${backend}/logout`, {
+  await axios.get(`http://127.0.0.1:8080/logout`, {
     withCredentials: true,
   });
 

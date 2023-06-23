@@ -1,11 +1,11 @@
-const backend = "http://13.209.64.80";
-const frontend = "/";
+const backend = "http://127.0.0.1:8080";
+const frontend = "http://127.0.0.1:5500/frontend/";
 
 async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);
 
-  const { data } = await axios.get(`${backend}/main/logincheck`, {
+  const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
   });
@@ -37,7 +37,7 @@ async function logincheck() {
 logincheck();
 
 logout.onclick = async () => {
-  await axios.get(`${backend}/logout`, {
+  await axios.get("http://127.0.0.1:8080/logout", {
     withCredentials: true,
   });
 
@@ -53,17 +53,17 @@ allview.onclick = async () => {
 };
 
 nick.onclick = async () => {
-  const { data } = await axios.get(`${backend}/main/logincheck`, {
+  const { data } = await axios.get("http://127.0.0.1:8080/main/logincheck", {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
   });
   const { nickname, role } = data;
 
   if (role == "writer") {
-    window.location.href = `${frontend}writerpage.html`;
+    window.location.href = "http://127.0.0.1:5500/frontend/writerpage.html";
   }
 
   if (role == "reader") {
-    window.location.href = `${frontend}mypage.html`;
+    window.location.href = "http://127.0.0.1:5500/frontend/mypage.html";
   }
 };

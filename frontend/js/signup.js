@@ -15,7 +15,7 @@ btn.onclick = (event) => {
   console.log(role);
   console.log(gender);
   axios
-    .post(`${backend}/signup`, {
+    .post("http://127.0.0.1:8080/signup", {
       withCredentials: true,
 
       data: {
@@ -33,15 +33,15 @@ btn.onclick = (event) => {
       console.log(e);
 
       if (e.data == "이미 존재하는 계정") {
-        return (window.location.href = `${frontend}singupErr2.html`);
+        return (window.location.href = 'http://127.0.0.1:5500/frontend/singupErr2.html');
       }
 
       if (e.data == "비밀번호 불일치") {
-        return (window.location.href = `${frontend}singupErr.html`);
+        return (window.location.href = 'http://127.0.0.1:5500/frontend/singupErr.html');
       }
 
       if (e.data == "가입성공") {
-        return (window.location.href = `${frontend}login.html`);
+        return (window.location.href = "http://127.0.0.1:5500/frontend/login.html");
       }
     });
 };

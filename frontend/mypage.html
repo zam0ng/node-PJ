@@ -11,7 +11,7 @@
 
   <body>
     <div class="header">
-      <a href="/index.html">
+      <a href="http://127.0.0.1:5500/frontend/index.html">
         <img
           class="header-img"
           src="https://cdn.discordapp.com/attachments/1114103044242677824/1115109195503648838/White_logo_-_no_background.png"
@@ -20,10 +20,10 @@
       <div class="ulheader">
         <ul style="display: flex; align-items: center">
           <li class="category">
-            <a href="/index.html">Home</a>
+            <a href="http://127.0.0.1:5500/frontend/index.html">Home</a>
           </li>
-          <li class="category"><a href="/checklist.html">My Books</a></li>
-          <li class="category"><a href="/follow.html">Following</a></li>
+          <li class="category"><a href="http://127.0.0.1:5500/frontend/checklist.html">My Books</a></li>
+          <li class="category"><a href="http://127.0.0.1:5500/frontend/follow.html">Following</a></li>
         </ul>
         <ul style="display: flex; align-items: center">
           <button id="logout">Log-Out</button>
@@ -121,22 +121,22 @@
 <script src="./js/address.js"></script>
 <script>
   logout.onclick = async () => {
-    await axios.get(`${backend}/logout`, {
+    await axios.get(`http://127.0.0.1:8080/logout`, {
       withCredentials: true,
     });
 
     document.cookie =
       "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-    window.location.href = `${frontend}index.html`;
+    window.location.href = `http://127.0.0.1:5500/frontend/index.html`;
   };
 
   async function getAPI() {
     try {
       const { data } = await axios.get(
-        `${backend}/mypages`,
+        `http://127.0.0.1:8080/mypages`,
         { withCredentials: true }
       );
-      img1.src = `${backend}${data.user_img}`;
+      img1.src = `http://127.0.0.1:8080${data.user_img}`;
 
         // img1.src = data.user_img;
         let tb = data.checks;
@@ -167,7 +167,7 @@
     form.append("upload", file.files[0]);
     console.log(file.files[0]);
     axios
-      .post(`${backend}/mypages`, form, {
+      .post(`http://127.0.0.1:8080/mypages`, form, {
         //이것때문에 req 가 안읽힘
         withCredentials: true,
 
@@ -187,20 +187,20 @@
       try {
         console.log("닉버튼 찍힘?");
       await axios.post(`
-      ${backend}/writer/nick`,{
+      http://127.0.0.1:8080/writer/nick`,{
         
         changenick : nickchange.value
       },
       {withCredentials:true});
         alert("개인정보가 변경되어 다시 로그인하세요!ㅎㅎ");
         logout.onclick = async () => {
-      await axios.get(`${backend}/logout`, {
+      await axios.get(`http://127.0.0.1:8080/logout`, {
         withCredentials: true,
       });
 
       document.cookie =
         "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-      window.location.href = `${frontend}index.html`;
+      window.location.href = ` http://127.0.0.1:5500/frontend/index.html`;
     };
         window.location.href="/login.html";
         
@@ -253,7 +253,7 @@
   async function commentAPI() {
     try {
       const { data } = await axios.get(
-        `${backend}/mypages/reviews`,
+        `http://127.0.0.1:8080/mypages/reviews`,
         {
           withCredentials: true,
         }
@@ -287,7 +287,7 @@
             <li>${el.comment}<br>${revisedFormattedDate}
               
             <div id="contain">
-              <div id="immg"><img id="imgg" src="${backend}/${el.Book.img}" alt=""></div>
+              <div id="immg"><img id="imgg" src="http://127.0.0.1:8080/${el.Book.img}" alt=""></div>
               <div id="r_title">${el.Book.title}</div>
             </div>
               </li>
@@ -312,7 +312,7 @@
   async function replies(){
     try {
       const { data } = await axios.get(
-        `${backend}/mypages/reviews`,
+        `http://127.0.0.1:8080/mypages/reviews`,
         {
           withCredentials: true,
         }

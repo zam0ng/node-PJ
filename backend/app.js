@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("database Connect");
     adminsignup(User);
@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "http://13.209.64.80",
+    origin: "http://127.0.0.1:5500",
     credentials: true,
   })
 );

@@ -11,7 +11,7 @@ btn.onclick = async () => {
     pwderr.style.color = "red";
     return;
   }
-  const e = await axios.get(`${backend}/login`, {
+  const e = await axios.get("http://127.0.0.1:8080/login", {
     withCredentials: true,
 
     params: {
@@ -25,9 +25,9 @@ btn.onclick = async () => {
   if (e.data?.msg == "로그인 성공") {
     console.log(e.data.token);
 
-    window.location.href = `${frontend}index.html`;
+    window.location.href = "http://127.0.0.1:5500/frontend/index.html";
   } else if (e.data == "어드민") {
-    window.location.href = `${frontend}admin.html`;
+    window.location.href = "http://127.0.0.1:5500/frontend/admin.html";
   } else if (e.data == "비밀번호 틀림") {
     undefinedID.innerText = "";
     pwderr.innerHTML = "wrong password";
@@ -52,7 +52,7 @@ function onEnterLogin(event) {
   console.log(keycode);
   if (keycode == "Enter") {
     axios
-      .post(`${backend}/login`, {
+      .post("http://127.0.0.1:8080/login", {
         withCredentials: true,
 
         params: {
@@ -63,9 +63,9 @@ function onEnterLogin(event) {
       .then((e) => {
         console.log(e);
         if (e.data == "로그인 성공") {
-          window.location.href = `${frontend}index.html`;
+          window.location.href = "http://127.0.0.1:5500/frontend/index.html";
         } else if (e.data == "어드민") {
-          window.location.href = `${frontend}admin.html`;
+          window.location.href = "http://127.0.0.1:5500/frontend/admin.html";
         } else if (e.data == "비밀번호 틀림") {
           undefinedID.innerText = "";
           pwderr.innerHTML = "wrong password";

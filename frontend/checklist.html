@@ -19,7 +19,7 @@
   <!-- 로고 부분 -->
   <div class="nav">
     <div class="logoBox">
-      <a href="/index.html"><img src="http://13.209.64.80/img/Black logo - no background.png"
+      <a href="http://127.0.0.1:5500/frontend/index.html"><img src="http://127.0.0.1:8080/img/Black logo - no background.png"
           alt="" /></a>
       <div class="functionBox">
         <span id="allview">📙books</span>
@@ -69,7 +69,7 @@
     async function checkAPI() {
         try {
           const data = await axios.get(
-            `${backend}/check/list`,
+            `http://127.0.0.1:8080/check/list`,
             { withCredentials: true, }
           );
 
@@ -78,9 +78,9 @@
             console.log(el.img)
             console.log(el.title)
             list.innerHTML += `
-          <a href="${frontend}view.html?id=${el.id}">
+          <a href="http://127.0.0.1:5500/frontend/view.html?id=${el.id}">
         <div class="booklist">
-            <div class="bookcover"><img src="${backend}/${el.img}" alt=""></div>
+            <div class="bookcover"><img src="http://127.0.0.1:8080/${el.img}" alt=""></div>
             <div>book's title : ${el.title}</div>
         </div>
       </a>
@@ -95,7 +95,7 @@
     async function buyAPI(){
       try {
         const data = await axios.get(
-          `${backend}/buy/list`,
+          `http://127.0.0.1:8080/buy/list`,
           {withCredentials:true}
         );
         console.log(data);
@@ -103,9 +103,9 @@
             console.log(e.img)
             console.log(e.title)
             list2.innerHTML += `
-          <a href="${frontend}view.html?id=${e.id}">
+          <a href="http://127.0.0.1:5500/frontend/view.html?id=${e.id}">
         <div class="booklist">
-            <div class="bookcover"><img src="${backend}/${e.img}" alt=""></div>
+            <div class="bookcover"><img src="http://127.0.0.1:8080/${e.img}" alt=""></div>
             <div>book's title : ${e.title}</div>
         </div>
       </a>

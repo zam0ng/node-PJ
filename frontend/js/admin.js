@@ -4,7 +4,7 @@ window.onload = async () => {
     // const at = document.cookie.slice(8);
     // console.log(at);
   
-    const data = await axios.get(`${backend}/main/admincheck`, {
+    const data = await axios.get(`http://127.0.0.1:8080/main/admincheck`, {
       // 이게 rawheader에 쿠키를 저장하는 역할
       withCredentials: true,
   
@@ -13,7 +13,7 @@ window.onload = async () => {
 
     if(data.data="undi"){
       alert("어드민 계정으로 로그인하세요");
-      window.location.href = `${frontend}login.html`;
+      window.location.href = `http://127.0.0.1:5500/frontend/login.html`;
     }
   }
   admincheck();
@@ -25,7 +25,7 @@ window.onload = async () => {
   reject_reason.style.visibility = "hidden";
   main_content3.style.display = "none";
 
-  const data = await axios.get(`${backend}/nonagreeuser`, {
+  const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser`, {
     withCredentials: true,
   });
   main_content.innerHTML = "";
@@ -68,14 +68,14 @@ window.onload = async () => {
 
     accept.forEach((e, index) => {
       e.onclick = async () => {
-        const data = await axios.get(`${backend}/nonagreeuser`, {
+        const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser`, {
           withCredentials: true,
         });
 
         data.data.forEach((e, indexx) => {
           if (index == indexx) {
             e.grade = e.grade + 1;
-            axios.post(`${backend}/nonagreeuser`, {
+            axios.post(`http://127.0.0.1:8080/nonagreeuser`, {
               withCredentials: true,
 
               data: {
@@ -91,14 +91,14 @@ window.onload = async () => {
 
     reject.forEach((e, index) => {
       e.onclick = async () => {
-        const data = await axios.get(`${backend}/nonagreeuser`, {
+        const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser`, {
           withCredentials: true,
         });
 
         data.data.forEach((e, indexx) => {
           if (index == indexx) {
             e.grade = e.grade - 1;
-            axios.post(`${backend}/nonagreeuser`, {
+            axios.post(`http://127.0.0.1:8080/nonagreeuser`, {
               withCredentials: true,
 
               data: {
@@ -130,7 +130,7 @@ user_agree.onclick = async () => {
   //0619
   main_content3.style.display = "none";
 
-  const data = await axios.get(`${backend}/nonagreeuser`, {
+  const data = await axios.get(`http://127.0.0.1:8080}/nonagreeuser`, {
     withCredentials: true,
   });
   main_content.innerHTML = "";
@@ -173,14 +173,14 @@ user_agree.onclick = async () => {
 
     accept.forEach((e, index) => {
       e.onclick = async () => {
-        const data = await axios.get(`${backend}/nonagreeuser`, {
+        const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser`, {
           withCredentials: true,
         });
 
         data.data.forEach((e, indexx) => {
           if (index == indexx) {
             e.grade = e.grade + 1;
-            axios.post(`${backend}/nonagreeuser`, {
+            axios.post(`http://127.0.0.1:8080/nonagreeuser`, {
               withCredentials: true,
 
               data: {
@@ -210,7 +210,7 @@ post_agree.onclick = async () => {
   user_agree.style.color = "rgb(158, 158, 158)";
   post_agree.style.color = "black";
   chat_agree.style.color = "rgb(158, 158, 158)";
-  const data = await axios.get(`${backend}/nonagreeuser/posts`, {
+  const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser/posts`, {
     withCredentials: true,
   });
 
@@ -222,7 +222,7 @@ post_agree.onclick = async () => {
   data.data.forEach((el) => {
     main_content2.innerHTML += `
                 <div class="book_img">
-                <img src="${backend}/${el.img}" alt="">
+                <img src="http://127.0.0.1:8080/${el.img}" alt="">
                 <div class="book_title">${el.title}</div>
                         <button class="accept2">  </button>
                         <button class="reject2">  </button>
@@ -233,14 +233,14 @@ post_agree.onclick = async () => {
 
     accept2.forEach((e, index) => {
       e.onclick = async () => {
-        const data = await axios.get(`${backend}/nonagreeuser/posts`, {
+        const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser/posts`, {
           withCredentials: true,
         });
 
         data.data.forEach((e, indexx) => {
           if (index == indexx) {
             e.accept = parseInt(e.accept) + 1;
-            axios.get(`${backend}/nonagreeuser/acceptUpdate`, {
+            axios.get(`http://127.0.0.1:8080/nonagreeuser/acceptUpdate`, {
               withCredentials: true,
 
               params: {
@@ -263,14 +263,14 @@ post_agree.onclick = async () => {
 
           const reasonvalue = reason.options[reason.selectedIndex].value;
 
-          const data = await axios.get(`${backend}/nonagreeuser/posts`, {
+          const data = await axios.get(`http://127.0.0.1:8080/nonagreeuser/posts`, {
             withCredentials: true,
           });
 
           data.data.forEach((e, indexx) => {
             if (index == indexx) {
               e.accept = parseInt(e.accept) - 1;
-              axios.get(`${backend}/nonagreeuser/acceptUpdate`, {
+              axios.get(`http://127.0.0.1:8080/nonagreeuser/acceptUpdate`, {
                 withCredentials: true,
 
                 params: {
@@ -319,18 +319,18 @@ chat_agree.onclick = async () => {
   let chatArea = document.querySelector(".chatArea");
 
   // confirm 이 0인 값을 가져와보자.
-  const confirmZero = await axios.get(`${backend}/chat/confirmZero`, {
+  const confirmZero = await axios.get(`http://127.0.0.1:8080/chat/confirmZero`, {
     withCredentials: true,
   });
 
   confirmZero.data.forEach((el, index) => {});
 
   // 채팅을 한번이라도 한 유저 이름 가져와야함
-  const un = await axios.get(`${backend}/chat/username`, {
+  const un = await axios.get(`http://127.0.0.1:8080/chat/username`, {
     withCredentials: true,
   });
 
-  const socket = io.connect(`${backend}`);
+  const socket = io.connect(`http://127.0.0.1:8080`);
   let chat_id;
   const userName = "admin";
   let userTemp;
@@ -369,7 +369,7 @@ chat_agree.onclick = async () => {
 
         who_room.innerText = str;
 
-        chatUserInfo = await axios.get(`${backend}/chat/getUserInfo`, {
+        chatUserInfo = await axios.get(`http://127.0.0.1:8080/chat/getUserInfo`, {
           withCredentials: true,
           params: {
             user_id: str,
@@ -382,7 +382,7 @@ chat_agree.onclick = async () => {
         // 소켓 연결됬을때 카톡 읽은것처럼 1로 바꿈.
 
         if (socket.emit("joinRoom", chat_id).connected) {
-          const data = axios.get(`${backend}/chat/changeone`, {
+          const data = axios.get(`http://127.0.0.1:8080/chat/changeone`, {
             withCredentials: true,
 
             params: {
@@ -392,7 +392,7 @@ chat_agree.onclick = async () => {
         }
         userTemp = chat_id;
 
-        const chatdata = await axios.get(`${backend}/chat/getChatData`, {
+        const chatdata = await axios.get(`http://127.0.0.1:8080/chat/getChatData`, {
           withCredentials: true,
           params: {
             id: chat_id,
