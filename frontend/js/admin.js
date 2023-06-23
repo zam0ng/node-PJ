@@ -108,11 +108,11 @@ window.onload = async () => {
       //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
     });
 
-    if(data.data="undi"){
+    if(data.data=="undi"){
       alert("어드민 계정으로 로그인하세요");
       window.location.href = `${frontend}login.html`;
     }
-    else if(data.data="admin"){
+    else if(data.data=="admin"){
       isLoading.classList.add("disable");
     }
 
