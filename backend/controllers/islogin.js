@@ -44,7 +44,22 @@ exports.adminislogin = async (req, res) => {
   try {
     
     const { access_token } = req.session;
+
+    console.log("-------------access_token")
+    console.log(access_token)
+    console.log("-------------access_token")
     
+    if(access_token){
+      const {user_id} = req.session;
+
+      if(user_id !="admin"){
+        res.send("undi")
+      }
+      else{
+        res.send();
+      }
+
+    }
     console.log(access_token);
     console.log(access_token==undefined)
     console.log(access_token=="undefined" || user_id !="")
