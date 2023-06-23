@@ -357,147 +357,137 @@ chat_agree.onclick = async () => {
     //usn : User Span Name
     let userClick = document.querySelectorAll(".userClick");
     let usn = document.querySelectorAll(".usn");
-
-    const zeroCnt = e.target.querySelector(".zeroCnt");
-    console.log(zeroCnt);
+    
 
     userClick.forEach((el, index) => {
       el.style.backgroundColor = "";
+      el.onclick = async (e) => {
+        
+      const zeroCnt = e.target.querySelector(".zeroCnt");
+      console.log(zeroCnt);
 
-      if (zeroCnt != null) {
-        el.onclick = async (e) => {
-
-
-          // 메세지가 왔을 때
-
+        // 메세지가 왔을 때
+        if(zeroCnt !=null){
           zeroCnt.style.display = "none";
-
-
           chatArea.innerHTML = "";
-          if (userTemp) {
-            socket.emit("leaveRoom", chat_id);
-          }
-          // el.style.backgroundColor="red"
-          let str = confirmZero.data[index].user_name;
+        if (userTemp) {
+          socket.emit("leaveRoom", chat_id);
+        }
+        // el.style.backgroundColor="red"
+        let str = confirmZero.data[index].user_name;
 
-          who_room.innerText = str;
+        who_room.innerText = str;
 
-          chatUserInfo = await axios.get(`${backend}/chat/getUserInfo`, {
+        chatUserInfo = await axios.get(`${backend}/chat/getUserInfo`, {
+          withCredentials: true,
+          params: {
+            user_id: str,
+          },
+        });
+        chat_id = chatUserInfo.data.id;
+
+        socket.emit("joinRoom", chat_id);
+
+        // 소켓 연결됬을때 카톡 읽은것처럼 1로 바꿈.
+
+        if (socket.emit("joinRoom", chat_id).connected) {
+          const data = axios.get(`${backend}/chat/changeone`, {
             withCredentials: true,
+
             params: {
-              user_id: str,
+              chat_id: chat_id,
             },
           });
-          chat_id = chatUserInfo.data.id;
+        }
+        userTemp = chat_id;
 
-          socket.emit("joinRoom", chat_id);
+        const chatdata = await axios.get(`${backend}/chat/getChatData`, {
+          withCredentials: true,
+          params: {
+            id: chat_id,
+          },
+        });
 
-          // 소켓 연결됬을때 카톡 읽은것처럼 1로 바꿈.
-
-          if (socket.emit("joinRoom", chat_id).connected) {
-            const data = axios.get(`${backend}/chat/changeone`, {
-              withCredentials: true,
-
-              params: {
-                chat_id: chat_id,
-              },
-            });
-          }
-          userTemp = chat_id;
-
-          const chatdata = await axios.get(`${backend}/chat/getChatData`, {
-            withCredentials: true,
-            params: {
-              id: chat_id,
-            },
-          });
-
-          chatdata.data.forEach((el, index) => {
-            if (el.user_name == "testadmin") {
-              chatArea.innerHTML += `
+        chatdata.data.forEach((el, index) => {
+          if (el.user_name == "testadmin") {
+            chatArea.innerHTML += `
     
                                 <span class="adminSpan">${el.text}</span>
                             `;
-            } else {
-              chatArea.innerHTML += `
+          } else {
+            chatArea.innerHTML += `
     
                                 <span class="userSpan">${el.text}</span>
                             `;
-            }
-          });
-          // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
-          setTimeout(() => {
-            chatArea.scrollTop = chatArea.scrollHeight;
-          }, 0);
-        };
-      }
-      else{
-        el.onclick = async (e) => {
-
-
-          // 메세지가 왔을 때
-
-          zeroCnt.style.display = "none";
-
-
-          chatArea.innerHTML = "";
-          if (userTemp) {
-            socket.emit("leaveRoom", chat_id);
           }
-          // el.style.backgroundColor="red"
-          let str = confirmZero.data[index].user_name;
+        });
+        // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
+        setTimeout(() => {
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }, 0);
+        } else {
 
-          who_room.innerText = str;
 
-          chatUserInfo = await axios.get(`${backend}/chat/getUserInfo`, {
+        chatArea.innerHTML = "";
+        if (userTemp) {
+          socket.emit("leaveRoom", chat_id);
+        }
+        // el.style.backgroundColor="red"
+        let str = confirmZero.data[index].user_name;
+
+        who_room.innerText = str;
+
+        chatUserInfo = await axios.get(`${backend}/chat/getUserInfo`, {
+          withCredentials: true,
+          params: {
+            user_id: str,
+          },
+        });
+        chat_id = chatUserInfo.data.id;
+
+        socket.emit("joinRoom", chat_id);
+
+        // 소켓 연결됬을때 카톡 읽은것처럼 1로 바꿈.
+
+        if (socket.emit("joinRoom", chat_id).connected) {
+          const data = axios.get(`${backend}/chat/changeone`, {
             withCredentials: true,
+
             params: {
-              user_id: str,
+              chat_id: chat_id,
             },
           });
-          chat_id = chatUserInfo.data.id;
+        }
+        userTemp = chat_id;
 
-          socket.emit("joinRoom", chat_id);
+        const chatdata = await axios.get(`${backend}/chat/getChatData`, {
+          withCredentials: true,
+          params: {
+            id: chat_id,
+          },
+        });
 
-          // 소켓 연결됬을때 카톡 읽은것처럼 1로 바꿈.
-
-          if (socket.emit("joinRoom", chat_id).connected) {
-            const data = axios.get(`${backend}/chat/changeone`, {
-              withCredentials: true,
-
-              params: {
-                chat_id: chat_id,
-              },
-            });
-          }
-          userTemp = chat_id;
-
-          const chatdata = await axios.get(`${backend}/chat/getChatData`, {
-            withCredentials: true,
-            params: {
-              id: chat_id,
-            },
-          });
-
-          chatdata.data.forEach((el, index) => {
-            if (el.user_name == "testadmin") {
-              chatArea.innerHTML += `
+        chatdata.data.forEach((el, index) => {
+          if (el.user_name == "testadmin") {
+            chatArea.innerHTML += `
     
                                 <span class="adminSpan">${el.text}</span>
                             `;
-            } else {
-              chatArea.innerHTML += `
+          } else {
+            chatArea.innerHTML += `
     
                                 <span class="userSpan">${el.text}</span>
                             `;
-            }
-          });
-          // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
-          setTimeout(() => {
-            chatArea.scrollTop = chatArea.scrollHeight;
-          }, 0);
-        };
-      }
+          }
+        });
+        // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
+        setTimeout(() => {
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }, 0);
+      };
+    }
+
+
     });
   });
 
