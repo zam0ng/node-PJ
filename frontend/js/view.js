@@ -608,7 +608,7 @@ async function getComments() {
         if (remove[0].innerHTML == loginUser.data.nickname) {
           if (confirm("댓글을 삭제 하시겠습니까?")) {
             // console.log(this.className);
-            axios.get("http://127.0.0.1:8080/view/review/delete", {
+            axios.get(`${backend}/view/review/delete`, {
               withCredentials: true,
               params: {
                 id: this.className,
