@@ -335,7 +335,7 @@ chat_agree.onclick = async () => {
 
   const socket = io.connect(`${backend}`);
   let chat_id;
-  const userName = "admin";
+  const userName = "testadmin";
   let userTemp;
   let chatUserInfo;
   console.log(confirmZero);
