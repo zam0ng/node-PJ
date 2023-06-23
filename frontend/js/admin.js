@@ -363,7 +363,11 @@ chat_agree.onclick = async () => {
       el.onclick = async (e) => {
         const zeroCnt = e.target.querySelector(".zeroCnt");
         console.log(zeroCnt);
-        zeroCnt.style.display = "none";
+
+        if(zeroCnt !=null){
+
+          zeroCnt.style.display = "none";
+        }
 
         chatArea.innerHTML = "";
         if (userTemp) {
