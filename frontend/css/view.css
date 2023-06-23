@@ -84,7 +84,7 @@ body {
 .buyprice span,
 .wantToReadBtn span {
   font-size: large;
-
+  
   display: flex;
   align-items: center;
 }
