@@ -431,7 +431,7 @@ chat_agree.onclick = async () => {
   };
 
   socket.on("message", (chat_id, user_name, msg) => {
-    if (user_name == "testadmin") {
+    if (user_name != "testadmin") {
       chatArea.innerHTML += `
 
                 <span class="adminSpan">${msg}</span>
