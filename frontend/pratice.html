@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   .container {
+  position: relative;
+}
+
+.opacity-control {
+  position: absolute;
+  top: 10%;
+
+}
+.slider {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 100px;
+transform: translate(-50%, 100%) rotate(-90deg);
+}
+
+.content {
+  background-color: rgb(0, 0, 0); 
+  width: 200px;
+  height: 200px;
+} 
+</style>
+<body>
+    <div class="container">
+        <div class="opacity-control">
+          <input type="range" min="0" max="100" value="100" class="slider" id="opacitySlider">
+        </div>
+        <div class="content">
+          <!-- Your content goes here -->
+        </div>
+      </div>
+</body>
+<script>
+    const opacitySlider = document.getElementById("opacitySlider");
+const contentDiv = document.querySelector(".content");
+
+opacitySlider.addEventListener("input", function() {
+  const opacityValue = this.value / 100;
+  contentDiv.style.backgroundColor = `rgba(0, 0, 0, ${opacityValue})`;
+});
+</script>
+</html>

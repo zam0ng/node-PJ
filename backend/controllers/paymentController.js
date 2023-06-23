@@ -79,7 +79,7 @@ exports.payApprove = async (req, res) => {
 
     res.write("<script>alert('결제가 완료되었습니다.')</script>");
     res.write(
-      `<script>window.location = "${process.env.frontend}index.html"</script>`
+      `<script>window.location = "http://127.0.0.1:5500/frontend/index.html"</script>`
     );
   } catch (error) {
     console.error(error);

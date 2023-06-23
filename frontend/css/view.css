@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #ffeed2;
+  
 }
 
 /* .nav {
@@ -66,6 +67,9 @@ body {
   width: 30px;
   height: 30px;
   font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 우측 사이드바 별점 잔해 */

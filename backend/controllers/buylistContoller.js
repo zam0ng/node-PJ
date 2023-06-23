@@ -7,11 +7,13 @@ exports.buyList = async(req,res)=>{
         console.log(data.buys);
         const as = data.buys;
         const zx = as.split(",");
-        let q;
+       let q ="";
         if (data.buys == "") {
+            console.log
+            console.log( req.params.id)
           q = req.params.id;
         } else {
-        q = data.buys + "," + req.params.id;
+        q= data.buys
         }
         await User.update(
           {

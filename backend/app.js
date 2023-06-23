@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log("database Connect");
     adminsignup(User);
