@@ -1,25 +1,5 @@
 window.onload = async () => {
 
-  async function admincheck() {
-    // const at = document.cookie.slice(8);
-    // console.log(at);
-  
-    const data = await axios.get(`${backend}/main/admincheck`, {
-      // 이게 rawheader에 쿠키를 저장하는 역할
-      withCredentials: true,
-  
-      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
-    });
-
-    if(data.data="undi"){
-      alert("어드민 계정으로 로그인하세요");
-      window.location.href = `${frontend}login.html`;
-      return;
-      // isLoading.classList.add("disable");
-    }
-  }
-  admincheck();
-
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
   post_agree.style.color = "rgb(158, 158, 158)";
@@ -117,7 +97,29 @@ window.onload = async () => {
       };
     });
   });
-  isLoading.classList.add("disable");
+  async function admincheck() {
+    // const at = document.cookie.slice(8);
+    // console.log(at);
+  
+    const data = await axios.get(`${backend}/main/admincheck`, {
+      // 이게 rawheader에 쿠키를 저장하는 역할
+      withCredentials: true,
+  
+      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+    });
+
+    if(data.data="undi"){
+      alert("어드민 계정으로 로그인하세요");
+      window.location.href = `${frontend}login.html`;
+    }
+    else{
+      // isLoading.classList.add("disable");
+
+    }
+
+  }
+  admincheck();
+  // isLoading.classList.add("disable");
 };
 user_agree.onclick = async () => {
   tab_title.innerText = "가입 승인";
