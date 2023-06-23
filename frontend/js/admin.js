@@ -434,12 +434,12 @@ chat_agree.onclick = async () => {
     if (user_name != "testadmin") {
       chatArea.innerHTML += `
 
-                <span class="adminSpan">${msg}</span>
+                <span class="userSpan">${msg}</span>
                 `;
     } else {
       chatArea.innerHTML += `
 
-            <span class="userSpan">${msg}</span>
+            <span class="adminSpan">${msg}</span>
                 `;
     }
     // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기
