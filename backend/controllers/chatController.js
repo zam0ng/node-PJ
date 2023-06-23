@@ -84,7 +84,7 @@ exports.confirmZero= async(req,res)=>{
              FROM (
                SELECT user_name
                FROM chat
-               WHERE user_name <> "admin"
+               WHERE user_name <> "testadmin"
                GROUP BY user_name
              ) A
              LEFT OUTER JOIN (
