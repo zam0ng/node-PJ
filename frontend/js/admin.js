@@ -205,7 +205,9 @@ closee.onclick = () => {
 // 게시글 관리
 post_agree.onclick = async () => {
   main_content2.innerHTML = "";
-  main_content2.style.visibility = "visible";
+  // main_content2.style.visibility = "visible";
+  main_content2.style.display = "block";
+
   main_content.style.display = "none";
   //0619
   main_content3.style.visibility = "hidden";
@@ -317,7 +319,8 @@ chat_agree.onclick = async () => {
   chatUserId.innerHTML = "";
   main_content3.style.display = "block";
   main_content3.style.visibility = "visible";
-  main_content2.style.visibility = "hidden";
+  // main_content2.style.visibility = "hidden";
+  main_content2.style.display = "none";
   main_content.style.display = "none";
 
   let chatArea = document.querySelector(".chatArea");
