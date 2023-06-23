@@ -174,7 +174,7 @@ async function getView() {
   const userInfo = await getLogin();
   console.log(userInfo);
   if (userInfo) {
-    myImgImg.setAttribute("src", `${backend}${userInfo.user_img}`);
+    myImgImg.setAttribute("src", `${backend}/${userInfo.user_img}`);
   }
 
   // Ratings & Reviews 별 누르면 별 채워지는 기능
