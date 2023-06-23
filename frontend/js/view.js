@@ -176,6 +176,10 @@ async function getView() {
   if (userInfo) {
     myImgImg.setAttribute("src", `${backend}${userInfo.data.user_img}`);
   }
+  else {
+    
+    myImg.innerHTML = `<img src="${backend}/img/basic.png" alt="" />`;
+  }
 
   // Ratings & Reviews 별 누르면 별 채워지는 기능
   const reviewStars = document.querySelector(".reviewStars");
