@@ -438,9 +438,9 @@ chat_agree.onclick = async () => {
     adminMsg.value = "";
   };
 
-  socket.on("message", (chat_id, user_name, msg) => {
+  socket.on("message", async(chat_id, user_name, msg) => {
 
-    axios.get(`${backend}/chat/changeone`, {
+    await axios.get(`${backend}/chat/changeone`, {
       withCredentials: true,
 
       params: {
