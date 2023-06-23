@@ -57,9 +57,7 @@ exports.adminislogin = async (req, res) => {
       }
 
     }
-    console.log(access_token);
-    console.log(access_token==undefined)
-    console.log(access_token=="undefined" || user_id !="")
+
     if(access_token == undefined){
       
       res.send("undi")
