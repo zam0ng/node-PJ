@@ -58,10 +58,14 @@ exports.adminislogin = async (req, res) => {
       const {user_id} = req.session;
 
       if(user_id !="testadmin"){
+        console.log("undi")
         res.send("undi");
       }
       else{
+        console.log("admin")
+
         res.send("admin");
+
         
       }
 
