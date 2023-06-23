@@ -173,7 +173,7 @@ async function getView() {
 
   const userInfo = await getLogin();
   console.log(userInfo);
-  if (userInfo) {
+  if (userInfo.data) {
     myImgImg.setAttribute("src", `${backend}${userInfo.data.user_img}`);
   }
   else {
