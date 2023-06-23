@@ -440,7 +440,7 @@ chat_agree.onclick = async () => {
 
   socket.on("message", (chat_id, user_name, msg) => {
 
-    const data = axios.get(`${backend}/chat/changeone`, {
+    axios.get(`${backend}/chat/changeone`, {
       withCredentials: true,
 
       params: {
