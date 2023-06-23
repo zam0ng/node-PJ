@@ -49,21 +49,22 @@ exports.adminislogin = async (req, res) => {
     console.log(access_token)
     console.log("-------------access_token")
 
-    if(access_token !=undefined){
+    if(access_token == undefined){
+      
+      res.send("undi");
+      
+    } else {
+
       const {user_id} = req.session;
 
       if(user_id !="testadmin"){
-        res.send("undi")
+        res.send("undi");
+      }
+      else{
+        res.send();
+        
       }
 
-    }
-
-    if(access_token == undefined){
-      
-      res.send("undi")
-      
-    } else {
-      res.send();
     }
   } catch (error) {
     console.log("adminislogin 컨트롤러에서 오류남" + error);
