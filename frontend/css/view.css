@@ -83,8 +83,6 @@ body {
 }
 .buyprice span,
 .wantToReadBtn span {
-  width: 30px;
-  height: 30px;
   font-size: large;
 
   display: flex;
