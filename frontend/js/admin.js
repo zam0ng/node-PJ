@@ -126,12 +126,10 @@ user_agree.onclick = async () => {
   post_agree.style.color = "rgb(158, 158, 158)";
   chat_agree.style.color = "rgb(158, 158, 158)";
 
-  main_content2.style.visibility = "hidden";
-  // main_content2.style.display="none";
+  // main_content2.style.visibility = "hidden";
+  main_content2.style.display="none";
   reject_reason.style.visibility = "hidden";
   main_content.style.display = "block";
-
-  //0619
   main_content3.style.display = "none";
 
   const data = await axios.get(`${backend}/nonagreeuser`, {
