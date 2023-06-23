@@ -10,19 +10,22 @@ async function logincheck() {
     withCredentials: true,
   });
 
-  const { nickname, role } = data;
+  const { nickname, role } = data.data;
   let who;
 
   if (role == "writer") {
     who = "작가";
-  } else {
+  } 
+  if (role == "reader"){
     who = "독자";
   }
 
-  if (data == "다시 로그인") {
+  if (data.data == "다시 로그인") {
     login.style.display = "block";
     signUp.style.display = "block";
     nick.style.display = "none";
+    logout.style.visibility = "hidden";
+
   } else {
     login.style.display = "none";
     signUp.style.display = "none";
