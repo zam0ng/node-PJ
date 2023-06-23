@@ -61,7 +61,7 @@ exports.adminislogin = async (req, res) => {
         res.send("undi");
       }
       else{
-        res.send();
+        res.send("admin");
         
       }
 
