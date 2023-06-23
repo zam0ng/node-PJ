@@ -48,15 +48,12 @@ exports.adminislogin = async (req, res) => {
     console.log("-------------access_token")
     console.log(access_token)
     console.log("-------------access_token")
-    
-    if(access_token){
+
+    if(access_token !=undefined){
       const {user_id} = req.session;
 
       if(user_id !="admin"){
         res.send("undi")
-      }
-      else{
-        res.send();
       }
 
     }
