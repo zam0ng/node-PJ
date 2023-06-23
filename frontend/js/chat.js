@@ -1,7 +1,7 @@
 // let backend = "http://13.209.64.80" ;
 // let frontend = "/" ;
 
-window.onload = async() => {
+
   // ==========================================================
   // 채팅 div 그리기
   // ==========================================================
@@ -140,5 +140,3 @@ window.onload = async() => {
     chatWrap.style.display = "block";
     socket.off("message");
   };
-  await isLoading.classList.add("disable");
-};

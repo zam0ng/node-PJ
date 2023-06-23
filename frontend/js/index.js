@@ -46,6 +46,7 @@ async function getStarList() {
             </div>
           </div></a>`;
   });
+  isLoading.classList.add("disable");
 }
 getStarList();
 getViewList();
