@@ -362,7 +362,7 @@ chat_agree.onclick = async () => {
       el.style.backgroundColor = "";
       el.onclick = async (e) => {
         const zeroCnt = e.target.querySelector(".zeroCnt");
-
+        console.log(zeroCnt);
         zeroCnt.style.display = "none";
 
         chatArea.innerHTML = "";
