@@ -283,24 +283,26 @@ async function getView() {
   const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
   BuyTheBookBtn.onclick = async () => {
     
-      const data = await axios.get(`${backend}/main/viewcheck`, {
-        // 이게 rawheader에 쿠키를 저장하는 역할
-        withCredentials: true,
-    
-        //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
-      });
-    
-      if(data.data="unde"){
-          alert("로그인 후 이용해주세요!ㅎㅎ");
-          window.location.href = `${frontend}login.html`;
-          return;
-        }
-     
-    if (confirm(`${bookInfo.title} 을 구매하시겠습니까?`)) {
-      window.location.href = `${backend}/v1/payment/ready?item_name=${bookInfo.title}&quantity=1&total_amount=${bookInfo.price}&vat_amount=0&tax_free_amount=0&books_id=${bookInfo.id}`;
-    } else {
-      return;
+    const data = await axios.get(`${backend}/main/viewcheck`, {
+      // 이게 rawheader에 쿠키를 저장하는 역할
+      withCredentials: true,
+  
+      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+    });
+  
+    if(data.data=="unde"){
+        alert("로그인 후 이용해주세요!ㅎㅎ");
+        window.location.href = `${frontend}login.html`;
+        return;
+      }
+    else{
+      if (confirm(`${bookInfo.title} 을 구매하시겠습니까?`)) {
+        window.location.href = `${backend}/v1/payment/ready?item_name=${bookInfo.title}&quantity=1&total_amount=${bookInfo.price}&vat_amount=0&tax_free_amount=0&books_id=${bookInfo.id}`;
+      } else {
+        return;
+      }
     }
+    
   };
   // =========================================================
 
