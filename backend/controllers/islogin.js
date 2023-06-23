@@ -51,6 +51,9 @@ exports.adminislogin = async (req, res) => {
       if(user_id !="admin"){
         res.send("undi")
       }
+      else{
+        res.send();
+      }
 
     }
     console.log(access_token);
