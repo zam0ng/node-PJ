@@ -405,7 +405,7 @@ chat_agree.onclick = async () => {
         });
 
         chatdata.data.forEach((el, index) => {
-          if (el.user_name == "admin") {
+          if (el.user_name == "testadmin") {
             chatArea.innerHTML += `
     
                                 <span class="adminSpan">${el.text}</span>
