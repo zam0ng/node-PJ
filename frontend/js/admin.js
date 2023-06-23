@@ -342,7 +342,7 @@ chat_agree.onclick = async () => {
   confirmZero.data.forEach((el, index) => {
     // const { user_name } = el;
     console.log(el);
-    console.log(zeroCnt);
+    // console.log(zeroCnt);
     if (el.zeroCnt == 0) {
       chatUserId.innerHTML += `
              <li class="userClick"><span class="usn">${el.user_name}</span>
