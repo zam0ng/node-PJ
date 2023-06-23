@@ -115,6 +115,7 @@ window.onload = async () => {
       };
     });
   });
+  isLoading.classList.add("disable");
 };
 user_agree.onclick = async () => {
   tab_title.innerText = "가입 승인";
