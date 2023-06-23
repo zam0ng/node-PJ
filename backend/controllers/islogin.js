@@ -22,6 +22,29 @@ exports.islogin = async (req, res, next) => {
     console.log("islogin 컨트롤러에서 오류남" + error);
   }
 };
+exports.islogin5 = async (req, res, next) => {
+  try {
+    const { access_token } = req.session;
+
+    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
+      if (err) {
+        console.log("다시 로그인");
+        // window.location.href = "http://13.209.64.80/";
+        // res.redirect("http://13.209.64.80/");
+        // res.send("relogin");
+        next();
+        // next();
+      } else {
+        // console.log("islogin");
+        // console.log(decoded);
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } catch (error) {
+    console.log("islogin 컨트롤러에서 오류남" + error);
+  }
+};
 exports.viewislogin = async (req, res) => {
   
   try {
