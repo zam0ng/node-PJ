@@ -144,12 +144,15 @@
         if (tb != null) {
           tc = tb.split(",");
         }
+        consoel.log("---------------------tc");
+        consoel.log(tc);
+        consoel.log("---------------------tc");
 
         nickname1.innerHTML = data.nickname;
         nickname2.innerHTML = data.nickname;
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
-        grade1.innerHTML = data.grade;
+        grade1.innerHTML = data.grade
         checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
