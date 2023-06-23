@@ -52,7 +52,7 @@ exports.adminislogin = async (req, res) => {
     if(access_token !=undefined){
       const {user_id} = req.session;
 
-      if(user_id !="admin"){
+      if(user_id !="testadmin"){
         res.send("undi")
       }
 
