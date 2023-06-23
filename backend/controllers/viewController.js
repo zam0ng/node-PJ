@@ -446,3 +446,11 @@ exports.getBuysList = async (req, res) => {
     console.error(error);
   }
 };
+exports.reviewDelete = async (req, res) => {
+  try {
+    const { id } = req.query;
+    await review.destroy({ where: { id } });
+  } catch (error) {
+    console.error(error);
+  }
+};

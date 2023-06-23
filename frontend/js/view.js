@@ -418,10 +418,6 @@ async function getComments() {
     commentContainer.querySelectorAll(".commentProfileImg");
   const commentProfileImgImg = commentContainer.querySelectorAll("img");
 
-  const commentProfileInfo = commentContainer.querySelectorAll(
-    ".commentProfileInfo"
-  );
-
   const commentArea = commentContainer.querySelectorAll(".commentArea");
 
   const commentMainStar = commentContainer.querySelectorAll(".commentMainStar");
@@ -464,8 +460,7 @@ async function getComments() {
           </div>
           <div class="commentProfileInfo">
           <span>${el.User.nickname}</span>
-          <span>0 review</span>
-          <span>0 follows</span>
+          <span class="${el.id}">remove</span>
           </div>
          
         </div>
@@ -530,7 +525,7 @@ async function getComments() {
           reCommentArea[index].innerHTML += `
         <div class="reCommentInput">
                       <div class="reCommentMyimg">
-                        <img src="$${backend}${userInfo.user_img}" alt="" />
+                        <img src="${backend}${userInfo.user_img}" alt="" />
                       </div>
                       <input type="text" />
                       <div class="reCommentBtn">
@@ -594,6 +589,40 @@ async function getComments() {
       }
     };
   });
+  
+    // =========================================================
+  // 댓글 삭제 기능
+  // getComments의 동작이 끝난뒤 실행되는 함수
+  const loginUser = await getLogin();
+  const commentProfileInfo = document.querySelectorAll(".commentProfileInfo");
+
+  commentProfileInfo.forEach((e, i) => {
+    const remove = commentProfileInfo[i].querySelectorAll("span");
+
+    remove[1].onclick = async function (e) {
+      if (!loginUser.data) {
+        alert("삭제 할 수 없습니다.");
+      } else {
+        if (remove[0].innerHTML == loginUser.data.nickname) {
+          if (confirm("댓글을 삭제 하시겠습니까?")) {
+            // console.log(this.className);
+            axios.get("http://127.0.0.1:8080/view/review/delete", {
+              withCredentials: true,
+              params: {
+                id: this.className,
+              },
+            });
+            getView();
+          }
+        }
+      }
+    };
+  });
+  // =========================================================
+
+
+
+
 }
 
 // 책에 대한 모든 정보를 가져오는 axios 문법
@@ -649,9 +678,6 @@ async function logincheck() {
   }
 }
 
-getView();
-logincheck();
-
 // =========================================================
 // 배포, 로컬에서 변하는 곳 정의
 const myImg = document.querySelector(".myImg");
@@ -693,6 +719,17 @@ async function getBuysList() {
 }
 
 // =========================================================
+// 로그인한 유저 정보 가져오기
+async function getLogin() {
+  const data = await axios.get(`${backend}/view/get/logininfo`, {
+    withCredentials: true,
+  });
+  return data;
+}
+// =========================================================
+
+getView();
+logincheck();
 
 
 

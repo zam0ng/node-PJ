@@ -17,8 +17,9 @@ const {
   checkbuys,
   getReviewCount,
   getBuysList,
+  reviewDelete,
 } = require("../controllers/viewController");
-const { islogin, islogin2 } = require("../controllers/islogin");
+const { islogin, islogin2 ,getLoginUser} = require("../controllers/islogin");
 
 router.get("/how/usercnt",usercnt);
 
@@ -48,5 +49,10 @@ router.get("/checks/buys/:id", islogin,checkbuys);
 router.get("/checks/delete/:id",islogin,checksdel);
 router.get("/checks/add/:id",islogin,checksadd);
 router.get("/:id", viewInfo);
+
+// 댓글 삭제를 위해 로그인한 유저 정보를 보내줌
+router.get("/get/logininfo", getLoginUser);
+// 댓글 삭제
+router.get("/review/delete", islogin, reviewDelete);
 
 module.exports = router;

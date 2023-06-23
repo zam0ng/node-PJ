@@ -532,9 +532,17 @@ body {
   font-size: 16px;
   margin-top: 4px;
 }
-.commentProfile .commentProfileInfo > span:first-child:hover {
+.commentProfile .commentProfileInfo > span:first-child:hover,
+.commentProfile .commentProfileInfo span:last-child:hover {
   cursor: pointer;
   text-decoration: underline;
+  color: #000;
+}
+
+.commentProfile .commentProfileInfo span:last-child {
+  display: block;
+  font-size: 4px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .commentProfileFollowbtn {
