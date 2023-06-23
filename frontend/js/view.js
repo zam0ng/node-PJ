@@ -8,12 +8,11 @@ async function getView() {
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
   // const userInfo = data.data.userdata;
-  let userInfo;
-  if (data.data?.userdata) {
-    userInfo = data.data.userdata;
-    // console.log("로그인한 유저 정보 : userInfo");
-    // console.log(userInfo);
-  }
+  // if (data.data?.userdata) {
+  //   userInfo = data.data.userdata;
+  //   // console.log("로그인한 유저 정보 : userInfo");
+  //   // console.log(userInfo);
+  // }
   const starInfo = data.data.stardata;
   const authordata = data.data.authordata;
   const reviewInfo = data.data.reviewdata;
@@ -172,6 +171,8 @@ async function getView() {
   const myImg = document.querySelector(".myImg");
   const myImgImg = myImg.querySelector("img");
 
+  const userInfo = await getLogin();
+  console.log(userInfo);
   if (userInfo) {
     myImgImg.setAttribute("src", `${backend}${userInfo.user_img}`);
   }
