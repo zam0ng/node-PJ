@@ -144,15 +144,14 @@
         if (tb != null) {
           tc = tb.split(",");
         }
-        console.log("---------------------tc");
-        console.log(tc);
-        console.log("---------------------tc");
-
         nickname1.innerHTML = data.nickname;
         nickname2.innerHTML = data.nickname;
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
         grade1.innerHTML = data.grade
+        if(tc==""){
+          tc.length =0;
+        }
         checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
