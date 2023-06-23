@@ -328,8 +328,6 @@ chat_agree.onclick = async () => {
     withCredentials: true,
   });
 
-  confirmZero.data.forEach((el, index) => {});
-
   // 채팅을 한번이라도 한 유저 이름 가져와야함
   const un = await axios.get(`${backend}/chat/username`, {
     withCredentials: true,
@@ -343,6 +341,7 @@ chat_agree.onclick = async () => {
 
   confirmZero.data.forEach((el, index) => {
     // const { user_name } = el;
+    console.log(zeroCnt);
     if (el.zeroCnt == 0) {
       chatUserId.innerHTML += `
              <li class="userClick"><span class="usn">${el.user_name}</span>
