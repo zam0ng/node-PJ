@@ -615,7 +615,7 @@ async function logincheck2() {
       }
 
       arr.forEach((el,index) => {
-        checkspeopleImg[index].src = checkscnt[el].user_img;
+        checkspeopleImg[index].src = checkscnt[el].data.user_img;
       });
 
       checkpeoplecnt.innerText = checkscnt.data.length;
