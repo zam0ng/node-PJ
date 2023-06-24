@@ -48,7 +48,6 @@ exports.viewInfo = async (req, res) => {
                     attributes: ["id", "nickname", "user_id", "user_img"],
                   },
                 ],
-                limit: 10,
               },
             ],
             where: {
@@ -341,6 +340,28 @@ exports.reviewDelete = async (req, res) => {
   try {
     const { id } = req.query;
     await review.destroy({ where: { id } });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.reviewMore = async (req, res) => {
+  try {
+    const { id, cnt } = req.query;
+    const limit = parseInt(cnt);
+
+    const reviews = await review.findAll({
+      where: { book_id: id },
+      include: [
+        {
+          model: User,
+          required: true,
+        },
+      ],
+      limit,
+    });
+
+    res.json(reviews);
   } catch (error) {
     console.error(error);
   }

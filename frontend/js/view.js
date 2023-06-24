@@ -20,8 +20,8 @@ async function getView() {
   // 넘어오는 데이터 콘솔 로그
   // console.log("작가 정보 : author");
   // console.log(author);
-  // console.log("책 정보 : bookInfo");
-  // console.log(bookInfo);
+  console.log("책 정보 : bookInfo");
+  console.log(bookInfo);
   // console.log("책에 있는 댓글들 모음 : thisReview");
   // console.log(thisReview);
   // console.log("로그인한 유저 정보 : userInfo");
@@ -273,7 +273,7 @@ async function getView() {
   // =========================================================
 
   getStarAvg();
-  getComments();
+  getComments(10);
 }
 
 // ==================================================
@@ -357,11 +357,11 @@ async function getStarAvg() {
 // ==================================================
 // ========== then에서 빼서 별도의 함수로 만들것 ===========
 // ==================================================
-async function getComments() {
+async function getComments(cnt) {
   const data = await booksAllData();
-  const author = data.data.bookdata;
-  const bookInfo = author.Books[0];
-  const thisReview = bookInfo.Reviews;
+  // const author = data.data.bookdata;
+  const reviewlength = data.data.bookdata.Books[0].Reviews.length;
+  const thisReview = await getLimitComments(cnt);
 
   let userInfo;
 
@@ -375,7 +375,7 @@ async function getComments() {
   commentContainer.innerHTML = "";
   commentContainer.append(commentContainerReviewCnt);
   // // 댓글의 총 개수를 표시
-  commentContainerReviewCnt.innerText = `Displaying 1 - ${thisReview.length} of ${thisReview.length} reviews`;
+  commentContainerReviewCnt.innerText = `Displaying 1 - ${thisReview.length} of ${reviewlength} reviews`;
 
   const monthMap = {
     "01": "Jan",
@@ -447,10 +447,14 @@ async function getComments() {
       `;
   });
   // readMore 버튼
-  commentContainer.innerHTML += `
+  if (thisReview.length % 10 == 0) {
+    commentContainer.innerHTML += `
     <div class="readMoreWrap">
-      <span class="readMoreBtn">readMore</span>
+      <span class="readMoreBtn" onclick="getComments(${
+        cnt + 10
+      })">readMore</span>
     </div>`;
+  }
 
   // 대댓글 comments 버튼 누르면 대댓글을 불러옴
   const commentMainWrap = document.querySelectorAll(".commentMainWrap");
@@ -663,36 +667,19 @@ async function getLogin() {
 }
 // =========================================================
 
-// // =========================================================
-// // 댓글 삭제 기능
-// // getComments의 동작이 끝난뒤 실행되는 함수
-// async function deleteReview() {
-//   const { data } = await getLogin();
-//   const commentProfileInfo = document.querySelectorAll(".commentProfileInfo");
-
-//   commentProfileInfo.forEach((e, i) => {
-//     const remove = commentProfileInfo[i].querySelectorAll("span");
-
-//     remove[1].onclick = async function (e) {
-//       if (!data) {
-//         alert("삭제 할 수 없습니다.");
-//       } else {
-//         if (remove[0].innerHTML == data.nickname) {
-//           if (confirm("댓글을 삭제 하시겠습니까?")) {
-//             // console.log(this.className);
-//             await axios.get("http://127.0.0.1:8080/view/review/delete", {
-//               withCredentials: true,
-//               params: {
-//                 id: this.className,
-//               },
-//             });
-//           }
-//         }
-//       }
-//     };
-//   });
-// }
-
+// =========================================================
+// 댓글 가져오기
+async function getLimitComments(cnt) {
+  const bookId = await getBookId();
+  const { data } = await axios.get(`${backend}/view/review/more`, {
+    withCredentials: true,
+    params: {
+      id: bookId,
+      cnt,
+    },
+  });
+  return data;
+}
 // // =========================================================
 
 getView();

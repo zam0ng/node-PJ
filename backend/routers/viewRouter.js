@@ -13,6 +13,7 @@ const {
   getReviewCount,
   getBuysList,
   reviewDelete,
+  reviewMore,
 } = require("../controllers/viewController");
 const { islogin, getLoginUser } = require("../controllers/islogin");
 
@@ -40,5 +41,7 @@ router.post("/r_reviewInsert", islogin, insertReReview);
 router.get("/get/logininfo", getLoginUser);
 // 댓글 삭제
 router.get("/review/delete", islogin, reviewDelete);
+// readMore
+router.get("/review/more", reviewMore);
 
 module.exports = router;
