@@ -6,6 +6,7 @@ window.onload = async () => {
   chat_agree.style.color = "rgb(158, 158, 158)";
   reject_reason.style.visibility = "hidden";
   main_content3.style.display = "none";
+  main_content2.style.display = "none";
 
   const data = await axios.get(`${backend}/nonagreeuser`, {
     withCredentials: true,
