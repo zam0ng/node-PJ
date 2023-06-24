@@ -47,7 +47,7 @@ router.post("/reviewInsert", islogin, insertReview);
 router.post("/r_reviewInsert", islogin, insertReReview);
 
 
-router.get("/checks/viewcnt/:id",islogin,viewcnt);
+router.get("/checks/viewcnt/:id",viewcnt);
 router.get("/checks/buys/:id", islogin,checkbuys);
 router.get("/checks/delete/:id",islogin,checksdel);
 router.get("/checks/add/:id",islogin,checksadd);
