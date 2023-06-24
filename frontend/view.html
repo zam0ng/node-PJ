@@ -577,6 +577,14 @@ async function logincheck2() {
       // checkpeoplecnt
       const buypeopleImg =document.querySelectorAll(".buypeopleImg");
       const checkspeopleImg=document.querySelectorAll(".checkspeopleImg");
+      //0625
+      const buycnt2 = await axios.get(`${backend}/view/buy/cnt`, {
+        withCredentials: true,
+
+        params :{
+          id : bookNum,
+        }
+      });
       
       const buycnt = await axios.get(`${backend}/view/buy/cnt`, {
         withCredentials: true,
@@ -585,12 +593,13 @@ async function logincheck2() {
           id : bookNum,
         }
       });
-
+      
       buycnt.data.forEach((el,index) => {
 
         buypeopleImg[index].src = el.user_img;
       });
-      buypeoplecnt.innerText= buycnt.data.length;
+      //0625
+      buypeoplecnt.innerText= buycnt2.data.length;
 
       const checkscnt = await axios.get(`${backend}/view/checks/cnt`, {
         withCredentials: true,
@@ -599,8 +608,13 @@ async function logincheck2() {
           id : bookNum,
         }
       });
-      checkscnt.data.forEach((el,index) => {
-        checkspeopleImg[index].src = el.user_img;
+      let arr = [];
+      for (let index = 0; index < 3; index++) {
+        arr.push(Math.floor(Math.random()*checkscnt+1));
+      }
+
+      arr.forEach((el,index) => {
+        checkspeopleImg[index].src = checkscnt[el].user_img;
       });
 
       checkpeoplecnt.innerText = checkscnt.data.length;

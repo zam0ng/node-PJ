@@ -358,6 +358,27 @@ exports.buycnt = async(req,res)=>{
     console.log("view컨트롤러 buycnt 에 오류남" +error); 
   }
 }
+exports.buycnt2 = async(req,res)=>{
+  try {
+
+    const {id}= req.query;
+      // 책번호 
+    const data = await User.findAll({
+      attributes :["user_img"],
+      where :{
+        buys: {
+          [Op.ne]: "", 
+          [Op.like]: `%${id}%`
+        }
+      },raw:true,
+      
+    })
+    res.json(data);
+    
+  } catch (error) {
+    console.log("view컨트롤러 buycnt 에 오류남" +error); 
+  }
+}
 
 exports.checkscnt = async(req,res)=>{
   try {

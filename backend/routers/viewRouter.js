@@ -19,6 +19,7 @@ const {
   getBuysList,
   reviewDelete,
   reviewMore,
+  buycnt2,
 } = require("../controllers/viewController");
 const { islogin, islogin2 ,getLoginUser} = require("../controllers/islogin");
 
@@ -30,6 +31,7 @@ router.get("/follow/add/",islogin,followadd)
 router.get("/follow/del",islogin,followdel)
 
 router.get("/buy/cnt",buycnt);
+router.get("/buy/cnt2",buycnt2);
 router.get("/checks/cnt",checkscnt);
 
 router.get("/user/checks",islogin, userchecks);
