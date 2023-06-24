@@ -141,7 +141,7 @@ a:active {
   flex-wrap: wrap;
 }
 
-.viewList .viewCard,
+.viewList .viewCard,.plusCard,
 .starList .starCard {
   width: 20%;
   height: 260px;
@@ -149,7 +149,8 @@ a:active {
 }
 
 .viewCard img,
-.starCard img {
+.starCard img,
+.plusCard img {
   width: 200px;
   height: 220px;
   border-radius: 10px;

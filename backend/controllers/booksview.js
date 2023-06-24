@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const {Books} = require("../models");
+const { parse } = require("path");
 
 exports.allview = async(req,res)=>{
     
@@ -8,6 +9,36 @@ exports.allview = async(req,res)=>{
             where : {
                 accept :true,
             }
+        }).then((e)=>{
+            // console.log(e.Books.length);
+            
+            const eArr=[];
+            e.forEach((el,index) => {
+                // console.log(el.dataValues);
+
+                eArr.push(el.dataValues);
+            });
+
+            res.json(eArr);
+            })
+    } catch (error) {
+        console.log("allview 컨트롤러 오류"+ error);
+    }
+}
+
+exports.allview2 = async(req,res)=>{
+    
+    let {id} = req.query;
+    if(id==undefined){
+        id=0;
+    }
+    let ta = parseInt(id)+9;
+    try {
+        await Books.findAll({
+            where : {
+                accept :true,
+            },
+            limit :ta,
         }).then((e)=>{
             // console.log(e.Books.length);
             
