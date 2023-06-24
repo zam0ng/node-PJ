@@ -342,13 +342,15 @@ exports.buycnt = async(req,res)=>{
       // 책번호 
     const data = await User.findAll({
       attributes :["user_img"],
-
+      order: sequelize.literal('rand()'),
       where :{
         buys: {
           [Op.ne]: "", 
           [Op.like]: `%${id}%`
         }
       },raw:true,
+      limit:3,
+      
     })
     res.json(data);
     

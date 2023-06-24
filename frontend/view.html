@@ -587,7 +587,7 @@ async function logincheck2() {
       });
 
       buycnt.data.forEach((el,index) => {
-        console.log(index);
+
         buypeopleImg[index].src = el.user_img;
       });
       buypeoplecnt.innerText= buycnt.data.length;
