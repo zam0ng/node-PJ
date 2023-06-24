@@ -163,7 +163,7 @@ body {
   align-items: flex-end;
 }
 .communityCollection .collectionStar .colStars {
-  width: 80%;
+  width: 172px;
   height: 30px;
   display: flex;
   position: relative;
