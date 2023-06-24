@@ -75,7 +75,7 @@ async function getView() {
 
   starAvg = (starTotalStore / starTotalCnt).toFixed(2);
 
-  const starBarWidth = ((starAvg / 5) * starMaxWidth).toFixed();
+  const starBarWidth = ((starMaxWidth / 5) * starAvg).toFixed();
   const colStarAvg = document.querySelector(".colStarAvg");
   const colStarAvgSpan = colStarAvg.querySelector("span");
 
