@@ -542,6 +542,25 @@ body {
   color: #fff;
 }
 
+.readMoreWrap {
+  width: 100%;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+}
+.readMoreBtn {
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.readMoreBtn::before,
+.readMoreBtn::after {
+  content: "";
+  background-color: #000;
+  height: 1px;
+  flex: 1 1;
+}
+
 /*  */
 .commentWrap .commentMainWrap {
   width: 80%;

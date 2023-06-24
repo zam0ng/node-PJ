@@ -48,6 +48,7 @@ exports.viewInfo = async (req, res) => {
                     attributes: ["id", "nickname", "user_id", "user_img"],
                   },
                 ],
+                limit: 10,
               },
             ],
             where: {

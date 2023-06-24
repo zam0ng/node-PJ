@@ -362,10 +362,9 @@ async function getComments() {
   const author = data.data.bookdata;
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
+
   let userInfo;
-  // if (data.data?.userdata) {
-  //   userInfo = data.data.userdata;
-  // }
+
   const reviewInfo = data.data.reviewdata;
   // reviews area
   const commentContainer = document.querySelector(".commentContainer");
@@ -378,22 +377,26 @@ async function getComments() {
   // // 댓글의 총 개수를 표시
   commentContainerReviewCnt.innerText = `Displaying 1 - ${thisReview.length} of ${thisReview.length} reviews`;
 
+  const monthMap = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
+  };
+
   // 댓글 그려주기
   thisReview.forEach((el, index) => {
     let dateSplit = el.createdAt.split("-");
 
-    if (dateSplit[1] == "01") dateSplit[1] = "Jan";
-    if (dateSplit[1] == "02") dateSplit[1] = "Feb";
-    if (dateSplit[1] == "03") dateSplit[1] = "Mar";
-    if (dateSplit[1] == "04") dateSplit[1] = "Apr";
-    if (dateSplit[1] == "05") dateSplit[1] = "May";
-    if (dateSplit[1] == "06") dateSplit[1] = "Jun";
-    if (dateSplit[1] == "07") dateSplit[1] = "Jul";
-    if (dateSplit[1] == "08") dateSplit[1] = "Aug";
-    if (dateSplit[1] == "09") dateSplit[1] = "Sep";
-    if (dateSplit[1] == "10") dateSplit[1] = "Oct";
-    if (dateSplit[1] == "11") dateSplit[1] = "Nov";
-    if (dateSplit[1] == "12") dateSplit[1] = "Dec";
+    dateSplit[1] = monthMap[dateSplit[1]];
 
     let reviewStar;
     if (el.star < 5) {
@@ -443,6 +446,11 @@ async function getComments() {
       </div>
       `;
   });
+  // readMore 버튼
+  commentContainer.innerHTML += `
+    <div class="readMoreWrap">
+      <span class="readMoreBtn">readMore</span>
+    </div>`;
 
   // 대댓글 comments 버튼 누르면 대댓글을 불러옴
   const commentMainWrap = document.querySelectorAll(".commentMainWrap");
@@ -540,7 +548,7 @@ async function getComments() {
         if (remove[0].innerHTML == loginUser.data.nickname) {
           if (confirm("댓글을 삭제 하시겠습니까?")) {
             // console.log(this.className);
-            axios.get("http://127.0.0.1:8080/view/review/delete", {
+            axios.get(`${backend}/view/review/delete`, {
               withCredentials: true,
               params: {
                 id: this.className,
