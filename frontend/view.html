@@ -587,7 +587,9 @@ async function logincheck2() {
       });
 
       buycnt.data.forEach((el,index) => {
-        buypeopleImg[index].src = el.user_img;
+        buypeopleImg[0].src = el.user_img;
+        buypeopleImg[1].src = el.user_img;
+        buypeopleImg[2].src = el.user_img;
       });
       buypeoplecnt.innerText= buycnt.data.length;
 
@@ -599,7 +601,9 @@ async function logincheck2() {
         }
       });
       checkscnt.data.forEach((el,index) => {
-        checkspeopleImg[index].src = el.user_img;
+        checkspeopleImg[0].src = el.user_img;
+        checkspeopleImg[1].src = el.user_img;
+        checkspeopleImg[2].src = el.user_img;
       });
 
       checkpeoplecnt.innerText = checkscnt.data.length;

@@ -676,6 +676,9 @@ async function logincheck() {
   if(role == "reader"){
     who = "독자";
   }
+  if (role == "testadmin"){
+    who ="관리자"
+  }
 
 
   if (data.data == "relogin") {
