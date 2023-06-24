@@ -81,7 +81,7 @@ async function getView() {
 
   // 만약 별점 정보가 없다면
   if (starInfo.length == 0) {
-    colStarAvgSpan.innerHTML = "0";
+    colStarAvgSpan.innerHTML = "0.00";
 
     let colStarFullWidth = `.colStars .colStarFull { width : 0px;}`;
 
