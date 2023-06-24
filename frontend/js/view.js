@@ -152,9 +152,9 @@ async function getView() {
 
   const followusercnt = await axios.get(`${backend}/view/how/usercnt`, {
     withCredentials: true,
-
+    
     params :{
-      id : bookInfo.id,
+      id : author.id,
     }
   });
   console.log("------------------------followusercnt");

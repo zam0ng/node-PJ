@@ -171,7 +171,7 @@ body {
 
 .colStars .colStarEmpty,
 .colStars .colStarFull {
-  height: 25px;
+  height: 30px;
   position: absolute;
   box-sizing: border-box;
   color: #e87400;
