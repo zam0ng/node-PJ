@@ -609,13 +609,14 @@ async function logincheck2() {
         }
       });
       console.log(checkscnt);
+      console.log(checkscnt.data);
       let arr = [];
       for (let index = 0; index < 3; index++) {
         arr.push(Math.floor(Math.random()*checkscnt+1));
       }
 
       arr.forEach((el,index) => {
-        checkspeopleImg[index].src = checkscnt[el].data.user_img;
+        checkspeopleImg[index].src = checkscnt.data[el].user_img;
       });
 
       checkpeoplecnt.innerText = checkscnt.data.length;
