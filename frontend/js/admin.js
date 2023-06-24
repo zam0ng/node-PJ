@@ -204,7 +204,7 @@ closee.onclick = () => {
 post_agree.onclick = async () => {
   main_content2.innerHTML = "";
   // main_content2.style.visibility = "visible";
-  main_content2.style.display = "block";
+  main_content2.style.display = "flex";
 
   main_content.style.display = "none";
   //0619
