@@ -616,8 +616,8 @@ async function logincheck2() {
       });
       console.log(checkscnt);
       console.log(checkscnt.data);
-      console.log(checkscnt.length);
-      
+      console.log(checkscnt.data.length);
+
       let arr = [];
       for (let index = 0; index < 3; index++) {
         arr.push(Math.floor(Math.random()*checkscnt.length+1));
