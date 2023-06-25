@@ -44,6 +44,8 @@ exports.gradeUpdate = async(req,res)=>{
             console.log("err");
         })
 
+        res.send();
+
     } catch (error) {
         console.log("gradeupdate 에서 오류남 "+error);
     }
