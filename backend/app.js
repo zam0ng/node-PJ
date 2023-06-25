@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "http://13.209.64.80",
+    origin: "http://43.200.22.238",
     credentials: true,
   })
 );
