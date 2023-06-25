@@ -426,14 +426,15 @@ exports.checkbuys =async(req,res)=>{
 exports.getReviewCount = async (req, res) => {
   try {
     const { nickname } = req.decoded;
+    const { book_id } = req.query;
 
     const [data] = await review.findAll({
       attributes: [
         "nickname",
         [sequelize.fn("count", sequelize.col("nickname")), "nickcnt"],
       ],
-      where: { nickname },
-      group: "nickname",
+      where: { nickname, book_id },
+      group: ["nickname", "book_id"],
       raw: true,
     });
 

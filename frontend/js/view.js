@@ -229,7 +229,7 @@ async function getView() {
       return;
     }
     // 댓글 3개 이상 못쓰게 하기
-    const cnt = await getReviewCount();
+    const cnt = await getReviewCount(bookInfo.id);
     if (cnt.data == 3) {
       alert("댓글을 3개 이상 입력 할 수 없습니다.");
       // 댓글을 쓰고 난 후 별 초기화
@@ -717,17 +717,17 @@ async function getBookId() {
 
 // =========================================================
 // 댓글을 3개 이상 쓰지 못하게 하기
-async function getReviewCount() {
-  const bookId = await getBookId();
+async function getReviewCount(bookId) {
+  // const bookId = await getBookId();
   const data = await axios.get(`${backend}/view/review/count`, {
     withCredentials: true,
     params: {
-      id: bookId,
+      book_id: bookId,
     },
   });
+  console.log(data);
   return data;
 }
-// =========================================================
  // =========================================================
 // 사용자가 책을 구매 했는지 확인
 async function getBuysList() {

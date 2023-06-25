@@ -365,7 +365,7 @@ chat_agree.onclick = async () => {
     userClick.forEach((el, index) => {
       el.style.backgroundColor = "";
       el.onclick = async (e) => {
-        
+      console.log(e)
       const zeroCnt = e.target.querySelector(".zeroCnt");
       console.log(zeroCnt);
 
