@@ -500,10 +500,11 @@ async function getComments(cnt) {
 
 // readMore 버튼
 if (thisReview.length % 10 == 0 && thisReview.length > 10) {
-  commentContainer.innerHTML += 
+  commentContainer.innerHTML += `
   <div class="readMoreWrap">
   <span class="readMoreBtn" onclick="getComments(${cnt + 10})">readMore</span>
   </div>;
+  `
 }
 
   // 대댓글 comments 버튼 누르면 대댓글을 불러옴
