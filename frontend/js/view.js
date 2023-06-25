@@ -498,15 +498,13 @@ async function getComments(cnt) {
       `;
   });
 
-  // readMore 버튼
-  if (thisReview.length % 10 == 0 && thisReview.length >0) {
-    commentContainer.innerHTML += `
-    <div class="readMoreWrap">
-    <span class="readMoreBtn" onclick="getComments(${
-      cnt + 10
-    })">readMore</span>
-    </div>`;
-  }
+// readMore 버튼
+if (thisReview.length % 10 == 0 && thisReview.length > 10) {
+  commentContainer.innerHTML += 
+  <div class="readMoreWrap">
+  <span class="readMoreBtn" onclick="getComments(${cnt + 10})">readMore</span>
+  </div>;
+}
 
   // 대댓글 comments 버튼 누르면 대댓글을 불러옴
 
@@ -608,34 +606,37 @@ async function getComments(cnt) {
   });
   
     // =========================================================
-  // 댓글 삭제 기능
-  // getComments의 동작이 끝난뒤 실행되는 함수
-  const loginUser = await getLogin();
-  const commentProfileInfo = document.querySelectorAll(".commentProfileInfo");
-
-  commentProfileInfo.forEach((e, i) => {
-    const remove = commentProfileInfo[i].querySelectorAll("span");
-
-    remove[1].onclick = async function (e) {
-      if (!loginUser.data) {
-        alert("삭제 할 수 없습니다.");
-      } else {
-        if (remove[0].innerHTML == loginUser.data.nickname) {
-          if (confirm("댓글을 삭제 하시겠습니까?")) {
-            // //console.log(this.className);
-            axios.get(`${backend}/view/review/delete`, {
-              withCredentials: true,
-              params: {
-                id: this.className,
-              },
-            });
-            getView();
+    // 댓글 삭제 기능
+    // getComments의 동작이 끝난뒤 실행되는 함수
+    const loginUser = await getLogin();
+    const commentProfileInfo = document.querySelectorAll(".commentProfileInfo");
+  
+    commentProfileInfo.forEach((e, i) => {
+      const remove = commentProfileInfo[i].querySelectorAll("span");
+  
+      remove[1].onclick = async function (e) {
+        if (!loginUser.data) {
+          alert("삭제 할 수 없습니다.");
+        } else {
+          if (remove[0].innerHTML == loginUser.data.nickname) {
+            if (confirm("댓글을 삭제 하시겠습니까?")) {
+              // console.log(this.className);
+              axios.get(`${backend}/view/review/delete`, {
+                withCredentials: true,
+                params: {
+                  id: this.className,
+                },
+              });
+              getView();
+            }
+          } else {
+            alert("삭제 할 수 없습니다.");
+            return;
           }
         }
-      }
-    };
-  });
-  // =========================================================
+      };
+    });
+    // =========================================================
 
 
 
