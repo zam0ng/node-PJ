@@ -538,6 +538,8 @@ async function logincheck2() {
           followBtn.style.backgroundColor = "black";
           ft.style.color = "white"
           ft.innerText = "Follow"
+          
+          window.location.reload();
         }
 
         else if (ft.innerText == "Follow") {
@@ -553,6 +555,9 @@ async function logincheck2() {
           followBtn.style.backgroundColor = "white";
           ft.style.color = "black"
           ft.innerText = "Following"
+
+          window.location.reload();
+
         }
       }
       //console.log(author);
@@ -615,7 +620,7 @@ async function logincheck2() {
       for (let index = 0; index < 3; index++) {
         arr.push(Math.floor(Math.random()*checkscnt+1));
       }
-
+      consoel.log(arr);
       if(checkscnt.length >3){
       arr.forEach((el,index) => {
         checkspeopleImg[index].src = checkscnt.data[el].user_img;
