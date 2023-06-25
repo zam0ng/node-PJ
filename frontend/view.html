@@ -626,7 +626,7 @@ async function logincheck2() {
       if(checkscnt.data.length >3){
 
         while(arr.length < 3){
-        let num = Math.floor(Math.random()*(checkscnt.data.length+1));
+        let num = Math.floor(Math.random()*(checkscnt.data.length));
 
         if(arr.indexOf(num)=== -1){
           arr.push(num);
