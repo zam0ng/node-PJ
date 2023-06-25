@@ -1,4 +1,4 @@
-const backend = "http://43.200.22.238";
+const backend = "http://najakjak.store";
 const frontend = "/";
 
 async function logincheck() {
