@@ -620,13 +620,17 @@ async function logincheck2() {
       for (let index = 0; index < 3; index++) {
         arr.push(Math.floor(Math.random()*checkscnt+1));
       }
-      consoel.log(arr);
+      console.log(arr);
+      console.log("-------------arr");
       if(checkscnt.length >3){
+        console.log("11111")
       arr.forEach((el,index) => {
         checkspeopleImg[index].src = checkscnt.data[el].user_img;
       });
       }
       else{
+        console.log("22222")
+
         checkscnt.data.forEach((el,index) => {
           checkspeopleImg[index].src = el.user_img;
         });
