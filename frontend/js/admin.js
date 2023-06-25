@@ -18,6 +18,7 @@ async function admincheck() {
   }
 
 }
+admincheck();
 
 window.onload = async () => {
 
@@ -122,7 +123,6 @@ window.onload = async () => {
     });
   });
   
-  admincheck();
   // isLoading.classList.add("disable");
 };
 user_agree.onclick = async () => {
