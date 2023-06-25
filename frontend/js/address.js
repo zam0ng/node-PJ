@@ -1,5 +1,5 @@
 // # 배포할 때 사용
-let backend = "http://43.200.22.238" ;
+let backend = "http://najakjak.store" ;
 let frontend = "/" ;
 
 // # 로컬 작업할 때 사용 
