@@ -72,11 +72,11 @@
         // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
       });
-      console.log(data);
+      console.log(data.data);
       chatWrap.style.display = "none";
-      if(data.data){
+      if (!data?.data.nickname) {
         alert("로그인 후 이용해주세요");
-        window.location.href = `${frontend}login.html`
+        window.location.href = `${frontend}login.html`;
         return;
       }
 
