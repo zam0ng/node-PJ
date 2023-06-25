@@ -499,7 +499,7 @@ async function getComments(cnt) {
   });
 
 // readMore 버튼
-if (thisReview.length % 10 == 0 && thisReview.length > 10) {
+if (thisReview.length % 10 > 0 && thisReview.length > 10) {
   commentContainer.innerHTML += `
   <div class="readMoreWrap">
   <span class="readMoreBtn" onclick="getComments(${cnt + 10})">readMore</span>
