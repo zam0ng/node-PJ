@@ -78,13 +78,13 @@
       viewList.innerHTML = "";
       const { data } = await axios.get(`${backend}/allview/sorim`);
 
-      console.log(data);
+      //console.log(data);
 
       cnt.innerText = data.length;
 
       data.forEach((el, index) => {
-        console.log(el.img);
-        console.log(el.id);
+        //console.log(el.img);
+        //console.log(el.id);
         viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
           <img src="${backend}/${el.img}" alt="" />
           <div class="cardText">

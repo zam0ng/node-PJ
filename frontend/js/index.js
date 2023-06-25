@@ -2,14 +2,14 @@ if (document.addEventListener) {
   window.addEventListener(
     "pageshow",
     function (event) {
-      console.log(event.persisted);
-      console.log(window.performance);
-      console.log(window.performance.navigation.type);
+      //console.log(event.persisted);
+      //console.log(window.performance);
+      //console.log(window.performance.navigation.type);
       if (
         event.persisted ||
         (window.performance && window.performance.navigation.type == 2)
       ) {
-        // console.log("hi");
+        // //console.log("hi");
         location.reload();
       }
     },
@@ -19,7 +19,7 @@ if (document.addEventListener) {
 // 조회수가 가장 많은 5개의 리스트를 가져옴
 async function getViewList() {
   const { data } = await axios.get(`${backend}/main/viewlist`);
-  console.log(data);
+  //console.log(data);
   data.forEach((el, index) => {
     viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
             <img src="${backend}/${el.img}" alt="" />
@@ -35,7 +35,7 @@ async function getViewList() {
 // 별점이 높은 순으로 5개의 리스트를 가져옴
 async function getStarList() {
   const { data } = await axios.get(`${backend}/main/starlist`);
-  console.log(data);
+  //console.log(data);
   data.forEach((el, index) => {
     starList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
             <img src="${backend}/${el.img}" alt="" />
@@ -53,7 +53,7 @@ getViewList();
 
 async function logincheck() {
   // const at = document.cookie.slice(8);
-  // console.log(at);
+  // //console.log(at);
 
   const data = await axios.get(`${backend}/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
@@ -62,12 +62,12 @@ async function logincheck() {
     //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
   });
 
-  console.log(data);
+  //console.log(data);
 
   const { nickname, role } = data.data;
-  console.log(nickname);
+  //console.log(nickname);
   let who;
-  console.log(role);
+  //console.log(role);
 
   if (role == "writer") {
     who = "작가";
@@ -79,7 +79,7 @@ async function logincheck() {
     who = "관리자";
   }
 
-  console.log(who);
+  //console.log(who);
 
   if (data.data == "relogin") {
     login.style.display = "block";
@@ -104,7 +104,7 @@ nick.onclick = async () => {
   });
   const { nickname, role } = data;
 
-  console.log(role);
+  //console.log(role);
   if (role == "writer") {
     window.location.href = `${frontend}writerpage.html`;
   }
@@ -133,4 +133,4 @@ allview.onclick = async () => {
 // a 태그 링크 정리
 const logoBox = document.querySelector(".logoBox");
 
-console.log(logoBox);
+//console.log(logoBox);

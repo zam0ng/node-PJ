@@ -80,7 +80,7 @@
         const { data } = await axios.get(`${backend}/allview/all`, {
           withCredentials: true,
         });
-        console.log(data)
+        //console.log(data)
         return data.length;
 
       }
@@ -89,9 +89,9 @@
         const plusCard = document.querySelector(".plusCard");
         plusCard.style.display = 'none';
         viewList.innerHTML = "";
-        console.log(await ta());
+        //console.log(await ta());
         const taa = await ta();
-        console.log(taa);
+        //console.log(taa);
         cnt.innerText = cntt + 9;
         const { data } = await axios.get(`${backend}/allview/all2`, {
           withCredentials: true,
@@ -124,7 +124,7 @@
         withCredentials : true,
       });
 
-      console.log(data);
+      //console.log(data);
 
 
       // const toggle = document.querySelector(".toggle");

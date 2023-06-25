@@ -59,10 +59,10 @@
            "http://13.209.64.80/follow/add",
            { withCredentials: true}
         );
-        console.log("-----------------")
-        console.log(data2.data);
+        //console.log("-----------------")
+        //console.log(data2.data);
         const tr = data2.data
-        console.log(tr)
+        //console.log(tr)
         tr.forEach((el) => {
           list.innerHTML += `
         <div class="booklist">
@@ -72,7 +72,7 @@
 
         });
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     }
     followAPI() 
@@ -82,9 +82,9 @@
   //       "http://13.209.64.80/follow/list",
   //       { withCredentials: true}
   //     );
-  //     console.log(data);
+  //     //console.log(data);
   //     data.data.forEach((e) => {
-  //       console.log(writer)
+  //       //console.log(writer)
       //   list.innerHTML += `
       //   <div class="booklist">
       //       <div class="bookcover">writer img</div>
@@ -94,7 +94,7 @@
       //    `
   //     });
   //   } catch (error) {
-  //     console.log(error)
+  //     //console.log(error)
   //   }
   //  }
   </script>

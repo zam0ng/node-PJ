@@ -2,16 +2,16 @@
 async function getView() {
   const data = await booksAllData();
   // .then((e) => {
-  // console.log("then");
-  // console.log(data);
+  // //console.log("then");
+  // //console.log(data);
   const author = data.data.bookdata;
   const bookInfo = author.Books[0];
   const thisReview = bookInfo.Reviews;
   // const userInfo = data.data.userdata;
   // if (data.data?.userdata) {
   //   userInfo = data.data.userdata;
-  //   // console.log("로그인한 유저 정보 : userInfo");
-  //   // console.log(userInfo);
+  //   // //console.log("로그인한 유저 정보 : userInfo");
+  //   // //console.log(userInfo);
   // }
   const starInfo = data.data.stardata;
   const authordata = data.data.authordata;
@@ -19,21 +19,21 @@ async function getView() {
   // const userAlldata = e.data.userAlldata;
 
   // 넘어오는 데이터 콘솔 로그
-  // console.log("작가 정보 : author");
-  // console.log(author);
-  console.log("책 정보 : bookInfo");
-  console.log(bookInfo);
-  // console.log("책에 있는 댓글들 모음 : thisReview");
-  // console.log(thisReview);
-  // console.log("로그인한 유저 정보 : userInfo");
-  // console.log(userInfo);
-  // console.log("리뷰 점수 : starInfo");
-  // console.log(starInfo);
-  // console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
-  // console.log(authordata);
-  // console.log("특정 책에 있는 댓글과 대댓글 가져오기 : reviewInfo");
-  // console.log(reviewInfo);
-  // console.log(userAlldata);
+  // //console.log("작가 정보 : author");
+  // //console.log(author);
+  //console.log("책 정보 : bookInfo");
+  //console.log(bookInfo);
+  // //console.log("책에 있는 댓글들 모음 : thisReview");
+  // //console.log(thisReview);
+  // //console.log("로그인한 유저 정보 : userInfo");
+  // //console.log(userInfo);
+  // //console.log("리뷰 점수 : starInfo");
+  // //console.log(starInfo);
+  // //console.log("작가 정보만 가져오기(작성 글 수, 팔로워 수) : authordata");
+  // //console.log(authordata);
+  // //console.log("특정 책에 있는 댓글과 대댓글 가져오기 : reviewInfo");
+  // //console.log(reviewInfo);
+  // //console.log(userAlldata);
 
   // index.html의 스타일 시트를 가져옴
   const documentStyleSheet = document.styleSheets[0];
@@ -68,7 +68,7 @@ async function getView() {
   let starMaxWidth = 178;
 
   starInfo.forEach((el, index) => {
-    // console.log(el);
+    // //console.log(el);
     starTotalStore += parseInt(el.starSum);
     starTotalCnt += parseInt(el.starCnt);
   });
@@ -157,8 +157,8 @@ async function getView() {
       id : author.id,
     }
   });
-  console.log("------------------------followusercnt");
-  console.log(followusercnt);
+  //console.log("------------------------followusercnt");
+  //console.log(followusercnt);
   // -----------------------------------------------
   // ------------------ 작가가 쓴 책의 총 갯수 + 작가 팔로워 수
   authorNameSpans[1].innerHTML = `${authordata.writebooks} books, ${followusercnt.data} followers`;
@@ -172,7 +172,7 @@ async function getView() {
   const myImgImg = myImg.querySelector("img");
 
   const userInfo = await getLogin();
-  console.log(userInfo);
+  //console.log(userInfo);
   if (userInfo.data) {
     myImgImg.setAttribute("src", `${backend}${userInfo.data.user_img}`);
   }
@@ -187,7 +187,7 @@ async function getView() {
 
   let reviewsScore;
   reviewStarSpan.forEach((el, index) => {
-    // console.log(index);
+    // //console.log(index);
     el.onclick = () => {
       reviewsScore = index + 1;
       for (let i = 0; i <= 4; i++) {
@@ -448,13 +448,13 @@ async function getComments(cnt) {
     if (dateSplit[1] == "12") dateSplit[1] = "Dec";
     let reviewStar;
     let restNum;
-    // console.log("댓글 별점");
-    // console.log(el.star);
+    // //console.log("댓글 별점");
+    // //console.log(el.star);
     if (el.star < 5) {
       reviewStar = "★".repeat(parseInt(el.star));
       restStar = "☆".repeat(5 - parseInt(el.star));
-      // console.log("restStar");
-      // console.log(restStar);
+      // //console.log("restStar");
+      // //console.log(restStar);
       reviewStar += restStar;
     } else {
       reviewStar = "★".repeat(parseInt(el.star));
@@ -566,7 +566,7 @@ async function getComments(cnt) {
         const reCommentBtn = commentContainer.querySelectorAll(".reCommentBtn");
         const reCommentInput = commentContainer.querySelectorAll("input");
         reCommentBtn.forEach((x, y) => {
-          // console.log("reCommentBtn.forEach");
+          // //console.log("reCommentBtn.forEach");
           x.onclick = async(e) => {
             
               const data = await axios.get(`${backend}/main/viewcheck`, {
@@ -622,7 +622,7 @@ async function getComments(cnt) {
       } else {
         if (remove[0].innerHTML == loginUser.data.nickname) {
           if (confirm("댓글을 삭제 하시겠습니까?")) {
-            // console.log(this.className);
+            // //console.log(this.className);
             axios.get(`${backend}/view/review/delete`, {
               withCredentials: true,
               params: {
@@ -725,7 +725,7 @@ async function getReviewCount(bookId) {
       book_id: bookId,
     },
   });
-  console.log(data);
+  //console.log(data);
   return data;
 }
  // =========================================================
@@ -738,7 +738,7 @@ async function getBuysList() {
       id: bookId,
     },
   });
-  console.log("tatatatatatatatatatatatatatatatatatatata")
+  //console.log("tatatatatatatatatatatatatatatatatatatata")
   return data;
 }
 

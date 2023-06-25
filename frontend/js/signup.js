@@ -12,8 +12,8 @@ btn.onclick = (event) => {
       role = el.value;
     }
   });
-  console.log(role);
-  console.log(gender);
+  //console.log(role);
+  //console.log(gender);
   axios
     .post(`${backend}/signup`, {
       withCredentials: true,
@@ -30,7 +30,7 @@ btn.onclick = (event) => {
       },
     })
     .then((e) => {
-      console.log(e);
+      //console.log(e);
 
       if (e.data == "이미 존재하는 계정") {
         return (window.location.href = `${frontend}singupErr2.html`);

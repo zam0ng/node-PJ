@@ -123,7 +123,7 @@
         const { data } = await axios.get(`${backend}/writer`, {
           withCredentials: true,
         });
-        console.log(data.user_img);
+        //console.log(data.user_img);
         img1.src = `${backend}${data.user_img}`;
 
         let tc;
@@ -142,36 +142,36 @@
         checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
     getAPI();
     uploadBtn.onclick = () => {
-      console.log("나 클릭?");
+      //console.log("나 클릭?");
       const form = new FormData();
       form.append("img1", img1.value);
       form.append("user_id", 2);
-      console.log(img1.value);
+      //console.log(img1.value);
       form.append("upload", file.files[0]);
-      console.log(file.files[0]);
+      //console.log(file.files[0]);
       axios
         .post(`${backend}/writer`, form, {
           withCredentials: true,
           "Content-Type": "multipart/form-data",
         })
         .then((e) => {
-          console.log("잘 전달됨");
-          console.log(e);
+          //console.log("잘 전달됨");
+          //console.log(e);
         })
         .catch((err) => {
-          console.log("=================================================");
-          console.log(err);
+          //console.log("=================================================");
+          //console.log(err);
         });
         window.location.reload();
     };
     nickBtn.onclick = async() => {
       try {
-        console.log("닉버튼 찍힘?");
+        //console.log("닉버튼 찍힘?");
       await axios.post(`
       ${backend}/writer/nick`,{
         
@@ -191,14 +191,14 @@
         window.location.href="/login.html";
         
       } catch (error) {
-        console.log("여기 nick ERR");
-        console.log(error);
+        //console.log("여기 nick ERR");
+        //console.log(error);
       }
     };
     let writerResult = document.querySelector(".writer-result");
     let bookresult = document.querySelector(".result");
     writerResult.addEventListener("click", function (e) {
-      console.log("책 작성 승인 결과");
+      //console.log("책 작성 승인 결과");
       e.preventDefault();
       if (bookresult.style.display === "none") {
         bookresult.style.display = "block";
@@ -233,7 +233,7 @@
             withCredentials: true,
           }
         );
-        console.log(data);
+        //console.log(data);
         data.forEach((el) => {
           acceptList.innerHTML += `
                 <li>
@@ -251,9 +251,9 @@
         try {
             const {data}= await axios.get(`${backend}/writer/result2`,{
                 withCredentials :true})
-                console.log(data)
+                //console.log(data)
                data.forEach((el) => {
-                console.log(el.reject);
+                //console.log(el.reject);
                 switch (el.reject) {
                        case "1": el.reject = "부적절한 책표지";
 
@@ -274,7 +274,7 @@
             default:
               break;
           }
-          console.log(el.reject);
+          //console.log(el.reject);
           rejectList.innerHTML += `
                 <li>
             <div class="list-warp">
@@ -292,7 +292,7 @@
         try {
             const {data}= await axios.get(`${backend}/writer/result3`,{
                 withCredentials :true})
-                console.log(data)
+                //console.log(data)
                data.forEach((el) => {
                 waitingList.innerHTML +=`
                 <li>

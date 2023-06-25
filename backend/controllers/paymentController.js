@@ -3,7 +3,7 @@ const { User } = require("../models");
 
 exports.payReady = async (req, res) => {
   try {
-    console.log(req.query);
+    //console.log(req.query);
     const { user_id } = req.decoded;
     const {
       item_name,

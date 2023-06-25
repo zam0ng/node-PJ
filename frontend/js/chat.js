@@ -72,7 +72,7 @@
         // 이게 rawheader에 쿠키를 저장하는 역할
         withCredentials: true,
       });
-      console.log(data.data);
+      //console.log(data.data);
       chatWrap.style.display = "none";
       if (!data?.data.nickname) {
         alert("로그인 후 이용해주세요");
@@ -107,7 +107,7 @@
       socket.emit("joinRoom", chat_id);
       // 소켓 관련 작업 내용 정리 공간 끝 =========================
 
-      // console.log("이거 chatbtn");
+      // //console.log("이거 chatbtn");
       if ((chatMain.style.display = "none")) {
         chatMain.style.display = "block";
       }

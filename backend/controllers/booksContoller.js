@@ -2,7 +2,7 @@ const { Books, User } = require("../models");
 
 exports.UserUpload = async (req, res) => {
   try {
-    console.log(req);
+    //console.log(req);
     const { nickname, user_id, id } = req.decoded;
     const { title, content, genre, page, price, publish } = req.body;
 
@@ -21,7 +21,7 @@ exports.UserUpload = async (req, res) => {
     });
     res.send("여기 완!");
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 };
 
@@ -31,7 +31,7 @@ exports.ImgLink = async (req, res) => {
     const data = await Books.findOne({ where: { id: 4 } });
     res.json(data);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(500).send("Internal Server Error"); // 오류 발생 시 500 상태 코드와 함께 오류 메시지를 응답
   }
 };

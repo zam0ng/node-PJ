@@ -5,7 +5,7 @@ exports.checkList = async(req,res)=>{
     try {
         const {user_id}=req.decoded;
        const data = await User.findOne({ where: {user_id:user_id},raw:true, });
-       console.log(data.checks);
+       //console.log(data.checks);
        const tastr = data.checks;
        const tb = tastr.split(",");
        
@@ -15,12 +15,12 @@ exports.checkList = async(req,res)=>{
             id: tb,
         },raw:true,
        })
-       console.log("data2----------");
-       console.log(data2);
-       console.log("data2----------");
+       //console.log("data2----------");
+       //console.log(data2);
+       //console.log("data2----------");
        res.json(data2);
     } catch (error) {
-        console.log("==========checklist 오류"+error)
+        //console.log("==========checklist 오류"+error)
     }
 }
 // 체크리스트 삭제
