@@ -14,8 +14,8 @@ window.onload = async () => {
   main_content.innerHTML = "";
 
   if (data.data.length == 0) {
-     main_content.innerHTML = `가입 승인 대기중인 유저가 없습니다.`;
-     isLoading.classList.add("disable");
+    isLoading.classList.add("disable");
+    return main_content.innerHTML = `가입 승인 대기중인 유저가 없습니다.`;
 
   }
 
