@@ -540,7 +540,7 @@ async function logincheck2() {
           ft.innerText = "Follow"
         }
 
-        if (ft.innerText == "Follow") {
+        else if (ft.innerText == "Follow") {
 
           await axios.get(`${backend}/follow/list`, {
             withCredentials: true,
