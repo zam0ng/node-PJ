@@ -50,6 +50,9 @@ class User extends Model {
         buys: {
           type: DataTypes.STRING,
         },
+        auth : {
+          type : DataTypes.STRING,
+        }
       },
       {
         sequelize,

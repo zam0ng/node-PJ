@@ -162,7 +162,7 @@ async function getView() {
   // -----------------------------------------------
   // ------------------ 작가가 쓴 책의 총 갯수 + 작가 팔로워 수
   authorNameSpans[1].innerHTML = `${authordata.writebooks} books, ${followusercnt.data} followers`;
-  // -----------------------------------------------
+  // --------------------------------------------
   
 
   // Ratings & Reviews 기능
@@ -499,7 +499,7 @@ async function getComments(cnt) {
   });
 
   // readMore 버튼
-  if (thisReview.length % 10 == 0) {
+  if (thisReview.length % 10 == 0 && thisReview.length >0) {
     commentContainer.innerHTML += `
     <div class="readMoreWrap">
     <span class="readMoreBtn" onclick="getComments(${
@@ -576,7 +576,7 @@ async function getComments(cnt) {
                 //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
               });
             
-              if(data.data="unde"){
+              if(data.data=="unde"){
                   alert("로그인 후 이용해주세요!ㅎㅎ");
                   window.location.href = `${frontend}login.html`;
                   return;
@@ -718,8 +718,12 @@ async function getBookId() {
 // =========================================================
 // 댓글을 3개 이상 쓰지 못하게 하기
 async function getReviewCount() {
+  const bookId = await getBookId();
   const data = await axios.get(`${backend}/view/review/count`, {
     withCredentials: true,
+    params: {
+      id: bookId,
+    },
   });
   return data;
 }

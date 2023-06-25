@@ -262,7 +262,8 @@ try {
       auth : auth,
     }
   })
-  console.log(data.id);
+  console.log(data);
+  // console.log(data.id);
   if(!data){
     console.log("인증번호불일치")
     return res.send("인증번호불일치")

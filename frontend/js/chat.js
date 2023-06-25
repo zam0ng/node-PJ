@@ -74,6 +74,11 @@
       });
       console.log(data);
       chatWrap.style.display = "none";
+      if(data?.data.id){
+        alert("로그인 후 이용해주세요");
+        window.location.href = `${frontend}login.html`
+        return;
+      }
 
       let chat_id = data.data.id;
       // let user_name = data.data.nickname;

@@ -525,6 +525,7 @@ async function logincheck2() {
 
       followBtn.onclick = async () => {
         logincheck2();
+        console.log('followBtn 클릭됨?')
         if (ft.innerText == "Following") {
           await axios.get(`${backend}/follow/del`, {
             withCredentials: true,
