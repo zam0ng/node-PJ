@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/chat.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id ="isLoading">
-      <img src="hhttp://najakjak.store/img/boxloading.gif" alt="">
+      <img src="http://najakjak.store/img/boxloading.gif" alt="">
   
       </div>
     <!-- 로고 부분 -->
@@ -73,7 +74,9 @@
     </div> -->
   </body>
   <script src="./genre.js"></script>
+  <script src="../js/chat.js"></script>
   <script>
+    
     window.onload = async () => {
       viewList.innerHTML = "";
       const { data } = await axios.get(`${backend}/allview/romance`);

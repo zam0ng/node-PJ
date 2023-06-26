@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/chat.css">
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
@@ -75,6 +76,7 @@
 
   </body>
   <script src="./genre.js"></script>
+  <script src="../js/chat.js"></script>
   <script>
     async function ta() {
         const { data } = await axios.get(`${backend}/allview/all`, {
