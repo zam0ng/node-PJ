@@ -9,11 +9,11 @@ const { raw } = require("express");
 exports.login = async (req, res) => {
   try {
     const { user_id, user_pw } = req.query;
-    console.log(req.query);
+    //console.log(req.query);
 
     const data = await User.findOne({ where: { user_id } });
-    // console.log(data.user_pw);
-    // console.log(data.grade);
+    // //console.log(data.user_pw);
+    // //console.log(data.grade);
     if (data == null) {
       return res.send("존재하지 않는 계정");
     }
@@ -27,7 +27,7 @@ exports.login = async (req, res) => {
     }
 
     const hash = bcrypt.compareSync(user_pw, data.user_pw);
-    // console.log(hash);
+    // //console.log(hash);
     if (hash) {
       let token = jwt.sign(
         {
@@ -49,8 +49,8 @@ exports.login = async (req, res) => {
       );
 
       req.session.access_token = token;
-      // console.log("logincontroller / req.sessionID")
-      // console.log(req.sessionID)
+      // //console.log("logincontroller / req.sessionID")
+      // //console.log(req.sessionID)
       await User.update(
         {
           tk: req.sessionID,
@@ -58,15 +58,15 @@ exports.login = async (req, res) => {
         { where: { user_id } }
       )
         .then((e) => {
-          console.log("tk insert com");
+          //console.log("tk insert com");
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         });
 
       // req.query = token;
-      // console.log(req.query);
-      console.log("bbbbbbbbbbbbbbbbbbb");
+      // //console.log(req.query);
+      //console.log("bbbbbbbbbbbbbbbbbbb");
       if (user_id == "testadmin") {
         res.send("어드민");
       } else {
@@ -82,17 +82,17 @@ exports.login = async (req, res) => {
       return res.send("비밀번호 틀림");
     }
   } catch (error) {
-    console.log("로그인 컨트롤러 오류" + error);
+    //console.log("로그인 컨트롤러 오류" + error);
   }
 };
 
 exports.logout = async (req, res) => {
-  console.log(req);
-  console.log("로그아웃 컨트롤러에 들어오니>");
+  //console.log(req);
+  //console.log("로그아웃 컨트롤러에 들어오니>");
   try {
     // 현재 브라우저 토큰값
     const th = req.rawHeaders[29].slice(8);
-    console.log(th);
+    //console.log(th);
 
     // 특정 값을 갖는 키를 찾는 함수를 정의합니다.
     function findKeyByToken(obj, token) {
@@ -134,16 +134,16 @@ exports.logout = async (req, res) => {
       // Delete each session by ID
       sessionIds.forEach((el) => {
         // if(sessionId) {
-        console.log(el);
-        console.log(nowsessioid);
+        //console.log(el);
+        //console.log(nowsessioid);
         if (el == nowsessioid) {
           // }
           req.sessionStore.destroy(nowsessioid, (err) => {
             if (err) {
               console.error("Error destroying session:", err);
             } else {
-              console.log("Session destroyed successfully:", nowsessioid);
-              console.log(ta);
+              //console.log("Session destroyed successfully:", nowsessioid);
+              //console.log(ta);
             }
           });
         }
@@ -152,7 +152,7 @@ exports.logout = async (req, res) => {
       res.sendStatus(200);
     });
   } catch (error) {
-    console.log("로그아웃 컨트롤러에서 오류" + error);
+    //console.log("로그아웃 컨트롤러에서 오류" + error);
   }
 };
 
@@ -161,21 +161,21 @@ exports.logout2 = async (req, res) => {
   try {
     
     // let {access_token} = req.session;
-    // console.log(access_token);
+    // //console.log(access_token);
     // access_token = null;
-    // console.log("-------------------access_token")
-    // console.log(access_token)
+    // //console.log("-------------------access_token")
+    // //console.log(access_token)
 
 
-    // console.log(req.session);
+    // //console.log(req.session);
     // req.session = nul;l"""
     
-    // console.log("-------------------access_token")
-    // console.log(req.session)
+    // //console.log("-------------------access_token")
+    // //console.log(req.session)
 
     req.session.destroy(function(err) {
       if (err) {
-        console.log("Error destroying session:", err);
+        //console.log("Error destroying session:", err);
       } else {
         // Session destroyed successfully
         // Any associated session data is cleared
@@ -184,13 +184,13 @@ exports.logout2 = async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    console.log("로그아웃 컨트롤러에서 오류" + error);
+    //console.log("로그아웃 컨트롤러에서 오류" + error);
   }
 };
 
 exports.mailauth= async(req,res)=>{
 
-  console.log(req.query);
+  //console.log(req.query);
 
   const {user_id,user_email} = req.query;
   
@@ -200,7 +200,7 @@ exports.mailauth= async(req,res)=>{
     }
     ,raw:true,
   })
-  console.log(data);
+  //console.log(data);
   if(!data){
     return res.send("없는아이디")
   }
@@ -211,7 +211,7 @@ exports.mailauth= async(req,res)=>{
       .toString()
       .padStart("0", 8);
 
-  console.log(mailnum);
+  //console.log(mailnum);
   await User.update({
     auth : mailnum,
   },{where :{
@@ -219,7 +219,7 @@ exports.mailauth= async(req,res)=>{
   }})
    res.send("일치!");
 
-  console.log(process.env.gmailpass);
+  //console.log(process.env.gmailpass);
   const transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -247,42 +247,42 @@ exports.mailauth= async(req,res)=>{
       return;
     }
    
-    console.log("ok", info);
+    //console.log("ok", info);
   });
 }
 
 exports.auth= async(req,res)=>{
 try {
-  console.log(req.query);
+  //console.log(req.query);
   const {auth,user_id} = req.query;
-  console.log(auth);
+  //console.log(auth);
   const data = await User.findOne({
     where :{
       user_id : user_id,
       auth : auth,
     }
   })
-  console.log(data);
-  // console.log(data.id);
+  //console.log(data);
+  // //console.log(data.id);
   if(!data){
-    console.log("인증번호불일치")
+    //console.log("인증번호불일치")
     return res.send("인증번호불일치")
   }
   else{
-    console.log("인증성공")
+    //console.log("인증성공")
     return res.send({id : data.id , msg : "인증성공"});
   }
 
-  // console.log(data);
+  // //console.log(data);
 } catch (error) {
-  console.log("auth 컨트롤러에서 오류남"+error);
+  //console.log("auth 컨트롤러에서 오류남"+error);
 }
 }
 
 exports.changepwd = async(req,res)=>{
 
 try {
-  console.log(req.query);
+  //console.log(req.query);
   const {id,user_pw,user_repw} = req.query;
   
   const hash = bcrypt.hashSync(user_pw,10)
@@ -296,6 +296,6 @@ try {
   })
 
 } catch (error) {
-  console.log("changepwd 컨트롤러에서 오류남 "+error);
+  //console.log("changepwd 컨트롤러에서 오류남 "+error);
 }
 }

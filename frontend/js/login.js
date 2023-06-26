@@ -20,10 +20,10 @@ btn.onclick = async () => {
     },
   });
 
-  console.log("login.html");
-  console.log(e);
+  //console.log("login.html");
+  //console.log(e);
   if (e.data?.msg == "로그인 성공") {
-    console.log(e.data.token);
+    //console.log(e.data.token);
 
     window.location.href = `${frontend}index.html`;
   } else if (e.data == "어드민") {
@@ -49,7 +49,7 @@ btn.onclick = async () => {
 
 function onEnterLogin(event) {
   const keycode = event.key;
-  console.log(keycode);
+  //console.log(keycode);
   if (keycode == "Enter") {
     axios
       .post(`${backend}/login`, {
@@ -61,7 +61,7 @@ function onEnterLogin(event) {
         },
       })
       .then((e) => {
-        console.log(e);
+        //console.log(e);
         if (e.data == "로그인 성공") {
           window.location.href = `${frontend}index.html`;
         } else if (e.data == "어드민") {

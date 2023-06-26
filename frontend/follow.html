@@ -18,10 +18,9 @@
   <!-- 로고 부분 -->
   <div class="nav">
     <div class="logoBox">
-      <a href="/index.html"><img src="http://13.209.64.80/img/Black logo - no background.png"
+      <a href="/index.html"><img src="http://najakjak.store/img/Black logo - no background.png"
           alt="" /></a>
       <div class="functionBox">
-        <span id="allview">📙books</span>
         <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
         <span id="nick"></span><a href=""></a></span>
         <!-- <span id="login"><a href="http://17.0.0.1:5500/login.html"> login</a></span>
@@ -56,35 +55,35 @@
     async function followAPI() {
       try {
         const data2 = await axios.get(
-           "http://13.209.64.80/follow/add",
+           "http://najakjak.store/follow/add",
            { withCredentials: true}
         );
-        console.log("-----------------")
-        console.log(data2.data);
+        //console.log("-----------------")
+        //console.log(data2.data);
         const tr = data2.data
-        console.log(tr)
+        //console.log(tr)
         tr.forEach((el) => {
           list.innerHTML += `
         <div class="booklist">
-            <div class="bookcover"><img class="img-box" src="http://13.209.64.80${el.user_img}" alt=""></div>
+            <div class="bookcover"><img class="img-box" src="http://najakjak.store${el.user_img}" alt=""></div>
             <div>writer name : ${el.nickname}</div>
         </div>`
 
         });
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     }
     followAPI() 
   //  async function followAPI() {
   //   try {
   //     const data = await axios.get(
-  //       "http://13.209.64.80/follow/list",
+  //       "http://najakjak.store/follow/list",
   //       { withCredentials: true}
   //     );
-  //     console.log(data);
+  //     //console.log(data);
   //     data.data.forEach((e) => {
-  //       console.log(writer)
+  //       //console.log(writer)
       //   list.innerHTML += `
       //   <div class="booklist">
       //       <div class="bookcover">writer img</div>
@@ -94,7 +93,7 @@
       //    `
   //     });
   //   } catch (error) {
-  //     console.log(error)
+  //     //console.log(error)
   //   }
   //  }
   </script>

@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id ="isLoading">
-      <img src="http://13.209.64.80/img/boxloading.gif" alt="">
+      <img src="http://najakjak.store/img/boxloading.gif" alt="">
   
       </div>
     <!-- 로고 부분 -->
@@ -18,7 +18,7 @@
       <div class="logoBox">
         <a href="/index.html"
           ><img
-            src="http://13.209.64.80/img/Black logo - no background.png"
+            src="http://najakjak.store/img/Black logo - no background.png"
             alt=""
         /></a>
 
@@ -78,13 +78,13 @@
       viewList.innerHTML = "";
       const { data } = await axios.get(`${backend}/allview/game`);
 
-      console.log(data);
+      //console.log(data);
 
       cnt.innerText = data.length;
 
       data.forEach((el, index) => {
-        console.log(el.img);
-        console.log(el.id);
+        //console.log(el.img);
+        //console.log(el.id);
         viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
           <img src="${backend}/${el.img}" alt="" />
           <div class="cardText">

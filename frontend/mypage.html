@@ -155,19 +155,19 @@
         checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
     getAPI();
 
   uploadBtn.onclick = () => {
-    console.log("나 클릭?");
+    //console.log("나 클릭?");
     const form = new FormData();
     // form.append('img1', img1.value);
     // form.append("user_id", 2)
-    // console.log(img1.value)
+    // //console.log(img1.value)
     form.append("upload", file.files[0]);
-    console.log(file.files[0]);
+    //console.log(file.files[0]);
     axios
       .post(`${backend}/mypages`, form, {
         //이것때문에 req 가 안읽힘
@@ -176,18 +176,18 @@
           "Content-Type": "multipart/form-data",
         })
         .then((e) => {
-          console.log("잘 전달됨");
-          console.log(e);
+          //console.log("잘 전달됨");
+          console.log(e);//
         })
         .catch((err) => {
-          console.log("=================================================");
-          console.log(err);
+          //console.log("=================================================");
+          console.log(err);//
         });
     };
 
     nickBtn.onclick = async() => {
       try {
-        console.log("닉버튼 찍힘?");
+        console.log("닉버튼 찍힘?");//
       await axios.post(`
       ${backend}/writer/nick`,{
         
@@ -207,15 +207,15 @@
         window.location.href="/login.html";
         
       } catch (error) {
-        console.log("여기 nick ERR");
-        console.log(error);
+        //console.log("여기 nick ERR");
+        console.log(error);//
       }
     };
 
     let myComment = document.querySelector(".my-comment");
     let comments = document.querySelector(".rp_result");
     myComment.addEventListener("click", function (e) {
-      console.log("댓글 클릭?");
+      //console.log("댓글 클릭?");
       e.preventDefault();
       if (comments.style.display == "none") {
         comments.style.display = "block";
@@ -243,7 +243,7 @@
     let myinfo = document.querySelector(".my-info");
     let profile = document.querySelector(".content1");
     myinfo.addEventListener("click", function (e) {
-      console.log("정보 수정 클릭?");
+      //console.log("정보 수정 클릭?");
       e.preventDefault();
       if (profile.style.display != "block") {
         profile.style.display = "block";
@@ -342,9 +342,9 @@
             /(\d{2})\/(\d{2})\/(\d{4})/,
             "$3/$1/$2"
           );
-          console.log(revisedFormattedDate);
-          console.log(el);
-          console.log(el.Review.comment);
+          //console.log(revisedFormattedDate);
+          //console.log(el);
+          //console.log(el.Review.comment);
 
           replies_list.innerHTML += `
             <li>${el.Review.comment}<br>

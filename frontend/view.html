@@ -11,13 +11,13 @@
   </head>
   <body>
     <div id ="isLoading">
-      <img src="http://13.209.64.80/img/boxloading.gif" alt="">
+      <img src="http://najakjak.store/img/boxloading.gif" alt="">
     </div>
      <!-- 로고 부분 -->
      <div class="nav">
       <div class="logoBox">
         <a href="/index.html"
-          ><img src="http://13.209.64.80/img/Black logo - no background.png" alt=""
+          ><img src="http://najakjak.store/img/Black logo - no background.png" alt=""
         /></a>
 
         <div class="functionBox">
@@ -186,9 +186,9 @@
           <!-- people currently reading -->
           <div class="currentlyWrap">
             <div class="peopleContainer">
-              <img class="buypeopleImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="buypeopleImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="buypeopleImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="buypeopleImg" src="http://najakjak.store/img/basic.png" />
+              <img class="buypeopleImg" src="http://najakjak.store/img/basic.png" />
+              <img class="buypeopleImg" src="http://najakjak.store/img/basic.png" />
               <span id="buypeoplecnt">100</span>
               <span> people are currently reading</span>
             </div>
@@ -196,9 +196,9 @@
           <!-- people want to read -->
           <div class="readWrap">
             <div class="peopleContainer">
-              <img class="checkspeopleImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="checkspeopleImg" src="http://13.209.64.80/img/basic.png" />
-              <img class="checkspeopleImg" src="http://13.209.64.80/img/basic.png" />
+              <img class="checkspeopleImg" src="http://najakjak.store/img/basic.png" />
+              <img class="checkspeopleImg" src="http://najakjak.store/img/basic.png" />
+              <img class="checkspeopleImg" src="http://najakjak.store/img/basic.png" />
               <span id ="checkpeoplecnt">100 </span>
               <span>people want to read</span>
             </div>
@@ -243,7 +243,7 @@
           <!-- 작가 이미지, 이름, 팔로우 버튼 -->
           <div class="reviewWrap">
             <div class="myImg">
-              <!-- <img src="http://13.209.64.80/img/basic.png" alt="" /> -->
+              <!-- <img src="http://najakjak.store/img/basic.png" alt="" /> -->
             </div>
             <div class="reivewForm">
               <div class="reviewStars">
@@ -525,7 +525,7 @@ async function logincheck2() {
 
       followBtn.onclick = async () => {
         logincheck2();
-        console.log('followBtn 클릭됨?')
+        //console.log('followBtn 클릭됨?')
         if (ft.innerText == "Following") {
           await axios.get(`${backend}/follow/del`, {
             withCredentials: true,
@@ -560,11 +560,11 @@ async function logincheck2() {
 
         }
       }
-      //console.log(author);
-      //console.log(author.Books)
+      ////console.log(author);
+      ////console.log(author.Books)
       const bookInfo = author.Books;
-      //console.log(bookInfo[0].id);
-      //console.log("------------author");
+      ////console.log(bookInfo[0].id);
+      ////console.log("------------author");
       const bookNum = bookInfo[0].id;
       const price = await axios.get(`${backend}/view/how/price`, {
         withCredentials: true,
@@ -574,7 +574,7 @@ async function logincheck2() {
         }
       });
 
-      //console.log(price);
+      ////console.log(price);
 
       buyprice_span.innerText = price.data;
 
@@ -614,9 +614,9 @@ async function logincheck2() {
           id : bookNum,
         }
       });
-      console.log(checkscnt);
-      console.log(checkscnt.data);
-      console.log(checkscnt.data.length);
+      //console.log(checkscnt);
+      //console.log(checkscnt.data);
+      //console.log(checkscnt.data.length);
 
       let arr = [];
       // for (let index = 0; index < 3; index++) {
@@ -632,14 +632,14 @@ async function logincheck2() {
           arr.push(num);
         }
       }
-      console.log(arr);
-        console.log("11111")
+      //console.log(arr);
+        //console.log("11111")
       arr.forEach((el,index) => {
         checkspeopleImg[index].src = checkscnt.data[el].user_img;
       });
       }
       else{
-        console.log("22222")
+        //console.log("22222")
 
         checkscnt.data.forEach((el,index) => {
           checkspeopleImg[index].src = el.user_img;
@@ -655,11 +655,11 @@ async function logincheck2() {
       const buycheck = await axios.get(`${backend}/view/checks/buys/${getId}`,{
         withCredentials:true,
       })
-      console.log(buycheck.data)
+      //console.log(buycheck.data)
       if(buycheck.data=="relogin"){
         buycheck.data=null;
       }
-      console.log("----------------buycheck.data")
+      //console.log("----------------buycheck.data")
       if(buycheck.data!=null){
         const BuyTheBookBtn = document.querySelector(".BuyTheBookBtn");
         buyspan.innerText = "thank you 👍";
@@ -688,13 +688,13 @@ wantToReadBtn.onclick = async() =>{
   
   if(checks.innerHTML == "♥"){
     checks.innerHTML = "♡"
-    //console.log("찜 해체할거임")
+    ////console.log("찜 해체할거임")
     const data = await axios.get(`${backend}/view/checks/delete/${getId}`, {
     withCredentials: true,
   });
   } else {
     checks.innerHTML = "♥"
-    //console.log("찜 할거임")
+    ////console.log("찜 할거임")
     const data = await axios.get(`${backend}/view/checks/add/${getId}`, {
     withCredentials: true,
   });

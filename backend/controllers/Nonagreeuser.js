@@ -33,15 +33,15 @@ exports.gradeUpdate = async(req,res)=>{
 
     try {
         const {grade,user_id} = req.body.data;
-        console.log(grade);
-        console.log(user_id);
+        //console.log(grade);
+        //console.log(user_id);
 
         await User.update({
             grade : grade,
         },{where :{user_id}}).then((e)=>{
-            console.log("update com")
+            //console.log("update com")
         }).catch((err)=>{
-            console.log("err");
+            //console.log("err");
         })
 
         res.send();
@@ -52,7 +52,7 @@ exports.gradeUpdate = async(req,res)=>{
 }
 
 exports.nonagreepost = async(req,res) =>{
-    console.log("nonagreepost 여기 들어와짐?")
+    //console.log("nonagreepost 여기 들어와짐?")
     try {
         const data = await Books.findAll({
             //datavalues 만 들어옴
@@ -62,7 +62,7 @@ exports.nonagreepost = async(req,res) =>{
             }
         })
 
-        console.log(data);
+        //console.log(data);
         res.json(data);
     } catch (error) {
         console.log("nonagresspost 에서 오류"+ error);
@@ -71,7 +71,7 @@ exports.nonagreepost = async(req,res) =>{
 }
 exports.acceptUpdate = async (req,res)=>{
     try {
-        console.log(req.query);
+        //console.log(req.query);
         const {accept,id,reject} =req.query;
 
         await Books.update({
@@ -85,7 +85,7 @@ exports.acceptUpdate = async (req,res)=>{
 
 exports.rejectUpdate = async (req,res)=>{
     try {
-        console.log(req.query);
+        //console.log(req.query);
         await Books.d
     } catch (error) {
         console.log("rejectUpdate 에서 오류남"+error);

@@ -68,8 +68,8 @@ exports.OrderByStar = async (req, res) => {
       },
       raw: true,
     });
-    // console.log("exports.OrderByStar");
-    // console.log(data);
+    // //console.log("exports.OrderByStar");
+    // //console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -91,8 +91,8 @@ exports.logincheck = async (req, res, next) => {
   const user_id = req.decoded.user_id;
   const nickname = req.decoded.nickname;
   const role = req.decoded.role;
-  console.log("maincontroller of logincheck");
-  console.log(user_id);
+  //console.log("maincontroller of logincheck");
+  //console.log(user_id);
 
   const data = { nickname, role };
   res.json(data);
@@ -102,7 +102,7 @@ exports.logincheck = async (req, res, next) => {
 
 //   try {
 //     const {user_id}= req.decoded;
-//     console.log()
+//     //console.log()
 //     if(user_id != "admin" || user_id ==""){
 
 //       res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" });
@@ -114,6 +114,6 @@ exports.logincheck = async (req, res, next) => {
 //     res.send();
 //     }
 //   } catch (error) {
-//     console.log("maincontroller/ admincheck 오류남"+error);
+//     //console.log("maincontroller/ admincheck 오류남"+error);
 //   }
 // }

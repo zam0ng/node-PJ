@@ -118,8 +118,8 @@ exports.viewInfo = async (req, res) => {
 exports.insertReview = async (req, res) => {
   const { nickname, id } = req.decoded;
   const { book_id, star, comment } = req.body;
-  // console.log("const { book_id, star, comment } = req.body;");
-  // console.log(req.body);
+  // //console.log("const { book_id, star, comment } = req.body;");
+  // //console.log(req.body);
   try {
     await review.create({
       book_id,
@@ -130,7 +130,7 @@ exports.insertReview = async (req, res) => {
     });
     res.send();
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 };
 
@@ -155,7 +155,7 @@ exports.checksadd = async (req, res) => {
 
     let tz;
     if (userdata.checks == "") {
-      console.log("true");
+      //console.log("true");
     }
     if (userdata.checks == "") {
       tz = req.params.id;
@@ -170,7 +170,7 @@ exports.checksadd = async (req, res) => {
     );
     res.send();
   } catch (error) {
-    console.log("view컨트롤러 checks에서 오류남" + error);
+    //console.log("view컨트롤러 checks에서 오류남" + error);
   }
 };
 
@@ -197,7 +197,7 @@ exports.checksdel = async (req, res) => {
     );
     res.send();
   } catch (error) {
-    console.log("view컨트롤러 checks에서 오류남" + error);
+    //console.log("view컨트롤러 checks에서 오류남" + error);
   }
 };
 exports.userchecks = async (req, res) => {
@@ -211,7 +211,7 @@ exports.userchecks = async (req, res) => {
 
     res.json(data);
   } catch (error) {
-    console.log("view 컨트롤러 userchecks 에서 오류남" + error);
+    //console.log("view 컨트롤러 userchecks 에서 오류남" + error);
   }
 };
 
@@ -236,7 +236,7 @@ exports.viewcnt = async (req, res) => {
     );
     res.send();
   } catch (error) {
-    console.log("viewcnt 컨트롤러에서 오류" + error);
+    //console.log("viewcnt 컨트롤러에서 오류" + error);
   }
 };
 
@@ -253,8 +253,8 @@ exports.followadd = async (req, res) => {
 
     res.json(data2);
   } catch (error) {
-    console.log("여기 followadd error임");
-    console.log(error);
+    //console.log("여기 followadd error임");
+    //console.log(error);
   }
 };
 
@@ -263,20 +263,20 @@ exports.followdel = async (req, res) => {
     req.parmas;
     // const {user_id}=req.decoded;
     // const data = await User.findOne({ where : {user_id},raw:true})
-    // console.log("----------여기 followdel")
-    // console.log(data.following)
+    // //console.log("----------여기 followdel")
+    // //console.log(data.following)
     // const followstr = data.following;
     // const tr = followstr.split(",");
     // const result = tr.filter(num => num!=req.params.id)
-    // console.log("----------------result")
-    // console.log(tr);
-    // console.log(result)
-    // console.log("----------------result")
+    // //console.log("----------------result")
+    // //console.log(tr);
+    // //console.log(result)
+    // //console.log("----------------result")
     // const result2 = result.join();
     // await User.update({
     //   following : result2},{where:{user_id}})
   } catch (error) {
-    console.log("followdel에서 오류남" + error);
+    //console.log("followdel에서 오류남" + error);
   }
 };
 exports.userfollow = async (req, res) => {
@@ -290,7 +290,7 @@ exports.userfollow = async (req, res) => {
 
     res.json(data);
   } catch (error) {
-    console.log("view 컨트롤러userfollow 에서 오류남" + error);
+    //console.log("view 컨트롤러userfollow 에서 오류남" + error);
   }
 };
 
@@ -373,7 +373,7 @@ exports.reviewMore = async (req, res) => {
 exports.howprice = async (req, res) => {
   try {
     const { id } = req.query;
-    console.log(id);
+    //console.log(id);
 
     const data = await Books.findOne({
       where: {
@@ -382,10 +382,10 @@ exports.howprice = async (req, res) => {
       raw: true,
     });
 
-    console.log(data.price);
+    //console.log(data.price);
     res.json(data.price);
   } catch (error) {
-    console.log("view컨트롤러 howprice 에 오류남" + error);
+    //console.log("view컨트롤러 howprice 에 오류남" +error);
   }
 };
 
@@ -405,7 +405,7 @@ exports.usercnt = async (req, res) => {
     });
     res.json(data.length);
   } catch (error) {
-    console.log("view컨트롤러 usercnt 에 오류남" + error);
+    //console.log("view컨트롤러 usercnt 에 오류남" +error);
   }
 };
 
@@ -427,7 +427,7 @@ exports.buycnt = async (req, res) => {
     });
     res.json(data);
   } catch (error) {
-    console.log("view컨트롤러 buycnt 에 오류남" + error);
+    //console.log("view컨트롤러 buycnt 에 오류남" +error);
   }
 };
 exports.buycnt2 = async (req, res) => {
@@ -446,7 +446,7 @@ exports.buycnt2 = async (req, res) => {
     });
     res.json(data);
   } catch (error) {
-    console.log("view컨트롤러 buycnt 에 오류남" + error);
+    //console.log("view컨트롤러 buycnt 에 오류남" +error);
   }
 };
 
@@ -467,7 +467,7 @@ exports.checkscnt = async (req, res) => {
     });
     res.json(data);
   } catch (error) {
-    console.log("view컨트롤러 checkscnt 에 오류남" + error);
+    //console.log("view컨트롤러 checkscnt 에 오류남" +error);
   }
 };
 
@@ -475,7 +475,7 @@ exports.checkbuys = async (req, res) => {
   try {
     //req.params.id
     const { user_id } = req.decoded;
-    console.log(req.params.id);
+    //console.log(req.params.id);
     const data = await User.findOne({
       where: {
         user_id: user_id,
@@ -485,9 +485,9 @@ exports.checkbuys = async (req, res) => {
         },
       },
     });
-    console.log("+++++++++++++++++++++++++++data");
-    console.log(data);
-    console.log("+++++++++++++++++++++++++++data");
+    //console.log("+++++++++++++++++++++++++++data");
+    //console.log(data);
+    //console.log("+++++++++++++++++++++++++++data");
     res.json(data);
   } catch (error) {}
 };
@@ -528,10 +528,10 @@ exports.getBuysList = async (req, res) => {
 
     // 책을 구매했으면 true, 구매하지 않았으면 false 반환
     if (data?.nickname) {
-      console.log("true");
+      //console.log("true")
       res.send("true");
     } else {
-      console.log("false");
+      //console.log("false");
 
       res.send("false");
     }

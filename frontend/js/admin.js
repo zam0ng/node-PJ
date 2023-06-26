@@ -1,3 +1,25 @@
+async function admincheck() {
+  // const at = document.cookie.slice(8);
+  // //console.log(at);
+
+  const data = await axios.get(`${backend}/main/admincheck`, {
+    // 이게 rawheader에 쿠키를 저장하는 역할
+    withCredentials: true,
+
+    //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+  });
+
+  if(data.data=="undi"){
+    alert("어드민 계정으로 로그인하세요");
+    window.location.href = `${frontend}login.html`;
+  }
+  else if(data.data=="admin"){
+    isLoading.classList.add("disable");
+  }
+
+}
+admincheck();
+
 window.onload = async () => {
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
@@ -96,6 +118,9 @@ window.onload = async () => {
       };
     });
   });
+  
+  // isLoading.classList.add("disable");
+};
 };
 
 async function admincheck() {
@@ -338,11 +363,11 @@ chat_agree.onclick = async () => {
   const userName = "testadmin";
   let userTemp;
   let chatUserInfo;
-  console.log(confirmZero);
+  //console.log(confirmZero);
   confirmZero.data.forEach((el, index) => {
     // const { user_name } = el;
-    console.log(el);
-    // console.log(zeroCnt);
+    //console.log(el);
+    // //console.log(zeroCnt);
     if (el.zeroCnt == 0) {
       chatUserId.innerHTML += `
              <li class="userClick"><span class="usn">${el.user_name}</span>
@@ -361,9 +386,9 @@ chat_agree.onclick = async () => {
     userClick.forEach((el, index) => {
       el.style.backgroundColor = "";
       el.onclick = async (e) => {
-        console.log(e);
-        const zeroCnt = e.target.querySelector(".zeroCnt");
-        console.log(zeroCnt);
+      //console.log(e)
+      const zeroCnt = e.target.querySelector(".zeroCnt");
+      //console.log(zeroCnt);
 
         // 메세지가 왔을 때
         if (zeroCnt != null) {

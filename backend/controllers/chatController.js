@@ -38,7 +38,7 @@ exports.getChatData = async (req, res) => {
 };
 
 exports.getUserName = async(req,res) =>{
-    console.log("getUserName 들어옴?")
+    //console.log("getUserName 들어옴?")
     try {
         const data = await Chat.findAll({
             attributes:["user_name"],
@@ -52,13 +52,13 @@ exports.getUserName = async(req,res) =>{
             raw:true,
         })
 
-        console.log("-------------data");
-        console.log(data);
-        console.log("-------------data");
+        //console.log("-------------data");
+        //console.log(data);
+        //console.log("-------------data");
         
         res.json(data);
         } catch (error) {
-        console.log("getUserName 에서 오류남"+error);
+        //console.log("getUserName 에서 오류남"+error);
     }
 }
 
@@ -95,19 +95,19 @@ exports.confirmZero= async(req,res)=>{
              ) B ON A.user_name = B.user_name;`, 
           { type: Sequelize.QueryTypes.SELECT });
           
-        console.log("-----------------confirmZero");
-        console.log(data);
-        console.log("-----------------confirmZero");
+        //console.log("-----------------confirmZero");
+        //console.log(data);
+        //console.log("-----------------confirmZero");
         
         res.json(data);
     } catch (error) {
-        console.log("chat 컨트롤러 confirmZero에서 오류남"+error);
+        //console.log("chat 컨트롤러 confirmZero에서 오류남"+error);
     }
 }
 
 exports.changeone = async(req,res)=>{
     try {
-        console.log(req.query);
+        //console.log(req.query);
         const {chat_id}=req.query;
 
         await Chat.update({
@@ -119,6 +119,6 @@ exports.changeone = async(req,res)=>{
         })
         res.send();
     } catch (error) { 
-        console.log("chat 컨트롤러 changeone 에서 오류남"+error);
+        //console.log("chat 컨트롤러 changeone 에서 오류남"+error);
     }
 }
