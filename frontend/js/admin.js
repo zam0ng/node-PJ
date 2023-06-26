@@ -1,29 +1,11 @@
 window.onload = async () => {
-
-  async function admincheck() {
-    // const at = document.cookie.slice(8);
-    // console.log(at);
-  
-    const data = await axios.get(`${backend}/main/admincheck`, {
-      // 이게 rawheader에 쿠키를 저장하는 역할
-      withCredentials: true,
-  
-      //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
-    });
-
-    if(data.data="undi"){
-      alert("어드민 계정으로 로그인하세요");
-      window.location.href = `${frontend}login.html`;
-    }
-  }
-  admincheck();
-
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
   post_agree.style.color = "rgb(158, 158, 158)";
   chat_agree.style.color = "rgb(158, 158, 158)";
   reject_reason.style.visibility = "hidden";
   main_content3.style.display = "none";
+  main_content2.style.display = "none";
 
   const data = await axios.get(`${backend}/nonagreeuser`, {
     withCredentials: true,
@@ -31,6 +13,7 @@ window.onload = async () => {
   main_content.innerHTML = "";
 
   if (data.data.length == 0) {
+    isLoading.classList.add("disable");
     return (main_content.innerHTML = `가입 승인 대기중인 유저가 없습니다.`);
   }
 
@@ -109,25 +92,44 @@ window.onload = async () => {
           }
         });
 
-
-        
         location.reload();
       };
     });
   });
 };
+
+async function admincheck() {
+  console.log("async function admincheck()");
+  // const at = document.cookie.slice(8);
+  // console.log(at);
+
+  const data = await axios.get(`${backend}/main/admincheck`, {
+    // 이게 rawheader에 쿠키를 저장하는 역할
+    withCredentials: true,
+
+    //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
+  });
+  console.log(data);
+  if (data.data == "undi") {
+    alert("어드민 계정으로 로그인하세요");
+    window.location.href = `${frontend}login.html`;
+  } else if (data.data == "admin") {
+    isLoading.classList.add("disable");
+  }
+}
+
+admincheck();
+// isLoading.classList.add("disable");
 user_agree.onclick = async () => {
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
   post_agree.style.color = "rgb(158, 158, 158)";
   chat_agree.style.color = "rgb(158, 158, 158)";
 
-  main_content2.style.visibility = "hidden";
-  // main_content2.style.display="none";
+  // main_content2.style.visibility = "hidden";
+  main_content2.style.display = "none";
   reject_reason.style.visibility = "hidden";
   main_content.style.display = "block";
-
-  //0619
   main_content3.style.display = "none";
 
   const data = await axios.get(`${backend}/nonagreeuser`, {
@@ -201,7 +203,9 @@ closee.onclick = () => {
 // 게시글 관리
 post_agree.onclick = async () => {
   main_content2.innerHTML = "";
-  main_content2.style.visibility = "visible";
+  // main_content2.style.visibility = "visible";
+  main_content2.style.display = "flex";
+
   main_content.style.display = "none";
   //0619
   main_content3.style.visibility = "hidden";
@@ -313,7 +317,8 @@ chat_agree.onclick = async () => {
   chatUserId.innerHTML = "";
   main_content3.style.display = "block";
   main_content3.style.visibility = "visible";
-  main_content2.style.visibility = "hidden";
+  // main_content2.style.visibility = "hidden";
+  main_content2.style.display = "none";
   main_content.style.display = "none";
 
   let chatArea = document.querySelector(".chatArea");
@@ -323,8 +328,6 @@ chat_agree.onclick = async () => {
     withCredentials: true,
   });
 
-  confirmZero.data.forEach((el, index) => {});
-
   // 채팅을 한번이라도 한 유저 이름 가져와야함
   const un = await axios.get(`${backend}/chat/username`, {
     withCredentials: true,
@@ -332,12 +335,14 @@ chat_agree.onclick = async () => {
 
   const socket = io.connect(`${backend}`);
   let chat_id;
-  const userName = "admin";
+  const userName = "testadmin";
   let userTemp;
   let chatUserInfo;
-
+  console.log(confirmZero);
   confirmZero.data.forEach((el, index) => {
     // const { user_name } = el;
+    console.log(el);
+    // console.log(zeroCnt);
     if (el.zeroCnt == 0) {
       chatUserId.innerHTML += `
              <li class="userClick"><span class="usn">${el.user_name}</span>
@@ -356,9 +361,14 @@ chat_agree.onclick = async () => {
     userClick.forEach((el, index) => {
       el.style.backgroundColor = "";
       el.onclick = async (e) => {
+        console.log(e);
         const zeroCnt = e.target.querySelector(".zeroCnt");
+        console.log(zeroCnt);
 
-        zeroCnt.style.display = "none";
+        // 메세지가 왔을 때
+        if (zeroCnt != null) {
+          zeroCnt.style.display = "none";
+        }
 
         chatArea.innerHTML = "";
         if (userTemp) {
@@ -400,15 +410,15 @@ chat_agree.onclick = async () => {
         });
 
         chatdata.data.forEach((el, index) => {
-          if (el.user_name == "admin") {
+          if (el.user_name == "testadmin") {
             chatArea.innerHTML += `
     
-                                <span class="adminSpan">${el.text}</span>
+                                <span class="userSpan">${el.text}</span>
                             `;
           } else {
             chatArea.innerHTML += `
     
-                                <span class="userSpan">${el.text}</span>
+                                <span class="adminSpan">${el.text}</span>
                             `;
           }
         });
@@ -425,16 +435,24 @@ chat_agree.onclick = async () => {
     adminMsg.value = "";
   };
 
-  socket.on("message", (chat_id, user_name, msg) => {
-    if (user_name == "admin") {
+  socket.on("message", async (chat_id, user_name, msg) => {
+    await axios.get(`${backend}/chat/changeone`, {
+      withCredentials: true,
+
+      params: {
+        chat_id: chat_id,
+      },
+    });
+
+    if (user_name == "testadmin") {
       chatArea.innerHTML += `
 
-                <span class="adminSpan">${msg}</span>
+                <span class="userSpan">${msg}</span>
                 `;
     } else {
       chatArea.innerHTML += `
 
-            <span class="userSpan">${msg}</span>
+            <span class="adminSpan">${msg}</span>
                 `;
     }
     // 대화한 내용이 창을 벗어나 스크롤이 생기면 맨 아래 부터 보게 하기

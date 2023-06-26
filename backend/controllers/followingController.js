@@ -56,19 +56,19 @@ exports.followingList = async(req,res)=>{
     try {
       const {user_id}=req.decoded;
       const {author_id}=req.query;
+      console.log("---------follow")
       console.log(user_id)
       console.log(author_id);
+      console.log("---------follow")
+
       const data = await User.findOne({ where : {user_id},raw:true})
-      // console.log("----------여기 followdel")
-      console.log(data.following)
       const followstr = data.following;
+      console.log(followstr);
       const tr = followstr.split(",");
       const result = tr.filter(num => num!=author_id)
-      // console.log("----------------result")
-      // console.log(tr);
-      // console.log(result)
-      // console.log("----------------result")
       const result2 = result.join();
+      console.log("-----------------frfr")
+      console.log(result2);
       await User.update({
         following : result2},{where:{user_id}})
 

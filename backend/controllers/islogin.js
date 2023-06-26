@@ -22,15 +22,67 @@ exports.islogin = async (req, res, next) => {
     console.log("islogin 컨트롤러에서 오류남" + error);
   }
 };
+exports.islogin5 = async (req, res, next) => {
+  try {
+    const { access_token } = req.session;
+
+    jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
+      if (err) {
+        console.log("다시 로그인");
+        // window.location.href = "http://13.209.64.80/";
+        // res.redirect("http://13.209.64.80/");
+        // res.send("relogin");
+        next();
+        // next();
+      } else {
+        // console.log("islogin");
+        // console.log(decoded);
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } catch (error) {
+    console.log("islogin 컨트롤러에서 오류남" + error);
+  }
+};
+exports.viewislogin = async (req, res) => {
+  try {
+    const { access_token } = req.session;
+
+    if (access_token == undefined) {
+      res.send("unde");
+    } else {
+      res.send();
+    }
+  } catch (error) {
+    console.log("viewislogin 컨트롤러에서 오류남" + error);
+  }
+};
 
 exports.adminislogin = async (req, res) => {
   try {
     const { access_token } = req.session;
+
+    console.log("-------------access_token");
     console.log(access_token);
-    console.log(access_token == undefined);
-    console.log(access_token == "undefined");
+    console.log("-------------access_token");
+
     if (access_token == undefined) {
+      console.log("undi1");
       res.send("undi");
+    } else {
+      const { user_id } = req.decoded;
+      console.log("--------------------------user_id");
+      console.log(user_id);
+      console.log("--------------------------user_id");
+      if (user_id != "testadmin") {
+        console.log("undi");
+        res.send("undi");
+      } else {
+        console.log("admin");
+
+        res.send("admin");
+      }
     }
   } catch (error) {
     console.log("adminislogin 컨트롤러에서 오류남" + error);

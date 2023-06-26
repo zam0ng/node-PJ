@@ -84,7 +84,7 @@ exports.confirmZero= async(req,res)=>{
              FROM (
                SELECT user_name
                FROM chat
-               WHERE user_name <> "admin"
+               WHERE user_name <> "testadmin"
                GROUP BY user_name
              ) A
              LEFT OUTER JOIN (
@@ -117,6 +117,7 @@ exports.changeone = async(req,res)=>{
                 chat_id : chat_id,
             }
         })
+        res.send();
     } catch (error) { 
         console.log("chat 컨트롤러 changeone 에서 오류남"+error);
     }

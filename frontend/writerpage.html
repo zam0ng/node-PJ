@@ -136,7 +136,10 @@
         gender1.innerHTML = data.gender;
         age1.innerHTML = data.age;
         grade1.innerHTML = data.grade;
-        checks.innerHTML = tc.length-1;
+        if(tc==""){
+          tc.length =0;
+        }
+        checks.innerHTML = tc.length;
         userId.innerHTML = data.user_id;
       } catch (error) {
         console.log(error);

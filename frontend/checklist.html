@@ -22,7 +22,6 @@
       <a href="/index.html"><img src="http://13.209.64.80/img/Black logo - no background.png"
           alt="" /></a>
       <div class="functionBox">
-        <span id="allview">📙books</span>
         <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
         <span id="nick"></span><a href=""></a></span>
         <!-- <span id="login"><a href="http://17.0.0.1:5500/login.html"> login</a></span>
@@ -73,10 +72,7 @@
             { withCredentials: true, }
           );
 
-          console.log(data);
           data.data.forEach((el) => {
-            console.log(el.img)
-            console.log(el.title)
             list.innerHTML += `
           <a href="${frontend}view.html?id=${el.id}">
         <div class="booklist">
@@ -91,4 +87,27 @@
         }
       }
     checkAPI();
+
+    async function buyAPI(){
+      try {
+        const data = await axios.get(
+          `${backend}/buy/list`,
+          {withCredentials:true}
+        );
+          data.data.forEach((e) => {
+            list2.innerHTML += `
+          <a href="${frontend}view.html?id=${e.id}">
+        <div class="booklist">
+            <div class="bookcover"><img src="${backend}/${e.img}" alt=""></div>
+            <div>book's title : ${e.title}</div>
+        </div>
+      </a>
+        `
+          })
+      } catch (error) {
+        console.log("checklist.html buyAPI에서 오류")
+        console.log(error)
+      }
+    }
+    buyAPI();
   </script>

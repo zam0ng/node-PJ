@@ -10,6 +10,10 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
+    <div id ="isLoading">
+      <img src="http://13.209.64.80/img/boxloading.gif" alt="">
+  
+      </div>
     <!-- 로고 부분 -->
     <div class="nav">
       <div class="logoBox">
@@ -68,26 +72,66 @@
         <div id="starList"></div>
       </div>
     </div> -->
+
   </body>
   <script src="./genre.js"></script>
   <script>
+    async function ta() {
+        const { data } = await axios.get(`${backend}/allview/all`, {
+          withCredentials: true,
+        });
+        console.log(data)
+        return data.length;
+
+      }
+      async function readmore(cntt) {
+
+        const plusCard = document.querySelector(".plusCard");
+        plusCard.style.display = 'none';
+        viewList.innerHTML = "";
+        console.log(await ta());
+        const taa = await ta();
+        console.log(taa);
+        cnt.innerText = cntt + 9;
+        const { data } = await axios.get(`${backend}/allview/all2`, {
+          withCredentials: true,
+          params: {
+            id: cntt,
+          },
+        });
+
+        data.forEach((el, index) => {
+          viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
+                <img src="${backend}/${el.img}" alt="" />
+                <div class="cardText">
+                <span>☻</span>
+                <span>${el.viewcnt}</span>
+                <span>${el.title}</span>
+                </div> 
+                </div></a>`;
+          if (index % 10 == 8 && index > cntt && taa > cntt + 9) {
+            viewList.innerHTML += `<div class="plusCard" onclick="readmore(${index + 2})">
+                    <img src="${backend}/img/pluss.png" alt="" >
+                    </div>`;
+          }
+        })
+      }
     window.onload = async () => {
       // window.location.href="/genre/all.html"
 
       viewList.innerHTML = "";
-      const { data } = await axios.get(`${backend}/allview/all`);
+      const { data } = await axios.get(`${backend}/allview/all2`,{
+        withCredentials : true,
+      });
 
       console.log(data);
 
-      cnt.innerText = data.length;
 
       // const toggle = document.querySelector(".toggle");
 
       // toggle.classList.toggle("active");
 
       data.forEach((el, index) => {
-        console.log(el.img);
-        console.log(el.id);
         viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
           <img src="${backend}/${el.img}" alt="" />
           <div class="cardText">
@@ -96,7 +140,18 @@
             <span>${el.title}</span>
           </div>
         </div></a>`;
+
+        if (index % 10 == 8) {
+            viewList.innerHTML += `<div class="plusCard" onclick="readmore(${index+2})">
+          <img src="${backend}/img/pluss.png" alt="" >
+          </div>`;
+
+          }
       });
+      cnt.innerText = data.length;
+
+      isLoading.classList.add("disable");
+
     };
   </script>
 </html>

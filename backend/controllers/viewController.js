@@ -168,6 +168,7 @@ exports.checksadd = async (req, res) => {
       },
       { where: { user_id } }
     );
+    res.send();
   } catch (error) {
     console.log("view컨트롤러 checks에서 오류남" + error);
   }
@@ -194,6 +195,7 @@ exports.checksdel = async (req, res) => {
       },
       { where: { user_id } }
     );
+    res.send();
   } catch (error) {
     console.log("view컨트롤러 checks에서 오류남" + error);
   }
@@ -346,6 +348,205 @@ exports.reviewDelete = async (req, res) => {
   }
 };
 
+exports.reviewMore = async (req, res) => {
+  try {
+    const { id, cnt } = req.query;
+    const limit = parseInt(cnt);
+
+    const reviews = await review.findAll({
+      where: { book_id: id },
+      include: [
+        {
+          model: User,
+          required: true,
+        },
+      ],
+      limit,
+    });
+
+    res.json(reviews);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.howprice = async (req, res) => {
+  try {
+    const { id } = req.query;
+    console.log(id);
+
+    const data = await Books.findOne({
+      where: {
+        id: id,
+      },
+      raw: true,
+    });
+
+    console.log(data.price);
+    res.json(data.price);
+  } catch (error) {
+    console.log("view컨트롤러 howprice 에 오류남" + error);
+  }
+};
+
+exports.usercnt = async (req, res) => {
+  try {
+    const { id } = req.query;
+    // 책번호
+    const data = await User.findAll({
+      attributes: ["following"],
+
+      where: {
+        following: {
+          [Op.ne]: "",
+          [Op.like]: `%${id}%`,
+        },
+      },
+    });
+    res.json(data.length);
+  } catch (error) {
+    console.log("view컨트롤러 usercnt 에 오류남" + error);
+  }
+};
+
+exports.buycnt = async (req, res) => {
+  try {
+    const { id } = req.query;
+    // 책번호
+    const data = await User.findAll({
+      attributes: ["user_img"],
+      order: sequelize.literal("rand()"),
+      where: {
+        buys: {
+          [Op.ne]: "",
+          [Op.like]: `%${id}%`,
+        },
+      },
+      raw: true,
+      limit: 3,
+    });
+    res.json(data);
+  } catch (error) {
+    console.log("view컨트롤러 buycnt 에 오류남" + error);
+  }
+};
+exports.buycnt2 = async (req, res) => {
+  try {
+    const { id } = req.query;
+    // 책번호
+    const data = await User.findAll({
+      attributes: ["user_img"],
+      where: {
+        buys: {
+          [Op.ne]: "",
+          [Op.like]: `%${id}%`,
+        },
+      },
+      raw: true,
+    });
+    res.json(data);
+  } catch (error) {
+    console.log("view컨트롤러 buycnt 에 오류남" + error);
+  }
+};
+
+exports.checkscnt = async (req, res) => {
+  try {
+    const { id } = req.query;
+    // 책번호
+    const data = await User.findAll({
+      attributes: ["user_img"],
+
+      where: {
+        checks: {
+          [Op.ne]: "",
+          [Op.like]: `%${id}%`,
+        },
+      },
+      raw: true,
+    });
+    res.json(data);
+  } catch (error) {
+    console.log("view컨트롤러 checkscnt 에 오류남" + error);
+  }
+};
+
+exports.checkbuys = async (req, res) => {
+  try {
+    //req.params.id
+    const { user_id } = req.decoded;
+    console.log(req.params.id);
+    const data = await User.findOne({
+      where: {
+        user_id: user_id,
+        buys: {
+          [Op.ne]: "",
+          [Op.like]: `%${req.params.id}%`,
+        },
+      },
+    });
+    console.log("+++++++++++++++++++++++++++data");
+    console.log(data);
+    console.log("+++++++++++++++++++++++++++data");
+    res.json(data);
+  } catch (error) {}
+};
+
+exports.getReviewCount = async (req, res) => {
+  try {
+    const { nickname } = req.decoded;
+    const { book_id } = req.query;
+
+    const [data] = await review.findAll({
+      attributes: [
+        "nickname",
+        [sequelize.fn("count", sequelize.col("nickname")), "nickcnt"],
+      ],
+      where: { nickname, book_id },
+      group: ["nickname", "book_id"],
+      raw: true,
+    });
+
+    if (data?.nickcnt >= 3) {
+      res.send("3");
+    } else {
+      res.send();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.getBuysList = async (req, res) => {
+  try {
+    const { nickname } = req.decoded;
+    const { id } = req.query;
+    const data = await User.findOne({
+      where: { nickname, buys: { [Op.like]: `%${id}%` } },
+      raw: true,
+    });
+
+    // 책을 구매했으면 true, 구매하지 않았으면 false 반환
+    if (data?.nickname) {
+      console.log("true");
+      res.send("true");
+    } else {
+      console.log("false");
+
+      res.send("false");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+exports.reviewDelete = async (req, res) => {
+  try {
+    const { id } = req.query;
+    await review.destroy({ where: { id } });
+  } catch (error) {
+    console.error(error);
+  }
+};
 exports.reviewMore = async (req, res) => {
   try {
     const { id, cnt } = req.query;

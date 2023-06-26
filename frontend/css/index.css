@@ -5,7 +5,24 @@ body {
   font-family: 'Playfair Display', serif;
 
 }
-
+#isLoading{
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top :0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+#isLoading img{
+  width: 300px;
+}
+#isLoading.disable{
+  display : none;
+}
 a {
   text-decoration: none;
   color: black;
@@ -124,7 +141,7 @@ a:active {
   flex-wrap: wrap;
 }
 
-.viewList .viewCard,
+.viewList .viewCard,.plusCard,
 .starList .starCard {
   width: 20%;
   height: 260px;
@@ -132,7 +149,8 @@ a:active {
 }
 
 .viewCard img,
-.starCard img {
+.starCard img,
+.plusCard img {
   width: 200px;
   height: 220px;
   border-radius: 10px;
