@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/signup.css">
+</head>
+<body>
+    <div class="main-box">
+        <div class="title">
+        
+            <img src="http://13.209.64.80/img/Color_logo_-_no_background.png" class="title-img" alt="">
+        </div>
+        <div class="title2">Create Account</div>
+        
+        <div class="user-info">
+        <label for="" class="user-label">ID</label><BR>
+        <input type="text" id="user_id_input" ><br>
+        <label for="" class="user-label">PASSWORD</label>
+        <input type="password" id="user_pw_input" name="user_pw"><br>
+        <span id="pw_err">The password does not match.</span><br>
+        <label for="" class="user-label">Re-enter password</label>
+        <input type="password" id="user_re_pw_input" name="user_re_pw"><br>
+            
+        <label for="" class="user-label">gender</label>
+        <input type="radio" name="check-gender" id="gender" value="man">man
+        <input type="radio" name="check-gender" id="gender" value="woman">woman
+        <Br>
+        <label for="" class="user-label">role</label>
+        <input type="radio" name="check-role" id="role" value="writer">writer
+        <input type="radio" name="check-role" id="role" value="reader">reader
+        <Br>
+        <label for="" class="user-label">age</label>
+        <input type="month" id ="age" name="age">
+        <br>
+        <label for="" class="user-label" >nickname</label>
+        <input type="text" id="user_nick_input" name="nickname"><br>
+
+        <label for="" class="user-label">E-Mail</label>
+        <input type="text" id="email_input" name="nickname" /><br />
+        
+        <button id="btn">Create Account</button>
+
+        <div class="Already">
+            Already have an account? <a href="/login.html">Sign in</a>
+        </div>
+        
+        <div id="copy">
+            © 2023 najakjak.Inc.
+        </div>
+    </div>  
+</body>
+<script src="./js/address.js"></script>
+<script>
+    btn.onclick = (event)=>{
+        const gender = document.getElementById("gender").value;
+        const role = document.getElementById("role").value;
+
+        axios.post(`${backend}/signup`,{
+
+            withCredentials:true,
+
+            data:{
+            
+                user_id : user_id_input.value,
+                user_pw : user_pw_input.value,
+                user_re_pw : user_re_pw_input.value,
+                user_gender : gender,
+                user_role : role,
+                user_age : age.value,
+                user_nick : user_nick_input.value,
+            }
+
+        }).then((e)=>{
+            //console.log(e);
+            
+            if(e.data=='이미 존재하는 계정'){
+               return window.location.href= `${frontend}singupErr2.html`
+            }
+            
+            if(e.data=='비밀번호 불일치'){
+                return window.location.href =`${frontend}singupErr.html`
+            }
+
+            if(e.data=='가입성공'){
+                return window.location.href =`${frontend}login.html`
+            }
+        })
+    }
+</script>
+</html>
+
+<!-- Account already exists. -->
+<!-- The password does not match. -->

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>checklist</title>
+  <link rel="stylesheet" href="./css/checklist.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap"
+    rel="stylesheet">
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <!-- 로고 부분 -->
+  <div class="nav">
+    <div class="logoBox">
+      <a href="/index.html"><img src="http://13.209.64.80/img/Black logo - no background.png"
+          alt="" /></a>
+      <div class="functionBox">
+        <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
+        <span id="nick"></span><a href=""></a></span>
+        <!-- <span id="login"><a href="http://17.0.0.1:5500/login.html"> login</a></span>
+          <span id="signUp"><a href="/signup.html"> signUp</a></span>
+          <button id="logout">logout</button> -->
+      </div>
+    </div>
+    <div class="toggle">
+      <div class="genre">
+
+        <span id="all"><a href="/genre/all.html">전체</a></span>
+        <span id="conan"><a href="/genre/conan.html">추리</a></span>
+        <span id="horror"><a href="/genre/horror.html">공포•스릴러</a></span>
+        <span id="fantasy"><a href="/genre/fantasy.html">판타지</a></span>
+        <span id="sorim"><a href="/genre/sorim.html">무협</a></span>
+        <span id="game"><a href="/genre/game.html">게임</a></span>
+        <span id="romance"><a href="/genre/romance.html">로맨스</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="checkContainer">
+    <span>CHECK LIST</span>
+    <div class="bar"></div>
+    <div class="checklist">
+      <div id="list">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="buysContainer">
+    <span>buys LIST</span>
+    <div class="bar"></div>
+    <div class="buyslist">
+      <div id="list2">
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="./js/address.js"></script>
+  <script>
+    async function checkAPI() {
+        try {
+          const data = await axios.get(
+            `${backend}/check/list`,
+            { withCredentials: true, }
+          );
+
+          data.data.forEach((el) => {
+            list.innerHTML += `
+          <a href="${frontend}view.html?id=${el.id}">
+        <div class="booklist">
+            <div class="bookcover"><img src="${backend}/${el.img}" alt=""></div>
+            <div>book's title : ${el.title}</div>
+        </div>
+      </a>
+        `
+          })
+        } catch (error) {
+          //console.log(error)
+        }
+      }
+    checkAPI();
+
+    async function buyAPI(){
+      try {
+        const data = await axios.get(
+          `${backend}/buy/list`,
+          {withCredentials:true}
+        );
+          data.data.forEach((e) => {
+            list2.innerHTML += `
+          <a href="${frontend}view.html?id=${e.id}">
+        <div class="booklist">
+            <div class="bookcover"><img src="${backend}/${e.img}" alt=""></div>
+            <div>book's title : ${e.title}</div>
+        </div>
+      </a>
+        `
+          })
+      } catch (error) {
+        //console.log("checklist.html buyAPI에서 오류")
+        //console.log(error)
+      }
+    }
+    buyAPI();
+  </script>
